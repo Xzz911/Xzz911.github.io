@@ -13,8 +13,14 @@
     />
     <link rel="icon" href="/images/123.jpg" />
     <!-- Prism 样式 -->
-    <link rel="stylesheet" href="/css/prism.css" />
-    <link rel="stylesheet" href="/css/prism-line-numbers.css" />
+    <!-- Prism 样式（CDN） -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs/plugins/line-numbers/prism-line-numbers.css">
+
+    <!-- Prism 功能脚本（CDN） -->
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/plugins/line-numbers/prism-line-numbers.js"></script>
+
     <link rel="preconnect" href="https://s4.zstatic.net" />
 <script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
 <link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
@@ -162,7 +168,7 @@
             <div class="timeline-tail"></div>
             <div class="timeline-content">
                 <div class="item-time">2024/12/31</div>
-                <a href="/%E5%BB%B6%E8%BF%9F%E6%BB%A1%E8%B6%B3/">
+                <a href="/2024%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/">
                     <h3>2024年度总结：保持正念 延迟满足</h3>
                 </a>
                 <div class="info">
@@ -185,7 +191,7 @@
                         
                         <span class="tag">
                             
-                            <a href="/tags/%E5%A5%8B%E8%BF%9B/" style="color: #03a9f4">
+                            <a href="/tags/%E5%A5%8B%E8%BF%9B/" style="color: #ff7d73">
                                 奋进
                             </a>
                         </span>
@@ -228,19 +234,33 @@
                         
                         <span class="tag">
                             
-                            <a href="/tags/hexo/" style="color: #00a596">
+                            <a href="/tags/hexo/" style="color: #ffa2c4">
                                 hexo
                             </a>
                         </span>
                         
                         <span class="tag">
                             
-                            <a href="/tags/demo/" style="color: #03a9f4">
+                            <a href="/tags/demo/" style="color: #00bcd4">
                                 demo
                             </a>
                         </span>
                         
                     </span>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="timeline" data-title="highlight-test">
+            <div class="timeline-tail"></div>
+            <div class="timeline-content">
+                <div class="item-time">2025/6/18</div>
+                <a href="/highlight-test/">
+                    <h3>highlight-test</h3>
+                </a>
+                <div class="info">
+                    
                     
                 </div>
             </div>
@@ -277,6 +297,35 @@
         
     </div>
     <script src="/js/main.js"></script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        Prism.highlightAll();
+
+        // 强制为所有 <pre><code class="language-xxx"> 添加 line-numbers 类
+        document.querySelectorAll('pre code[class^="language-"]').forEach(function (codeBlock) {
+        const pre = codeBlock.parentElement;
+        if (!pre.classList.contains('line-numbers')) {
+            const lang = Array.from(codeBlock.classList).find(c => c.startsWith('language-'));
+            pre.classList.add('line-numbers');
+            if (lang) pre.classList.add(lang);
+        }
+        });
+
+        // 启动 PrismJS 渲染
+        Prism.highlightAll();
+
+        // DOM 变化监听器（Vue/VueRouter 页面跳转适配）
+        const target = document.querySelector('.content');
+        if (target) {
+        const observer = new MutationObserver(() => {
+            Prism.highlightAll();
+        });
+        observer.observe(target, { childList: true, subtree: true });
+        }
+    });
+    </script>
+
     
 </body>
 </html>

@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>简单的 Hexo 文章示例 | Xzzzz911</title>
+    <title>highlight-test | Xzzzz911</title>
     <meta name="author" content="John Doe" />
     <meta name="description" content="This is my website Hello Everyone" />
     <meta name="keywords" content="" />
@@ -165,7 +165,7 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>简单的 Hexo 文章示例</h1>
+        <h1>highlight-test</h1>
     </div>
     <div class="info">
         <span class="date">
@@ -176,58 +176,11 @@
         </span>
         
         
-        <span class="tags">
-            <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
-                
-                <a href="/tags/hexo/" style="color: #ffa2c4">
-                    hexo
-                </a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/demo/" style="color: #00bcd4">
-                    demo
-                </a>
-            </span>
-            
-        </span>
-        
     </div>
     
     <div class="content" v-pre>
-        <p>这是一篇非常简单的 Hexo 文章示例。</p>
-<p>下面是一个常用的 Hexo 命令操作代码块：</p>
-<pre><code>hexo clean
-hexo generate
-hexo server
-</code></pre>
-<p>你可以把这段代码复制到终端执行，启动你的 Hexo 本地服务器。</p>
-<pre><code>askjdhfkj
-asljndkflj
-sljkdfkljd
-</code></pre>
-<p>你是真的帅</p>
-<pre><code class="language-bash"># 有语法高亮，语义清晰
-#!/bin/bash
-
-if [ ! -f &quot;backup&quot; ]; then
-    exit 1
-fi
-
-ACTUAL_MD5=$(md5sum &quot;backup&quot; | cut -d&#39; &#39; -f1)
-
-if [ &quot;$ACTUAL_MD5&quot; = &quot;18ed919aada0f7adca8802acf7b8a4d5&quot; ]; then
-    backup
-    exit 0
-else
-    exit 1
-fi
+        <pre><code class="language-bash">echo hello world
+ls -la
 </code></pre>
 
     </div>

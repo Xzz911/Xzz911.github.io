@@ -13,8 +13,14 @@
     />
     <link rel="icon" href="/images/123.jpg" />
     <!-- Prism 样式 -->
-    <link rel="stylesheet" href="/css/prism.css" />
-    <link rel="stylesheet" href="/css/prism-line-numbers.css" />
+    <!-- Prism 样式（CDN） -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs/plugins/line-numbers/prism-line-numbers.css">
+
+    <!-- Prism 功能脚本（CDN） -->
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/plugins/line-numbers/prism-line-numbers.js"></script>
+
     <link rel="preconnect" href="https://s4.zstatic.net" />
 <script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
 <link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
@@ -160,7 +166,7 @@
         
         
         <span>
-            <a href="/tags/%E5%A5%8B%E8%BF%9B/" style="background: #00bcd4">
+            <a href="/tags/%E5%A5%8B%E8%BF%9B/" style="background: #00a596">
                 <span class="icon">
                     <i class="fa-solid fa-tags fa-fw"></i>
                 </span>
@@ -184,7 +190,7 @@
         
         
         <span>
-            <a href="/tags/demo/" style="background: #ffa2c4">
+            <a href="/tags/demo/" style="background: #00bcd4">
                 <span class="icon">
                     <i class="fa-solid fa-tags fa-fw"></i>
                 </span>
@@ -213,14 +219,14 @@
                     
                     <span class="tag">
                         
-                        <a href="/tags/hexo/" style="color: #00a596">
+                        <a href="/tags/hexo/" style="color: #00bcd4">
                             hexo
                         </a>
                     </span>
                     
                     <span class="tag">
                         
-                        <a href="/tags/demo/" style="color: #03a9f4">
+                        <a href="/tags/demo/" style="color: #ffa2c4">
                             demo
                         </a>
                     </span>
@@ -261,6 +267,35 @@
         
     </div>
     <script src="/js/main.js"></script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        Prism.highlightAll();
+
+        // 强制为所有 <pre><code class="language-xxx"> 添加 line-numbers 类
+        document.querySelectorAll('pre code[class^="language-"]').forEach(function (codeBlock) {
+        const pre = codeBlock.parentElement;
+        if (!pre.classList.contains('line-numbers')) {
+            const lang = Array.from(codeBlock.classList).find(c => c.startsWith('language-'));
+            pre.classList.add('line-numbers');
+            if (lang) pre.classList.add(lang);
+        }
+        });
+
+        // 启动 PrismJS 渲染
+        Prism.highlightAll();
+
+        // DOM 变化监听器（Vue/VueRouter 页面跳转适配）
+        const target = document.querySelector('.content');
+        if (target) {
+        const observer = new MutationObserver(() => {
+            Prism.highlightAll();
+        });
+        observer.observe(target, { childList: true, subtree: true });
+        }
+    });
+    </script>
+
     
 </body>
 </html>
