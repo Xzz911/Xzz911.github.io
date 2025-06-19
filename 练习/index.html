@@ -19,8 +19,6 @@
       
         <!-- 你自己的自定义样式 -->
         <link rel="stylesheet" href="/css/style.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
-
       
         <!-- Prism 脚本 -->
         <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
@@ -256,20 +254,20 @@ fi
         </span>
       </div>
   
-      <!-- ✅ 新增：运行时长显示 -->
+      <!-- 运行时长显示 -->
       <div id="site-runtime"></div>
   
-      <!-- ✅ 新增：访问统计 -->
+      <!-- 访问统计 -->
       <div>
         本站总访问量：<span id="busuanzi_value_site_pv">加载中...</span> 次
       </div>
   
-      <!-- ✅ 新增：拯救者1号距离显示 -->
+      <!-- 拯救者 1 号当前距离显示 -->
       <div>
         拯救者 1 号当前距离地球 <span id="voyager1-distance">加载中...</span>
       </div>
   
-      <!-- ✅ 社交链接部分 -->
+      <!-- 社交链接部分 -->
       
         <div class="social-links">
           
@@ -289,7 +287,7 @@ fi
           
         </div>
       
-      <!-- ✅ 社交链接结束 -->
+      <!-- 社交链接结束 -->
   
       <div>
         Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
@@ -299,19 +297,24 @@ fi
       
     </div>
   
-    <!-- ✅ Busuanzi 访问统计脚本 -->
+    <!-- Busuanzi 访问统计脚本 -->
     <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   
-    <!-- ✅ 页面底部 JS：运行时间 + Voyager 动态距离 -->
+    <!-- 页面底部 JS：运行时间 + Voyager 动态距离 -->
     <script>
       // 建站起始时间
       const siteStartTime = new Date('2025-06-18T00:00:00');
   
-      // Voyager 1 起始距离（单位：千米）
-      let voyagerDistanceKm = 100;
-      const AU_IN_KM = 1.495979e+8; // 一个 AU 多少千米
+      // 本地存储key
+      const STORAGE_KEY = 'voyager1_distance_km';
   
-      // 更新时间显示
+      // 天文单位（公里）
+      const AU_IN_KM = 1.495979e+8;
+  
+      // 从localStorage读取距离，默认100
+      let voyagerDistanceKm = parseInt(localStorage.getItem(STORAGE_KEY)) || 100;
+  
+      // 更新时间显示函数
       function updateSiteRuntime() {
         const now = new Date();
         const diff = Math.floor((now - siteStartTime) / 1000);
@@ -325,11 +328,14 @@ fi
           `本站居然运行了 ${days} 天 ${hours} 小时 ${minutes} 分 ${seconds} 秒`;
       }
   
-      // 更新 Voyager 1 距离
+      // 更新 Voyager 1 距离函数
       function updateVoyagerDistance() {
         // 每秒随机增加 1~100 km
         const delta = Math.floor(Math.random() * 100) + 1;
         voyagerDistanceKm += delta;
+  
+        // 保存最新距离到 localStorage
+        localStorage.setItem(STORAGE_KEY, voyagerDistanceKm);
   
         const au = (voyagerDistanceKm / AU_IN_KM).toFixed(6);
   
@@ -337,7 +343,7 @@ fi
           `${voyagerDistanceKm.toLocaleString()} 千米，约为 ${au} 个天文单位 🚀`;
       }
   
-      // 初始显示一次
+      // 页面加载时先刷新显示一次
       updateSiteRuntime();
       updateVoyagerDistance();
   
@@ -347,16 +353,6 @@ fi
         updateVoyagerDistance();
       }, 1000);
     </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-    <script>
-    AOS.init({
-        duration: 600,
-        once: true
-    });
-    </script>
-
-
   </footer>
   
         </div>

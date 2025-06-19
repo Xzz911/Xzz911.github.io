@@ -1,0 +1,430 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Archives | Xzzzz911</title>
+        <meta name="author" content="John Doe" />
+        <meta name="description" content="This is my website Hello Everyone" />
+        <meta name="keywords" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <link rel="icon" href="/images/123.jpg" />
+      
+        <!-- Prism 样式 -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs/plugins/line-numbers/prism-line-numbers.css">
+      
+        <!-- Font Awesome 图标库（⚠️ 图标不显示必须加） -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+      
+        <!-- 你自己的自定义样式 -->
+        <link rel="stylesheet" href="/css/style.css">
+      
+        <!-- Prism 脚本 -->
+        <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/prismjs/plugins/line-numbers/prism-line-numbers.js"></script>
+      
+        <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+      <meta name="generator" content="Hexo 7.3.0"></head>
+      
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>XZZZZ911</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;主页</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;关于</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;存档</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;分类</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;标签</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;XZZZZ911</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">主页</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">关于</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">存档</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">分类</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">标签</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            
+<div id="archives">
+    
+    <div id="timeline-wrap" ref="timeline">
+        
+        <div class="timeline" data-title="2024年度总结：保持正念延迟满足">
+            <div class="timeline-tail"></div>
+            <div class="timeline-content">
+                <div class="item-time">2024/12/31</div>
+                <a href="/2024%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/">
+                    <h3>2024年度总结：保持正念 延迟满足</h3>
+                </a>
+                <div class="info">
+                    
+                    <span class="category">
+                        <a href="/categories/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/">
+                            <span class="icon">
+                                <i class="fa-solid fa-bookmark fa-fw"></i>
+                            </span>
+                            年度总结
+                        </a>
+                    </span>
+                    
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </span>
+                        
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/%E5%A5%8B%E8%BF%9B/" style="color: #ff7d73">
+                                奋进
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="timeline" data-title="helloworld">
+            <div class="timeline-tail"></div>
+            <div class="timeline-content">
+                <div class="item-time">2025/6/18</div>
+                <a href="/hello-world/">
+                    <h3>Hello World</h3>
+                </a>
+                <div class="info">
+                    
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="timeline" data-title="简单的hexo文章示例">
+            <div class="timeline-tail"></div>
+            <div class="timeline-content">
+                <div class="item-time">2025/6/18</div>
+                <a href="/%E7%BB%83%E4%B9%A0/">
+                    <h3>简单的 Hexo 文章示例</h3>
+                </a>
+                <div class="info">
+                    
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </span>
+                        
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/hexo/" style="color: #ffa2c4">
+                                hexo
+                            </a>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/demo/" style="color: #ff7d73">
+                                demo
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="timeline" data-title="highlight-test">
+            <div class="timeline-tail"></div>
+            <div class="timeline-content">
+                <div class="item-time">2025/6/18</div>
+                <a href="/highlight-test/">
+                    <h3>highlight-test</h3>
+                </a>
+                <div class="info">
+                    
+                    
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+      <div>
+        &copy;
+        2022 - 2025 By Xzzzz911
+        <span id="footer-icon">
+          <i class="fa-solid fa-font-awesome fa-fw"></i>
+        </span>
+      </div>
+  
+      <!-- 运行时长显示 -->
+      <div id="site-runtime"></div>
+  
+      <!-- 访问统计 -->
+      <div>
+        本站总访问量：<span id="busuanzi_value_site_pv">加载中...</span> 次
+      </div>
+  
+      <!-- 拯救者 1 号当前距离显示 -->
+      <div>
+        拯救者 1 号当前距离地球 <span id="voyager1-distance">加载中...</span>
+      </div>
+  
+      <!-- 社交链接部分 -->
+      
+        <div class="social-links">
+          
+            <a href="https://xzz911.github.io/" target="_blank" rel="noopener" title="来访问我的GitHub吧">
+              <i class="fab fa-github"></i>
+            </a>
+          
+          
+            <a href="mailto:xzzzz911@qq.com" title="邮件发送我">
+              <i class="fas fa-envelope"></i>
+            </a>
+          
+          
+            <a href="http://wpa.qq.com/msgrd?v=3&uin=443602796&site=qq&menu=yes" target="_blank" title="QQ: 443602796">
+              <i class="fab fa-qq"></i>
+            </a>
+          
+        </div>
+      
+      <!-- 社交链接结束 -->
+  
+      <div>
+        Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+        <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+      </div>
+  
+      
+    </div>
+  
+    <!-- Busuanzi 访问统计脚本 -->
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+    <!-- 页面底部 JS：运行时间 + Voyager 动态距离 -->
+    <script>
+      // 建站起始时间
+      const siteStartTime = new Date('2025-06-18T00:00:00');
+  
+      // 本地存储key
+      const STORAGE_KEY = 'voyager1_distance_km';
+  
+      // 天文单位（公里）
+      const AU_IN_KM = 1.495979e+8;
+  
+      // 从localStorage读取距离，默认100
+      let voyagerDistanceKm = parseInt(localStorage.getItem(STORAGE_KEY)) || 100;
+  
+      // 更新时间显示函数
+      function updateSiteRuntime() {
+        const now = new Date();
+        const diff = Math.floor((now - siteStartTime) / 1000);
+  
+        const days = Math.floor(diff / (3600 * 24));
+        const hours = Math.floor((diff % (3600 * 24)) / 3600);
+        const minutes = Math.floor((diff % 3600) / 60);
+        const seconds = diff % 60;
+  
+        document.getElementById("site-runtime").textContent =
+          `本站居然运行了 ${days} 天 ${hours} 小时 ${minutes} 分 ${seconds} 秒`;
+      }
+  
+      // 更新 Voyager 1 距离函数
+      function updateVoyagerDistance() {
+        // 每秒随机增加 1~100 km
+        const delta = Math.floor(Math.random() * 100) + 1;
+        voyagerDistanceKm += delta;
+  
+        // 保存最新距离到 localStorage
+        localStorage.setItem(STORAGE_KEY, voyagerDistanceKm);
+  
+        const au = (voyagerDistanceKm / AU_IN_KM).toFixed(6);
+  
+        document.getElementById("voyager1-distance").textContent =
+          `${voyagerDistanceKm.toLocaleString()} 千米，约为 ${au} 个天文单位 🚀`;
+      }
+  
+      // 页面加载时先刷新显示一次
+      updateSiteRuntime();
+      updateVoyagerDistance();
+  
+      // 每秒更新
+      setInterval(() => {
+        updateSiteRuntime();
+        updateVoyagerDistance();
+      }, 1000);
+    </script>
+  </footer>
+  
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        Prism.highlightAll();
+
+        // 强制为所有 <pre><code class="language-xxx"> 添加 line-numbers 类
+        document.querySelectorAll('pre code[class^="language-"]').forEach(function (codeBlock) {
+        const pre = codeBlock.parentElement;
+        if (!pre.classList.contains('line-numbers')) {
+            const lang = Array.from(codeBlock.classList).find(c => c.startsWith('language-'));
+            pre.classList.add('line-numbers');
+            if (lang) pre.classList.add(lang);
+        }
+        });
+
+        // 启动 PrismJS 渲染
+        Prism.highlightAll();
+
+        // DOM 变化监听器（Vue/VueRouter 页面跳转适配）
+        const target = document.querySelector('.content');
+        if (target) {
+        const observer = new MutationObserver(() => {
+            Prism.highlightAll();
+        });
+        observer.observe(target, { childList: true, subtree: true });
+        }
+    });
+    </script>
+
+
+
+    
+</body>
+</html>
