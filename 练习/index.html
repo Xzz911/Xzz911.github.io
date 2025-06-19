@@ -19,6 +19,8 @@
       
         <!-- 你自己的自定义样式 -->
         <link rel="stylesheet" href="/css/style.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+
       
         <!-- Prism 脚本 -->
         <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
@@ -195,7 +197,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/demo/" style="color: #ffa2c4">
+                <a href="/tags/demo/" style="color: #03a9f4">
                     demo
                 </a>
             </span>
@@ -345,6 +347,16 @@ fi
         updateVoyagerDistance();
       }, 1000);
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+    AOS.init({
+        duration: 600,
+        once: true
+    });
+    </script>
+
+
   </footer>
   
         </div>
