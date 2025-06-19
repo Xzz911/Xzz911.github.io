@@ -44,5 +44,38 @@
     transform: rotateY(360deg);
   }
   
+/* 绳子本体 */
+#rope-progress {
+    position: fixed;
+    top: 0;
+    right: 30px;
+    width: 8px;
+    background: #444;
+    border-radius: 4px;
+    z-index: 9999;
+    transition: height 0.3s ease;
+  }
+  
+  /* 绳子头 - 小熊猫图 */
+  #rope-progress img {
+    position: absolute;
+    bottom: -32px; /* ✅ 向下移动图片，避免遮住绳子 */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 48px;
+    height: auto;
+    pointer-events: auto;
+    cursor: pointer;
+    animation: bounce 1.2s ease-in-out infinite;
+  }
+  
+  /* 小幅弹跳动画 */
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-4px); }
+  }
+  
+  
+  
   
   

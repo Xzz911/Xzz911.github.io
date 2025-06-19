@@ -16,6 +16,10 @@
     <!-- 你自己的自定义样式 -->
     <link rel="stylesheet" href="/css/style.css">
 
+    <!-- 自定义样式：一定要放在 style.css 之后，确保覆盖生效 -->
+    <link rel="stylesheet" href="/css/custom.css">
+
+    <!-- 主题内部样式或脚本导入 -->
     <link rel="preconnect" href="https://s4.zstatic.net" />
 <script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
 <link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
@@ -47,6 +51,7 @@
 
 
 <link rel="stylesheet" href="/css/main.css" />
+
 
 <meta name="generator" content="Hexo 7.3.0"></head>
 <body>
@@ -185,7 +190,7 @@
         
         
         <span>
-            <a href="/tags/demo/" style="background: #ff7d73">
+            <a href="/tags/demo/" style="background: #ffa2c4">
                 <span class="icon">
                     <i class="fa-solid fa-tags fa-fw"></i>
                 </span>
@@ -223,7 +228,7 @@
                     
                     <span class="tag">
                         
-                        <a href="/tags/%E5%A5%8B%E8%BF%9B/" style="color: #ffa2c4">
+                        <a href="/tags/%E5%A5%8B%E8%BF%9B/" style="color: #00bcd4">
                             奋进
                         </a>
                     </span>
@@ -355,7 +360,8 @@
   <!-- 初始化打字机效果 -->
   <script src="/js/typed-subtitle.js"></script>
 
-  
+  <script src="/js/custom.js"></script>
+
         </div>
         
         <transition name="fade">
@@ -367,22 +373,35 @@
 
         <!-- 阅读进度绳子 -->
         <div
-            id="rope-progress"
-            title="点我回到顶部"
-            @click="scrollToTop"
-            :style="{
-                position: 'fixed',
-                right: '20px',
-                top: '100px',
-                width: '10px',
-                height: ropeHeight + 'px',
-                background: '#555',
-                borderRadius: '5px',
-                cursor: 'pointer',
-                zIndex: 9999,
-                transition: 'height 0.3s ease'
-            }"
-        ></div>
+        id="rope-progress"
+        title="点我回到顶部"
+        @click="scrollToTop"
+        :style="{
+            position: 'fixed',
+            right: '20px',
+            top: '100px',
+            width: '10px',
+            height: ropeHeight + 'px',
+            background: '#555',
+            borderRadius: '5px',
+            cursor: 'pointer',
+            zIndex: 9999,
+            transition: 'height 0.3s ease',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'flex-end',
+            alignItems: 'center',
+            overflow: 'visible'
+        }"
+        >
+        <!-- 绳子头图片 -->
+        <img
+            src="/images/rope-head.png"
+            alt="Rope Head"
+            style="width: 80px; height: 80px; margin-top: 50px"
+        />
+        </div>
+
     </div>
 
     <script src="/js/main.js"></script>
