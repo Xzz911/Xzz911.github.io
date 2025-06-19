@@ -1,0 +1,15 @@
+.social-links {
+    margin: 10px 0;
+  }
+  
+  .social-links a {
+    margin-right: 10px;
+    color: #888;
+    font-size: 1.3rem;
+    transition: color 0.3s;
+  }
+  
+  .social-links a:hover {
+    color: #1da1f2;
+  }
+  

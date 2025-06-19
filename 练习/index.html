@@ -1,27 +1,30 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <title>简单的 Hexo 文章示例 | Xzzzz911</title>
-    <meta name="author" content="John Doe" />
-    <meta name="description" content="This is my website Hello Everyone" />
-    <meta name="keywords" content="" />
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
-    />
-    <link rel="icon" href="/images/123.jpg" />
-    <!-- Prism 样式 -->
-    <!-- Prism 样式（CDN） -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs/plugins/line-numbers/prism-line-numbers.css">
-
-    <!-- Prism 功能脚本（CDN） -->
-    <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/prismjs/plugins/line-numbers/prism-line-numbers.js"></script>
-
-    <link rel="preconnect" href="https://s4.zstatic.net" />
+    <head>
+        <meta charset="utf-8" />
+        <title>简单的 Hexo 文章示例 | Xzzzz911</title>
+        <meta name="author" content="John Doe" />
+        <meta name="description" content="This is my website Hello Everyone" />
+        <meta name="keywords" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <link rel="icon" href="/images/123.jpg" />
+      
+        <!-- Prism 样式 -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs/plugins/line-numbers/prism-line-numbers.css">
+      
+        <!-- Font Awesome 图标库（⚠️ 图标不显示必须加） -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+      
+        <!-- 你自己的自定义样式 -->
+        <link rel="stylesheet" href="/css/style.css">
+      
+        <!-- Prism 脚本 -->
+        <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/prismjs/plugins/line-numbers/prism-line-numbers.js"></script>
+      
+        <link rel="preconnect" href="https://s4.zstatic.net" />
 <script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
 <link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 <link rel="preconnect" href="https://fonts.googleapis.cn" />
@@ -57,7 +60,8 @@
 
 <link rel="stylesheet" href="/css/main.css" />
 
-<meta name="generator" content="Hexo 7.3.0"></head>
+      <meta name="generator" content="Hexo 7.3.0"></head>
+      
 <body>
     <div id="layout">
         <transition name="fade">
@@ -184,14 +188,14 @@
             
             <span class="tag">
                 
-                <a href="/tags/hexo/" style="color: #ffa2c4">
+                <a href="/tags/hexo/" style="color: #00a596">
                     hexo
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/demo/" style="color: #00bcd4">
+                <a href="/tags/demo/" style="color: #ffa2c4">
                     demo
                 </a>
             </span>
@@ -242,22 +246,107 @@ fi
 
             <footer id="footer">
     <div id="footer-wrap">
-        <div>
-            &copy;
-            2022 - 2025 Xzzzz911
-            <span id="footer-icon">
-                <i class="fa-solid fa-font-awesome fa-fw"></i>
-            </span>
-            &commat;John Doe
+      <div>
+        &copy;
+        2022 - 2025 By Xzzzz911
+        <span id="footer-icon">
+          <i class="fa-solid fa-font-awesome fa-fw"></i>
+        </span>
+      </div>
+  
+      <!-- ✅ 新增：运行时长显示 -->
+      <div id="site-runtime"></div>
+  
+      <!-- ✅ 新增：访问统计 -->
+      <div>
+        本站总访问量：<span id="busuanzi_value_site_pv">加载中...</span> 次
+      </div>
+  
+      <!-- ✅ 新增：拯救者1号距离显示 -->
+      <div>
+        拯救者 1 号当前距离地球 <span id="voyager1-distance">加载中...</span>
+      </div>
+  
+      <!-- ✅ 社交链接部分 -->
+      
+        <div class="social-links">
+          
+            <a href="https://xzz911.github.io/" target="_blank" rel="noopener" title="来访问我的GitHub吧">
+              <i class="fab fa-github"></i>
+            </a>
+          
+          
+            <a href="mailto:xzzzz911@qq.com" title="邮件发送我">
+              <i class="fas fa-envelope"></i>
+            </a>
+          
+          
+            <a href="http://wpa.qq.com/msgrd?v=3&uin=443602796&site=qq&menu=yes" target="_blank" title="QQ: 443602796">
+              <i class="fab fa-qq"></i>
+            </a>
+          
         </div>
-        <div>
-            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
-            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
-        </div>
-        
+      
+      <!-- ✅ 社交链接结束 -->
+  
+      <div>
+        Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+        <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+      </div>
+  
+      
     </div>
-</footer>
-
+  
+    <!-- ✅ Busuanzi 访问统计脚本 -->
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+    <!-- ✅ 页面底部 JS：运行时间 + Voyager 动态距离 -->
+    <script>
+      // 建站起始时间
+      const siteStartTime = new Date('2025-06-18T00:00:00');
+  
+      // Voyager 1 起始距离（单位：千米）
+      let voyagerDistanceKm = 100;
+      const AU_IN_KM = 1.495979e+8; // 一个 AU 多少千米
+  
+      // 更新时间显示
+      function updateSiteRuntime() {
+        const now = new Date();
+        const diff = Math.floor((now - siteStartTime) / 1000);
+  
+        const days = Math.floor(diff / (3600 * 24));
+        const hours = Math.floor((diff % (3600 * 24)) / 3600);
+        const minutes = Math.floor((diff % 3600) / 60);
+        const seconds = diff % 60;
+  
+        document.getElementById("site-runtime").textContent =
+          `本站居然运行了 ${days} 天 ${hours} 小时 ${minutes} 分 ${seconds} 秒`;
+      }
+  
+      // 更新 Voyager 1 距离
+      function updateVoyagerDistance() {
+        // 每秒随机增加 1~100 km
+        const delta = Math.floor(Math.random() * 100) + 1;
+        voyagerDistanceKm += delta;
+  
+        const au = (voyagerDistanceKm / AU_IN_KM).toFixed(6);
+  
+        document.getElementById("voyager1-distance").textContent =
+          `${voyagerDistanceKm.toLocaleString()} 千米，约为 ${au} 个天文单位 🚀`;
+      }
+  
+      // 初始显示一次
+      updateSiteRuntime();
+      updateVoyagerDistance();
+  
+      // 每秒更新
+      setInterval(() => {
+        updateSiteRuntime();
+        updateVoyagerDistance();
+      }, 1000);
+    </script>
+  </footer>
+  
         </div>
         
         <transition name="fade">
@@ -296,6 +385,8 @@ fi
         }
     });
     </script>
+
+
 
     
     
