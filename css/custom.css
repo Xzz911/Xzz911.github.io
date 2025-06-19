@@ -1,0 +1,7 @@
+figure.highlight table {
+  table-layout: fixed;
+}
+figure.highlight pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+}

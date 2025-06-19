@@ -8,6 +8,9 @@ const app = Vue.createApp({
             menuColor: false,
             scrollTop: 0,
             renderers: [],
+
+            // 新增进度条高度状态
+            ropeHeight: 0,
         };
     },
     created() {
@@ -25,18 +28,32 @@ const app = Vue.createApp({
         },
         handleScroll() {
             let wrap = this.$refs.homePostsWrap;
-            let newScrollTop = document.documentElement.scrollTop;
+            let newScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
             if (this.scrollTop < newScrollTop) {
                 this.hiddenMenu = true;
                 this.showMenuItems = false;
             } else this.hiddenMenu = false;
+
             if (wrap) {
                 if (newScrollTop <= window.innerHeight - 100) this.menuColor = true;
                 else this.menuColor = false;
                 if (newScrollTop <= 400) wrap.style.top = "-" + newScrollTop / 5 + "px";
                 else wrap.style.top = "-80px";
             }
+
             this.scrollTop = newScrollTop;
+
+            // 计算进度条高度
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrolled = newScrollTop / docHeight;
+            this.ropeHeight = Math.min(Math.max(scrolled * window.innerHeight * 0.8, 20), window.innerHeight * 0.8);
+        },
+
+        scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+            });
         },
     },
 });

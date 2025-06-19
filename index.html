@@ -1,30 +1,22 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>Xzzzz911</title>
-        <meta name="author" content="John Doe" />
-        <meta name="description" content="This is my website Hello Everyone" />
-        <meta name="keywords" content="" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-        <link rel="icon" href="/images/123.jpg" />
-      
-        <!-- Prism 样式 -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs/plugins/line-numbers/prism-line-numbers.css">
-      
-        <!-- Font Awesome 图标库（⚠️ 图标不显示必须加） -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
-      
-        <!-- 你自己的自定义样式 -->
-        <link rel="stylesheet" href="/css/style.css">
-      
-        <!-- Prism 脚本 -->
-        <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/prismjs/plugins/line-numbers/prism-line-numbers.js"></script>
-      
-        <link rel="preconnect" href="https://s4.zstatic.net" />
+<head>
+    <meta charset="utf-8" />
+    <title>Xzzzz911</title>
+    <meta name="author" content="Xzzzz911" />
+    <meta name="description" content="This is my website Hello Everyone" />
+    <meta name="keywords" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <link rel="icon" href="/images/123.jpg" />
+
+    <!-- Font Awesome 图标库 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+
+    <!-- 你自己的自定义样式 -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <link rel="preconnect" href="https://s4.zstatic.net" />
 <script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
 <link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 <link rel="preconnect" href="https://fonts.googleapis.cn" />
@@ -58,10 +50,9 @@
 
 <link rel="stylesheet" href="/css/main.css" />
 
-      <meta name="generator" content="Hexo 7.3.0"></head>
-      
+<meta name="generator" content="Hexo 7.3.0"></head>
 <body>
-    <div id="layout">
+    <div id="layout" v-cloak>
         <transition name="fade">
             <div id="loading" v-show="loading">
                 <div id="loading-circle">
@@ -180,6 +171,12 @@
             <div class="wrap">
                 <h1>Xzzzz911</h1>
                 <h3>保持正念 延迟满足</h3>
+
+                <!-- 这里插入动态字幕容器 -->
+                <h2 style="color: inherit; font-weight: 400; margin: 10px 0;">
+                    <span id="typed-subtitle" style="white-space: pre;"></span>
+                </h2>                           
+
                 <h5>This is my website Hello Everyone</h5>
             </div>
         </span>
@@ -211,9 +208,7 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">echo</span> hello world
-<span class="token function">ls</span> <span class="token parameter variable">-la</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
+                <p>高亮部分修改</p>
             
         </div>
     </div>
@@ -243,35 +238,7 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <p>这是一篇非常简单的 Hexo 文章示例。</p>
-<p>下面是一个常用的 Hexo 命令操作代码块：</p>
-<pre><code>hexo clean
-hexo generate
-hexo server
-</code></pre>
-<p>你可以把这段代码复制到终端执行，启动你的 Hexo 本地服务器。</p>
-<pre><code>askjdhfkj
-asljndkflj
-sljkdfkljd
-</code></pre>
-<p>你是真的帅</p>
-<pre><code class="language-bash"># 有语法高亮，语义清晰
-#!/bin/bash
-
-if [ ! -f &quot;backup&quot; ]; then
-    exit 1
-fi
-
-ACTUAL_MD5=$(md5sum &quot;backup&quot; | cut -d&#39; &#39; -f1)
-
-if [ &quot;$ACTUAL_MD5&quot; = &quot;18ed919aada0f7adca8802acf7b8a4d5&quot; ]; then
-    backup
-    exit 0
-else
-    exit 1
-fi
-</code></pre>
-
+                <p>这是一篇非常简单的 Hexo 文章示例。</p>
             
         </div>
     </div>
@@ -285,12 +252,12 @@ fi
         
         <span class="tag">
             
-            <a href="/tags/hexo/" style="color: #ffa2c4">hexo</a>
+            <a href="/tags/hexo/" style="color: #ff7d73">hexo</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/demo/" style="color: #00a596">demo</a>
+            <a href="/tags/demo/" style="color: #00bcd4">demo</a>
         </span>
         
     </div>
@@ -315,20 +282,8 @@ fi
     <div class="description">
         <div class="content" v-pre>
             
-            <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code>$ hexo new &quot;My New Post&quot;
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code>$ hexo server
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code>$ hexo generate
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code>$ hexo deploy
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
+                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<p>hello world</p>
             
         </div>
     </div>
@@ -367,29 +322,7 @@ fi
     <div class="description">
         <div class="content" v-pre>
             
-            <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>&emsp;&emsp;时光荏苒，很快就到了年底，2024年也就悄悄的过去了，回顾这一年，有很多的感触，在此做一个总结，留下自己的脚印。</p>
-<h2 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h2><p>&emsp;&emsp;要总结的第一件事那当然是CTF，回顾这一年，作为PWN手，打了大大小小的比赛也不少了，很喜欢比赛时的那种刺激紧张的氛围，但也不排除老是坐牢的那种无奈沮丧。总之事情是往好的方向发展，随着后面的学习，感觉PWN越来越难理解，老让人捉摸不透，绞尽脑汁的那种，学起来很累，导致有段时间不太想学PWN了😅😅，那个时候就在研究其他的东西，希望新的一年里，能够重新拾起学PWN的乐趣。</p>
-<p><img src="/images/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-10-09%20074951.png" alt="截图"></p>
-<h2 id="趣事"><a href="#趣事" class="headerlink" title="趣事"></a>趣事</h2><p>&emsp;&emsp;要总结的第二件事就是自己这一年经历了很多有意义的事。年初的时候，初中老班长拉着一堆人来了一次同学聚会，多年没见的同学，在见面的那一刻，还是感觉到有点社恐😂😂，一起聊聊天，就感觉好多了，就开始聊起来了，氛围也越来越好了，讲了很多自己学校有关的趣事，然后一起去打了麻将，总之过的挺愉快的。</p>
-<p>&emsp;&emsp;其次就是去贵州线下参加长城杯了，第一次尝试铁锅炖大鹅，别有一番风味，味道还真不错，可惜就可惜半决赛没得奖😭😭，就差那一丢丢就可以得三等奖了，队友们都很棒的！！！但是这次又进了线下第二届长城杯半决，加把油，希望可以尽力这次得个奖！！！</p>
-<p><img src="/images/1.png"></p>
-<p>&emsp;&emsp;附上好队友拍的一张图片，挺喜欢这张照片的，我的两个队友在地铁公交上面拍的，印象好像是去花溪大学城的路上，总之还是挺不错的，尽管比赛没有得奖，但还是收获很多的东西的！！!</p>
-<p><img src="/images/2.png"></p>
-<p>&emsp;&emsp;接着应该就是上一学年的综测排名了，拿了一个二等奖学金，还得些证书，下次再接再厉，稳定发挥，冲冲冲！！！然后就是接连一两个月和同学早起去晨跑，晚上也去锻炼，拉引体向上学会了技巧，用腿蹬一下就上去，功夫不负有心人，体测得了80分😁😁（引体向上靠用腿蹬做了十五个😁😁），附上学校早上六点的样子。</p>
-<p><img src="/images/3.png"></p>
-<p>&emsp;&emsp;然后就是自己一个人坐高铁去九江软考，也算是对自己的一种历练，自己出去闯闯，让自己提前被社会毒打😵‍💫😵‍💫，尽管结果不怎么样，还差些就过了，但还是收获很多的，遇到了一些有意义的事和人，还是挺不错的，下次继续加油，争取拿下！！！</p>
-<p><img src="/images/4.png"></p>
-<p>&emsp;&emsp;🚄🚄最后应该就和同学一起去南昌玩了两天，算是第一次出来旅游，总体感觉还不错，第一天去看了双子塔，逛了绿地，万达……中午吃了老三样，辣椒辣的我西西叫🤤🤤。</p>
-<p><img src="/images/5.png"></p>
-<p>&emsp;&emsp;然后就去了南昌之心看了，在那附近玩了下，发现那个地方有挺多拍照的点位的🤣🤣，然后又是新的尝试，在网吧里面过夜，有趣是有趣，后半夜睡的辗转反侧，有点小难受🥱🥱。</p>
-<p><img src="/images/6.png"></p>
-<p>&emsp;&emsp;第二天就去了八一广场，看了下纪念塔，吃了顿打平火（一样是辣的一批），在附近逛了逛，差不多就结束了，过的还是挺不错的，美滋滋😋😋。</p>
-<p><img src="/images/7.png"></p>
-<p><img src="/images/8.png"></p>
-<h2 id="成长"><a href="#成长" class="headerlink" title="成长"></a>成长</h2><p>&emsp;&emsp;这一年也经历了很多事和人，思想、心态上我感觉也成熟了不少，这些事让我懂得了一个道理：珍惜眼前的人，好好对待他们，要不然失去了就会很遗憾可惜，还有就是多花时间陪陪家人。心态上面，我感觉情绪稳定了不少，没必要以为一些小事而去烦恼，心态放平，这都不是什么事。其次就是遇到了很多很好的朋友，我会好好珍惜，希望他们也如此👊👊。</p>
-<h1 id="展望"><a href="#展望" class="headerlink" title="展望"></a>展望</h1><p>&emsp;&emsp;希望2025年，元气满满，都能按照自己的想法走，不留遗憾，好运连连，依旧坚持保持正念，延迟满足，时刻提醒着自己，新的一年，冲冲冲！！！</p>
-<p>&emsp;&emsp;争取把工程师考过，争取进个预备队，最后那肯定是上岸了，哈哈哈哈哈哈，加油加油加油！！！👊👊👊👊</p>
-
+                <p>2024年度总结</p>
             
         </div>
     </div>
@@ -428,20 +361,12 @@ fi
         <div class="avatar">
             <img src="/images/123.jpg" alt="avatar" />
         </div>
-        <div class="name">John Doe</div>
+        <div class="name">Xzzzz911</div>
         <div class="description">
-            <p>Description<br>…</p>
+            <p>越努力 越幸运</p>
 
         </div>
         
-        
-        <div class="friend-links">
-            
-            <div class="friend-link">
-                <a target="_blank" rel="noopener" href="https://argvchs.github.io">Argvchs</a>
-            </div>
-            
-        </div>
         
     </div>
 </div>
@@ -558,8 +483,17 @@ fi
         updateSiteRuntime();
         updateVoyagerDistance();
       }, 1000);
+
+      
     </script>
   </footer>
+
+  <!-- Typed.js -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+  <!-- 初始化打字机效果 -->
+  <script src="/js/typed-subtitle.js"></script>
+
   
         </div>
         
@@ -569,38 +503,54 @@ fi
             </div>
         </transition>
         
+
+        <!-- 阅读进度绳子 -->
+        <div
+            id="rope-progress"
+            title="点我回到顶部"
+            @click="scrollToTop"
+            :style="{
+                position: 'fixed',
+                right: '20px',
+                top: '100px',
+                width: '10px',
+                height: ropeHeight + 'px',
+                background: '#555',
+                borderRadius: '5px',
+                cursor: 'pointer',
+                zIndex: 9999,
+                transition: 'height 0.3s ease'
+            }"
+        ></div>
     </div>
+
     <script src="/js/main.js"></script>
 
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        Prism.highlightAll();
-
-        // 强制为所有 <pre><code class="language-xxx"> 添加 line-numbers 类
-        document.querySelectorAll('pre code[class^="language-"]').forEach(function (codeBlock) {
-        const pre = codeBlock.parentElement;
-        if (!pre.classList.contains('line-numbers')) {
-            const lang = Array.from(codeBlock.classList).find(c => c.startsWith('language-'));
-            pre.classList.add('line-numbers');
-            if (lang) pre.classList.add(lang);
-        }
-        });
-
-        // 启动 PrismJS 渲染
-        Prism.highlightAll();
-
-        // DOM 变化监听器（Vue/VueRouter 页面跳转适配）
-        const target = document.querySelector('.content');
-        if (target) {
-        const observer = new MutationObserver(() => {
+        document.addEventListener('DOMContentLoaded', function () {
             Prism.highlightAll();
+
+            // 强制为所有 <pre><code class="language-xxx"> 添加 line-numbers 类
+            document.querySelectorAll('pre code[class^="language-"]').forEach(function (codeBlock) {
+                const pre = codeBlock.parentElement;
+                if (!pre.classList.contains('line-numbers')) {
+                    const lang = Array.from(codeBlock.classList).find(c => c.startsWith('language-'));
+                    pre.classList.add('line-numbers');
+                    if (lang) pre.classList.add(lang);
+                }
+            });
+
+            Prism.highlightAll();
+
+            const target = document.querySelector('.content');
+            if (target) {
+                const observer = new MutationObserver(() => {
+                    Prism.highlightAll();
+                });
+                observer.observe(target, { childList: true, subtree: true });
+            }
         });
-        observer.observe(target, { childList: true, subtree: true });
-        }
-    });
     </script>
-
-
 
     
 </body>

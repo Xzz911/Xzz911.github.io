@@ -1,30 +1,22 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>简单的 Hexo 文章示例 | Xzzzz911</title>
-        <meta name="author" content="John Doe" />
-        <meta name="description" content="This is my website Hello Everyone" />
-        <meta name="keywords" content="" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-        <link rel="icon" href="/images/123.jpg" />
-      
-        <!-- Prism 样式 -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs/plugins/line-numbers/prism-line-numbers.css">
-      
-        <!-- Font Awesome 图标库（⚠️ 图标不显示必须加） -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
-      
-        <!-- 你自己的自定义样式 -->
-        <link rel="stylesheet" href="/css/style.css">
-      
-        <!-- Prism 脚本 -->
-        <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/prismjs/plugins/line-numbers/prism-line-numbers.js"></script>
-      
-        <link rel="preconnect" href="https://s4.zstatic.net" />
+<head>
+    <meta charset="utf-8" />
+    <title>简单的 Hexo 文章示例 | Xzzzz911</title>
+    <meta name="author" content="Xzzzz911" />
+    <meta name="description" content="This is my website Hello Everyone" />
+    <meta name="keywords" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <link rel="icon" href="/images/123.jpg" />
+
+    <!-- Font Awesome 图标库 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+
+    <!-- 你自己的自定义样式 -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <link rel="preconnect" href="https://s4.zstatic.net" />
 <script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
 <link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 <link rel="preconnect" href="https://fonts.googleapis.cn" />
@@ -60,10 +52,9 @@
 
 <link rel="stylesheet" href="/css/main.css" />
 
-      <meta name="generator" content="Hexo 7.3.0"></head>
-      
+<meta name="generator" content="Hexo 7.3.0"></head>
 <body>
-    <div id="layout">
+    <div id="layout" v-cloak>
         <transition name="fade">
             <div id="loading" v-show="loading">
                 <div id="loading-circle">
@@ -188,14 +179,14 @@
             
             <span class="tag">
                 
-                <a href="/tags/hexo/" style="color: #00bcd4">
+                <a href="/tags/hexo/" style="color: #ffa2c4">
                     hexo
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/demo/" style="color: #00a596">
+                <a href="/tags/demo/" style="color: #03a9f4">
                     demo
                 </a>
             </span>
@@ -206,6 +197,7 @@
     
     <div class="content" v-pre>
         <p>这是一篇非常简单的 Hexo 文章示例。</p>
+<span id="more"></span>
 <p>下面是一个常用的 Hexo 命令操作代码块：</p>
 <pre><code>hexo clean
 hexo generate
@@ -217,22 +209,9 @@ asljndkflj
 sljkdfkljd
 </code></pre>
 <p>你是真的帅</p>
-<pre><code class="language-bash"># 有语法高亮，语义清晰
-#!/bin/bash
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 有语法高亮，语义清晰</span></span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ ! -f <span class="string">&quot;backup&quot;</span> ]; then</span><br><span class="line">    exit <span class="number">1</span></span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">ACTUAL_MD5=$(md5sum <span class="string">&quot;backup&quot;</span> | cut -d<span class="string">&#x27; &#x27;</span> -f1)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ <span class="string">&quot;$ACTUAL_MD5&quot;</span> = <span class="string">&quot;18ed919aada0f7adca8802acf7b8a4d5&quot;</span> ]; then</span><br><span class="line">    backup</span><br><span class="line">    exit <span class="number">0</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    exit <span class="number">1</span></span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
 
-if [ ! -f &quot;backup&quot; ]; then
-    exit 1
-fi
-
-ACTUAL_MD5=$(md5sum &quot;backup&quot; | cut -d&#39; &#39; -f1)
-
-if [ &quot;$ACTUAL_MD5&quot; = &quot;18ed919aada0f7adca8802acf7b8a4d5&quot; ]; then
-    backup
-    exit 0
-else
-    exit 1
-fi
-</code></pre>
+<p>知道吗<br>啊啊啊<br>你好熊之之</p>
 
     </div>
     
@@ -352,8 +331,17 @@ fi
         updateSiteRuntime();
         updateVoyagerDistance();
       }, 1000);
+
+      
     </script>
   </footer>
+
+  <!-- Typed.js -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+  <!-- 初始化打字机效果 -->
+  <script src="/js/typed-subtitle.js"></script>
+
   
         </div>
         
@@ -363,38 +351,54 @@ fi
             </div>
         </transition>
         
+
+        <!-- 阅读进度绳子 -->
+        <div
+            id="rope-progress"
+            title="点我回到顶部"
+            @click="scrollToTop"
+            :style="{
+                position: 'fixed',
+                right: '20px',
+                top: '100px',
+                width: '10px',
+                height: ropeHeight + 'px',
+                background: '#555',
+                borderRadius: '5px',
+                cursor: 'pointer',
+                zIndex: 9999,
+                transition: 'height 0.3s ease'
+            }"
+        ></div>
     </div>
+
     <script src="/js/main.js"></script>
 
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        Prism.highlightAll();
-
-        // 强制为所有 <pre><code class="language-xxx"> 添加 line-numbers 类
-        document.querySelectorAll('pre code[class^="language-"]').forEach(function (codeBlock) {
-        const pre = codeBlock.parentElement;
-        if (!pre.classList.contains('line-numbers')) {
-            const lang = Array.from(codeBlock.classList).find(c => c.startsWith('language-'));
-            pre.classList.add('line-numbers');
-            if (lang) pre.classList.add(lang);
-        }
-        });
-
-        // 启动 PrismJS 渲染
-        Prism.highlightAll();
-
-        // DOM 变化监听器（Vue/VueRouter 页面跳转适配）
-        const target = document.querySelector('.content');
-        if (target) {
-        const observer = new MutationObserver(() => {
+        document.addEventListener('DOMContentLoaded', function () {
             Prism.highlightAll();
+
+            // 强制为所有 <pre><code class="language-xxx"> 添加 line-numbers 类
+            document.querySelectorAll('pre code[class^="language-"]').forEach(function (codeBlock) {
+                const pre = codeBlock.parentElement;
+                if (!pre.classList.contains('line-numbers')) {
+                    const lang = Array.from(codeBlock.classList).find(c => c.startsWith('language-'));
+                    pre.classList.add('line-numbers');
+                    if (lang) pre.classList.add(lang);
+                }
+            });
+
+            Prism.highlightAll();
+
+            const target = document.querySelector('.content');
+            if (target) {
+                const observer = new MutationObserver(() => {
+                    Prism.highlightAll();
+                });
+                observer.observe(target, { childList: true, subtree: true });
+            }
         });
-        observer.observe(target, { childList: true, subtree: true });
-        }
-    });
     </script>
-
-
 
     
     

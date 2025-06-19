@@ -13,3 +13,36 @@
     color: #1da1f2;
   }
   
+
+  .avatar {
+    display: inline-block;
+    border-radius: 50%;
+    padding: 5px;
+    background: rgba(200, 200, 200, 0.3); /* 浅灰色半透明背景 */
+    box-shadow:
+      0 0 10px 4px rgba(150, 150, 150, 0.8), /* 中灰色光晕 */
+      0 0 20px 8px rgba(100, 100, 100, 0.5); /* 深灰色柔和光晕 */
+    transition: box-shadow 0.5s ease;
+  }
+  
+  .avatar:hover {
+    box-shadow:
+      0 0 20px 8px rgba(150, 150, 150, 1),
+      0 0 40px 16px rgba(100, 100, 100, 0.85);
+  }
+  
+  .avatar img {
+    border-radius: 50%;
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: transform 0.8s ease;
+    cursor: pointer;
+  }
+  
+  .avatar img:hover {
+    transform: rotateY(360deg);
+  }
+  
+  
+  
