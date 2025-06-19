@@ -29,3 +29,66 @@
 }
 
 
+#主页头像下的动态图标
+.icon-links {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.icon-link {
+  position: relative;
+  display: inline-block;
+  margin: 0 12px;
+  font-size: 32px;
+  color: #555;
+  cursor: pointer;
+  animation: floatAnim 3s ease-in-out infinite;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.icon-link:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.icon-link:nth-child(3) {
+  animation-delay: 0.4s;
+}
+.icon-link:nth-child(4) {
+  animation-delay: 0.6s;
+}
+
+.icon-link:hover {
+  color: #1abc9c;
+  transform: scale(1.2);
+  animation-play-state: paused;
+}
+
+/* 浮动动画 */
+@keyframes floatAnim {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Tooltip */
+.tooltip {
+  position: absolute;
+  bottom: 140%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #222;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.icon-link:hover .tooltip {
+  opacity: 1;
+}

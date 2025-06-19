@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
   var options = {
     strings: [
-      "welcome to my blog ^_^",
-      "这是一个fw的博客",
+      "Welcome! Glad to have you here — make yourself at home.",
+      "You made it! Not sure how, but welcome anyway.",
       "have fun ^_^"
     ],
     typeSpeed: 50,

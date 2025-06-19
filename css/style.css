@@ -13,7 +13,7 @@
     color: #1da1f2;
   }
   
-
+  /* 主页头像特效 */
   .avatar {
     display: inline-block;
     border-radius: 50%;
@@ -75,6 +75,28 @@
     50% { transform: translateX(-50%) translateY(-4px); }
   }
   
+  @keyframes heartbeat {
+    0%, 100% {
+      transform: scale(1);
+    }
+    14% {
+      transform: scale(1.3);
+    }
+    28% {
+      transform: scale(1);
+    }
+    42% {
+      transform: scale(1.3);
+    }
+    70% {
+      transform: scale(1);
+    }
+  }
+  
+  #heartbeat {
+    color: red;
+    animation: heartbeat 1.2s infinite;
+  }
   
   
   
