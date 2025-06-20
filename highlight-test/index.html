@@ -56,10 +56,12 @@
 
 <link rel="stylesheet" href="/css/main.css" />
 
-    
-
 <meta name="generator" content="Hexo 7.3.0"></head>
 <body>
+
+    <!-- ✅ 全站背景图容器（新增） -->
+    <div id="global-bg"></div>
+
     <div id="layout" v-cloak>
         <transition name="fade">
             <div id="loading" v-show="loading">
@@ -267,8 +269,8 @@
       // 白天 9:00 ~ 18:00 之间显示不同文案
       const isDaytime = hours >= 9 && hours < 18;
       const message = isDaytime
-        ? "什么时候能够实现财富自由呀~"
-        : "下班了就该开开心心地玩耍~";
+        ? "加油加油好好干，冲冲冲~"
+        : "好好放松吧，好好休息一下~";
 
       document.getElementById("site-runtime").innerHTML = `
         <div style="font-size:16px;font-weight:bold">${message}</div>
@@ -366,8 +368,6 @@
             style="width: 80px; height: 80px; margin-top: 50px; pointer-events: none;"
         />
         </div>
-
-
     </div>
 
     <script src="/js/main.js"></script>
