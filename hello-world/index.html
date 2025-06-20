@@ -198,22 +198,32 @@
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
-    <div>
-        <h1>Hello World</h1>
-    </div>
-    <div class="info">
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
+
+    <!-- ✅ 页面顶部标题：居中显示，无背景容器 -->
+    <div class="post-title-area" style="text-align: center; margin-top: 3rem; margin-bottom: 1.5rem;">
+        <h1 style="color: #b6b4b4; font-size: 2.5rem; font-weight: bold; margin-bottom: 0.5rem;">Hello World</h1>
+
+
+        <div class="info" style="font-size: 0.95rem; color: #555;">
+            <span class="date">
+                <span class="icon">
+                    <i class="fa-solid fa-calendar fa-fw"></i>
+                </span>
+                2025/6/18
             </span>
-            2025/6/18
-        </span>
-        
-        
+
+            
+
+            
+        </div>
     </div>
-    
-    <div class="content" v-pre>
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+
+    <!-- ✅ 正文卡片容器 -->
+    <div class="post-wrapper" style="max-width: 960px; margin: 1rem auto 2rem auto; background-color: rgba(255, 255, 255, 0.5); border-radius: 12px; padding: 2rem; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+
+        
+        <div class="content" v-pre>
+            <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
 <p>hello world</p>
 <span id="more"></span>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code>$ hexo new &quot;My New Post&quot;
@@ -229,13 +239,16 @@
 </code></pre>
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 
+        </div>
+        
     </div>
+
+    <!-- ✅ 评论区 -->
     
-    
-    
-    
-    
-    
+        
+        
+        
+        
     
 </div>
 
