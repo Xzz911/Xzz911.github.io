@@ -9,16 +9,16 @@
     <meta name="keywords" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <link rel="icon" href="/images/123.jpg" />
-
+    
     <!-- Font Awesome 图标库 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
-
+    
     <!-- 你自己的自定义样式 -->
     <link rel="stylesheet" href="/css/style.css">
-
+    
     <!-- 自定义样式：一定要放在 style.css 之后，确保覆盖生效 -->
     <link rel="stylesheet" href="/css/custom.css">
-
+    
     <!-- 主题内部样式或脚本导入 -->
     <link rel="preconnect" href="https://s4.zstatic.net" />
 <script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
@@ -52,7 +52,38 @@
 
 <link rel="stylesheet" href="/css/main.css" />
 
+    
+    <!-- 强制全局固定背景样式，优先级高 -->
+    <style>
+        html {
+        background-image: url("/images/1.jpg") !important;
+        background-size: cover !important;
+        background-attachment: fixed !important;
+        background-position: center center !important;
+        background-repeat: no-repeat !important;
+        min-height: 100vh !important;
+        }
+    
+        body {
+        background: transparent !important;
+        min-height: 100vh !important;
+        }
+    
+        #home-background {
+        display: none !important;  /* 隐藏 ParticleX 自带的顶部背景图区域 */
+        }
+
+        #content-inner,
+        .page,
+        .post-block,
+        .main-inner {
+        background: rgba(255, 255, 255, 0.3) !important; /* 半透明方便透出背景 */
+        border-radius: 10px;
+        padding: 20px;
+        }
+    </style>
 <meta name="generator" content="Hexo 7.3.0"></head>
+      
 <body>
 
     <!-- ✅ 全站背景图容器（新增） -->
@@ -194,7 +225,7 @@
                         
                         <span class="tag">
                             
-                            <a href="/tags/%E5%A5%8B%E8%BF%9B/" style="color: #ff7d73">
+                            <a href="/tags/%E5%A5%8B%E8%BF%9B/" style="color: #00a596">
                                 奋进
                             </a>
                         </span>
@@ -237,14 +268,14 @@
                         
                         <span class="tag">
                             
-                            <a href="/tags/hexo/" style="color: #00a596">
+                            <a href="/tags/hexo/" style="color: #ff7d73">
                                 hexo
                             </a>
                         </span>
                         
                         <span class="tag">
                             
-                            <a href="/tags/demo/" style="color: #00bcd4">
+                            <a href="/tags/demo/" style="color: #03a9f4">
                                 demo
                             </a>
                         </span>
