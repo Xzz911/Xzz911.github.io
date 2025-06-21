@@ -463,11 +463,19 @@
 * {
     margin: 0;
     padding: 0;
-    position: relative;
+
     scrollbar-color: #8ab5ff #e6efff;
     scrollbar-width: thin;
     word-wrap: break-word;
 }
+
+.main-container, /* 主页主体 */
+.header,         /* 头部 */
+.footer          /* 页脚 */
+{
+  position: relative;
+}
+
 .article {
     font-size: 15px;
     margin: auto;
