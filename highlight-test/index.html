@@ -197,51 +197,97 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div class="article">
-
-    <!-- ✅ 页面顶部标题：居中显示，无背景容器 -->
-    <div class="post-title-area" style="text-align: center; margin-top: 3rem; margin-bottom: 1.5rem;">
+            <div id="home-posts-wrap" ref="homePostsWrap" class="home-posts-wrap">
+    <div id="home-posts" style="opacity: 0.5; flex: 3;">
+      <div class="post-title-area" style="text-align: center; margin-top: 3rem; margin-bottom: 1.5rem;">
         <h1 style="color: #b6b4b4; font-size: 2.5rem; font-weight: bold; margin-bottom: 0.5rem;">highlight-test</h1>
-
-
+  
         <div class="info" style="font-size: 0.95rem; color: #555;">
-            <span class="date">
-                <span class="icon">
-                    <i class="fa-solid fa-calendar fa-fw"></i>
-                </span>
-                2025/6/18
+          <span class="date">
+            <span class="icon">
+              <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-
-            
-
-            
+            2025/6/18
+          </span>
+  
+          
+  
+          
         </div>
-    </div>
-
-    <!-- ✅ 正文卡片容器 -->
-    <div class="post-wrapper" style="max-width: 960px; margin: 1rem auto 2rem auto; background-color: rgba(255, 255, 255, 0.5); border-radius: 12px; padding: 2rem; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
-
+      </div>
+  
+      <div class="post-wrapper" style="background-color: rgba(255,255,255,0.5); border-radius: 12px; padding: 2rem; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
         
-        <div class="content" v-pre>
+          <div class="content" v-pre>
             <p>高亮部分修改</p>
 <span id="more"></span>
 
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> hello world</span><br><span class="line"><span class="built_in">ls</span> -la</span><br></pre></td></tr></table></figure>
 <p>啊啊啊</p>
 
+          </div>
+        
+      </div>
+    </div>
+  
+    <!-- 右边头像卡片，与主页一样调用 -->
+    
+    <div id="home-card" style="opacity: 0.5; flex: 1;">
+      <div id="card-style">
+    <div id="card-div">
+        <div class="avatar">
+            <img src="/images/123.jpg" alt="avatar" />
+        </div>
+        <div class="name">Xzzzz911</div>
+        <div class="description">
+            <p>越努力 越幸运</p>
+
         </div>
         
+        <div class="icon-links">
+            
+            <span class="icon-link">
+                <a href="https://github.com/xzz911" title="来访问我的GitHub吧" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-github fa-fw"></i>
+                </a>
+            </span>
+            
+            <span class="icon-link">
+                <a href="https://wpa.qq.com/msgrd?v=3&amp;uin=443602796&amp;site=qq&amp;menu=yes" title="QQ: 443602796" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-qq fa-fw"></i>
+                </a>
+            </span>
+            
+            <span class="icon-link">
+                <a href="mailto:xzzzz911@qq.com" title="邮件发送我" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-solid fa-envelope fa-fw"></i>
+                </a>
+            </span>
+            
+            <span class="icon-link">
+                <a href="https://space.bilibili.com/你的UID" title="B站主页" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-solid fa-tv fa-fw"></i>
+                </a>
+            </span>
+            
+        </div>
+        
+        
     </div>
-
-    <!-- ✅ 评论区 -->
-    
-        
-        
-        
-        
-    
 </div>
 
+    </div>
+    
+  
+    <!-- 评论区 -->
+    
+      
+      
+      
+      
+    
+  </div>
+  
             <footer id="footer">
   <div id="footer-wrap">
     <div>

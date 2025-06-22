@@ -10,12 +10,16 @@ mixins.preview = {
             let preview = this.$refs.preview,
                 content = this.$refs.previewContent;
             let images = document.querySelectorAll("img");
-            for (let i of images)
+            for (let i of images) {
+                // 跳过头像图片
+                if (i.closest('.avatar')) continue;
+
                 i.addEventListener("click", () => {
                     content.alt = i.alt;
                     content.src = i.src;
                     this.previewShow = true;
                 });
+            }
             preview.addEventListener("click", () => {
                 this.previewShow = false;
             });
