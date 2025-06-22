@@ -1,102 +1,144 @@
+/* ========== 社交链接 ========== */
 .social-links {
-    margin: 10px 0;
-  }
-  
-  .social-links a {
-    margin-right: 10px;
-    color: #888;
-    font-size: 1.3rem;
-    transition: color 0.3s;
-  }
-  
-  .social-links a:hover {
-    color: #1da1f2;
-  }
-  
-  /* 主页头像特效 */
-  .avatar {
-    display: inline-block;
-    border-radius: 50%;
-    padding: 5px;
-    background: rgba(200, 200, 200, 0.3); /* 浅灰色半透明背景 */
-    box-shadow:
-      0 0 10px 4px rgba(150, 150, 150, 0.8), /* 中灰色光晕 */
-      0 0 20px 8px rgba(100, 100, 100, 0.5); /* 深灰色柔和光晕 */
-    transition: box-shadow 0.5s ease;
-  }
-  
-  .avatar:hover {
-    box-shadow:
-      0 0 20px 8px rgba(150, 150, 150, 1),
-      0 0 40px 16px rgba(100, 100, 100, 0.85);
-  }
-  
-  .avatar img {
-    border-radius: 50%;
-    display: block;
-    width: 100%;
-    height: auto;
-    transition: transform 0.8s ease;
-    cursor: pointer;
-  }
-  
-  .avatar img:hover {
-    transform: rotateY(360deg);
-  }
-  
-/* 绳子本体 */
+  margin: 10px 0;
+}
+.social-links a {
+  margin-right: 10px;
+  color: #888;
+  font-size: 1.3rem;
+  transition: color 0.3s;
+}
+.social-links a:hover {
+  color: #1da1f2;
+}
+
+/* ========== 主页头像特效 ========== */
+.avatar {
+  display: inline-block;
+  border-radius: 50%;
+  padding: 5px;
+  background: rgba(200, 200, 200, 0.3);
+  box-shadow:
+    0 0 10px 4px rgba(150, 150, 150, 0.8),
+    0 0 20px 8px rgba(100, 100, 100, 0.5);
+  transition: box-shadow 0.5s ease;
+}
+.avatar:hover {
+  box-shadow:
+    0 0 20px 8px rgba(150, 150, 150, 1),
+    0 0 40px 16px rgba(100, 100, 100, 0.85);
+}
+.avatar img {
+  border-radius: 50%;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.8s ease;
+  cursor: pointer;
+}
+.avatar img:hover {
+  transform: rotateY(360deg);
+}
+
+/* 阅读进度绳子样式 */
 #rope-progress {
-    position: fixed;
-    top: 0;
-    right: 30px;
-    width: 8px;
-    background: #444;
-    border-radius: 4px;
-    z-index: 9999;
-    transition: height 0.3s ease;
+  position: fixed;
+  top: 0;
+  right: 20px;
+  width: 4px;
+  border-radius: 3px;
+  cursor: pointer;
+  z-index: 9999;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  overflow: visible;
+
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.25) 0,
+      rgba(255, 255, 255, 0.25) 4px,
+      transparent 4px,
+      transparent 8px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      rgba(255, 255, 255, 0.15) 0,
+      rgba(255, 255, 255, 0.15) 4px,
+      transparent 4px,
+      transparent 8px
+    );
+  background-color: rgba(30, 30, 30, 0.6);
+  background-blend-mode: overlay;
+  background-size: 8px 8px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+
+  opacity: 0;
+  transform: translateY(-30px) scaleY(0.8);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+#rope-progress.rope-visible {
+  opacity: 1;
+  transform: translateY(0) scaleY(1);
+}
+
+#rope-progress:hover {
+  box-shadow: 0 0 12px 4px rgba(255, 255, 255, 0.3);
+  background-color: rgba(60, 60, 60, 0.7);
+}
+
+/* 绳子头图片样式（带跳动和心跳混合动效） */
+#rope-progress img {
+  position: absolute;
+  bottom: -32px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48px;
+  height: auto;
+  pointer-events: auto;
+  cursor: pointer;
+  animation: bounceHeart 1.6s ease-in-out infinite;
+}
+
+@keyframes bounceHeart {
+  0%, 100% {
+    transform: translateX(-50%) scale(1);
   }
-  
-  /* 绳子头 - 小熊猫图 */
-  #rope-progress img {
-    position: absolute;
-    bottom: -32px; /* ✅ 向下移动图片，避免遮住绳子 */
-    left: 50%;
-    transform: translateX(-50%);
-    width: 48px;
-    height: auto;
-    pointer-events: auto;
-    cursor: pointer;
-    animation: bounce 1.2s ease-in-out infinite;
+  25% {
+    transform: translateX(-50%) scale(1.1) translateY(-3px);
   }
-  
-  /* 小幅弹跳动画 */
-  @keyframes bounce {
-    0%, 100% { transform: translateX(-50%) translateY(0); }
-    50% { transform: translateX(-50%) translateY(-4px); }
+  50% {
+    transform: translateX(-50%) scale(1) translateY(0);
   }
-  
-  @keyframes heartbeat {
-    0%, 100% {
-      transform: scale(1);
-    }
-    14% {
-      transform: scale(1.3);
-    }
-    28% {
-      transform: scale(1);
-    }
-    42% {
-      transform: scale(1.3);
-    }
-    70% {
-      transform: scale(1);
-    }
+  75% {
+    transform: translateX(-50%) scale(1.05) translateY(-2px);
   }
-  
-  #heartbeat {
-    color: red;
-    animation: heartbeat 1.2s infinite;
-  }
-  
-  
-  
+}
+
+/* 页面底部心跳备用动画 */
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  14%, 42% { transform: scale(1.3); }
+  28%, 70% { transform: scale(1); }
+}
+
+/* 阅读进度百分比文字 */
+.rope-percent {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 0 3px #000;
+  pointer-events: none;
+  user-select: none;
+}
+
