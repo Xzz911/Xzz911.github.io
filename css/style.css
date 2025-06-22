@@ -147,3 +147,14 @@
   pointer-events: none;
   user-select: none;
 }
+
+/* 控制标题与正文间距 */
+.post-title-area {
+  text-align: center;
+  margin-top: 10rem;               /*设置该元素上方与其他元素之间的距离*/
+  margin-bottom: 10rem;           /*设置该元素下方与其他元素之间的距离*/
+} 
+
+
+
+
