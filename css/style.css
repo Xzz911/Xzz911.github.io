@@ -157,4 +157,55 @@
 
 
 
+/* ==========文章目录 ========== */
+/* sticky 整体包裹容器 */
+.card-sticky-wrapper {
+  position: sticky;
+  top: 4rem;
+  z-index: 10;
+}
 
+/* TOC样式 */
+#toc-container {
+  background: rgba(255,255,255,0.6);
+  margin-top: 2rem;         /* 目录和头像的距离 */
+  border-radius: 12px;
+  padding: 1rem;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+/* TOC内部链接样式 */
+#toc-container a {
+  color: #333;
+  text-decoration: none;
+  font-size: 0.9rem;
+  display: block;
+  margin: 0.3rem 0;
+}
+
+#toc-container a:hover {
+  color: #409eff;
+}
+
+/* 目录和旁边的图片 */
+.toc-header {
+  font-weight: bold;
+  font-size: 1.3rem;  /* ✅ 让“目录”两个字变大 */
+  color: #333;
+  margin-bottom: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.toc-header i {
+  font-size: 1.3rem;  /* ✅ 图标跟着变大 */
+  color: #515253;
+}
+
+
+#toc-container ol {
+  list-style: none; /* 去掉默认数字 */
+  counter-reset: none;
+}

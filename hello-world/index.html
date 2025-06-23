@@ -222,16 +222,16 @@
           <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
 <p>hello world</p>
 <span id="more"></span>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code>$ hexo new &quot;My New Post&quot;
+<h2><span id="quick-start">Quick Start</span></h2><h3><span id="create-a-new-post">Create a new post</span></h3><pre><code>$ hexo new &quot;My New Post&quot;
 </code></pre>
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code>$ hexo server
+<h3><span id="run-server">Run server</span></h3><pre><code>$ hexo server
 </code></pre>
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code>$ hexo generate
+<h3><span id="generate-static-files">Generate static files</span></h3><pre><code>$ hexo generate
 </code></pre>
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code>$ hexo deploy
+<h3><span id="deploy-to-remote-sites">Deploy to remote sites</span></h3><pre><code>$ hexo deploy
 </code></pre>
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 
@@ -242,51 +242,85 @@
 
   <!-- ✅ 右侧卡片 -->
   
-  <div id="home-card" style="opacity: 0.5; flex: 1;">
-    <div id="card-style">
+    <div id="home-card" style="opacity: 0.5; flex: 1; position: relative;">
+
+      <!-- 固定头像 -->
+      <div class="profile-card-fixed">
+        <div id="card-style">
     <div id="card-div">
+  
+      <!-- 头像区域整体包裹 -->
+      <div class="card-header">
+        <!-- 头像 -->
         <div class="avatar">
-            <img src="/images/123.jpg" alt="avatar" />
+          <img src="/images/123.jpg" alt="avatar" />
         </div>
+  
+        <!-- 作者名 -->
         <div class="name">Xzzzz911</div>
+  
+        <!-- 描述（支持 markdown） -->
         <div class="description">
-            <p>越努力 越幸运</p>
+          <p>越努力 越幸运</p>
 
         </div>
+  
+        <!-- 图标链接 -->
         
         <div class="icon-links">
-            
-            <span class="icon-link">
-                <a href="https://github.com/xzz911" title="来访问我的GitHub吧" target="_blank" rel="noopener noreferrer">
-                    <i class="fa-brands fa-github fa-fw"></i>
-                </a>
-            </span>
-            
-            <span class="icon-link">
-                <a href="https://wpa.qq.com/msgrd?v=3&amp;uin=443602796&amp;site=qq&amp;menu=yes" title="QQ: 443602796" target="_blank" rel="noopener noreferrer">
-                    <i class="fa-brands fa-qq fa-fw"></i>
-                </a>
-            </span>
-            
-            <span class="icon-link">
-                <a href="mailto:xzzzz911@qq.com" title="邮件发送我" target="_blank" rel="noopener noreferrer">
-                    <i class="fa-solid fa-envelope fa-fw"></i>
-                </a>
-            </span>
-            
-            <span class="icon-link">
-                <a href="https://space.bilibili.com/你的UID" title="B站主页" target="_blank" rel="noopener noreferrer">
-                    <i class="fa-solid fa-tv fa-fw"></i>
-                </a>
-            </span>
-            
+          
+          <span class="icon-link">
+            <a href="https://github.com/xzz911" title="来访问我的GitHub吧" target="_blank" rel="noopener noreferrer">
+              <i class="fa-brands fa-github fa-fw"></i>
+            </a>
+          </span>
+          
+          <span class="icon-link">
+            <a href="https://wpa.qq.com/msgrd?v=3&amp;uin=443602796&amp;site=qq&amp;menu=yes" title="QQ: 443602796" target="_blank" rel="noopener noreferrer">
+              <i class="fa-brands fa-qq fa-fw"></i>
+            </a>
+          </span>
+          
+          <span class="icon-link">
+            <a href="mailto:xzzzz911@qq.com" title="邮件发送我" target="_blank" rel="noopener noreferrer">
+              <i class="fa-solid fa-envelope fa-fw"></i>
+            </a>
+          </span>
+          
+          <span class="icon-link">
+            <a href="https://space.bilibili.com/你的UID" title="B站主页" target="_blank" rel="noopener noreferrer">
+              <i class="fa-solid fa-tv fa-fw"></i>
+            </a>
+          </span>
+          
         </div>
         
+  
+        <!-- 友链 -->
         
+      </div>
+  
+      <!-- TOC 目录区域 -->
+      
+  
     </div>
-</div>
-
   </div>
+  
+      </div>
+
+      <!-- sticky 的 TOC -->
+      <div class="card-sticky-wrapper">
+        <div id="toc-container">
+          <div class="toc-header">
+            <i class="fa-solid fa-list-ul"></i> 目录
+          </div>
+          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+        </div>
+      </div>
+    </div>
+  
+
+  
   
 </div>
 
@@ -296,8 +330,7 @@
   
   
   
-
-
+ 
             <footer id="footer">
   <div id="footer-wrap">
     <div>
