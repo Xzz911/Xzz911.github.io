@@ -197,9 +197,8 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <!-- ✅ 页面标题和标签 -->
+            <!-- ✅ 页面标题和标签 --> 
 <div class="post-title-area">
-
   <h1 style="color: #b6b4b4; font-size: 2.5rem; font-weight: bold; margin-bottom: 0.5rem;">简单的 Hexo 文章示例</h1>
   <div class="info" style="font-size: 0.95rem; color: #555;">
     <span class="date">
@@ -214,12 +213,12 @@
       
       <span class="tag">
         
-        <a href="/tags/hexo/" style="color: #00a596; margin-right: 0.5rem;">hexo</a>
+        <a href="/tags/hexo/" style="color: #ff7d73; margin-right: 0.5rem;">hexo</a>
       </span>
       
       <span class="tag">
         
-        <a href="/tags/demo/" style="color: #ff7d73; margin-right: 0.5rem;">demo</a>
+        <a href="/tags/demo/" style="color: #03a9f4; margin-right: 0.5rem;">demo</a>
       </span>
       
     </span>
@@ -227,7 +226,10 @@
   </div>
 </div>
 
-<!-- ✅ 正文与侧边卡片整体容器，复用主页结构 -->
+<!-- ✅ 内容预处理：为标题添加 id -->
+
+
+<!-- ✅ 正文与侧边卡片整体容器 -->
 <div id="home-posts-wrap" class="home-posts-wrap" style="display: flex; max-width: 1200px; margin: auto; gap: 2rem;">
 
   <!-- ✅ 正文部分 -->
@@ -336,9 +338,6 @@ sljkdfkljd
       </div>
     </div>
   
-
-  
-  
 </div>
 
 <!-- ✅ 评论区 -->
@@ -347,7 +346,49 @@ sljkdfkljd
   
   
   
- 
+
+
+<!-- ====== 目录滚动高亮脚本 ====== -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const tocLis = document.querySelectorAll("#toc-container > ol > li");
+  const headers = [...document.querySelectorAll(".content h1")];  // 这里用h1作为一级标题
+
+  const idToTocLi = {};
+  tocLis.forEach(li => {
+    const a = li.querySelector("a");
+    if (!a) return;
+    const href = a.getAttribute("href");
+    if (!href || !href.startsWith("#")) return;
+    const id = decodeURIComponent(href.slice(1));
+    idToTocLi[id] = li;
+  });
+
+  function onScroll() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+    let currentIndex = 0;
+    for (let i = 0; i < headers.length; i++) {
+      const headerTop = headers[i].getBoundingClientRect().top + window.pageYOffset - 100; // 100px偏移，视情况调整
+      if (scrollTop >= headerTop) {
+        currentIndex = i;
+      } else {
+        break;
+      }
+    }
+
+    tocLis.forEach(li => li.classList.remove("active"));
+    if (headers[currentIndex]) {
+      const id = headers[currentIndex].id;
+      if (idToTocLi[id]) {
+        idToTocLi[id].classList.add("active");
+      }
+    }
+  }
+
+  window.addEventListener("scroll", onScroll);
+  onScroll();
+});
+</script>
             <footer id="footer">
   <div id="footer-wrap">
     <div>

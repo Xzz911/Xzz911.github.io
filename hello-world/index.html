@@ -197,9 +197,8 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <!-- ✅ 页面标题和标签 -->
+            <!-- ✅ 页面标题和标签 --> 
 <div class="post-title-area">
-
   <h1 style="color: #b6b4b4; font-size: 2.5rem; font-weight: bold; margin-bottom: 0.5rem;">Hello World</h1>
   <div class="info" style="font-size: 0.95rem; color: #555;">
     <span class="date">
@@ -211,7 +210,10 @@
   </div>
 </div>
 
-<!-- ✅ 正文与侧边卡片整体容器，复用主页结构 -->
+<!-- ✅ 内容预处理：为标题添加 id -->
+
+
+<!-- ✅ 正文与侧边卡片整体容器 -->
 <div id="home-posts-wrap" class="home-posts-wrap" style="display: flex; max-width: 1200px; margin: auto; gap: 2rem;">
 
   <!-- ✅ 正文部分 -->
@@ -222,16 +224,16 @@
           <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
 <p>hello world</p>
 <span id="more"></span>
-<h2><span id="quick-start">Quick Start</span></h2><h3><span id="create-a-new-post">Create a new post</span></h3><pre><code>$ hexo new &quot;My New Post&quot;
+<h2 id="quick-start"><span id="quick-start">Quick Start</span></h2><h3 id="create-a-new-post"><span id="create-a-new-post">Create a new post</span></h3><pre><code>$ hexo new &quot;My New Post&quot;
 </code></pre>
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3><span id="run-server">Run server</span></h3><pre><code>$ hexo server
+<h3 id="run-server"><span id="run-server">Run server</span></h3><pre><code>$ hexo server
 </code></pre>
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3><span id="generate-static-files">Generate static files</span></h3><pre><code>$ hexo generate
+<h3 id="generate-static-files"><span id="generate-static-files">Generate static files</span></h3><pre><code>$ hexo generate
 </code></pre>
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3><span id="deploy-to-remote-sites">Deploy to remote sites</span></h3><pre><code>$ hexo deploy
+<h3 id="deploy-to-remote-sites"><span id="deploy-to-remote-sites">Deploy to remote sites</span></h3><pre><code>$ hexo deploy
 </code></pre>
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 
@@ -314,13 +316,10 @@
           <div class="toc-header">
             <i class="fa-solid fa-list-ul"></i> 目录
           </div>
-          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#quick-start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#create-a-new-post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#run-server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#generate-static-files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#deploy-to-remote-sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
         </div>
       </div>
     </div>
-  
-
-  
   
 </div>
 
@@ -330,7 +329,49 @@
   
   
   
- 
+
+
+<!-- ====== 目录滚动高亮脚本 ====== -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const tocLis = document.querySelectorAll("#toc-container > ol > li");
+  const headers = [...document.querySelectorAll(".content h1")];  // 这里用h1作为一级标题
+
+  const idToTocLi = {};
+  tocLis.forEach(li => {
+    const a = li.querySelector("a");
+    if (!a) return;
+    const href = a.getAttribute("href");
+    if (!href || !href.startsWith("#")) return;
+    const id = decodeURIComponent(href.slice(1));
+    idToTocLi[id] = li;
+  });
+
+  function onScroll() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+    let currentIndex = 0;
+    for (let i = 0; i < headers.length; i++) {
+      const headerTop = headers[i].getBoundingClientRect().top + window.pageYOffset - 100; // 100px偏移，视情况调整
+      if (scrollTop >= headerTop) {
+        currentIndex = i;
+      } else {
+        break;
+      }
+    }
+
+    tocLis.forEach(li => li.classList.remove("active"));
+    if (headers[currentIndex]) {
+      const id = headers[currentIndex].id;
+      if (idToTocLi[id]) {
+        idToTocLi[id].classList.add("active");
+      }
+    }
+  }
+
+  window.addEventListener("scroll", onScroll);
+  onScroll();
+});
+</script>
             <footer id="footer">
   <div id="footer-wrap">
     <div>

@@ -175,6 +175,18 @@
   overflow-y: auto;
 }
 
+/* 默认隐藏所有二级目录 */
+#toc-container ol.toc > li > ol.toc-child {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+/* 给激活的一级目录li加active，展开二级目录 */
+#toc-container ol.toc > li.active > ol.toc-child {
+  max-height: 1000px; /* 这个值足够大，确保内容展开 */
+}
+
 /* TOC内部链接样式 */
 #toc-container a {
   color: #333;
@@ -204,8 +216,18 @@
   color: #515253;
 }
 
-
+/* 目录前面序号 */
 #toc-container ol {
   list-style: none; /* 去掉默认数字 */
   counter-reset: none;
+}
+
+/* 目录跳转动画 */
+html {
+  scroll-behavior: smooth;
+}
+
+/* 让标题在被跳转时留出间距 */
+.content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
+  scroll-margin-top: 50px; /* 与 JS 中的 offset 保持一致 */
 }
