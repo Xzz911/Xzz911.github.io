@@ -198,6 +198,7 @@
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <!-- ✅ 页面标题和标签 --> 
+
 <div class="post-title-area">
   <h1 style="color: #b6b4b4; font-size: 2.5rem; font-weight: bold; margin-bottom: 0.5rem;">highlight-test</h1>
   <div class="info" style="font-size: 0.95rem; color: #555;">
@@ -210,13 +211,9 @@
   </div>
 </div>
 
-<!-- ✅ 内容预处理：为标题添加 id -->
 
 
-<!-- ✅ 正文与侧边卡片整体容器 -->
 <div id="home-posts-wrap" class="home-posts-wrap" style="display: flex; max-width: 1200px; margin: auto; gap: 2rem;">
-
-  <!-- ✅ 正文部分 -->
   <div id="home-posts" style="opacity: 0.5; flex: 3;">
     <div class="post">
       
@@ -232,11 +229,8 @@
     </div>
   </div>
 
-  <!-- ✅ 右侧卡片 -->
   
     <div id="home-card" style="opacity: 0.5; flex: 1; position: relative;">
-
-      <!-- 固定头像 -->
       <div class="profile-card-fixed">
         <div id="card-style">
     <div id="card-div">
@@ -299,8 +293,6 @@
   </div>
   
       </div>
-
-      <!-- sticky 的 TOC -->
       <div class="card-sticky-wrapper">
         <div id="toc-container">
           <div class="toc-header">
@@ -313,7 +305,47 @@
   
 </div>
 
-<!-- ✅ 评论区 -->
+<!-- 修改过的上一篇/下一篇导航 -->
+<div class="post-nav-outer" style="max-width: 1200px; margin: 3rem auto 0; display: flex; justify-content: center;">
+  <div class="post-nav-inner" style="flex: 3; display: flex; gap: 1rem;">
+    
+      <!-- 无上一篇时显示当前文章占位 -->
+      <a href="/highlight-test/" style="flex: 1; text-decoration: none; color: #999; cursor: default;">
+        <div>
+          <div style="font-size: 0.85rem; color: #492630;">⬅ 本篇 </div>
+          <div style="font-weight: bold; font-size: 1.1rem; margin-top: 0.3rem;">highlight-test</div>
+          <div style="font-size: 0.85rem; margin-top: 0.5rem;">
+            <i class="fa fa-calendar"></i> 2025-06-18
+            
+            
+          </div>
+        </div>
+      </a>
+    
+
+    
+      <a href="/%E7%BB%83%E4%B9%A0/" style="flex: 1; text-decoration: none; color: #ccc; text-align: right;">
+        <div>
+          <div style="font-size: 0.85rem; color: #492630;">下一篇 ➡</div>
+          <div style="font-weight: bold; font-size: 1.1rem; margin-top: 0.3rem;">简单的 Hexo 文章示例</div>
+          <div style="font-size: 0.85rem; margin-top: 0.5rem;">
+            <i class="fa fa-calendar"></i> 2025-06-18
+            
+            
+              &nbsp;| <i class="fa fa-tags"></i>
+              
+                hexo, 
+              
+                demo
+              
+            
+          </div>
+        </div>
+      </a>
+    
+  </div>
+</div>
+
 
   
   
@@ -321,12 +353,10 @@
   
 
 
-<!-- ====== 目录滚动高亮脚本 ====== -->
 <script>
 document.addEventListener("DOMContentLoaded", function() {
   const tocLis = document.querySelectorAll("#toc-container > ol > li");
-  const headers = [...document.querySelectorAll(".content h1")];  // 这里用h1作为一级标题
-
+  const headers = [...document.querySelectorAll(".content h1")];
   const idToTocLi = {};
   tocLis.forEach(li => {
     const a = li.querySelector("a");
@@ -341,7 +371,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
     let currentIndex = 0;
     for (let i = 0; i < headers.length; i++) {
-      const headerTop = headers[i].getBoundingClientRect().top + window.pageYOffset - 100; // 100px偏移，视情况调整
+      const headerTop = headers[i].getBoundingClientRect().top + window.pageYOffset - 100;
       if (scrollTop >= headerTop) {
         currentIndex = i;
       } else {
@@ -362,6 +392,7 @@ document.addEventListener("DOMContentLoaded", function() {
   onScroll();
 });
 </script>
+
             <footer id="footer">
   <div id="footer-wrap">
     <div>

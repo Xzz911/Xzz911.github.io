@@ -1,61 +1,62 @@
-/* ========== 社交链接 ========== */
+/* ========== 社交链接样式 ========== */
 .social-links {
-  margin: 10px 0;
+  margin: 10px 0; /* 社交图标容器上下间距 */
 }
 .social-links a {
-  margin-right: 10px;
-  color: #888;
-  font-size: 1.3rem;
-  transition: color 0.3s;
+  margin-right: 10px;        /* 图标之间水平间距 */
+  color: #888;               /* 图标默认颜色 */
+  font-size: 1.3rem;         /* 图标大小 */
+  transition: color 0.3s;    /* 颜色变换动画过渡 */
 }
 .social-links a:hover {
-  color: #1da1f2;
+  color: #1da1f2; /* 鼠标悬停时变成推特蓝色 */
 }
 
 /* ========== 主页头像特效 ========== */
 .avatar {
   display: inline-block;
-  border-radius: 50%;
-  padding: 5px;
-  background: rgba(200, 200, 200, 0.3);
+  border-radius: 50%; /* 头像圆形 */
+  padding: 5px;       /* 头像内边距 */
+  background: rgba(200, 200, 200, 0.3); /* 半透明背景 */
   box-shadow:
     0 0 10px 4px rgba(150, 150, 150, 0.8),
-    0 0 20px 8px rgba(100, 100, 100, 0.5);
-  transition: box-shadow 0.5s ease;
+    0 0 20px 8px rgba(100, 100, 100, 0.5); /* 发光阴影效果 */
+  transition: box-shadow 0.5s ease; /* 阴影过渡 */
 }
 .avatar:hover {
   box-shadow:
     0 0 20px 8px rgba(150, 150, 150, 1),
-    0 0 40px 16px rgba(100, 100, 100, 0.85);
+    0 0 40px 16px rgba(100, 100, 100, 0.85); /* 悬停时阴影加强 */
 }
 .avatar img {
-  border-radius: 50%;
+  border-radius: 50%; /* 头像图片圆形 */
   display: block;
-  width: 100%;
+  width: 100%;        /* 图片宽度填满容器 */
   height: auto;
-  transition: transform 0.8s ease;
-  cursor: pointer;
+  transition: transform 0.8s ease; /* 图片旋转动画过渡 */
+  cursor: pointer;    /* 鼠标变成指针，提示可点击 */
 }
 .avatar img:hover {
-  transform: rotateY(360deg);
+  transform: rotateY(360deg); /* 鼠标悬停时图片绕Y轴旋转一圈 */
 }
 
-/* 阅读进度绳子样式 */
+/* ========== 阅读进度“绳子”样式 ========== */
 #rope-progress {
-  position: fixed;
+  position: fixed;      /* 固定定位在屏幕 */
   top: 0;
-  right: 20px;
-  width: 4px;
-  border-radius: 3px;
-  cursor: pointer;
-  z-index: 9999;
+  right: 20px;          /* 右侧距离 */
+  width: 4px;           /* 细条宽度 */
+  border-radius: 3px;   /* 圆角 */
+  cursor: pointer;      /* 鼠标指针样式 */
+  z-index: 9999;        /* 层级最高，保证在最上层 */
 
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  flex-direction: column;  /* 竖直排列 */
+  justify-content: flex-end; /* 内容靠底部 */
   align-items: center;
   overflow: visible;
 
+  /* 斜线纹理背景 */
   background-image:
     repeating-linear-gradient(
       45deg,
@@ -71,41 +72,36 @@
       transparent 4px,
       transparent 8px
     );
-  background-color: rgba(30, 30, 30, 0.6);
-  background-blend-mode: overlay;
-  background-size: 8px 8px;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: rgba(30, 30, 30, 0.6); /* 半透明深色底 */
+  background-blend-mode: overlay;          /* 背景混合模式 */
+  background-size: 8px 8px;                 /* 纹理大小 */
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);  /* 细微阴影 */
 
-  opacity: 0;
-  transform: translateY(-30px) scaleY(0.8);
+  opacity: 0;                               /* 初始透明不可见 */
+  transform: translateY(-30px) scaleY(0.8); /* 初始位置上移缩放 */
   transition:
     opacity 0.6s ease,
-    transform 0.6s ease;
+    transform 0.6s ease;                    /* 渐变过渡 */
 }
-
 #rope-progress.rope-visible {
-  opacity: 1;
-  transform: translateY(0) scaleY(1);
+  opacity: 1;            /* 显示时完全不透明 */
+  transform: translateY(0) scaleY(1); /* 位置和大小复原 */
 }
-
 #rope-progress:hover {
-  box-shadow: 0 0 12px 4px rgba(255, 255, 255, 0.3);
-  background-color: rgba(60, 60, 60, 0.7);
+  box-shadow: 0 0 12px 4px rgba(255, 255, 255, 0.3); /* 悬停阴影加强 */
+  background-color: rgba(60, 60, 60, 0.7);            /* 背景颜色加深 */
 }
-
-/* 绳子头图片样式（带跳动和心跳混合动效） */
 #rope-progress img {
   position: absolute;
-  bottom: -32px;
+  bottom: -32px;          /* 图片放在进度条下方 */
   left: 50%;
   transform: translateX(-50%);
   width: 48px;
   height: auto;
   pointer-events: auto;
   cursor: pointer;
-  animation: bounceHeart 1.6s ease-in-out infinite;
+  animation: bounceHeart 1.6s ease-in-out infinite; /* 心跳动画 */
 }
-
 @keyframes bounceHeart {
   0%, 100% {
     transform: translateX(-50%) scale(1);
@@ -121,20 +117,19 @@
   }
 }
 
-/* 页面底部心跳备用动画 */
+/* ========== 页面底部心跳动画备用 ========== */
 #heartbeat {
   display: inline-block;
-  animation: heartbeat 2.0s ease-in-out infinite;
-  transform-origin: center;
+  animation: heartbeat 2.0s ease-in-out infinite; /* 心跳动画 */
+  transform-origin: center; /* 变换中心点 */
 }
-
 @keyframes heartbeat {
   0%, 100% { transform: scale(1); }
   14%, 42% { transform: scale(1.3); }
   28%, 70% { transform: scale(1); }
 }
 
-/* 阅读进度百分比文字 */
+/* ========== 阅读进度百分比文字样式 ========== */
 .rope-percent {
   position: absolute;
   top: 8px;
@@ -143,35 +138,34 @@
   font-size: 12px;
   font-weight: bold;
   color: #fff;
-  text-shadow: 0 0 3px #000;
-  pointer-events: none;
-  user-select: none;
+  text-shadow: 0 0 3px #000; /* 文字阴影 */
+  pointer-events: none;      /* 不响应鼠标事件 */
+  user-select: none;         /* 不可选中 */
 }
 
-/* 控制标题与正文间距 */
+/* ========== 文章标题区域样式 ========== */
 .post-title-area {
   text-align: center;
-  margin-top: 10rem;               /*设置该元素上方与其他元素之间的距离*/
-  margin-bottom: 10rem;           /*设置该元素下方与其他元素之间的距离*/
-} 
+  margin-top: 10rem;   /* 标题上方大间距 */
+  margin-bottom: 10rem; /* 标题下方大间距 */
+}
 
+/* ========== 文章目录（TOC）样式 ========== */
 
-
-/* ==========文章目录 ========== */
-/* sticky 整体包裹容器 */
+/* sticky 整体包裹容器，顶部固定 */
 .card-sticky-wrapper {
   position: sticky;
-  top: 4rem;
+  top: 4rem; /* 距离顶部4rem */
   z-index: 10;
 }
 
-/* TOC样式 */
+/* TOC 容器样式 */
 #toc-container {
-  background: rgba(255,255,255,0.6);
-  margin-top: 2rem;         /* 目录和头像的距离 */
+  background: rgba(255, 255, 255, 0.6); /* 半透明白背景 */
+  margin-top: 2rem;
   border-radius: 12px;
   padding: 1rem;
-  max-height: 60vh;
+  max-height: 60vh; /* 最大高度，超出滚动 */
   overflow-y: auto;
 }
 
@@ -182,12 +176,12 @@
   transition: max-height 0.3s ease;
 }
 
-/* 给激活的一级目录li加active，展开二级目录 */
+/* 激活的一级目录展开对应的二级目录 */
 #toc-container ol.toc > li.active > ol.toc-child {
-  max-height: 1000px; /* 这个值足够大，确保内容展开 */
+  max-height: 1000px; /* 充分展开 */
 }
 
-/* TOC内部链接样式 */
+/* TOC 内部链接样式 */
 #toc-container a {
   color: #333;
   text-decoration: none;
@@ -195,39 +189,134 @@
   display: block;
   margin: 0.3rem 0;
 }
-
 #toc-container a:hover {
-  color: #409eff;
+  color: #409eff; /* 悬停变成蓝色 */
 }
 
-/* 目录和旁边的图片 */
+/* 目录标题和图标 */
 .toc-header {
   font-weight: bold;
-  font-size: 1.3rem;  /* ✅ 让“目录”两个字变大 */
+  font-size: 1.3rem;
   color: #333;
   margin-bottom: 0.8rem;
   display: flex;
   align-items: center;
   gap: 0.6rem;
 }
-
 .toc-header i {
-  font-size: 1.3rem;  /* ✅ 图标跟着变大 */
+  font-size: 1.3rem;
   color: #515253;
 }
 
-/* 目录前面序号 */
+/* 取消 TOC 列表默认数字 */
 #toc-container ol {
-  list-style: none; /* 去掉默认数字 */
+  list-style: none;
   counter-reset: none;
 }
 
-/* 目录跳转动画 */
+/* 页面平滑滚动效果 */
 html {
   scroll-behavior: smooth;
 }
 
-/* 让标题在被跳转时留出间距 */
+/* 跳转锚点标题滚动时预留顶部间距，防止被固定导航遮挡 */
 .content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
-  scroll-margin-top: 50px; /* 与 JS 中的 offset 保持一致 */
+  scroll-margin-top: 50px;
+}
+
+/* ========== 跳转区域（上一篇/下一篇导航）样式 ========== */
+#post-nav {
+  display: flex;
+  justify-content: space-between; /* 两端对齐 */
+  margin: 3rem 0;
+  padding: 1rem 2rem;
+  border-radius: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.05); /* 半透明背景 */
+}
+#post-nav a {
+  text-decoration: none;
+  color: #ccc; /* 默认文字颜色 */
+}
+#post-nav a:hover span:last-child {
+  text-decoration: underline; /* 悬停时给标题加下划线 */
+  color: #fff; /* 字体变白 */
+}
+
+/* 跳转卡片容器样式 */
+.post-nav-inner a > div {
+  background: linear-gradient(135deg, #606960, #caa2a2); /* 灰色渐变背景 */
+  border-radius: 1rem;
+  padding: 1rem;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.6); /* 阴影 */
+  border: 1px solid rgba(255,255,255,0.15);
+  transform: scale(1);
+  transition:
+    transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.3s ease;
+  background-size: 200% 200%;
+  background-position: 0% 50%;
+  cursor: pointer;
+  position: relative;
+  color: #ddd;
+  animation: bgGradientShift 10s ease-in-out infinite; /* 背景渐变动画 */
+}
+
+/* 跳转卡片悬停效果 */
+.post-nav-inner a:hover > div {
+  transform: scale(1.07) translateY(-4px); /* 放大并上移 */
+  box-shadow: 0 16px 40px rgba(0,0,0,0.9); /* 阴影加强 */
+  border-color: #6a9cff;
+  background: #585858; /* 悬停背景色 */
+}
+
+/* 背景渐变动画关键帧 */
+@keyframes bgGradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* 跳转卡片中图标动画 */
+.post-nav-inner a > div i,
+.post-nav-inner a > div .fa-calendar,
+.post-nav-inner a > div .fa-folder-open,
+.post-nav-inner a > div .fa-tags {
+  color: #a0a8cc;
+  transition: color 0.3s ease;
+  animation: iconPulse 2.5s infinite ease-in-out;
+  animation-play-state: running;
+  opacity: 0.7;
+}
+/* 悬停时图标颜色和透明度变化 */
+.post-nav-inner a:hover > div i,
+.post-nav-inner a:hover > div .fa-calendar,
+.post-nav-inner a:hover > div .fa-folder-open,
+.post-nav-inner a:hover > div .fa-tags {
+  color: #c8d6ff;
+  opacity: 1;
+}
+
+/* 图标呼吸动画关键帧 */
+@keyframes iconPulse {
+  0%, 100% {
+    opacity: 0.7;
+    filter: drop-shadow(0 0 2px #d40539);
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 6px #14cb38);
+  }
+}
+
+/* 悬停跳转链接文字 */
+.post-nav-inner a:hover {
+  color: #eee !important;
+  text-decoration: none;
 }

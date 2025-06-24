@@ -198,6 +198,7 @@
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <!-- ✅ 页面标题和标签 --> 
+
 <div class="post-title-area">
   <h1 style="color: #b6b4b4; font-size: 2.5rem; font-weight: bold; margin-bottom: 0.5rem;">2024年度总结：保持正念 延迟满足</h1>
   <div class="info" style="font-size: 0.95rem; color: #555;">
@@ -228,13 +229,9 @@
   </div>
 </div>
 
-<!-- ✅ 内容预处理：为标题添加 id -->
 
 
-<!-- ✅ 正文与侧边卡片整体容器 -->
 <div id="home-posts-wrap" class="home-posts-wrap" style="display: flex; max-width: 1200px; margin: auto; gap: 2rem;">
-
-  <!-- ✅ 正文部分 -->
   <div id="home-posts" style="opacity: 0.5; flex: 3;">
     <div class="post">
       
@@ -271,11 +268,8 @@
     </div>
   </div>
 
-  <!-- ✅ 右侧卡片 -->
   
     <div id="home-card" style="opacity: 0.5; flex: 1; position: relative;">
-
-      <!-- 固定头像 -->
       <div class="profile-card-fixed">
         <div id="card-style">
     <div id="card-div">
@@ -338,8 +332,6 @@
   </div>
   
       </div>
-
-      <!-- sticky 的 TOC -->
       <div class="card-sticky-wrapper">
         <div id="toc-container">
           <div class="toc-header">
@@ -352,7 +344,47 @@
   
 </div>
 
-<!-- ✅ 评论区 -->
+<!-- 修改过的上一篇/下一篇导航 -->
+<div class="post-nav-outer" style="max-width: 1200px; margin: 3rem auto 0; display: flex; justify-content: center;">
+  <div class="post-nav-inner" style="flex: 3; display: flex; gap: 1rem;">
+    
+      <a href="/hello-world/" style="flex: 1; text-decoration: none; color: #ccc;">
+        <div>
+          <div style="font-size: 0.85rem; color: #492630;">⬅ 上一篇</div>
+          <div style="font-weight: bold; font-size: 1.1rem; margin-top: 0.3rem;">Hello World</div>
+          <div style="font-size: 0.85rem; margin-top: 0.5rem;">
+            <i class="fa fa-calendar"></i> 2025-06-18
+            
+            
+          </div>
+        </div>
+      </a>
+    
+
+    
+      <!-- 无下一篇时显示当前文章占位 -->
+      <a href="/2024%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" style="flex: 1; text-decoration: none; color: #999; text-align: right; cursor: default;">
+        <div>
+          <div style="font-size: 0.85rem; color: #492630;"> 本篇 ➡</div>
+          <div style="font-weight: bold; font-size: 1.1rem; margin-top: 0.3rem;">2024年度总结：保持正念 延迟满足</div>
+          <div style="font-size: 0.85rem; margin-top: 0.5rem;">
+            <i class="fa fa-calendar"></i> 2024-12-31
+            
+              &nbsp;| <i class="fa fa-folder-open"></i> 年度总结
+            
+            
+              &nbsp;| <i class="fa fa-tags"></i>
+              
+                奋进
+              
+            
+          </div>
+        </div>
+      </a>
+    
+  </div>
+</div>
+
 
   
   
@@ -360,12 +392,10 @@
   
 
 
-<!-- ====== 目录滚动高亮脚本 ====== -->
 <script>
 document.addEventListener("DOMContentLoaded", function() {
   const tocLis = document.querySelectorAll("#toc-container > ol > li");
-  const headers = [...document.querySelectorAll(".content h1")];  // 这里用h1作为一级标题
-
+  const headers = [...document.querySelectorAll(".content h1")];
   const idToTocLi = {};
   tocLis.forEach(li => {
     const a = li.querySelector("a");
@@ -380,7 +410,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
     let currentIndex = 0;
     for (let i = 0; i < headers.length; i++) {
-      const headerTop = headers[i].getBoundingClientRect().top + window.pageYOffset - 100; // 100px偏移，视情况调整
+      const headerTop = headers[i].getBoundingClientRect().top + window.pageYOffset - 100;
       if (scrollTop >= headerTop) {
         currentIndex = i;
       } else {
@@ -401,6 +431,7 @@ document.addEventListener("DOMContentLoaded", function() {
   onScroll();
 });
 </script>
+
             <footer id="footer">
   <div id="footer-wrap">
     <div>
