@@ -320,3 +320,61 @@ html {
   color: #eee !important;
   text-decoration: none;
 }
+.author-status-sidebar {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-size: 0.75rem;
+  padding: 2px 6px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+  user-select: none;
+  cursor: default;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
+  transition: background-color 0.3s ease;
+  z-index: 20;
+}
+
+.author-status-sidebar:hover,
+.author-status-sidebar:focus {
+  background-color: rgba(0, 0, 0, 0.85);
+  outline: none;
+}
+
+.status-text {
+  opacity: 0;
+  max-width: 0;
+  overflow: hidden;
+  display: inline-block;
+  transform: translateX(20px); /* 往右移出 */
+  transition:
+    opacity 0.3s ease,
+    max-width 0.3s ease,
+    transform 0.3s ease;
+  white-space: nowrap;
+}
+
+.author-status-sidebar:hover .status-text,
+.author-status-sidebar:focus .status-text {
+  opacity: 1;
+  max-width: 150px; /* 展开宽度 */
+  transform: translateX(0); /* 回到正常位置 */
+}
+
+
+/* 🔵 扩大点击区域：透明点击层 */
+#rope-click-layer {
+  position: absolute;
+  bottom: -80px;   /* 向下延伸以包住绳子头 */
+  left: -30px;     /* 向左扩展点击范围 */
+  width: 140px;    /* 宽度覆盖绳子头两侧 */
+  height: 140px;   /* 总体高度覆盖绳子头上下 */
+  z-index: 11;     /* 高于图片，低于其他顶层UI */
+  background: transparent;
+  cursor: pointer;
+}

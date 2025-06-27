@@ -221,7 +221,7 @@
       
       <span class="tag">
         
-        <a href="/tags/%E5%A5%8B%E8%BF%9B/" style="color: #00bcd4; margin-right: 0.5rem;">奋进</a>
+        <a href="/tags/%E5%A5%8B%E8%BF%9B/" style="color: #00a596; margin-right: 0.5rem;">奋进</a>
       </span>
       
     </span>
@@ -272,65 +272,71 @@
     <div id="home-card" style="opacity: 0.5; flex: 1; position: relative;">
       <div class="profile-card-fixed">
         <div id="card-style">
-    <div id="card-div">
-  
-      <!-- 头像区域整体包裹 -->
-      <div class="card-header">
-        <!-- 头像 -->
-        <div class="avatar">
-          <img src="/images/123.jpg" alt="avatar" />
-        </div>
-  
-        <!-- 作者名 -->
-        <div class="name">Xzzzz911</div>
-  
-        <!-- 描述（支持 markdown） -->
-        <div class="description">
-          <p>越努力 越幸运</p>
+  <div id="card-div">
 
+    <!-- 头像区域整体包裹 -->
+    <div class="card-header">
+      <!-- 头像，添加外层相对定位 -->
+      <div class="avatar">
+        <img src="/images/123.jpg" alt="avatar" />
+
+        <!-- 右下角小标注 -->
+        <div class="author-status-sidebar" tabindex="0" aria-label="认真摸鱼中">
+          <g-emoji class="g-emoji" alias="palm_tree" fallback-src="https://lskypro.acozycotage.net/LightPicture/2022/12/fe1dc0402e623096.jpg">🐟</g-emoji>
+          <span class="status-text">认真摸鱼中</span>
         </div>
-  
-        <!-- 图标链接 -->
+      </div>
+
+      <!-- 作者名 -->
+      <div class="name">Xzzzz911</div>
+
+      <!-- 描述（支持 markdown） -->
+      <div class="description">
+        <p>越努力 越幸运</p>
+
+      </div>
+
+      <!-- 图标链接 -->
+      
+      <div class="icon-links">
         
-        <div class="icon-links">
-          
-          <span class="icon-link">
-            <a href="https://github.com/xzz911" title="来访问我的GitHub吧" target="_blank" rel="noopener noreferrer">
-              <i class="fa-brands fa-github fa-fw"></i>
-            </a>
-          </span>
-          
-          <span class="icon-link">
-            <a href="https://wpa.qq.com/msgrd?v=3&amp;uin=443602796&amp;site=qq&amp;menu=yes" title="QQ: 443602796" target="_blank" rel="noopener noreferrer">
-              <i class="fa-brands fa-qq fa-fw"></i>
-            </a>
-          </span>
-          
-          <span class="icon-link">
-            <a href="mailto:xzzzz911@qq.com" title="邮件发送我" target="_blank" rel="noopener noreferrer">
-              <i class="fa-solid fa-envelope fa-fw"></i>
-            </a>
-          </span>
-          
-          <span class="icon-link">
-            <a href="https://space.bilibili.com/你的UID" title="B站主页" target="_blank" rel="noopener noreferrer">
-              <i class="fa-solid fa-tv fa-fw"></i>
-            </a>
-          </span>
-          
-        </div>
+        <span class="icon-link">
+          <a href="https://github.com/xzz911" title="来访问我的GitHub吧" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-github fa-fw"></i>
+          </a>
+        </span>
         
-  
-        <!-- 友链 -->
+        <span class="icon-link">
+          <a href="https://wpa.qq.com/msgrd?v=3&amp;uin=443602796&amp;site=qq&amp;menu=yes" title="QQ: 443602796" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-qq fa-fw"></i>
+          </a>
+        </span>
+        
+        <span class="icon-link">
+          <a href="mailto:xzzzz911@qq.com" title="邮件发送我" target="_blank" rel="noopener noreferrer">
+            <i class="fa-solid fa-envelope fa-fw"></i>
+          </a>
+        </span>
+        
+        <span class="icon-link">
+          <a href="https://space.bilibili.com/你的UID" title="B站主页" target="_blank" rel="noopener noreferrer">
+            <i class="fa-solid fa-tv fa-fw"></i>
+          </a>
+        </span>
         
       </div>
-  
-      <!-- TOC 目录区域 -->
       
-  
+
+      <!-- 友链 -->
+      
     </div>
+
+    <!-- TOC 目录区域 -->
+    
+
   </div>
-  
+</div>
+
       </div>
       <div class="card-sticky-wrapper">
         <div id="toc-container">
@@ -565,6 +571,12 @@ document.addEventListener("DOMContentLoaded", function() {
   <!-- ✅ 鼠标点击特效 -->
   <script src="/js/click-effect.js"></script>
 
+  <!-- 鼠标星星特效，仅桌面端加载 -->
+  <script>
+    if (window.innerWidth > 768) {
+      document.write('<script src="/js/star.js"><\/script>');
+    }
+  </script>
 
   
         </div>
@@ -579,13 +591,19 @@ document.addEventListener("DOMContentLoaded", function() {
         <!-- 阅读进度绳子 -->
         <div
         id="rope-progress"
-        title="点我回到顶部"
-        @click="scrollToTop"
         :class="{'rope-visible': ropeHeight > 20}"
-        :style="{ height: ropeHeight + 'px' }">
+        :style="{ height: ropeHeight + 'px' }"
+        >
+        <!-- ✅ 新增：透明点击区域 -->
+        <div
+            id="rope-click-layer"
+            title="点我回到顶部"
+            @click="scrollToTop"
+        ></div>
 
         <!-- 进度百分比 -->
         <div class="rope-percent" id="rope-percent">0%</div>
+
         <!-- 绳子头图片 -->
         <img
             src="/images/rope-head.png"
@@ -597,15 +615,16 @@ document.addEventListener("DOMContentLoaded", function() {
         />
         </div>
 
+
     </div>
 
     <script src="/js/main.js"></script>
 
     <script>
+        // 保留你已有 PrismJS 代码不变
         document.addEventListener('DOMContentLoaded', function () {
             Prism.highlightAll();
 
-            // 强制为所有 <pre><code class="language-xxx"> 添加 line-numbers 类
             document.querySelectorAll('pre code[class^="language-"]').forEach(function (codeBlock) {
                 const pre = codeBlock.parentElement;
                 if (!pre.classList.contains('line-numbers')) {
@@ -626,6 +645,70 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     </script>
+
+    <!-- 新增：监听标签页切换，动态修改标签页标题 -->
+    <script>
+    (function () {
+        const isPost = true; // ✅ 是否是文章页面
+        const originalTitle = document.title;
+        const awayTitle = "🤠别玩了啦~";
+        const backTitle = "🚩给我狠狠学~";
+        let blinkInterval = null;
+        let isTabActive = true;
+
+        // 闪烁标题
+        function blinkTitle(titles, interval = 500, times = 6) {
+            let count = 0;
+            let index = 0;
+            if (blinkInterval) clearInterval(blinkInterval);
+            blinkInterval = setInterval(() => {
+                document.title = titles[index];
+                index = (index + 1) % titles.length;
+                count++;
+                if (count >= times) {
+                    clearInterval(blinkInterval);
+                    blinkInterval = null;
+                    if (isPost) updateScrollProgressTitle();
+                    else document.title = originalTitle;
+                }
+            }, interval);
+        }
+
+        // 更新标题为进度百分比
+        function updateScrollProgressTitle() {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const percent = Math.min(100, Math.round((scrollTop / scrollHeight) * 100));
+            document.title = `📖 ${percent}% | ${originalTitle}`;
+        }
+
+        // 页面可见性切换
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                isTabActive = false;
+                if (blinkInterval) clearInterval(blinkInterval);
+                document.title = awayTitle;
+            } else {
+                isTabActive = true;
+                document.title = backTitle;
+                blinkTitle([backTitle, originalTitle], 500, 6);
+            }
+        });
+
+        // 仅在文章页监听滚动和初始化
+        if (isPost) {
+            window.addEventListener('scroll', () => {
+                if (isTabActive) updateScrollProgressTitle();
+            });
+            window.addEventListener('load', () => {
+                updateScrollProgressTitle();
+            });
+        }
+    })();
+    </script>
+
+
+
 
     
     

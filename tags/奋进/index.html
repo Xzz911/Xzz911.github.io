@@ -213,7 +213,7 @@
         
         
         <span>
-            <a href="/tags/hexo/" style="background: #00a596">
+            <a href="/tags/hexo/" style="background: #03a9f4">
                 <span class="icon">
                     <i class="fa-solid fa-tags fa-fw"></i>
                 </span>
@@ -224,7 +224,7 @@
         
         
         <span>
-            <a href="/tags/demo/" style="background: #ff7d73">
+            <a href="/tags/demo/" style="background: #00bcd4">
                 <span class="icon">
                     <i class="fa-solid fa-tags fa-fw"></i>
                 </span>
@@ -262,7 +262,7 @@
                     
                     <span class="tag">
                         
-                        <a href="/tags/%E5%A5%8B%E8%BF%9B/" style="color: #00a596">
+                        <a href="/tags/%E5%A5%8B%E8%BF%9B/" style="color: #ff7d73">
                             奋进
                         </a>
                     </span>
@@ -408,6 +408,12 @@
   <!-- ✅ 鼠标点击特效 -->
   <script src="/js/click-effect.js"></script>
 
+  <!-- 鼠标星星特效，仅桌面端加载 -->
+  <script>
+    if (window.innerWidth > 768) {
+      document.write('<script src="/js/star.js"><\/script>');
+    }
+  </script>
 
   
         </div>
@@ -422,13 +428,19 @@
         <!-- 阅读进度绳子 -->
         <div
         id="rope-progress"
-        title="点我回到顶部"
-        @click="scrollToTop"
         :class="{'rope-visible': ropeHeight > 20}"
-        :style="{ height: ropeHeight + 'px' }">
+        :style="{ height: ropeHeight + 'px' }"
+        >
+        <!-- ✅ 新增：透明点击区域 -->
+        <div
+            id="rope-click-layer"
+            title="点我回到顶部"
+            @click="scrollToTop"
+        ></div>
 
         <!-- 进度百分比 -->
         <div class="rope-percent" id="rope-percent">0%</div>
+
         <!-- 绳子头图片 -->
         <img
             src="/images/rope-head.png"
@@ -440,15 +452,16 @@
         />
         </div>
 
+
     </div>
 
     <script src="/js/main.js"></script>
 
     <script>
+        // 保留你已有 PrismJS 代码不变
         document.addEventListener('DOMContentLoaded', function () {
             Prism.highlightAll();
 
-            // 强制为所有 <pre><code class="language-xxx"> 添加 line-numbers 类
             document.querySelectorAll('pre code[class^="language-"]').forEach(function (codeBlock) {
                 const pre = codeBlock.parentElement;
                 if (!pre.classList.contains('line-numbers')) {
@@ -469,6 +482,70 @@
             }
         });
     </script>
+
+    <!-- 新增：监听标签页切换，动态修改标签页标题 -->
+    <script>
+    (function () {
+        const isPost = false; // ✅ 是否是文章页面
+        const originalTitle = document.title;
+        const awayTitle = "🤠别玩了啦~";
+        const backTitle = "🚩给我狠狠学~";
+        let blinkInterval = null;
+        let isTabActive = true;
+
+        // 闪烁标题
+        function blinkTitle(titles, interval = 500, times = 6) {
+            let count = 0;
+            let index = 0;
+            if (blinkInterval) clearInterval(blinkInterval);
+            blinkInterval = setInterval(() => {
+                document.title = titles[index];
+                index = (index + 1) % titles.length;
+                count++;
+                if (count >= times) {
+                    clearInterval(blinkInterval);
+                    blinkInterval = null;
+                    if (isPost) updateScrollProgressTitle();
+                    else document.title = originalTitle;
+                }
+            }, interval);
+        }
+
+        // 更新标题为进度百分比
+        function updateScrollProgressTitle() {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const percent = Math.min(100, Math.round((scrollTop / scrollHeight) * 100));
+            document.title = `📖 ${percent}% | ${originalTitle}`;
+        }
+
+        // 页面可见性切换
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                isTabActive = false;
+                if (blinkInterval) clearInterval(blinkInterval);
+                document.title = awayTitle;
+            } else {
+                isTabActive = true;
+                document.title = backTitle;
+                blinkTitle([backTitle, originalTitle], 500, 6);
+            }
+        });
+
+        // 仅在文章页监听滚动和初始化
+        if (isPost) {
+            window.addEventListener('scroll', () => {
+                if (isTabActive) updateScrollProgressTitle();
+            });
+            window.addEventListener('load', () => {
+                updateScrollProgressTitle();
+            });
+        }
+    })();
+    </script>
+
+
+
 
     
 
