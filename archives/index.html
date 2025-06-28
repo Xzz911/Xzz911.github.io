@@ -198,6 +198,44 @@
     
     <div id="timeline-wrap" ref="timeline">
         
+        <div class="timeline" data-title="[moectf2022]pwn复现">
+            <div class="timeline-tail"></div>
+            <div class="timeline-content" style="opacity: 0.5; border-radius: 12px; padding: 1rem;">
+                <div class="item-time">2023/10/13</div>
+                <a href="/%5BMoeCTF%202022%5D%20PWN%E5%A4%8D%E7%8E%B0/">
+                    <h3>[MoeCTF 2022] PWN复现</h3>
+                </a>
+                <div class="info">
+                    
+                    <span class="category">
+                        <a href="/categories/CTF/">
+                            <span class="icon">
+                                <i class="fa-solid fa-bookmark fa-fw"></i>
+                            </span>
+                            CTF
+                        </a>
+                    </span>
+                    
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </span>
+                        
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/PWN/" style="color: #00bcd4">
+                                PWN
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </div>
+        </div>
+        
         <div class="timeline" data-title="2024年度总结：保持正念延迟满足">
             <div class="timeline-tail"></div>
             <div class="timeline-content" style="opacity: 0.5; border-radius: 12px; padding: 1rem;">
@@ -268,7 +306,7 @@
                         
                         <span class="tag">
                             
-                            <a href="/tags/hexo/" style="color: #03a9f4">
+                            <a href="/tags/hexo/" style="color: #ffa2c4">
                                 hexo
                             </a>
                         </span>
@@ -337,31 +375,21 @@
 
   <!-- 页面底部 JS：运行时间 + Voyager 动态距离 -->
   <script>
-    // 建站起始时间（格式：年-月-日T时:分:秒）
     const siteStartTime = new Date('2025-06-18T00:00:00');
-
-    // Voyager 1 真实起始距离 km 和速度（约17km/s）
     const voyagerStartTime = new Date('2023-07-25T00:00:00');
-    let voyagerDistanceKm = 23400000000; // 起始距离约234亿千米
-
-    // 本地存储key，保存距离，页面刷新时继续累加
+    let voyagerDistanceKm = 23400000000;
     const STORAGE_KEY = 'voyager1_distance_km';
-
-    // 天文单位换算（公里）
     const AU_IN_KM = 1.495979e+8;
 
-    // 载入 localStorage 中的距离，优先使用，没则用起始距离
     const storedDistance = parseInt(localStorage.getItem(STORAGE_KEY));
     if (!isNaN(storedDistance) && storedDistance > voyagerDistanceKm) {
       voyagerDistanceKm = storedDistance;
     }
 
-    // 补零函数，位数不足补0
     function padZero(num, len = 2) {
       return num.toString().padStart(len, '0');
     }
 
-    // 更新时间显示 + 白天/晚上文案切换
     function updateSiteRuntime() {
       const now = new Date();
       const diffSeconds = Math.floor((now - siteStartTime) / 1000);
@@ -371,7 +399,6 @@
       const minutes = Math.floor((diffSeconds % 3600) / 60);
       const seconds = diffSeconds % 60;
 
-      // 白天 9:00 ~ 18:00 之间显示不同文案
       const isDaytime = hours >= 9 && hours < 18;
       const message = isDaytime
         ? "加油加油好好干，冲冲冲~"
@@ -383,17 +410,14 @@
           本站居然运行了 ${days} 天 ${padZero(hours)} 小时 ${padZero(minutes)} 分 ${padZero(seconds)} 秒
           <i id="heartbeat" class="fas fa-heartbeat" style="color: red;"></i>
         </div>
-
       `;
     }
 
-    // 更新时间 + 距离计算（用秒数 * 速度计算距离）
     function updateVoyagerDistance() {
       const now = new Date();
       const secondsPassed = Math.floor((now - voyagerStartTime) / 1000);
-      voyagerDistanceKm = 23400000000 + secondsPassed * 17; // 速度17km/s
+      voyagerDistanceKm = 23400000000 + secondsPassed * 17;
 
-      // 保存距离
       localStorage.setItem(STORAGE_KEY, voyagerDistanceKm);
 
       const au = (voyagerDistanceKm / AU_IN_KM).toFixed(6);
@@ -404,46 +428,72 @@
       `;
     }
 
-    // 页面加载时初始化显示
-    updateSiteRuntime();
-    updateVoyagerDistance();
-
-    // 每秒刷新
-    setInterval(() => {
+    function startTimers() {
       updateSiteRuntime();
       updateVoyagerDistance();
-    }, 1000);
+      setInterval(() => {
+        updateSiteRuntime();
+        updateVoyagerDistance();
+      }, 1000);
+    }
+
+    window.addEventListener('DOMContentLoaded', startTimers);
   </script>
 </footer>
 
-  <!-- Typed.js -->
-  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<!-- Typed.js -->
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<!-- 初始化打字机效果 -->
+<script src="/js/typed-subtitle.js"></script>
 
-  <!-- 初始化打字机效果 -->
-  <script src="/js/typed-subtitle.js"></script>
+<!-- 鼠标点击核心价值观文字特效 -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
 
-  <!-- 鼠标点击核心价值观文字特效 -->
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+<!-- 鼠标粒子拖尾特效 -->
+<script src="/js/mouse-particles.js"></script>
 
-  <!-- 鼠标粒子拖尾特效 -->
-  <script src="/js/mouse-particles.js"></script>
+<!-- 网站页面特效 -->
+<canvas id="universe" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-1;pointer-events:none;"></canvas>
+<script defer src="/js/universe.js"></script>
+<script src="/js/custom.js"></script>
 
-  <!-- 网站页面特效 -->
-  <canvas id="universe" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-1;pointer-events:none;"></canvas>
-  <script defer src="/js/universe.js"></script>
-  <script src="/js/custom.js"></script>
+<!-- ✅ 鼠标点击特效 -->
+<script src="/js/click-effect.js"></script>
 
-  <!-- ✅ 鼠标点击特效 -->
-  <script src="/js/click-effect.js"></script>
+<!-- 鼠标星星特效，仅桌面端加载 -->
+<script>
+  if (window.innerWidth > 768) {
+    document.write('<script src="/js/star.js"><\/script>');
+  }
+</script>
 
-  <!-- 鼠标星星特效，仅桌面端加载 -->
-  <script>
-    if (window.innerWidth > 768) {
-      document.write('<script src="/js/star.js"><\/script>');
+<!-- 今日诗词API脚本 -->
+<script src="https://fastly.jsdelivr.net/npm/js-heo@1.0.11/poem/jinrishici.js" charset="utf-8"></script>
+<script type="text/javascript">
+  jinrishici.load(function(result) {
+    if (result.status === "success") {
+      const data = result.data;
+      const content = data.content || "";
+      const origin = data.origin || {};
+      const title = origin.title || "";
+      const author = origin.author || data.author || "";
+      const dynasty = origin.dynasty || data.dynasty || "";
+
+      const sentenceEl = document.getElementById("poem_sentence");
+      if (sentenceEl) sentenceEl.innerText = content;
+
+      const metaEl = document.getElementById("poem_meta");
+      if (metaEl) {
+        metaEl.innerText = `${dynasty} · ${author} 《${title}》`;
+      }
+    } else {
+      console.warn("今日诗词 API 加载失败");
     }
-  </script>
+  });
+</script>
 
-  
+
+
         </div>
         
         <transition name="fade">
@@ -516,7 +566,7 @@
     (function () {
         const isPost = false; // ✅ 是否是文章页面
         const originalTitle = document.title;
-        const awayTitle = "🤠别玩了啦~";
+        const awayTitle = "🤠别再玩了啦~";
         const backTitle = "🚩给我狠狠学~";
         let blinkInterval = null;
         let isTabActive = true;
