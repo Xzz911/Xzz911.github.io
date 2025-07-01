@@ -26,25 +26,27 @@
 <link rel="preconnect" href="https://fonts.googleapis.cn" />
 <link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
 <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+  rel="stylesheet"
+  href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
 />
-<script> const mixins = {}; </script>
 
-<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+<script>const mixins = {};</script>
 
 
-<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
-<link
-    rel="stylesheet"
-    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
-/>
-<script src="/js/lib/highlight.js"></script>
+  <script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
 
 
 
-<script src="/js/lib/preview.js"></script>
+
+
+
+
+  <script src="/js/lib/preview.js"></script>
+
+
+
+
+
 
 
 
@@ -224,7 +226,7 @@
         
         
         <span>
-            <a href="/tags/hexo/" style="background: #03a9f4">
+            <a href="/tags/hexo/" style="background: #00a596">
                 <span class="icon">
                     <i class="fa-solid fa-tags fa-fw"></i>
                 </span>
@@ -235,7 +237,7 @@
         
         
         <span>
-            <a href="/tags/demo/" style="background: #00a596">
+            <a href="/tags/demo/" style="background: #00bcd4">
                 <span class="icon">
                     <i class="fa-solid fa-tags fa-fw"></i>
                 </span>
@@ -566,6 +568,59 @@
         }
     })();
     </script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll("figure.highlight").forEach(function (block) {
+        // 尝试从 code 标签 class 中提取语言名
+        let lang = block.querySelector("code")?.className?.match(/language-(\w+)/)?.[1];
+
+        // 如果没有从 code 标签获得，尝试从 figure 的 class 中提取
+        if (!lang) {
+        const figureClasses = block.className.split(/\s+/);
+        // 去除 highlight 关键字，取剩余第一个作为语言名
+        lang = figureClasses.find(c => c !== "highlight") || "code";
+        }
+
+        // 转成小写
+        lang = lang.toLowerCase();
+
+        // 创建顶部工具栏容器
+        const toolbar = document.createElement("div");
+        toolbar.className = "custom-code-toolbar";
+
+        // 🔴🟡🟢 圆点区域
+        const dots = document.createElement("div");
+        dots.className = "custom-code-dots";
+        dots.innerHTML = `<span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>`;
+        toolbar.appendChild(dots);
+
+        // 🧩 语言名标签
+        const langLabel = document.createElement("span");
+        langLabel.className = "code-lang-label";
+        langLabel.innerText = lang;
+        toolbar.appendChild(langLabel);
+
+        // 📋 复制按钮
+        const copyBtn = document.createElement("button");
+        copyBtn.className = "copy-btn";
+        copyBtn.innerText = "📋";
+        copyBtn.addEventListener("click", () => {
+        const code = block.querySelector("code");
+        if (!code) return;
+        navigator.clipboard.writeText(code.innerText).then(() => {
+            copyBtn.innerText = "✅";
+            setTimeout(() => (copyBtn.innerText = "📋"), 1500);
+        });
+        });
+        toolbar.appendChild(copyBtn);
+
+        // 插入工具栏到代码块顶部
+        block.insertBefore(toolbar, block.firstChild);
+    });
+    });
+    </script>
+
 
 
 

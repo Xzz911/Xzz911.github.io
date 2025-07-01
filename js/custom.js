@@ -23,4 +23,13 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
   });
+
+  document.querySelectorAll('pre code').forEach((block) => {
+    const pre = block.parentElement;
+    if (!block.className.includes('language-')) {
+      block.classList.add('language-none');
+    }
+    pre.classList.add('line-numbers');
+  });
+  
   

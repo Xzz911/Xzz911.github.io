@@ -26,30 +26,32 @@
 <link rel="preconnect" href="https://fonts.googleapis.cn" />
 <link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
 <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+  rel="stylesheet"
+  href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
 />
-<script> const mixins = {}; </script>
 
-<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
-
-
-<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
-<link
-    rel="stylesheet"
-    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
-/>
-<script src="/js/lib/highlight.js"></script>
+<script>const mixins = {};</script>
 
 
-
-<script src="/js/lib/preview.js"></script>
+  <script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
 
 
 
 
 
+
+
+  <script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+  
+  
+  
 
 
 
@@ -252,7 +254,7 @@
 <p><img src="/images/3.png"></p>
 <p>&emsp;&emsp;然后就是自己一个人坐高铁去九江软考，也算是对自己的一种历练，自己出去闯闯，让自己提前被社会毒打😵‍💫😵‍💫，尽管结果不怎么样，还差些就过了，但还是收获很多的，遇到了一些有意义的事和人，还是挺不错的，下次继续加油，争取拿下！！！</p>
 <p><img src="/images/4.png"></p>
-<p>&emsp;&emsp;🚄🚄最后应该就和同学一起去南昌玩了两天，算是第一次出来旅游，总体感觉还不错，第一天去看了双子塔，逛了绿地，万达……中午吃了老三样，辣椒辣的我西西叫🤤🤤。</p>
+<p>&emsp;&emsp;🚄🚄最后应该就和同学一起去南昌玩了两天，算是第一次出来旅游，总体感觉还不错，第一天去看了双子塔，逛了绿地，万达......中午吃了老三样，辣椒辣的我西西叫🤤🤤。</p>
 <p><img src="/images/5.png"></p>
 <p>&emsp;&emsp;然后就去了南昌之心看了，在那附近玩了下，发现那个地方有挺多拍照的点位的🤣🤣，然后又是新的尝试，在网吧里面过夜，有趣是有趣，后半夜睡的辗转反侧，有点小难受🥱🥱。</p>
 <p><img src="/images/6.png"></p>
@@ -319,8 +321,8 @@
         </span>
         
         <span class="icon-link">
-          <a href="https://space.bilibili.com/你的UID" title="B站主页" target="_blank" rel="noopener noreferrer">
-            <i class="fa-solid fa-tv fa-fw"></i>
+          <a href="https://space.bilibili.com/1709777759" title="B站主页" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-bilibili fa-fw"></i>
           </a>
         </span>
         
@@ -723,6 +725,59 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     })();
     </script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll("figure.highlight").forEach(function (block) {
+        // 尝试从 code 标签 class 中提取语言名
+        let lang = block.querySelector("code")?.className?.match(/language-(\w+)/)?.[1];
+
+        // 如果没有从 code 标签获得，尝试从 figure 的 class 中提取
+        if (!lang) {
+        const figureClasses = block.className.split(/\s+/);
+        // 去除 highlight 关键字，取剩余第一个作为语言名
+        lang = figureClasses.find(c => c !== "highlight") || "code";
+        }
+
+        // 转成小写
+        lang = lang.toLowerCase();
+
+        // 创建顶部工具栏容器
+        const toolbar = document.createElement("div");
+        toolbar.className = "custom-code-toolbar";
+
+        // 🔴🟡🟢 圆点区域
+        const dots = document.createElement("div");
+        dots.className = "custom-code-dots";
+        dots.innerHTML = `<span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>`;
+        toolbar.appendChild(dots);
+
+        // 🧩 语言名标签
+        const langLabel = document.createElement("span");
+        langLabel.className = "code-lang-label";
+        langLabel.innerText = lang;
+        toolbar.appendChild(langLabel);
+
+        // 📋 复制按钮
+        const copyBtn = document.createElement("button");
+        copyBtn.className = "copy-btn";
+        copyBtn.innerText = "📋";
+        copyBtn.addEventListener("click", () => {
+        const code = block.querySelector("code");
+        if (!code) return;
+        navigator.clipboard.writeText(code.innerText).then(() => {
+            copyBtn.innerText = "✅";
+            setTimeout(() => (copyBtn.innerText = "📋"), 1500);
+        });
+        });
+        toolbar.appendChild(copyBtn);
+
+        // 插入工具栏到代码块顶部
+        block.insertBefore(toolbar, block.firstChild);
+    });
+    });
+    </script>
+
 
 
 

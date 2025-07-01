@@ -397,3 +397,128 @@ html {
   max-height: none !important;
   overflow: visible !important;
 }
+/* ===== 顶部工具栏样式 ===== */
+.custom-code-toolbar {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.3rem 0.6rem;
+  background: #2d2d2d !important;  /* 保证背景色 */
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  font-family: monospace;
+  font-size: 0.85rem;
+  color: #ccc;
+  user-select: none;
+}
+
+/* 🔴🟡🟢 圆点区域 */
+.custom-code-dots {
+  display: flex;
+  gap: 0.3rem;
+}
+.custom-code-dots .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.dot.red { background: #ff5f56; }
+.dot.yellow { background: #ffbd2e; }
+.dot.green { background: #27c93f; }
+
+/* 🧩 语言名 */
+.code-lang-label {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #aaa;
+}
+
+/* 📋 复制按钮 */
+.copy-btn {
+  background: none;
+  border: none;
+  color: #ccc;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.copy-btn:hover {
+  color: #fff;
+}
+
+/* 修改代码块整体圆角和背景一致 */
+figure.highlight {
+  background: #2d2d2d !important;
+  border-radius: 12px !important;  /* 保留圆角 */
+  overflow: hidden !important;
+  box-shadow: none !important;
+  border: none !important;
+  margin: 1em 0 !important;
+  padding: 0 !important;
+}
+
+/* 代码块内部 pre 标签 */
+figure.highlight pre {
+  margin: 0 !important;
+  padding: 1em !important;   /* 保留内边距 */
+  background: #2d2d2d !important;
+  color: #f8f8f2;
+  border: none !important;
+  /* 取消下面的圆角清除，保留父元素圆角即可 */
+  /* border-radius: 0 !important; */
+  box-shadow: none !important;
+}
+
+/* Prism 的背景也覆盖 */
+pre[class*="language-"],
+code[class*="language-"] {
+  background: #2d2d2d !important;
+  border: none !important;
+  /* 保留圆角取消，否则会变直角
+  border-radius: 0 !important;
+  */
+  box-shadow: none !important;
+}
+
+/* 统一整个代码块区域背景和字体色 */
+figure.highlight,
+figure.highlight table,
+figure.highlight pre,
+figure.highlight td,
+figure.highlight .gutter,
+figure.highlight .code,
+pre[class*="language-"],
+code[class*="language-"] {
+  background: #2d2d2d !important;
+  border: none !important;
+  /* 保留圆角 */
+  /* border-radius: 0 !important; */
+  box-shadow: none !important;
+  color: #ccc !important;
+}
+
+/* 行号颜色 */
+figure.highlight .gutter {
+  color: #666 !important;
+}
+
+/* 表格布局取消边框与间距 */
+figure.highlight table {
+  border-spacing: 0 !important;
+  border-collapse: collapse !important;
+  width: 100% !important;
+}
+
+/* 代码单元格 padding */
+figure.highlight td {
+  padding: 0 !important;
+}
+
+/* 代码块本体 padding */
+figure.highlight .code pre {
+  padding: 1em !important;
+  margin: 0 !important;
+}
+
