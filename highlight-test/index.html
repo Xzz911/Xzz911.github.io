@@ -527,6 +527,9 @@ document.addEventListener("DOMContentLoaded", function() {
 <!-- ✅ 鼠标点击特效 -->
 <script src="/js/click-effect.js"></script>
 
+<script src="/js/code-copy.js"></script>
+
+
 <!-- 鼠标星星特效，仅桌面端加载 -->
 <script>
   if (window.innerWidth > 768) {
@@ -689,57 +692,7 @@ document.addEventListener("DOMContentLoaded", function() {
     })();
     </script>
 
-    <script>
-    document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll("figure.highlight").forEach(function (block) {
-        // 尝试从 code 标签 class 中提取语言名
-        let lang = block.querySelector("code")?.className?.match(/language-(\w+)/)?.[1];
 
-        // 如果没有从 code 标签获得，尝试从 figure 的 class 中提取
-        if (!lang) {
-        const figureClasses = block.className.split(/\s+/);
-        // 去除 highlight 关键字，取剩余第一个作为语言名
-        lang = figureClasses.find(c => c !== "highlight") || "code";
-        }
-
-        // 转成小写
-        lang = lang.toLowerCase();
-
-        // 创建顶部工具栏容器
-        const toolbar = document.createElement("div");
-        toolbar.className = "custom-code-toolbar";
-
-        // 🔴🟡🟢 圆点区域
-        const dots = document.createElement("div");
-        dots.className = "custom-code-dots";
-        dots.innerHTML = `<span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>`;
-        toolbar.appendChild(dots);
-
-        // 🧩 语言名标签
-        const langLabel = document.createElement("span");
-        langLabel.className = "code-lang-label";
-        langLabel.innerText = lang;
-        toolbar.appendChild(langLabel);
-
-        // 📋 复制按钮
-        const copyBtn = document.createElement("button");
-        copyBtn.className = "copy-btn";
-        copyBtn.innerText = "📋";
-        copyBtn.addEventListener("click", () => {
-        const code = block.querySelector("code");
-        if (!code) return;
-        navigator.clipboard.writeText(code.innerText).then(() => {
-            copyBtn.innerText = "✅";
-            setTimeout(() => (copyBtn.innerText = "📋"), 1500);
-        });
-        });
-        toolbar.appendChild(copyBtn);
-
-        // 插入工具栏到代码块顶部
-        block.insertBefore(toolbar, block.firstChild);
-    });
-    });
-    </script>
 
 
 

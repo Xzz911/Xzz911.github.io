@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Tags: hexo | Xzzzz911</title>
+    <title>[HGAME 2023 week1] PWN 复现 | Xzzzz911</title>
     <meta name="author" content="Xzzzz911" />
     <meta name="description" content="This is my website Hello Everyone" />
     <meta name="keywords" content="" />
@@ -48,6 +48,10 @@
 
 
 
+
+  
+  
+  
 
 
 
@@ -195,96 +199,235 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div id="archives">
+            <!-- ✅ 页面标题和标签 --> 
+
+<div class="post-title-area">
+  <h1 style="color: #b6b4b4; font-size: 2.5rem; font-weight: bold; margin-bottom: 0.5rem;">[HGAME 2023 week1] PWN 复现</h1>
+  <div class="info" style="font-size: 0.95rem; color: #555;">
+    <span class="date">
+      <span class="icon"><i class="fa-solid fa-calendar fa-fw"></i></span>
+      2023/9/4
+    </span>
     
-    <div class="categories-tags">
-        
-        
-        
-        <span>
-            <a href="/tags/%E5%A5%8B%E8%BF%9B/" style="background: #00bcd4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                奋进
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/PWN/" style="background: #00a596">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                PWN
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/hexo/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                hexo
-            </a>
-        </span>
-        
-        
-        
-        
-        
-        <span>
-            <a href="/tags/demo/" style="background: #00a596">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                demo
-            </a>
-        </span>
-        
-        
-    </div>
+    <span class="category" style="margin-left: 1rem;">
+      <a href="/categories/CTF/">
+        <span class="icon"><i class="fa-solid fa-bookmark fa-fw"></i></span>
+        CTF
+      </a>
+    </span>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2025/6/18</div>
-            <a href="/%E7%BB%83%E4%B9%A0/">
-                <h3>简单的 Hexo 文章示例</h3>
-            </a>
-            <div class="info">
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/hexo/" style="color: #ffa2c4">
-                            hexo
-                        </a>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/demo/" style="color: #ff7d73">
-                            demo
-                        </a>
-                    </span>
-                    
-                </span>
-                
-            </div>
-        </div>
-    </div>
     
+    <span class="tags" style="margin-left: 1rem;">
+      <span class="icon"><i class="fa-solid fa-tags fa-fw"></i></span>
+      
+      
+      <span class="tag">
+        
+        <a href="/tags/PWN/" style="color: #ff7d73; margin-right: 0.5rem;">PWN</a>
+      </span>
+      
+    </span>
+    
+  </div>
 </div>
+
+
+
+<div id="home-posts-wrap" class="home-posts-wrap" style="display: flex; max-width: 1200px; margin: auto; gap: 2rem;">
+  <div id="home-posts" style="opacity: 0.5; flex: 3;">
+    <div class="post">
+      
+        <div class="content" v-pre>
+          <p>[HGAME 2023 week1] PWN 复现</p>
+<span id="more"></span>
+
+
+        </div>
+      
+    </div>
+  </div>
+
+  
+    <div id="home-card" style="opacity: 0.5; flex: 1; position: relative;">
+      <div class="profile-card-fixed">
+        <div id="card-style">
+  <div id="card-div">
+
+    <!-- 头像区域整体包裹 -->
+    <div class="card-header">
+      <!-- 头像，添加外层相对定位 -->
+      <div class="avatar">
+        <img src="/images/123.jpg" alt="avatar" />
+
+        <!-- 右下角小标注 -->
+        <div class="author-status-sidebar" tabindex="0" aria-label="认真摸鱼中">
+          <g-emoji class="g-emoji" alias="palm_tree" fallback-src="https://lskypro.acozycotage.net/LightPicture/2022/12/fe1dc0402e623096.jpg">🐟</g-emoji>
+          <span class="status-text">认真摸鱼中</span>
+        </div>
+      </div>
+
+      <!-- 作者名 -->
+      <div class="name">Xzzzz911</div>
+
+      <!-- 描述（支持 markdown） -->
+      <div class="description">
+        <p>越努力 越幸运</p>
+
+      </div>
+
+      <!-- 图标链接 -->
+      
+      <div class="icon-links">
+        
+        <span class="icon-link">
+          <a href="https://github.com/xzz911" title="来访问我的GitHub吧" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-github fa-fw"></i>
+          </a>
+        </span>
+        
+        <span class="icon-link">
+          <a href="https://wpa.qq.com/msgrd?v=3&amp;uin=443602796&amp;site=qq&amp;menu=yes" title="QQ: 443602796" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-qq fa-fw"></i>
+          </a>
+        </span>
+        
+        <span class="icon-link">
+          <a href="mailto:xzzzz911@qq.com" title="邮件发送我" target="_blank" rel="noopener noreferrer">
+            <i class="fa-solid fa-envelope fa-fw"></i>
+          </a>
+        </span>
+        
+        <span class="icon-link">
+          <a href="https://space.bilibili.com/1709777759" title="B站主页" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-bilibili fa-fw"></i>
+          </a>
+        </span>
+        
+      </div>
+      
+
+      <!-- 友链 -->
+      
+    </div>
+
+    <!-- 新增访客信息卡片，只在首页显示 -->
+    
+
+    <!-- ✅ 卡片 2：今日诗词（仅首页展示），加了分割样式 -->
+    
+
+    <!-- TOC 目录区域 -->
+    
+
+  </div>
+</div>
+
+      </div>
+      <div class="card-sticky-wrapper">
+        <div id="toc-container">
+          <div class="toc-header">
+            <i class="fa-solid fa-list-ul"></i> 目录
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  
+</div>
+
+<!-- 修改过的上一篇/下一篇导航 -->
+<div class="post-nav-outer" style="max-width: 1200px; margin: 3rem auto 0; display: flex; justify-content: center;">
+  <div class="post-nav-inner" style="flex: 3; display: flex; gap: 1rem;">
+    
+      <a href="/2024%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" style="flex: 1; text-decoration: none; color: #ccc;">
+        <div>
+          <div style="font-size: 0.85rem; color: #492630;">⬅ 上一篇</div>
+          <div style="font-weight: bold; font-size: 1.1rem; margin-top: 0.3rem;">2024年度总结：保持正念 延迟满足</div>
+          <div style="font-size: 0.85rem; margin-top: 0.5rem;">
+            <i class="fa fa-calendar"></i> 2024-12-31
+            
+              &nbsp;| <i class="fa fa-folder-open"></i> 
+            
+            
+              &nbsp;| <i class="fa fa-tags"></i>
+              
+                奋进
+              
+            
+          </div>
+        </div>
+      </a>
+    
+
+    
+      <a href="/%5BHNCTF%202022%20Week1%5D%20PWN%20%E5%A4%8D%E7%8E%B0/" style="flex: 1; text-decoration: none; color: #ccc; text-align: right;">
+        <div>
+          <div style="font-size: 0.85rem; color: #492630;">下一篇 ➡</div>
+          <div style="font-weight: bold; font-size: 1.1rem; margin-top: 0.3rem;">[HNCTF 2022 Week1] PWN 复现</div>
+          <div style="font-size: 0.85rem; margin-top: 0.5rem;">
+            <i class="fa fa-calendar"></i> 2023-08-18
+            
+              &nbsp;| <i class="fa fa-folder-open"></i> 
+            
+            
+              &nbsp;| <i class="fa fa-tags"></i>
+              
+                PWN
+              
+            
+          </div>
+        </div>
+      </a>
+    
+  </div>
+</div>
+
+
+  
+  
+  
+  
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const tocLis = document.querySelectorAll("#toc-container > ol > li");
+  const headers = [...document.querySelectorAll(".content h1")];
+  const idToTocLi = {};
+  tocLis.forEach(li => {
+    const a = li.querySelector("a");
+    if (!a) return;
+    const href = a.getAttribute("href");
+    if (!href || !href.startsWith("#")) return;
+    const id = decodeURIComponent(href.slice(1));
+    idToTocLi[id] = li;
+  });
+
+  function onScroll() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+    let currentIndex = 0;
+    for (let i = 0; i < headers.length; i++) {
+      const headerTop = headers[i].getBoundingClientRect().top + window.pageYOffset - 100;
+      if (scrollTop >= headerTop) {
+        currentIndex = i;
+      } else {
+        break;
+      }
+    }
+
+    tocLis.forEach(li => li.classList.remove("active"));
+    if (headers[currentIndex]) {
+      const id = headers[currentIndex].id;
+      if (idToTocLi[id]) {
+        idToTocLi[id].classList.add("active");
+      }
+    }
+  }
+
+  window.addEventListener("scroll", onScroll);
+  onScroll();
+});
+</script>
 
             <footer id="footer">
   <div id="footer-wrap">
@@ -512,7 +655,7 @@
     <!-- 新增：监听标签页切换，动态修改标签页标题 -->
     <script>
     (function () {
-        const isPost = false; // ✅ 是否是文章页面
+        const isPost = true; // ✅ 是否是文章页面
         const originalTitle = document.title;
         const awayTitle = "🤠别再玩了啦~";
         const backTitle = "🚩给我狠狠学~";
@@ -572,6 +715,12 @@
 
 
 
+
+
+
+
+    
+    
 
 
 

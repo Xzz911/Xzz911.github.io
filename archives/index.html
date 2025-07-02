@@ -203,7 +203,7 @@
         <div class="timeline" data-title="[moectf2022]pwn复现">
             <div class="timeline-tail"></div>
             <div class="timeline-content" style="opacity: 0.5; border-radius: 12px; padding: 1rem;">
-                <div class="item-time">2023/10/13</div>
+                <div class="item-time">2023/8/16</div>
                 <a href="/%5BMoeCTF%202022%5D%20PWN%E5%A4%8D%E7%8E%B0/">
                     <h3>[MoeCTF 2022] PWN复现</h3>
                 </a>
@@ -228,6 +228,82 @@
                         <span class="tag">
                             
                             <a href="/tags/PWN/" style="color: #03a9f4">
+                                PWN
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="timeline" data-title="[hnctf2022week1]pwn复现">
+            <div class="timeline-tail"></div>
+            <div class="timeline-content" style="opacity: 0.5; border-radius: 12px; padding: 1rem;">
+                <div class="item-time">2023/8/18</div>
+                <a href="/%5BHNCTF%202022%20Week1%5D%20PWN%20%E5%A4%8D%E7%8E%B0/">
+                    <h3>[HNCTF 2022 Week1] PWN 复现</h3>
+                </a>
+                <div class="info">
+                    
+                    <span class="category">
+                        <a href="/categories/CTF/">
+                            <span class="icon">
+                                <i class="fa-solid fa-bookmark fa-fw"></i>
+                            </span>
+                            CTF
+                        </a>
+                    </span>
+                    
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </span>
+                        
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/PWN/" style="color: #ffa2c4">
+                                PWN
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="timeline" data-title="[hgame2023week1]pwn复现">
+            <div class="timeline-tail"></div>
+            <div class="timeline-content" style="opacity: 0.5; border-radius: 12px; padding: 1rem;">
+                <div class="item-time">2023/9/4</div>
+                <a href="/%5BHGAME%202023%20week1%5D%20PWN%20%E5%A4%8D%E7%8E%B0/">
+                    <h3>[HGAME 2023 week1] PWN 复现</h3>
+                </a>
+                <div class="info">
+                    
+                    <span class="category">
+                        <a href="/categories/CTF/">
+                            <span class="icon">
+                                <i class="fa-solid fa-bookmark fa-fw"></i>
+                            </span>
+                            CTF
+                        </a>
+                    </span>
+                    
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </span>
+                        
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/PWN/" style="color: #ff7d73">
                                 PWN
                             </a>
                         </span>
@@ -265,7 +341,7 @@
                         
                         <span class="tag">
                             
-                            <a href="/tags/%E5%A5%8B%E8%BF%9B/" style="color: #ff7d73">
+                            <a href="/tags/%E5%A5%8B%E8%BF%9B/" style="color: #ffa2c4">
                                 奋进
                             </a>
                         </span>
@@ -315,7 +391,7 @@
                         
                         <span class="tag">
                             
-                            <a href="/tags/demo/" style="color: #ffa2c4">
+                            <a href="/tags/demo/" style="color: #03a9f4">
                                 demo
                             </a>
                         </span>
@@ -461,6 +537,9 @@
 
 <!-- ✅ 鼠标点击特效 -->
 <script src="/js/click-effect.js"></script>
+
+<script src="/js/code-copy.js"></script>
+
 
 <!-- 鼠标星星特效，仅桌面端加载 -->
 <script>
@@ -624,57 +703,7 @@
     })();
     </script>
 
-    <script>
-    document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll("figure.highlight").forEach(function (block) {
-        // 尝试从 code 标签 class 中提取语言名
-        let lang = block.querySelector("code")?.className?.match(/language-(\w+)/)?.[1];
 
-        // 如果没有从 code 标签获得，尝试从 figure 的 class 中提取
-        if (!lang) {
-        const figureClasses = block.className.split(/\s+/);
-        // 去除 highlight 关键字，取剩余第一个作为语言名
-        lang = figureClasses.find(c => c !== "highlight") || "code";
-        }
-
-        // 转成小写
-        lang = lang.toLowerCase();
-
-        // 创建顶部工具栏容器
-        const toolbar = document.createElement("div");
-        toolbar.className = "custom-code-toolbar";
-
-        // 🔴🟡🟢 圆点区域
-        const dots = document.createElement("div");
-        dots.className = "custom-code-dots";
-        dots.innerHTML = `<span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>`;
-        toolbar.appendChild(dots);
-
-        // 🧩 语言名标签
-        const langLabel = document.createElement("span");
-        langLabel.className = "code-lang-label";
-        langLabel.innerText = lang;
-        toolbar.appendChild(langLabel);
-
-        // 📋 复制按钮
-        const copyBtn = document.createElement("button");
-        copyBtn.className = "copy-btn";
-        copyBtn.innerText = "📋";
-        copyBtn.addEventListener("click", () => {
-        const code = block.querySelector("code");
-        if (!code) return;
-        navigator.clipboard.writeText(code.innerText).then(() => {
-            copyBtn.innerText = "✅";
-            setTimeout(() => (copyBtn.innerText = "📋"), 1500);
-        });
-        });
-        toolbar.appendChild(copyBtn);
-
-        // 插入工具栏到代码块顶部
-        block.insertBefore(toolbar, block.firstChild);
-    });
-    });
-    </script>
 
 
 

@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Archives | Xzzzz911</title>
+    <title>Xzzzz911</title>
     <meta name="author" content="Xzzzz911" />
     <meta name="description" content="This is my website Hello Everyone" />
     <meta name="keywords" content="" />
@@ -50,6 +50,8 @@
 
 
 
+
+  <script src="/js/lib/home.js"></script>
 
 
 <link rel="stylesheet" href="/css/main.css" />
@@ -195,152 +197,250 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            
-<div id="archives">
-    
-    <div id="timeline-wrap" ref="timeline">
-        
-        <div class="timeline" data-title="[moectf2022]pwn复现">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content" style="opacity: 0.5; border-radius: 12px; padding: 1rem;">
-                <div class="item-time">2023/10/13</div>
-                <a href="/%5BMoeCTF%202022%5D%20PWN%E5%A4%8D%E7%8E%B0/">
-                    <h3>[MoeCTF 2022] PWN复现</h3>
-                </a>
-                <div class="info">
-                    
-                    <span class="category">
-                        <a href="/categories/CTF/">
-                            <span class="icon">
-                                <i class="fa-solid fa-bookmark fa-fw"></i>
-                            </span>
-                            CTF
-                        </a>
-                    </span>
-                    
-                    
-                    <span class="tags">
-                        <span class="icon">
-                            <i class="fa-solid fa-tags fa-fw"></i>
-                        </span>
-                        
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/PWN/" style="color: #ffa2c4">
-                                PWN
-                            </a>
-                        </span>
-                        
-                    </span>
-                    
-                </div>
+            <div id="home-head"> 
+    <div
+        id="home-background"
+        ref="homeBackground"
+        data-images="/images/1.jpg"
+    ></div>
+    <div id="home-info" @click="homeClick">
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="info">
+            <div class="wrap">
+                <h1>Xzzzz911</h1>
+                <h3>保持正念 延迟满足</h3>
+
+                <!-- 这里插入动态字幕容器 -->
+                <h2 style="color: inherit; font-weight: 400; margin: 10px 0;">
+                    <span id="typed-subtitle" style="white-space: pre;"></span>
+                </h2>                           
+
+                <h5>This is my website Hello Everyone</h5>
             </div>
-        </div>
+        </span>
+    </div>
+</div>
+
+<div
+    id="home-posts-wrap"
+    ref="homePostsWrap"
+    true
+>
+    <!-- 整体透明，用opacity -->
+    <div id="home-posts" style="opacity: 0.5;">
         
-        <div class="timeline" data-title="2024年度总结：保持正念延迟满足">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content" style="opacity: 0.5; border-radius: 12px; padding: 1rem;">
-                <div class="item-time">2024/12/31</div>
-                <a href="/2024%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/">
-                    <h3>2024年度总结：保持正念 延迟满足</h3>
-                </a>
-                <div class="info">
-                    
-                    <span class="category">
-                        <a href="/categories/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/">
-                            <span class="icon">
-                                <i class="fa-solid fa-bookmark fa-fw"></i>
-                            </span>
-                            年度总结
-                        </a>
-                    </span>
-                    
-                    
-                    <span class="tags">
-                        <span class="icon">
-                            <i class="fa-solid fa-tags fa-fw"></i>
-                        </span>
-                        
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/%E5%A5%8B%E8%BF%9B/" style="color: #00a596">
-                                奋进
-                            </a>
-                        </span>
-                        
-                    </span>
-                    
-                </div>
-            </div>
-        </div>
+
+<div class="post">
+    <a href="/%5BHNCTF%202022%20Week1%5D%20PWN%20%E5%A4%8D%E7%8E%B0/">
+        <h2 class="post-title">[HNCTF 2022 Week1] PWN 复现</h2>
+    </a>
+    <div class="category-and-date">
         
-        <div class="timeline" data-title="helloworld">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content" style="opacity: 0.5; border-radius: 12px; padding: 1rem;">
-                <div class="item-time">2025/6/18</div>
-                <a href="/hello-world/">
-                    <h3>Hello World</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                </div>
-            </div>
-        </div>
+        <span class="category">
+            <a href="/categories/CTF/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                CTF
+            </a>
+        </span>
         
-        <div class="timeline" data-title="简单的hexo文章示例">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content" style="opacity: 0.5; border-radius: 12px; padding: 1rem;">
-                <div class="item-time">2025/6/18</div>
-                <a href="/%E7%BB%83%E4%B9%A0/">
-                    <h3>简单的 Hexo 文章示例</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                    <span class="tags">
-                        <span class="icon">
-                            <i class="fa-solid fa-tags fa-fw"></i>
-                        </span>
-                        
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/hexo/" style="color: #00a596">
-                                hexo
-                            </a>
-                        </span>
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/demo/" style="color: #03a9f4">
-                                demo
-                            </a>
-                        </span>
-                        
-                    </span>
-                    
-                </div>
-            </div>
-        </div>
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/8/18
+        </span>
         
-        <div class="timeline" data-title="highlight-test">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content" style="opacity: 0.5; border-radius: 12px; padding: 1rem;">
-                <div class="item-time">2025/6/18</div>
-                <a href="/highlight-test/">
-                    <h3>highlight-test</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                </div>
-            </div>
-        </div>
         
     </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+                <p>[HNCTF 2022 Week1] PWN 复现</p>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/PWN/" style="color: #00bcd4">PWN</a>
+        </span>
+        
+    </div>
+    <a href="/%5BHNCTF%202022%20Week1%5D%20PWN%20%E5%A4%8D%E7%8E%B0/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/%5BMoeCTF%202022%5D%20PWN%E5%A4%8D%E7%8E%B0/">
+        <h2 class="post-title">[MoeCTF 2022] PWN复现</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/CTF/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                CTF
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/8/16
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+                <p>[MoeCTF 2022] PWN复现</p>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/PWN/" style="color: #ffa2c4">PWN</a>
+        </span>
+        
+    </div>
+    <a href="/%5BMoeCTF%202022%5D%20PWN%E5%A4%8D%E7%8E%B0/" class="go-post">阅读全文</a>
+</div>
+
+
+        <div class="page-current">
+    
+    <a class="page-num" href="/">
+        <i class="fa-solid fa-caret-left fa-fw"></i>
+    </a>
+    <a class="page-num" href="/">1</a>
+    <span class="page-omit">...</span>
+    
+    <span class="current">2</span>
+    
+    
+    
+    
+</div>
+
+    </div>
+
+    
+    <!-- 侧边卡片也透明 -->
+    <div id="home-card" style="opacity: 0.5;">
+        <div id="card-style">
+  <div id="card-div">
+
+    <!-- 头像区域整体包裹 -->
+    <div class="card-header">
+      <!-- 头像，添加外层相对定位 -->
+      <div class="avatar">
+        <img src="/images/123.jpg" alt="avatar" />
+
+        <!-- 右下角小标注 -->
+        <div class="author-status-sidebar" tabindex="0" aria-label="认真摸鱼中">
+          <g-emoji class="g-emoji" alias="palm_tree" fallback-src="https://lskypro.acozycotage.net/LightPicture/2022/12/fe1dc0402e623096.jpg">🐟</g-emoji>
+          <span class="status-text">认真摸鱼中</span>
+        </div>
+      </div>
+
+      <!-- 作者名 -->
+      <div class="name">Xzzzz911</div>
+
+      <!-- 描述（支持 markdown） -->
+      <div class="description">
+        <p>越努力 越幸运</p>
+
+      </div>
+
+      <!-- 图标链接 -->
+      
+      <div class="icon-links">
+        
+        <span class="icon-link">
+          <a href="https://github.com/xzz911" title="来访问我的GitHub吧" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-github fa-fw"></i>
+          </a>
+        </span>
+        
+        <span class="icon-link">
+          <a href="https://wpa.qq.com/msgrd?v=3&amp;uin=443602796&amp;site=qq&amp;menu=yes" title="QQ: 443602796" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-qq fa-fw"></i>
+          </a>
+        </span>
+        
+        <span class="icon-link">
+          <a href="mailto:xzzzz911@qq.com" title="邮件发送我" target="_blank" rel="noopener noreferrer">
+            <i class="fa-solid fa-envelope fa-fw"></i>
+          </a>
+        </span>
+        
+        <span class="icon-link">
+          <a href="https://space.bilibili.com/1709777759" title="B站主页" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-bilibili fa-fw"></i>
+          </a>
+        </span>
+        
+      </div>
+      
+
+      <!-- 友链 -->
+      
+    </div>
+
+    <!-- 新增访客信息卡片，只在首页显示 -->
+    
+    <div id="visitor-info-card" class="card-widget" style="margin-top: 1.5rem; padding: 1rem; border: 1px solid #ddd; border-radius: 8px; background: #fafafa;">
+      <div class="card-header" style="font-weight: bold; font-size: 1.1rem; margin-bottom: 10px;">
+        <i class="fa fa-bullhorn"></i> 公告栏
+      </div>
+      <div class="card-content" style="font-size: 0.95rem; color: #333;">
+        <div id="welcome-text">Welcome to my blog!</div>
+        <div id="visitor-location" style="margin-top: 10px;"></div>
+      </div>
+    </div>
+    
+
+    <!-- ✅ 卡片 2：今日诗词（仅首页展示），加了分割样式 -->
+    
+      <div class="card-widget" id="card-poem" style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #eee;">
+        <div id="poem_sentence" style="font-size: 1rem; padding: 0.5rem 0;"></div>
+        <div id="poem_info" style="font-size: 0.85rem; color: #888;">
+          <div id="poem_meta"></div>
+        </div>
+      </div>
+    
+
+    <!-- TOC 目录区域 -->
+    
+
+  </div>
+</div>
+
+    </div>
+    
 </div>
 
             <footer id="footer">
@@ -461,6 +561,9 @@
 
 <!-- ✅ 鼠标点击特效 -->
 <script src="/js/click-effect.js"></script>
+
+<script src="/js/code-copy.js"></script>
+
 
 <!-- 鼠标星星特效，仅桌面端加载 -->
 <script>
@@ -624,57 +727,7 @@
     })();
     </script>
 
-    <script>
-    document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll("figure.highlight").forEach(function (block) {
-        // 尝试从 code 标签 class 中提取语言名
-        let lang = block.querySelector("code")?.className?.match(/language-(\w+)/)?.[1];
 
-        // 如果没有从 code 标签获得，尝试从 figure 的 class 中提取
-        if (!lang) {
-        const figureClasses = block.className.split(/\s+/);
-        // 去除 highlight 关键字，取剩余第一个作为语言名
-        lang = figureClasses.find(c => c !== "highlight") || "code";
-        }
-
-        // 转成小写
-        lang = lang.toLowerCase();
-
-        // 创建顶部工具栏容器
-        const toolbar = document.createElement("div");
-        toolbar.className = "custom-code-toolbar";
-
-        // 🔴🟡🟢 圆点区域
-        const dots = document.createElement("div");
-        dots.className = "custom-code-dots";
-        dots.innerHTML = `<span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>`;
-        toolbar.appendChild(dots);
-
-        // 🧩 语言名标签
-        const langLabel = document.createElement("span");
-        langLabel.className = "code-lang-label";
-        langLabel.innerText = lang;
-        toolbar.appendChild(langLabel);
-
-        // 📋 复制按钮
-        const copyBtn = document.createElement("button");
-        copyBtn.className = "copy-btn";
-        copyBtn.innerText = "📋";
-        copyBtn.addEventListener("click", () => {
-        const code = block.querySelector("code");
-        if (!code) return;
-        navigator.clipboard.writeText(code.innerText).then(() => {
-            copyBtn.innerText = "✅";
-            setTimeout(() => (copyBtn.innerText = "📋"), 1500);
-        });
-        });
-        toolbar.appendChild(copyBtn);
-
-        // 插入工具栏到代码块顶部
-        block.insertBefore(toolbar, block.firstChild);
-    });
-    });
-    </script>
 
 
 

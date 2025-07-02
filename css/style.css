@@ -522,3 +522,100 @@ figure.highlight .code pre {
   margin: 0 !important;
 }
 
+/* ===============================
+   整体工具栏样式
+   =============================== */
+   .custom-code-toolbar {
+    display: flex;                      /* 使用 Flexbox 布局 */
+    align-items: center;                /* 垂直居中对齐 */
+    justify-content: space-between;    /* 左右两端对齐，中间空隙自动分配 */
+    padding: 4px 12px;                  /* 内边距，上下4px，左右12px */
+    background: rgba(0, 0, 0, 0.7);    /* 深色半透明背景，更突出亮色字体 */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* 底部半透明边框 */
+    font-size: 0.9rem;                  /* 字体大小 */
+    user-select: none;                  /* 禁止文本被选中 */
+    position: relative;                 /* 方便内部绝对定位元素定位 */
+  }
+  
+  /* ===============================
+     左侧三个圆点容器
+     =============================== */
+  .custom-code-dots {
+    display: flex;                      /* 横向排列圆点 */
+    gap: 6px;                          /* 圆点之间间距 */
+    flex-shrink: 0;                    /* 不允许收缩 */
+  }
+  
+  /* ===============================
+     单个圆点样式
+     =============================== */
+  .custom-code-dots .dot {
+    width: 10px;                       /* 宽度10px */
+    height: 10px;                      /* 高度10px */
+    border-radius: 50%;                /* 圆形 */
+    display: inline-block;             /* 行内块元素 */
+  }
+  
+  /* 红色圆点 */
+  .dot.red {
+    background-color: #ff5f56;
+  }
+  /* 黄色圆点 */
+  .dot.yellow {
+    background-color: #ffbd2e;
+  }
+  /* 绿色圆点 */
+  .dot.green {
+    background-color: #27c93f;
+  }
+  
+  /* ===============================
+     语言名标签样式（绝对居中）
+     =============================== */
+  .code-lang-label {
+    position: absolute;                /* 绝对定位 */
+    left: 50%;                        /* 水平位置在容器宽度中间 */
+    transform: translateX(-50%);      /* 通过平移自身宽度的50%实现真正居中 */
+    font-weight: 600;                 /* 加粗 */
+    color: #fff !important;           /* 白色字体，重要级别高 */
+    white-space: nowrap;              /* 不换行 */
+    pointer-events: none;             /* 禁止鼠标事件，不影响点击 */
+  }
+  
+  /* ===============================
+     右侧按钮组容器
+     =============================== */
+  .right-group {
+    display: flex;                    /* 横向排列按钮 */
+    gap: 8px;                        /* 按钮之间间距 */
+    flex-shrink: 0;                  /* 不允许收缩 */
+  }
+  
+  /* ===============================
+     复制按钮 和 折叠按钮 公共样式
+     =============================== */
+  .copy-btn,
+  .collapse-btn {
+    background: none;                 /* 无背景 */
+    border: none;                    /* 无边框 */
+    cursor: pointer;                 /* 鼠标变成手型 */
+    color: #fff !important;          /* 白色字体 */
+    font-size: 1.1rem;               /* 字体大小 */
+    padding: 2px 6px;                /* 内边距 */
+    border-radius: 3px;              /* 圆角 */
+    transition: background-color 0.2s ease; /* 背景颜色变化过渡 */
+  }
+  
+  /* 按钮上的图标颜色 */
+  .copy-btn i,
+  .collapse-btn i {
+    color: #fff !important;          /* 白色图标 */
+  }
+  
+  /* 按钮 hover 状态 - 变为浅色半透明背景，字体保持白色 */
+  .copy-btn:hover,
+  .collapse-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff !important;
+  }
+  
