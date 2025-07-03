@@ -1,0 +1,740 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Xzzzz911</title>
+    <meta name="author" content="Xzzzz911" />
+    <meta name="description" content="This is my website Hello Everyone" />
+    <meta name="keywords" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <link rel="icon" href="/images/123.jpg" />
+    
+    <!-- Font Awesome 图标库 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+    
+    <!-- 你自己的自定义样式 -->
+    <link rel="stylesheet" href="/css/style.css">
+    
+    <!-- 自定义样式：一定要放在 style.css 之后，确保覆盖生效 -->
+    <link rel="stylesheet" href="/css/custom.css">
+    
+    <!-- 主题内部样式或脚本导入 -->
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+
+<script>const mixins = {};</script>
+
+
+  <script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+
+
+
+
+
+  <script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+  <script src="/js/lib/home.js"></script>
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+    
+    <!-- 强制全局固定背景样式，优先级高 -->
+    <style>
+        html {
+        background-image: url("/images/1.jpg") !important;
+        background-size: cover !important;
+        background-attachment: fixed !important;
+        background-position: center center !important;
+        background-repeat: no-repeat !important;
+        min-height: 100vh !important;
+        }
+    
+        body {
+        background: transparent !important;
+        min-height: 100vh !important;
+        }
+    
+        #home-background {
+        display: none !important;  /* 隐藏 ParticleX 自带的顶部背景图区域 */
+        }
+
+        #content-inner,
+        .page,
+        .post-block,
+        .main-inner {
+        background: rgba(255, 255, 255, 0.3) !important; /* 半透明方便透出背景 */
+        border-radius: 10px;
+        padding: 20px;
+        }
+    </style>
+<meta name="generator" content="Hexo 7.3.0"></head>
+      
+<body>
+
+    <!-- ✅ 全站背景图容器（新增） -->
+    <div id="global-bg"></div>
+
+    <div id="layout" v-cloak>
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>XZZZZ911</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;主页</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;关于</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;存档</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;分类</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;标签</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;XZZZZ911</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">主页</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">关于</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">存档</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">分类</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">标签</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div id="home-head"> 
+    <div
+        id="home-background"
+        ref="homeBackground"
+        data-images="/images/1.jpg"
+    ></div>
+    <div id="home-info" @click="homeClick">
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="info">
+            <div class="wrap">
+                <h1>Xzzzz911</h1>
+                <h3>保持正念 延迟满足</h3>
+
+                <!-- 这里插入动态字幕容器 -->
+                <h2 style="color: inherit; font-weight: 400; margin: 10px 0;">
+                    <span id="typed-subtitle" style="white-space: pre;"></span>
+                </h2>                           
+
+                <h5>This is my website Hello Everyone</h5>
+            </div>
+        </span>
+    </div>
+</div>
+
+<div
+    id="home-posts-wrap"
+    ref="homePostsWrap"
+    true
+>
+    <!-- 整体透明，用opacity -->
+    <div id="home-posts" style="opacity: 0.5;">
+        
+
+<div class="post">
+    <a href="/%5BHNCTF%202022%20Week1%5D%20PWN%20%E5%A4%8D%E7%8E%B0/">
+        <h2 class="post-title">[HNCTF 2022 Week1] PWN 复现</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/CTF/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                CTF
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/8/18
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+                <p>[HNCTF 2022 Week1] PWN 复现</p>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/PWN/" style="color: #00a596">PWN</a>
+        </span>
+        
+    </div>
+    <a href="/%5BHNCTF%202022%20Week1%5D%20PWN%20%E5%A4%8D%E7%8E%B0/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/%5BMoeCTF%202022%5D%20PWN%E5%A4%8D%E7%8E%B0/">
+        <h2 class="post-title">[MoeCTF 2022] PWN复现</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/CTF/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                CTF
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/8/16
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+                <p>[MoeCTF 2022] PWN复现</p>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/PWN/" style="color: #00a596">PWN</a>
+        </span>
+        
+    </div>
+    <a href="/%5BMoeCTF%202022%5D%20PWN%E5%A4%8D%E7%8E%B0/" class="go-post">阅读全文</a>
+</div>
+
+
+        <div class="page-current">
+    
+    <a class="page-num" href="/page/3/">
+        <i class="fa-solid fa-caret-left fa-fw"></i>
+    </a>
+    <a class="page-num" href="/">1</a>
+    <span class="page-omit">...</span>
+    
+    <span class="current">4</span>
+    
+    
+    
+    
+</div>
+
+    </div>
+
+    
+    <!-- 侧边卡片也透明 -->
+    <div id="home-card" style="opacity: 0.5;">
+        <div id="card-style">
+  <div id="card-div">
+
+    <!-- 头像区域整体包裹 -->
+    <div class="card-header">
+      <!-- 头像，添加外层相对定位 -->
+      <div class="avatar">
+        <img src="/images/123.jpg" alt="avatar" />
+
+        <!-- 右下角小标注 -->
+        <div class="author-status-sidebar" tabindex="0" aria-label="认真摸鱼中">
+          <g-emoji class="g-emoji" alias="palm_tree" fallback-src="https://lskypro.acozycotage.net/LightPicture/2022/12/fe1dc0402e623096.jpg">🐟</g-emoji>
+          <span class="status-text">认真摸鱼中</span>
+        </div>
+      </div>
+
+      <!-- 作者名 -->
+      <div class="name">Xzzzz911</div>
+
+      <!-- 描述（支持 markdown） -->
+      <div class="description">
+        <p>越努力 越幸运</p>
+
+      </div>
+
+      <!-- 图标链接 -->
+      
+      <div class="icon-links">
+        
+        <span class="icon-link">
+          <a href="https://github.com/xzz911" title="来访问我的GitHub吧" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-github fa-fw"></i>
+          </a>
+        </span>
+        
+        <span class="icon-link">
+          <a href="https://wpa.qq.com/msgrd?v=3&amp;uin=443602796&amp;site=qq&amp;menu=yes" title="QQ: 443602796" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-qq fa-fw"></i>
+          </a>
+        </span>
+        
+        <span class="icon-link">
+          <a href="mailto:xzzzz911@qq.com" title="邮件发送我" target="_blank" rel="noopener noreferrer">
+            <i class="fa-solid fa-envelope fa-fw"></i>
+          </a>
+        </span>
+        
+        <span class="icon-link">
+          <a href="https://space.bilibili.com/1709777759" title="B站主页" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-bilibili fa-fw"></i>
+          </a>
+        </span>
+        
+      </div>
+      
+
+      <!-- 友链 -->
+      
+    </div>
+
+    <!-- 新增访客信息卡片，只在首页显示 -->
+    
+    <div id="visitor-info-card" class="card-widget" style="margin-top: 1.5rem; padding: 1rem; border: 1px solid #ddd; border-radius: 8px; background: #fafafa;">
+      <div class="card-header" style="font-weight: bold; font-size: 1.1rem; margin-bottom: 10px;">
+        <i class="fa fa-bullhorn"></i> 公告栏
+      </div>
+      <div class="card-content" style="font-size: 0.95rem; color: #333;">
+        <div id="welcome-text">Welcome to my blog!</div>
+        <div id="visitor-location" style="margin-top: 10px;"></div>
+      </div>
+    </div>
+    
+
+    <!-- ✅ 卡片 2：今日诗词（仅首页展示），加了分割样式 -->
+    
+      <div class="card-widget" id="card-poem" style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #eee;">
+        <div id="poem_sentence" style="font-size: 1rem; padding: 0.5rem 0;"></div>
+        <div id="poem_info" style="font-size: 0.85rem; color: #888;">
+          <div id="poem_meta"></div>
+        </div>
+      </div>
+    
+
+    <!-- TOC 目录区域 -->
+    
+
+  </div>
+</div>
+
+    </div>
+    
+</div>
+
+            <footer id="footer">
+  <div id="footer-wrap">
+    <div>
+      &copy;
+      2022 - 2025 By Xzzzz911
+      <span id="footer-icon">
+        <i class="fa-solid fa-font-awesome fa-fw"></i>
+      </span>
+    </div>
+
+    <!-- 运行时长显示 -->
+    <div id="site-runtime"></div>
+
+    <!-- 访问统计 -->
+    <div>
+      本站总访问量：<span id="busuanzi_value_site_pv">加载中...</span> 次
+    </div>
+
+    <!-- 拯救者 1 号当前距离显示 -->
+    <div id="voyager1-distance">加载中...</div>
+
+    <div>
+      Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+      <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+    </div>
+
+    
+  </div>
+
+  <!-- Busuanzi 访问统计脚本 -->
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  <!-- 页面底部 JS：运行时间 + Voyager 动态距离 -->
+  <script>
+    const siteStartTime = new Date('2025-06-18T00:00:00');
+    const voyagerStartTime = new Date('2023-07-25T00:00:00');
+    let voyagerDistanceKm = 23400000000;
+    const STORAGE_KEY = 'voyager1_distance_km';
+    const AU_IN_KM = 1.495979e+8;
+
+    const storedDistance = parseInt(localStorage.getItem(STORAGE_KEY));
+    if (!isNaN(storedDistance) && storedDistance > voyagerDistanceKm) {
+      voyagerDistanceKm = storedDistance;
+    }
+
+    function padZero(num, len = 2) {
+      return num.toString().padStart(len, '0');
+    }
+
+    function updateSiteRuntime() {
+      const now = new Date();
+      const diffSeconds = Math.floor((now - siteStartTime) / 1000);
+
+      const days = Math.floor(diffSeconds / (3600 * 24));
+      const hours = Math.floor((diffSeconds % (3600 * 24)) / 3600);
+      const minutes = Math.floor((diffSeconds % 3600) / 60);
+      const seconds = diffSeconds % 60;
+
+      const isDaytime = hours >= 9 && hours < 18;
+      const message = isDaytime
+        ? "加油加油好好干，冲冲冲~"
+        : "好好放松吧，好好休息一下~";
+
+      document.getElementById("site-runtime").innerHTML = `
+        <div style="font-size:16px;font-weight:bold">${message}</div>
+        <div style="font-size:13px;font-weight:bold">
+          本站居然运行了 ${days} 天 ${padZero(hours)} 小时 ${padZero(minutes)} 分 ${padZero(seconds)} 秒
+          <i id="heartbeat" class="fas fa-heartbeat" style="color: red;"></i>
+        </div>
+      `;
+    }
+
+    function updateVoyagerDistance() {
+      const now = new Date();
+      const secondsPassed = Math.floor((now - voyagerStartTime) / 1000);
+      voyagerDistanceKm = 23400000000 + secondsPassed * 17;
+
+      localStorage.setItem(STORAGE_KEY, voyagerDistanceKm);
+
+      const au = (voyagerDistanceKm / AU_IN_KM).toFixed(6);
+
+      document.getElementById("voyager1-distance").innerHTML = `
+        拯救者 1 号当前距离地球 ${voyagerDistanceKm.toLocaleString()} 千米，
+        约为 ${au} 个天文单位 🚀
+      `;
+    }
+
+    function startTimers() {
+      updateSiteRuntime();
+      updateVoyagerDistance();
+      setInterval(() => {
+        updateSiteRuntime();
+        updateVoyagerDistance();
+      }, 1000);
+    }
+
+    window.addEventListener('DOMContentLoaded', startTimers);
+  </script>
+</footer>
+
+<!-- Typed.js -->
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<!-- 初始化打字机效果 -->
+<script src="/js/typed-subtitle.js"></script>
+
+<!-- 鼠标点击核心价值观文字特效 -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+
+<!-- 鼠标粒子拖尾特效 -->
+<script src="/js/mouse-particles.js"></script>
+
+<!-- 网站页面特效 -->
+<canvas id="universe" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-1;pointer-events:none;"></canvas>
+<script defer src="/js/universe.js"></script>
+<script src="/js/custom.js"></script>
+
+<!-- ✅ 鼠标点击特效 -->
+<script src="/js/click-effect.js"></script>
+
+<script src="/js/code-copy.js"></script>
+
+
+<!-- 鼠标星星特效，仅桌面端加载 -->
+<script>
+  if (window.innerWidth > 768) {
+    document.write('<script src="/js/star.js"><\/script>');
+  }
+</script>
+
+<!-- 今日诗词API脚本 -->
+<script src="https://fastly.jsdelivr.net/npm/js-heo@1.0.11/poem/jinrishici.js" charset="utf-8"></script>
+<script type="text/javascript">
+  jinrishici.load(function(result) {
+    if (result.status === "success") {
+      const data = result.data;
+      const content = data.content || "";
+      const origin = data.origin || {};
+      const title = origin.title || "";
+      const author = origin.author || data.author || "";
+      const dynasty = origin.dynasty || data.dynasty || "";
+
+      const sentenceEl = document.getElementById("poem_sentence");
+      if (sentenceEl) sentenceEl.innerText = content;
+
+      const metaEl = document.getElementById("poem_meta");
+      if (metaEl) {
+        metaEl.innerText = `${dynasty} · ${author} 《${title}》`;
+      }
+    } else {
+      console.warn("今日诗词 API 加载失败");
+    }
+  });
+</script>
+
+
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+
+        <!-- 阅读进度绳子 -->
+        <div
+        id="rope-progress"
+        :class="{'rope-visible': ropeHeight > 20}"
+        :style="{ height: ropeHeight + 'px' }"
+        >
+        <!-- ✅ 新增：透明点击区域 -->
+        <div
+            id="rope-click-layer"
+            title="点我回到顶部"
+            @click="scrollToTop"
+        ></div>
+
+        <!-- 进度百分比 -->
+        <div class="rope-percent" id="rope-percent">0%</div>
+
+        <!-- 绳子头图片 -->
+        <img
+            src="/images/rope-head.png"
+            alt="Rope Head"
+            draggable="false"
+            oncontextmenu="return false;"
+            @click.stop.prevent
+            style="width: 80px; height: 80px; margin-top: 50px; pointer-events: none;"
+        />
+        </div>
+
+
+    </div>
+
+    <script src="/js/main.js"></script>
+
+    <script>
+        // 保留你已有 PrismJS 代码不变
+        document.addEventListener('DOMContentLoaded', function () {
+            Prism.highlightAll();
+
+            document.querySelectorAll('pre code[class^="language-"]').forEach(function (codeBlock) {
+                const pre = codeBlock.parentElement;
+                if (!pre.classList.contains('line-numbers')) {
+                    const lang = Array.from(codeBlock.classList).find(c => c.startsWith('language-'));
+                    pre.classList.add('line-numbers');
+                    if (lang) pre.classList.add(lang);
+                }
+            });
+
+            Prism.highlightAll();
+
+            const target = document.querySelector('.content');
+            if (target) {
+                const observer = new MutationObserver(() => {
+                    Prism.highlightAll();
+                });
+                observer.observe(target, { childList: true, subtree: true });
+            }
+        });
+    </script>
+
+    <!-- 新增：监听标签页切换，动态修改标签页标题 -->
+    <script>
+    (function () {
+        const isPost = false; // ✅ 是否是文章页面
+        const originalTitle = document.title;
+        const awayTitle = "🤠别再玩了啦~";
+        const backTitle = "🚩给我狠狠学~";
+        let blinkInterval = null;
+        let isTabActive = true;
+
+        // 闪烁标题
+        function blinkTitle(titles, interval = 500, times = 6) {
+            let count = 0;
+            let index = 0;
+            if (blinkInterval) clearInterval(blinkInterval);
+            blinkInterval = setInterval(() => {
+                document.title = titles[index];
+                index = (index + 1) % titles.length;
+                count++;
+                if (count >= times) {
+                    clearInterval(blinkInterval);
+                    blinkInterval = null;
+                    if (isPost) updateScrollProgressTitle();
+                    else document.title = originalTitle;
+                }
+            }, interval);
+        }
+
+        // 更新标题为进度百分比
+        function updateScrollProgressTitle() {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const percent = Math.min(100, Math.round((scrollTop / scrollHeight) * 100));
+            document.title = `📖 ${percent}% | ${originalTitle}`;
+        }
+
+        // 页面可见性切换
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                isTabActive = false;
+                if (blinkInterval) clearInterval(blinkInterval);
+                document.title = awayTitle;
+            } else {
+                isTabActive = true;
+                document.title = backTitle;
+                blinkTitle([backTitle, originalTitle], 500, 6);
+            }
+        });
+
+        // 仅在文章页监听滚动和初始化
+        if (isPost) {
+            window.addEventListener('scroll', () => {
+                if (isTabActive) updateScrollProgressTitle();
+            });
+            window.addEventListener('load', () => {
+                updateScrollProgressTitle();
+            });
+        }
+    })();
+    </script>
+
+
+
+
+
+
+
+    
+
+
+</body>
+</html>
