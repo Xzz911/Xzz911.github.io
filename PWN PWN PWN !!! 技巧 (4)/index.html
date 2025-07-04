@@ -1,0 +1,898 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>PWN PWN PWN !!! 技巧 (4) | Xzzzz911</title>
+    <meta name="author" content="Xzzzz911" />
+    <meta name="description" content="This is my website Hello Everyone" />
+    <meta name="keywords" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <link rel="icon" href="/images/123.jpg" />
+    
+    <!-- Font Awesome 图标库 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+    
+    <!-- 你自己的自定义样式 -->
+    <link rel="stylesheet" href="/css/style.css">
+    
+    <!-- 自定义样式：一定要放在 style.css 之后，确保覆盖生效 -->
+    <link rel="stylesheet" href="/css/custom.css">
+    
+    <!-- 主题内部样式或脚本导入 -->
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+
+<script>const mixins = {};</script>
+
+
+  <script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+
+
+
+
+
+  <script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+  
+  
+  
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+    
+    <!-- 强制全局固定背景样式，优先级高 -->
+    <style>
+        html {
+        background-image: url("/images/1.jpg") !important;
+        background-size: cover !important;
+        background-attachment: fixed !important;
+        background-position: center center !important;
+        background-repeat: no-repeat !important;
+        min-height: 100vh !important;
+        }
+    
+        body {
+        background: transparent !important;
+        min-height: 100vh !important;
+        }
+    
+        #home-background {
+        display: none !important;  /* 隐藏 ParticleX 自带的顶部背景图区域 */
+        }
+
+        #content-inner,
+        .page,
+        .post-block,
+        .main-inner {
+        background: rgba(255, 255, 255, 0.3) !important; /* 半透明方便透出背景 */
+        border-radius: 10px;
+        padding: 20px;
+        }
+    </style>
+<meta name="generator" content="Hexo 7.3.0"></head>
+      
+<body>
+
+    <!-- ✅ 全站背景图容器（新增） -->
+    <div id="global-bg"></div>
+
+    <div id="layout" v-cloak>
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>XZZZZ911</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;主页</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;关于</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;存档</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;分类</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;标签</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;XZZZZ911</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">主页</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">关于</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">存档</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">分类</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">标签</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <!-- ✅ 页面标题和标签 --> 
+
+<div class="post-title-area">
+  <h1 style="color: #b6b4b4; font-size: 2.5rem; font-weight: bold; margin-bottom: 0.5rem;">PWN PWN PWN !!! 技巧 (4)</h1>
+  <div class="info" style="font-size: 0.95rem; color: #555;">
+    <span class="date">
+      <span class="icon"><i class="fa-solid fa-calendar fa-fw"></i></span>
+      2023/10/29
+    </span>
+    
+    <span class="category" style="margin-left: 1rem;">
+      <a href="/categories/%E6%8A%80%E5%B7%A7/">
+        <span class="icon"><i class="fa-solid fa-bookmark fa-fw"></i></span>
+        技巧
+      </a>
+    </span>
+    
+    
+    <span class="tags" style="margin-left: 1rem;">
+      <span class="icon"><i class="fa-solid fa-tags fa-fw"></i></span>
+      
+      
+      <span class="tag">
+        
+        <a href="/tags/PWN/" style="color: #00a596; margin-right: 0.5rem;">PWN</a>
+      </span>
+      
+    </span>
+    
+  </div>
+</div>
+
+
+
+<div id="home-posts-wrap" class="home-posts-wrap" style="display: flex; max-width: 1200px; margin: auto; gap: 2rem;">
+  <div id="home-posts" style="opacity: 0.5; flex: 3;">
+    <div class="post">
+      
+        <div class="content" v-pre>
+          <p>PWN PWN PWN !!! 技巧 (4)</p>
+<span id="more"></span>
+
+<h1 id="简介"><span id="简介">简介:</span></h1><p><a href="https://xzz911.github.io/PWN%20PWN%20PWN%20!!!%20%E6%8A%80%E5%B7%A7%20(1)/">PWN PWN PWN !!! 技巧 (1)</a></p>
+<p><a href="https://xzz911.github.io/PWN%20PWN%20PWN%20!!!%20%E6%8A%80%E5%B7%A7%20(3)/">PWN PWN PWN !!! 技巧 (2)</a></p>
+<p><a href="https://xzz911.github.io/PWN%20PWN%20PWN%20!!!%20%E6%8A%80%E5%B7%A7%20(3)/">PWN PWN PWN !!! 技巧 (3)</a></p>
+<p>紧接上述技巧（1）、技巧（2）和技巧（3），这次总结一些常用的命令、重定向和一些整数溢出需要了解的知识点，还有一些接收发送的命令。</p>
+<hr>
+<h2 id="shell命令"><span id="shell命令">shell命令</span></h2><p>（1）$IFS$1</p>
+<p>它是一个 shell 变量，用于定义分隔符来进行单词分割。<code>$1</code> 是 shell 脚本中的位置参数，表示第一个参数。</p>
+<p>（2）tac${IFS}f*</p>
+<p><code>tac$&#123;IFS&#125;f*</code> 是一个 shell 命令，它使用 <code>tac</code> 命令来反向连接文件。<code>$&#123;IFS&#125;</code> 表示 IFS 变量的值，它用于在 <code>tac</code> 和 <code>f*</code> 之间添加分隔符。<code>f*</code> 是一个文件名模式，表示当前目录中以 f 开头的所有文件。</p>
+<p>（3）nl${IFS}f*</p>
+<p><code>nl$&#123;IFS&#125;f*</code> 是一个 shell 命令，它使用 <code>nl</code> 命令来为文件添加行号。<code>$&#123;IFS&#125;</code> 表示 IFS 变量的值，它用于在 <code>nl</code> 和 <code>f*</code> 之间添加分隔符。<code>f*</code> 是一个文件名模式，表示当前目录中以 f 开头的所有文件。</p>
+<p>因此，这个命令的作用是为当前目录中以 f 开头的所有文件添加行号。</p>
+<p>（4）tail .&#x2F;*</p>
+<p><code>tail ./*</code> 是一个 shell 命令，它使用 <code>tail</code> 命令来显示文件的最后几行。<code>./</code> 表示当前目录，<code>*</code> 是一个通配符，表示当前目录中的所有文件和目录。</p>
+<p>因此，这个命令的作用是显示当前目录中所有文件的最后几行。默认情况下，<code>tail</code> 命令显示每个文件的最后 10 行。</p>
+<p>（5）重定向组合</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">exec</span> 1&gt;&amp;0 &amp;&amp; <span class="built_in">tac</span> fl*</span><br><span class="line"><span class="built_in">tac</span> fl* &gt;&amp;0</span><br><span class="line"><span class="built_in">tac</span> fl* &gt;&amp;2</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>解释见 FSCTF 2023 PWN</p>
+</blockquote>
+<hr>
+<h2 id="重定向"><span id="重定向">重定向</span></h2><p>在 Linux shell 中，<code>&gt;&amp;0</code>、<code>&gt;&amp;1</code> 和 <code>&gt;&amp;2</code> 都是重定向操作符，用于将输出重定向到不同的地方：</p>
+<ul>
+<li><code>&gt;&amp;0</code>：这个操作符将输出重定向到文件描述符0，也就是标准输入。然而，这通常没有什么实际用途，因为标准输入通常用于读取输入，而不是写入输出。</li>
+<li><code>&gt;&amp;1</code>：这个操作符将输出重定向到文件描述符1，也就是标准输出。这是默认的输出目标，所以你通常不需要显式地使用这个操作符。然而，在某些情况下，你可能会想要将错误输出重定向到标准输出，那么你可以使用<code>2&gt;&amp;1</code>。</li>
+<li><code>&gt;&amp;2</code>：这个操作符将输出重定向到文件描述符2，也就是标准错误输出。这通常用于输出错误信息。例如，如果你有一个命令可能会产生错误，你可以使用这个操作符将错误信息重定向到一个文件，如：<code>command 2&gt; error.txt</code>。</li>
+</ul>
+<p>常见示例：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">exec</span> 1&gt;&amp;0</span><br></pre></td></tr></table></figure>
+
+<p>它将标准输出（文件描述符 1）重定向到标准输入（文件描述符 0）</p>
+<hr>
+<h2 id="整数溢出"><span id="整数溢出">整数溢出</span></h2><p>整数溢出是指在计算机中对整数类型进行运算时，结果超出了该类型所能表示的范围。</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>范围</th>
+<th>占用字节</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>char</code></td>
+<td>-128 ~ 127</td>
+<td>1 字节</td>
+</tr>
+<tr>
+<td><code>unsigned char</code></td>
+<td>0 ~ 255</td>
+<td>1 字节</td>
+</tr>
+<tr>
+<td><code>short</code></td>
+<td>-32768 ~ 32767</td>
+<td>2 字节</td>
+</tr>
+<tr>
+<td><code>unsigned short</code></td>
+<td>0 ~ 65535</td>
+<td>2 字节</td>
+</tr>
+<tr>
+<td><code>int8</code></td>
+<td>-128 ~ 127</td>
+<td>1 字节</td>
+</tr>
+<tr>
+<td><code>uint8</code></td>
+<td>0 ~ 255</td>
+<td>1 字节</td>
+</tr>
+<tr>
+<td><code>int16</code></td>
+<td>-32768 ~ 32767</td>
+<td>2 字节</td>
+</tr>
+<tr>
+<td><code>uint16</code></td>
+<td>0 ~ 65535</td>
+<td>2 字节</td>
+</tr>
+<tr>
+<td><code>int32</code></td>
+<td>-2147483648 ~ 2147483647</td>
+<td>4 字节</td>
+</tr>
+<tr>
+<td><code>uint32</code></td>
+<td>0 ~ 4294967295</td>
+<td>4 字节</td>
+</tr>
+<tr>
+<td><code>int64</code></td>
+<td>-9223372036854775808 ~ 9223372036854775807</td>
+<td>8 字节</td>
+</tr>
+<tr>
+<td><code>uint64</code></td>
+<td>0 ~ 18446744073709551615</td>
+<td>8 字节</td>
+</tr>
+<tr>
+<td><code>long32</code></td>
+<td>-2147483648 ~ 2147483647</td>
+<td>4 字节</td>
+</tr>
+<tr>
+<td><code>ulong32</code></td>
+<td>0 ~ 4294967295</td>
+<td>4 字节</td>
+</tr>
+<tr>
+<td><code>long64</code></td>
+<td>-9223372036854775808 ~ 9223372036854775807</td>
+<td>8 字节</td>
+</tr>
+<tr>
+<td><code>ulong64</code></td>
+<td>0 ~ 18446744073709551615</td>
+<td>8 字节</td>
+</tr>
+</tbody></table>
+<p><img src="/images/PWNPWNPWN!!!%E6%8A%80%E5%B7%A7(4)/1.png"></p>
+<hr>
+<h2 id="pwntools"><span id="pwntools">Pwntools</span></h2><p>利用 <code>pwntools</code> 工具来接收发送数据，在做题的时候我认为还是非常重要的，所以记录一手，大家一起共勉<del>_</del></p>
+<p>发送数据</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">p.send(data)               <span class="comment"># 发送数据 data</span></span><br><span class="line">p.sendline(data)           <span class="comment"># 发送一行数据 data，加上换行符</span></span><br><span class="line">p.sendafter(data, payload) <span class="comment"># 接收到 data 后发送 payload</span></span><br><span class="line">p.sendlineafter(data, payload) <span class="comment"># 接收到 data 后发送 payload 并换行</span></span><br></pre></td></tr></table></figure>
+
+<p>接收数据</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">p.recv(n)                  <span class="comment"># 接收指定 n 字节</span></span><br><span class="line">p.recvn(n)                 <span class="comment"># 接收 n 字符</span></span><br><span class="line">p.recvall()                <span class="comment"># 接收所有数据</span></span><br><span class="line">p.recvline()               <span class="comment"># 接收一行（到换行符）</span></span><br><span class="line">p.recvlines(n)             <span class="comment"># 接收 n 行</span></span><br><span class="line">p.recvuntil(data)          <span class="comment"># 接收到 data 为止</span></span><br><span class="line">p.recvuntil(data, drop=<span class="literal">True</span>)  <span class="comment"># 接收直到 data（如 &#x27;\nTell&#x27;）</span></span><br></pre></td></tr></table></figure>
+
+<p>示例：如何接收到 <code>0x4038f64e0f1c4200</code></p>
+<p><img src="/images/PWNPWNPWN!!!%E6%8A%80%E5%B7%A7(4)/2.png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">num = <span class="built_in">int</span>(p.recv(<span class="number">18</span>), <span class="number">16</span>)</span><br><span class="line"><span class="comment"># 或者：</span></span><br><span class="line">p.recvuntil(<span class="string">b&#x27;0x&#x27;</span>)</span><br><span class="line">num = <span class="built_in">int</span>(p.recvline(), <span class="number">16</span>)</span><br><span class="line"><span class="comment"># 或者：</span></span><br><span class="line">p.recvuntil(<span class="string">b&#x27;0x&#x27;</span>)</span><br><span class="line">puts_addr = <span class="built_in">int</span>(p.recv(<span class="number">16</span>), <span class="number">16</span>)</span><br></pre></td></tr></table></figure>
+
+<p><code>p.recv()</code> 和 <code>p.recvn()</code> 有什么区别</p>
+<p><img src="/images/PWNPWNPWN!!!%E6%8A%80%E5%B7%A7(4)/3.png"></p>
+<p>32 位如何接受字符串</p>
+<p><img src="/images/PWNPWNPWN!!!%E6%8A%80%E5%B7%A7(4)/4.png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">num = u32(p.recvuntil(<span class="string">b&#x27;\xf7&#x27;</span>)[-<span class="number">4</span>:])</span><br><span class="line"><span class="comment"># 提取后 4 字节</span></span><br><span class="line">python切片：[-<span class="number">4</span>:]，代码可以确保仅提取接收到的数据的最后四个字节，而不考虑数据的前面部分</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/PWNPWNPWN!!!%E6%8A%80%E5%B7%A7(4)/5.png"></p>
+<p>64 位如何接受字符串</p>
+<p><img src="/images/PWNPWNPWN!!!%E6%8A%80%E5%B7%A7(4)/6.png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">num = u64(p.recvuntil(<span class="string">b&#x27;\x7f&#x27;</span>)[-<span class="number">6</span>:].ljust(<span class="number">8</span>, <span class="string">b&#x27;\x00&#x27;</span>))</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">num = u64(p.recvuntil(<span class="string">b&#x27;\x7f&#x27;</span>)[:<span class="number">6</span>].ljust(<span class="number">8</span>, <span class="string">b&#x27;\x00&#x27;</span>))</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">num = u64(p.recv(<span class="number">6</span>).ljust(<span class="number">8</span>, <span class="string">b&#x27;\x00&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/PWNPWNPWN!!!%E6%8A%80%E5%B7%A7(4)/7.png"></p>
+<hr>
+<h2 id="fmtstr"><span id="fmtstr">Fmtstr</span></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">fmtstr_payload(offset, &#123;address:data&#125;, numbwritten=<span class="number">0</span>, write_size=<span class="string">&#x27;byte&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>offset</code>：格式化字符串偏移</li>
+<li><code>numbwritten</code>：已经输出的字符数</li>
+<li><code>write_size</code>：写入方式（<code>byte</code>&#x3D;<code>hhn</code>，<code>short</code>&#x3D;<code>hn</code>，<code>int</code>&#x3D;<code>n</code>），默认为 <code>byte</code></li>
+</ul>
+<blockquote>
+<p>注意：部分题目限制时间，pwntools 生成的 payload 可能失效。
+可通过修改低地址等方式减小输出长度，需手动构造 payload。</p>
+</blockquote>
+<hr>
+<h1 id="总结"><span id="总结">总结：</span></h1><p>多做多总结，慢慢的要开始进攻堆了，加油加油，冲冲冲！！！</p>
+
+        </div>
+      
+    </div>
+  </div>
+
+  
+    <div id="home-card" style="opacity: 0.5; flex: 1; position: relative;">
+      <div class="profile-card-fixed">
+        <div id="card-style">
+  <div id="card-div">
+
+    <!-- 头像区域整体包裹 -->
+    <div class="card-header">
+      <!-- 头像，添加外层相对定位 -->
+      <div class="avatar">
+        <img src="/images/123.jpg" alt="avatar" />
+
+        <!-- 右下角小标注 -->
+        <div class="author-status-sidebar" tabindex="0" aria-label="认真摸鱼中">
+          <g-emoji class="g-emoji" alias="palm_tree" fallback-src="https://lskypro.acozycotage.net/LightPicture/2022/12/fe1dc0402e623096.jpg">🐟</g-emoji>
+          <span class="status-text">认真摸鱼中</span>
+        </div>
+      </div>
+
+      <!-- 作者名 -->
+      <div class="name">Xzzzz911</div>
+
+      <!-- 描述（支持 markdown） -->
+      <div class="description">
+        <p>越努力 越幸运</p>
+
+      </div>
+
+      <!-- 图标链接 -->
+      
+      <div class="icon-links">
+        
+        <span class="icon-link">
+          <a href="https://github.com/xzz911" title="来访问我的GitHub吧" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-github fa-fw"></i>
+          </a>
+        </span>
+        
+        <span class="icon-link">
+          <a href="https://wpa.qq.com/msgrd?v=3&amp;uin=443602796&amp;site=qq&amp;menu=yes" title="QQ: 443602796" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-qq fa-fw"></i>
+          </a>
+        </span>
+        
+        <span class="icon-link">
+          <a href="mailto:xzzzz911@qq.com" title="邮件发送我" target="_blank" rel="noopener noreferrer">
+            <i class="fa-solid fa-envelope fa-fw"></i>
+          </a>
+        </span>
+        
+        <span class="icon-link">
+          <a href="https://space.bilibili.com/1709777759" title="B站主页" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-bilibili fa-fw"></i>
+          </a>
+        </span>
+        
+      </div>
+      
+
+      <!-- 友链 -->
+      
+    </div>
+
+    <!-- 新增访客信息卡片，只在首页显示 -->
+    
+
+    <!-- ✅ 卡片 2：今日诗词（仅首页展示），加了分割样式 -->
+    
+
+    <!-- TOC 目录区域 -->
+    
+
+  </div>
+</div>
+
+      </div>
+      <div class="card-sticky-wrapper">
+        <div id="toc-container">
+          <div class="toc-header">
+            <i class="fa-solid fa-list-ul"></i> 目录
+          </div>
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">简介:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#shell%E5%91%BD%E4%BB%A4"><span class="toc-number">1.1.</span> <span class="toc-text">shell命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E5%AE%9A%E5%90%91"><span class="toc-number">1.2.</span> <span class="toc-text">重定向</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B4%E6%95%B0%E6%BA%A2%E5%87%BA"><span class="toc-number">1.3.</span> <span class="toc-text">整数溢出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pwntools"><span class="toc-number">1.4.</span> <span class="toc-text">Pwntools</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fmtstr"><span class="toc-number">1.5.</span> <span class="toc-text">Fmtstr</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">2.</span> <span class="toc-text">总结：</span></a></li></ol>
+        </div>
+      </div>
+    </div>
+  
+</div>
+
+<!-- 修改过的上一篇/下一篇导航 -->
+<div class="post-nav-outer" style="max-width: 1200px; margin: 3rem auto 0; display: flex; justify-content: center;">
+  <div class="post-nav-inner" style="flex: 3; display: flex; gap: 1rem;">
+    
+      <a href="/SHCTF%202023%20%5BWEEK%201%5D%20PWN/" style="flex: 1; text-decoration: none; color: #ccc;">
+        <div>
+          <div style="font-size: 0.85rem; color: #492630;">⬅ 上一篇</div>
+          <div style="font-weight: bold; font-size: 1.1rem; margin-top: 0.3rem;">SHCTF 2023 [WEEK 1] PWN</div>
+          <div style="font-size: 0.85rem; margin-top: 0.5rem;">
+            <i class="fa fa-calendar"></i> 2023-10-31
+            
+              &nbsp;| <i class="fa fa-folder-open"></i> 
+            
+            
+              &nbsp;| <i class="fa fa-tags"></i>
+              
+                PWN, 
+              
+                SHCTF
+              
+            
+          </div>
+        </div>
+      </a>
+    
+
+    
+      <a href="/NewStarCTF%202023%20%5BWEEK%203%5D%20PWN/" style="flex: 1; text-decoration: none; color: #ccc; text-align: right;">
+        <div>
+          <div style="font-size: 0.85rem; color: #492630;">下一篇 ➡</div>
+          <div style="font-weight: bold; font-size: 1.1rem; margin-top: 0.3rem;">NewStarCTF 2023 [WEEK 3] PWN</div>
+          <div style="font-size: 0.85rem; margin-top: 0.5rem;">
+            <i class="fa fa-calendar"></i> 2023-10-28
+            
+              &nbsp;| <i class="fa fa-folder-open"></i> 
+            
+            
+              &nbsp;| <i class="fa fa-tags"></i>
+              
+                PWN, 
+              
+                NewStarCTF
+              
+            
+          </div>
+        </div>
+      </a>
+    
+  </div>
+</div>
+
+
+  
+  
+  
+  
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const tocLis = document.querySelectorAll("#toc-container > ol > li");
+  const headers = [...document.querySelectorAll(".content h1")];
+  const idToTocLi = {};
+  tocLis.forEach(li => {
+    const a = li.querySelector("a");
+    if (!a) return;
+    const href = a.getAttribute("href");
+    if (!href || !href.startsWith("#")) return;
+    const id = decodeURIComponent(href.slice(1));
+    idToTocLi[id] = li;
+  });
+
+  function onScroll() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+    let currentIndex = 0;
+    for (let i = 0; i < headers.length; i++) {
+      const headerTop = headers[i].getBoundingClientRect().top + window.pageYOffset - 100;
+      if (scrollTop >= headerTop) {
+        currentIndex = i;
+      } else {
+        break;
+      }
+    }
+
+    tocLis.forEach(li => li.classList.remove("active"));
+    if (headers[currentIndex]) {
+      const id = headers[currentIndex].id;
+      if (idToTocLi[id]) {
+        idToTocLi[id].classList.add("active");
+      }
+    }
+  }
+
+  window.addEventListener("scroll", onScroll);
+  onScroll();
+});
+</script>
+
+            <footer id="footer">
+  <div id="footer-wrap">
+    <div>
+      &copy;
+      2022 - 2025 By Xzzzz911
+      <span id="footer-icon">
+        <i class="fa-solid fa-font-awesome fa-fw"></i>
+      </span>
+    </div>
+
+    <!-- 运行时长显示 -->
+    <div id="site-runtime"></div>
+
+    <!-- 访问统计 -->
+    <div>
+      本站总访问量：<span id="busuanzi_value_site_pv">加载中...</span> 次
+    </div>
+
+    <!-- 拯救者 1 号当前距离显示 -->
+    <div id="voyager1-distance">加载中...</div>
+
+    <div>
+      Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+      <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+    </div>
+
+    
+  </div>
+
+  <!-- Busuanzi 访问统计脚本 -->
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  <!-- 页面底部 JS：运行时间 + Voyager 动态距离 -->
+  <script>
+    const siteStartTime = new Date('2025-06-18T00:00:00');
+    const voyagerStartTime = new Date('2023-07-25T00:00:00');
+    let voyagerDistanceKm = 23400000000;
+    const STORAGE_KEY = 'voyager1_distance_km';
+    const AU_IN_KM = 1.495979e+8;
+
+    const storedDistance = parseInt(localStorage.getItem(STORAGE_KEY));
+    if (!isNaN(storedDistance) && storedDistance > voyagerDistanceKm) {
+      voyagerDistanceKm = storedDistance;
+    }
+
+    function padZero(num, len = 2) {
+      return num.toString().padStart(len, '0');
+    }
+
+    function updateSiteRuntime() {
+      const now = new Date();
+      const diffSeconds = Math.floor((now - siteStartTime) / 1000);
+
+      const days = Math.floor(diffSeconds / (3600 * 24));
+      const hours = Math.floor((diffSeconds % (3600 * 24)) / 3600);
+      const minutes = Math.floor((diffSeconds % 3600) / 60);
+      const seconds = diffSeconds % 60;
+
+      const isDaytime = hours >= 9 && hours < 18;
+      const message = isDaytime
+        ? "加油加油好好干，冲冲冲~"
+        : "好好放松吧，好好休息一下~";
+
+      document.getElementById("site-runtime").innerHTML = `
+        <div style="font-size:16px;font-weight:bold">${message}</div>
+        <div style="font-size:13px;font-weight:bold">
+          本站居然运行了 ${days} 天 ${padZero(hours)} 小时 ${padZero(minutes)} 分 ${padZero(seconds)} 秒
+          <i id="heartbeat" class="fas fa-heartbeat" style="color: red;"></i>
+        </div>
+      `;
+    }
+
+    function updateVoyagerDistance() {
+      const now = new Date();
+      const secondsPassed = Math.floor((now - voyagerStartTime) / 1000);
+      voyagerDistanceKm = 23400000000 + secondsPassed * 17;
+
+      localStorage.setItem(STORAGE_KEY, voyagerDistanceKm);
+
+      const au = (voyagerDistanceKm / AU_IN_KM).toFixed(6);
+
+      document.getElementById("voyager1-distance").innerHTML = `
+        拯救者 1 号当前距离地球 ${voyagerDistanceKm.toLocaleString()} 千米，
+        约为 ${au} 个天文单位 🚀
+      `;
+    }
+
+    function startTimers() {
+      updateSiteRuntime();
+      updateVoyagerDistance();
+      setInterval(() => {
+        updateSiteRuntime();
+        updateVoyagerDistance();
+      }, 1000);
+    }
+
+    window.addEventListener('DOMContentLoaded', startTimers);
+  </script>
+</footer>
+
+<!-- Typed.js -->
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<!-- 初始化打字机效果 -->
+<script src="/js/typed-subtitle.js"></script>
+
+<!-- 鼠标点击核心价值观文字特效 -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+
+<!-- 鼠标粒子拖尾特效 -->
+<script src="/js/mouse-particles.js"></script>
+
+<!-- 网站页面特效 -->
+<canvas id="universe" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-1;pointer-events:none;"></canvas>
+<script defer src="/js/universe.js"></script>
+<script src="/js/custom.js"></script>
+
+<!-- ✅ 鼠标点击特效 -->
+<script src="/js/click-effect.js"></script>
+
+<script src="/js/code-copy.js"></script>
+
+
+<!-- 鼠标星星特效，仅桌面端加载 -->
+<script>
+  if (window.innerWidth > 768) {
+    document.write('<script src="/js/star.js"><\/script>');
+  }
+</script>
+
+<!-- 今日诗词API脚本 -->
+<script src="https://fastly.jsdelivr.net/npm/js-heo@1.0.11/poem/jinrishici.js" charset="utf-8"></script>
+<script type="text/javascript">
+  jinrishici.load(function(result) {
+    if (result.status === "success") {
+      const data = result.data;
+      const content = data.content || "";
+      const origin = data.origin || {};
+      const title = origin.title || "";
+      const author = origin.author || data.author || "";
+      const dynasty = origin.dynasty || data.dynasty || "";
+
+      const sentenceEl = document.getElementById("poem_sentence");
+      if (sentenceEl) sentenceEl.innerText = content;
+
+      const metaEl = document.getElementById("poem_meta");
+      if (metaEl) {
+        metaEl.innerText = `${dynasty} · ${author} 《${title}》`;
+      }
+    } else {
+      console.warn("今日诗词 API 加载失败");
+    }
+  });
+</script>
+
+
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+
+        <!-- 阅读进度绳子 -->
+        <div
+        id="rope-progress"
+        :class="{'rope-visible': ropeHeight > 20}"
+        :style="{ height: ropeHeight + 'px' }"
+        >
+        <!-- ✅ 新增：透明点击区域 -->
+        <div
+            id="rope-click-layer"
+            title="点我回到顶部"
+            @click="scrollToTop"
+        ></div>
+
+        <!-- 进度百分比 -->
+        <div class="rope-percent" id="rope-percent">0%</div>
+
+        <!-- 绳子头图片 -->
+        <img
+            src="/images/rope-head.png"
+            alt="Rope Head"
+            draggable="false"
+            oncontextmenu="return false;"
+            @click.stop.prevent
+            style="width: 80px; height: 80px; margin-top: 50px; pointer-events: none;"
+        />
+        </div>
+
+
+    </div>
+
+    <script src="/js/main.js"></script>
+
+    <script>
+        // 保留你已有 PrismJS 代码不变
+        document.addEventListener('DOMContentLoaded', function () {
+            Prism.highlightAll();
+
+            document.querySelectorAll('pre code[class^="language-"]').forEach(function (codeBlock) {
+                const pre = codeBlock.parentElement;
+                if (!pre.classList.contains('line-numbers')) {
+                    const lang = Array.from(codeBlock.classList).find(c => c.startsWith('language-'));
+                    pre.classList.add('line-numbers');
+                    if (lang) pre.classList.add(lang);
+                }
+            });
+
+            Prism.highlightAll();
+
+            const target = document.querySelector('.content');
+            if (target) {
+                const observer = new MutationObserver(() => {
+                    Prism.highlightAll();
+                });
+                observer.observe(target, { childList: true, subtree: true });
+            }
+        });
+    </script>
+
+    <!-- 新增：监听标签页切换，动态修改标签页标题 -->
+    <script>
+    (function () {
+        const isPost = true; // ✅ 是否是文章页面
+        const originalTitle = document.title;
+        const awayTitle = "🤠别再玩了啦~";
+        const backTitle = "🚩给我狠狠学~";
+        let blinkInterval = null;
+        let isTabActive = true;
+
+        // 闪烁标题
+        function blinkTitle(titles, interval = 500, times = 6) {
+            let count = 0;
+            let index = 0;
+            if (blinkInterval) clearInterval(blinkInterval);
+            blinkInterval = setInterval(() => {
+                document.title = titles[index];
+                index = (index + 1) % titles.length;
+                count++;
+                if (count >= times) {
+                    clearInterval(blinkInterval);
+                    blinkInterval = null;
+                    if (isPost) updateScrollProgressTitle();
+                    else document.title = originalTitle;
+                }
+            }, interval);
+        }
+
+        // 更新标题为进度百分比
+        function updateScrollProgressTitle() {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const percent = Math.min(100, Math.round((scrollTop / scrollHeight) * 100));
+            document.title = `📖 ${percent}% | ${originalTitle}`;
+        }
+
+        // 页面可见性切换
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                isTabActive = false;
+                if (blinkInterval) clearInterval(blinkInterval);
+                document.title = awayTitle;
+            } else {
+                isTabActive = true;
+                document.title = backTitle;
+                blinkTitle([backTitle, originalTitle], 500, 6);
+            }
+        });
+
+        // 仅在文章页监听滚动和初始化
+        if (isPost) {
+            window.addEventListener('scroll', () => {
+                if (isTabActive) updateScrollProgressTitle();
+            });
+            window.addEventListener('load', () => {
+                updateScrollProgressTitle();
+            });
+        }
+    })();
+    </script>
+
+
+
+
+
+
+
+    
+    
+
+
+
+
+    
+
+
+</body>
+</html>
