@@ -1,0 +1,761 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>PWN PWN PWN !!! 技巧 (3) | Xzzzz911</title>
+    <meta name="author" content="Xzzzz911" />
+    <meta name="description" content="This is my website Hello Everyone" />
+    <meta name="keywords" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <link rel="icon" href="/images/123.jpg" />
+    
+    <!-- Font Awesome 图标库 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+    
+    <!-- 你自己的自定义样式 -->
+    <link rel="stylesheet" href="/css/style.css">
+    
+    <!-- 自定义样式：一定要放在 style.css 之后，确保覆盖生效 -->
+    <link rel="stylesheet" href="/css/custom.css">
+    
+    <!-- 主题内部样式或脚本导入 -->
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+
+<script>const mixins = {};</script>
+
+
+  <script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+
+
+
+
+
+  <script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+  
+  
+  
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+    
+    <!-- 强制全局固定背景样式，优先级高 -->
+    <style>
+        html {
+        background-image: url("/images/1.jpg") !important;
+        background-size: cover !important;
+        background-attachment: fixed !important;
+        background-position: center center !important;
+        background-repeat: no-repeat !important;
+        min-height: 100vh !important;
+        }
+    
+        body {
+        background: transparent !important;
+        min-height: 100vh !important;
+        }
+    
+        #home-background {
+        display: none !important;  /* 隐藏 ParticleX 自带的顶部背景图区域 */
+        }
+
+        #content-inner,
+        .page,
+        .post-block,
+        .main-inner {
+        background: rgba(255, 255, 255, 0.3) !important; /* 半透明方便透出背景 */
+        border-radius: 10px;
+        padding: 20px;
+        }
+    </style>
+<meta name="generator" content="Hexo 7.3.0"></head>
+      
+<body>
+
+    <!-- ✅ 全站背景图容器（新增） -->
+    <div id="global-bg"></div>
+
+    <div id="layout" v-cloak>
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>XZZZZ911</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;主页</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;关于</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;存档</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;分类</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;标签</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;XZZZZ911</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">主页</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">关于</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">存档</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">分类</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">标签</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <!-- ✅ 页面标题和标签 --> 
+
+<div class="post-title-area">
+  <h1 style="color: #b6b4b4; font-size: 2.5rem; font-weight: bold; margin-bottom: 0.5rem;">PWN PWN PWN !!! 技巧 (3)</h1>
+  <div class="info" style="font-size: 0.95rem; color: #555;">
+    <span class="date">
+      <span class="icon"><i class="fa-solid fa-calendar fa-fw"></i></span>
+      2023/10/27
+    </span>
+    
+    <span class="category" style="margin-left: 1rem;">
+      <a href="/categories/%E6%8A%80%E5%B7%A7/">
+        <span class="icon"><i class="fa-solid fa-bookmark fa-fw"></i></span>
+        技巧
+      </a>
+    </span>
+    
+    
+    <span class="tags" style="margin-left: 1rem;">
+      <span class="icon"><i class="fa-solid fa-tags fa-fw"></i></span>
+      
+      
+      <span class="tag">
+        
+        <a href="/tags/PWN/" style="color: #ff7d73; margin-right: 0.5rem;">PWN</a>
+      </span>
+      
+    </span>
+    
+  </div>
+</div>
+
+
+
+<div id="home-posts-wrap" class="home-posts-wrap" style="display: flex; max-width: 1200px; margin: auto; gap: 2rem;">
+  <div id="home-posts" style="opacity: 0.5; flex: 3;">
+    <div class="post">
+      
+        <div class="content" v-pre>
+          <p>PWN PWN PWN !!! 技巧 (3)</p>
+<span id="more"></span>
+
+<h1 id="简介"><span id="简介">简介：</span></h1><p>紧接上述技巧（1）和技巧（2），这期整理一些 Linux 系统调用号和一些编码的命令，记录一下。</p>
+<hr>
+<h2 id="linux-系统调用号表"><span id="linux-系统调用号表">Linux 系统调用号表</span></h2><h3 id="32-位"><span id="32-位">32 位</span></h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> _ASM_X86_UNISTD_32_H</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> _ASM_X86_UNISTD_32_H 1</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_restart_syscall 0</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_exit 1</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_fork 2</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_read 3</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_write 4</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_open 5</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_close 6</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_waitpid 7</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_creat 8</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_link 9</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_unlink 10</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_execve 11</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_chdir 12</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_time 13</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_mknod 14</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_chmod 15</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_lchown 16</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_break 17</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_oldstat 18</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_lseek 19</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getpid 20</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_mount 21</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_umount 22</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setuid 23</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getuid 24</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_stime 25</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_ptrace 26</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_alarm 27</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_oldfstat 28</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_pause 29</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_utime 30</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_stty 31</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_gtty 32</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_access 33</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_nice 34</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_ftime 35</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sync 36</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_kill 37</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_rename 38</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_mkdir 39</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_rmdir 40</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_dup 41</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_pipe 42</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_times 43</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_prof 44</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_brk 45</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setgid 46</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getgid 47</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_signal 48</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_geteuid 49</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getegid 50</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_acct 51</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_umount2 52</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_lock 53</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_ioctl 54</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_fcntl 55</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_mpx 56</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setpgid 57</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_ulimit 58</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_oldolduname 59</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_umask 60</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_chroot 61</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_ustat 62</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_dup2 63</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getppid 64</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getpgrp 65</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setsid 66</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sigaction 67</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sgetmask 68</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_ssetmask 69</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setreuid 70</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setregid 71</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sigsuspend 72</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sigpending 73</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sethostname 74</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setrlimit 75</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getrlimit 76</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getrusage 77</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_gettimeofday 78</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_settimeofday 79</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getgroups 80</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setgroups 81</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_select 82</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_symlink 83</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_oldlstat 84</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_readlink 85</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_uselib 86</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_swapon 87</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_reboot 88</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_readdir 89</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_mmap 90</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_munmap 91</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_truncate 92</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_ftruncate 93</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_fchmod 94</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_fchown 95</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getpriority 96</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setpriority 97</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_profil 98</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_statfs 99</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_fstatfs 100</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_ioperm 101</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_socketcall 102</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_syslog 103</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setitimer 104</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getitimer 105</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_stat 106</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_lstat 107</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_fstat 108</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_olduname 109</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_iopl 110</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_vhangup 111</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_idle 112</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_vm86old 113</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_wait4 114</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_swapoff 115</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sysinfo 116</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_ipc 117</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_fsync 118</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sigreturn 119</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_clone 120</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setdomainname 121</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_uname 122</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_modify_ldt 123</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_adjtimex 124</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_mprotect 125</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sigprocmask 126</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_create_module 127</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_init_module 128</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_delete_module 129</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_get_kernel_syms 130</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_quotactl 131</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getpgid 132</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_fchdir 133</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_bdflush 134</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sysfs 135</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_personality 136</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_afs_syscall 137</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setfsuid 138</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setfsgid 139</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR__llseek 140</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getdents 141</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR__newselect 142</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_flock 143</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_msync 144</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_readv 145</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_writev 146</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getsid 147</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_fdatasync 148</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR__sysctl 149</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_mlock 150</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_munlock 151</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_mlockall 152</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_munlockall 153</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sched_setparam 154</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sched_getparam 155</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sched_setscheduler 156</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sched_getscheduler 157</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sched_yield 158</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sched_get_priority_max 159</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sched_get_priority_min 160</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sched_rr_get_interval 161</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_nanosleep 162</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_mremap 163</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setresuid 164</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getresuid 165</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_vm86 166</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_query_module 167</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_poll 168</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_nfsservctl 169</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setresgid 170</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getresgid 171</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_prctl 172</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_rt_sigreturn 173</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_rt_sigaction 174</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_rt_sigprocmask 175</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_rt_sigpending 176</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_rt_sigtimedwait 177</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_rt_sigqueueinfo 178</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_rt_sigsuspend 179</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_pread64 180</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_pwrite64 181</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_chown 182</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getcwd 183</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_capget 184</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_capset 185</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sigaltstack 186</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sendfile 187</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getpmsg 188</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_putpmsg 189</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_vfork 190</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_ugetrlimit 191</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_mmap2 192</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_truncate64 193</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_ftruncate64 194</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_stat64 195</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_lstat64 196</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_fstat64 197</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_lchown32 198</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getuid32 199</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getgid32 200</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_geteuid32 201</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getegid32 202</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setreuid32 203</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setregid32 204</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getgroups32 205</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setgroups32 206</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_fchown32 207</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setresuid32 208</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getresuid32 209</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setresgid32 210</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getresgid32 211</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_chown32 212</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setuid32 213</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setgid32 214</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setfsuid32 215</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setfsgid32 216</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_pivot_root 217</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_mincore 218</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_madvise 219</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getdents64 220</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_fcntl64 221</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_gettid 224</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_readahead 225</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setxattr 226</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_lsetxattr 227</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_fsetxattr 228</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getxattr 229</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_lgetxattr 230</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_fgetxattr 231</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_listxattr 232</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_llistxattr 233</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_flistxattr 234</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_removexattr 235</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_lremovexattr 236</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_fremovexattr 237</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_tkill 238</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sendfile64 239</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_futex 240</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sched_setaffinity 241</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sched_getaffinity 242</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_set_thread_area 243</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_get_thread_area 244</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_io_setup 245</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_io_destroy 246</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_io_getevents 247</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_io_submit 248</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_io_cancel 249</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_fadvise64 250</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_exit_group 252</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_lookup_dcookie 253</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_epoll_create 254</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_epoll_ctl 255</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_epoll_wait 256</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_remap_file_pages 257</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_set_tid_address 258</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_timer_create 259</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_timer_settime 260</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_timer_gettime 261</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_timer_getoverrun 262</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_timer_delete 263</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_clock_settime 264</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_clock_gettime 265</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_clock_getres 266</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_clock_nanosleep 267</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_statfs64 268</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_fstatfs64 269</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_tgkill 270</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_utimes 271</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_fadvise64_64 272</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_vserver 273</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_mbind 274</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_get_mempolicy 275</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_set_mempolicy 276</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_mq_open 277</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_mq_unlink 278</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_mq_timedsend 279</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_mq_timedreceive 280</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_mq_notify 281</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_mq_getsetattr 282</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_kexec_load 283</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_waitid 284</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_add_key 286</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_request_key 287</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_keyctl 288</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_ioprio_set 289</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_ioprio_get 290</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_inotify_init 291</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_inotify_add_watch 292</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_inotify_rm_watch 293</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_migrate_pages 294</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_openat 295</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_mkdirat 296</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_mknodat 297</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_fchownat 298</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_futimesat 299</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_fstatat64 300</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_unlinkat 301</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_renameat 302</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_linkat 303</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_symlinkat 304</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_readlinkat 305</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_fchmodat 306</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_faccessat 307</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_pselect6 308</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_ppoll 309</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_unshare 310</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_set_robust_list 311</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_get_robust_list 312</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_splice 313</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sync_file_range 314</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_tee 315</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_vmsplice 316</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_move_pages 317</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getcpu 318</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_epoll_pwait 319</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_utimensat 320</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_signalfd 321</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_timerfd_create 322</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_eventfd 323</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_fallocate 324</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_timerfd_settime 325</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_timerfd_gettime 326</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_signalfd4 327</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_eventfd2 328</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_epoll_create1 329</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_dup3 330</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_pipe2 331</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_inotify_init1 332</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_preadv 333</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_pwritev 334</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_rt_tgsigqueueinfo 335</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_perf_event_open 336</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_recvmmsg 337</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_fanotify_init 338</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_fanotify_mark 339</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_prlimit64 340</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_name_to_handle_at 341</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_open_by_handle_at 342</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_clock_adjtime 343</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_syncfs 344</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sendmmsg 345</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setns 346</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_process_vm_readv 347</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_process_vm_writev 348</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_kcmp 349</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_finit_module 350</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sched_setattr 351</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sched_getattr 352</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_renameat2 353</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_seccomp 354</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getrandom 355</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_memfd_create 356</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_bpf 357</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_execveat 358</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_socket 359</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_socketpair 360</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_bind 361</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_connect 362</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_listen 363</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_accept4 364</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getsockopt 365</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setsockopt 366</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getsockname 367</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getpeername 368</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sendto 369</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sendmsg 370</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_recfrom 371</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_recvmsg 372</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_shutdown 373</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_userfaultfd 374</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_membarrier 375</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_mlock2 376</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_copy_file_range 377</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_preadv2 378</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_pwritev2 379</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">/* _ASM_X86_UNISTD_32_H */</span></span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="64-位"><span id="64-位">64 位</span></h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> _ASM_X86_UNISTD_64_H</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> _ASM_X86_UNISTD_64_H 1</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_read 0</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_write 1</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_open 2</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_close 3</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_stat 4</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_fstat 5</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_lstat 6</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_poll 7</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_lseek 8</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_mmap 9</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_mprotect 10</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_munmap 11</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_brk 12</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_rt_sigaction 13</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_rt_sigprocmask 14</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_rt_sigreturn 15</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_ioctl 16</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_pread64 17</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_pwrite64 18</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_readv 19</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_writev 20</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_access 21</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_pipe 22</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_select 23</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sched_yield 24</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_mremap 25</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_msync 26</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_mincore 27</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_madvise 28</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_shmget 29</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_shmat 30</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_shmctl 31</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_dup 32</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_dup2 33</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_pause 34</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_nanosleep 35</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getitimer 36</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_alarm 37</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setitimer 38</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getpid 39</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sendfile 40</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_socket 41</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_connect 42</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_accept 43</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sendto 44</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_recvfrom 45</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sendmsg 46</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_recvmsg 47</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_shutdown 48</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_bind 49</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_listen 50</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getsockname 51</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getpeername 52</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_socketpair 53</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setsockopt 54</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getsockopt 55</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_clone 56</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_fork 57</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_vfork 58</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_execve 59</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_exit 60</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_wait4 61</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_kill 62</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_uname 63</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_semget 64</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_semop 65</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_semctl 66</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_shmdt 67</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_msgget 68</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_msgsnd 69</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_msgrcv 70</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_msgctl 71</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_fcntl 72</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_flock 73</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_fsync 74</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_fdatasync 75</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_truncate 76</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_ftruncate 77</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getdents 78</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getcwd 79</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_chdir 80</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_fchdir 81</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_rename 82</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_mkdir 83</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_rmdir 84</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_creat 85</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_link 86</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_unlink 87</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_symlink 88</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_readlink 89</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_chmod 90</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_fchmod 91</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_chown 92</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_fchown 93</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_lchown 94</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_umask 95</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_gettimeofday 96</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getrlimit 97</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getrusage 98</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sysinfo 99</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_times 100</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_ptrace 101</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getuid 102</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_syslog 103</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getgid 104</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setuid 105</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setgid 106</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_geteuid 107</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getegid 108</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setpgid 109</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getppid 110</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getpgrp 111</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setsid 112</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setreuid 113</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setregid 114</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getgroups 115</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setgroups 116</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setresuid 117</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getresuid 118</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setresgid 119</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getresgid 120</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getpgid 121</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setfsuid 122</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setfsgid 123</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getsid 124</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_capget 125</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_capset 126</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_rt_sigpending 127</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_rt_sigtimedwait 128</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_rt_sigqueueinfo 129</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_rt_sigsuspend 130</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sigaltstack 131</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_utime 132</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_mknod 133</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_uselib 134</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_personality 135</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_ustat 136</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_statfs 137</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_fstatfs 138</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sysfs 139</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getpriority 140</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setpriority 141</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sched_setparam 142</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sched_getparam 143</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sched_setscheduler 144</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sched_getscheduler 145</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sched_get_priority_max 146</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sched_get_priority_min 147</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sched_rr_get_interval 148</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_mlock 149</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_munlock 150</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_mlockall 151</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_munlockall 152</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_vhangup 153</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_modify_ldt 154</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_pivot_root 155</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR__sysctl 156</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_prctl 157</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_arch_prctl 158</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_adjtimex 159</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setrlimit 160</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_chroot 161</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sync 162</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_acct 163</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_settimeofday 164</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_mount 165</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_umount2 166</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_swapon 167</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_swapoff 168</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_reboot 169</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sethostname 170</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setdomainname 171</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_iopl 172</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_ioperm 173</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_create_module 174</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_init_module 175</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_delete_module 176</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_get_kernel_syms 177</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_query_module 178</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_quotactl 179</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_nfsservctl 180</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getpmsg 181</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_putpmsg 182</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_afs_syscall 183</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_tuxcall 184</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_security 185</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_gettid 186</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_readahead 187</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_setxattr 188</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_lsetxattr 189</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_fsetxattr 190</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getxattr 191</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_lgetxattr 192</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_fgetxattr 193</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_listxattr 194</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_llistxattr 195</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_flistxattr 196</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_removexattr 197</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_lremovexattr 198</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_fremovexattr 199</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_tkill 200</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_time 201</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_futex 202</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sched_setaffinity 203</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sched_getaffinity 204</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_set_thread_area 205</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_io_setup 206</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_io_destroy 207</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_io_getevents 208</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_io_submit 209</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_io_cancel 210</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_get_thread_area 211</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_lookup_dcookie 212</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_epoll_create 213</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_epoll_ctl_old 214</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_epoll_wait_old 215</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_remap_file_pages 216</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_getdents64 217</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_set_tid_address 218</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_restart_syscall 219</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_semtimedop 220</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_fadvise64 221</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_timer_create 222</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_timer_settime 223</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_timer_gettime 224</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_timer_getoverrun 225</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_timer_delete 226</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_clock_settime 227</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_clock_gettime 228</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_clock_getres 229</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_clock_nanosleep 230</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_exit_group 231</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_epoll_wait 232</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_epoll_ctl 233</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_tgkill 234</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_utimes 235</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_vserver 236</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_mbind 237</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_set_mempolicy 238</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_get_mempolicy 239</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_mq_open 240</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_mq_unlink 241</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_mq_timedsend 242</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_mq_timedreceive 243</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_mq_notify 244</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_mq_getsetattr 245</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_kexec_load 246</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_waitid 247</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_add_key 248</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_request_key 249</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_keyctl 250</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_ioprio_set 251</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_ioprio_get 252</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_inotify_init 253</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_inotify_add_watch 254</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_inotify_rm_watch 255</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_migrate_pages 256</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_openat 257</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_mkdirat 258</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_mknodat 259</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_fchownat 260</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_futimesat 261</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_newfstatat 262</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_unlinkat 263</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_renameat 264</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_linkat 265</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_symlinkat 266</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_readlinkat 267</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_fchmodat 268</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_faccessat 269</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_pselect6 270</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_ppoll 271</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_unshare 272</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_set_robust_list 273</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_get_robust_list 274</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_splice 275</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sync_file_range 277</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_vmsplice 278</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_move_pages 279</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_utimensat 280</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_epoll_pwait 281</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __NR_sign</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="arch-参数说明"><span id="arch-参数说明">arch 参数说明</span></h2><h3 id="arch-x3d-39-i386-39"><span id="archx3d39i38639"><strong>arch&#x3D;&#39;i386&#39;</strong></span></h3><blockquote>
+<p>arch&#x3D;&#39;i386&#39; 表示目标二进制文件是一个 32 位的 x86 架构的程序。i386 是 Intel 80386 处理器的简称，它是第一个支持 32 位计算的 x86 处理器。在这里，i386 用来表示目标程序是一个 32 位的 x86 程序。 在使用 pwntools 库进行二进制漏洞利用时，需要正确设置目标架构和操作系统，以便库能够正确地生成 shellcode、ROP 链等攻击负载。如果目标程序是一个 32 位的 x86 程序，那么应该将 arch 设置为 &#39;i386&#39;。</p>
+</blockquote>
+<h3 id="arch-x3d-39-amd64-39"><span id="archx3d39amd6439"><strong>arch&#x3D;&#39;amd64&#39;</strong></span></h3><blockquote>
+<p>arch&#x3D;&#39;amd64&#39; 表示目标二进制文件是一个 64 位的 x86-64 架构的程序。amd64 是 AMD 公司推出的一种 64 位处理器架构，它扩展了原有的 x86 架构，支持 64 位计算。在这里，amd64 用来表示目标程序是一个 64 位的 x86-64 程序。 与 i386 类似，在使用 pwntools库&amp;spm&#x3D;1001.2101.3001.7020进行二进制漏洞利用时，需要正确设置目标架构和操作系统，以便库能够正确地生成 shellcode、ROP 链等攻击负载。如果目标程序是一个 64 位的 x86-64 程序，那么应该将 arch 设置为 &#39;amd64&#39;。</p>
+</blockquote>
+<hr>
+<h2 id="编码-x2f-解码"><span id="编码-x2f-解码">编码 &#x2F; 解码</span></h2><h3 id="base64-编码"><span id="base64-编码"><strong>Base64 编码：</strong></span></h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">base64</span> file</span><br><span class="line">功能：从指定的文件file中读取数据，编码为<span class="built_in">base64</span>的字符串然后输出；</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;string&#x27;</span> | <span class="built_in">base64</span></span><br><span class="line">功能：将字符串string+换行编码为<span class="built_in">base64</span>的字符串然后输出；</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> -n <span class="string">&#x27;string&#x27;</span> | <span class="built_in">base64</span></span><br><span class="line">功能：将字符串string编码为<span class="built_in">base64</span>的字符串然后输出；</span><br></pre></td></tr></table></figure>
+
+<h3 id="base64-解码"><span id="base64-解码"><strong>Base64 解码：</strong></span></h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">base64</span> -d file</span><br><span class="line">功能：从指定的文件file中读取已经过<span class="built_in">base64</span>编码的数据，然后进行解码，并输出解码后的字符串；</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;str&#x27;</span> | <span class="built_in">base64</span> -d</span><br><span class="line">功能：对<span class="built_in">base64</span>编码的字符串str和空行进行解码，然后将解码后的字符串输出；</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> -n <span class="string">&#x27;str&#x27;</span> | <span class="built_in">base64</span> -d</span><br><span class="line">功能：对<span class="built_in">base64</span>编码的字符串str进行解码，然后将解码后的字符串输出；</span><br><span class="line"></span><br><span class="line">import <span class="built_in">base64</span></span><br><span class="line">key = <span class="string">&#x27;编码&#x27;</span></span><br><span class="line">key = base64.b64decode(key)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/PWNPWNPWN!!!%E6%8A%80%E5%B7%A7(3)/1.png"></p>
+<h3 id="base32-解码"><span id="base32-解码"><strong>Base32 解码：</strong></span></h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">import <span class="built_in">base64</span></span><br><span class="line">key = <span class="string">&#x27;编码&#x27;</span></span><br><span class="line">key = base64.b32decode(key)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/PWNPWNPWN!!!%E6%8A%80%E5%B7%A7(3)/2.png"></p>
+<hr>
+<h1 id="总结"><span id="总结">总结：</span></h1><p>这次就记录了一些做 PWN 题时常见的编码与系统调用号，后续继续补充，加油！🔥🔥🔥</p>
+
+        </div>
+      
+    </div>
+  </div>
+
+  
+    <div id="home-card" style="opacity: 0.5; flex: 1; position: relative;">
+      <div class="profile-card-fixed">
+        <div id="card-style">
+  <div id="card-div">
+
+    <!-- 头像区域整体包裹 -->
+    <div class="card-header">
+      <!-- 头像，添加外层相对定位 -->
+      <div class="avatar">
+        <img src="/images/123.jpg" alt="avatar" />
+
+        <!-- 右下角小标注 -->
+        <div class="author-status-sidebar" tabindex="0" aria-label="认真摸鱼中">
+          <g-emoji class="g-emoji" alias="palm_tree" fallback-src="https://lskypro.acozycotage.net/LightPicture/2022/12/fe1dc0402e623096.jpg">🐟</g-emoji>
+          <span class="status-text">认真摸鱼中</span>
+        </div>
+      </div>
+
+      <!-- 作者名 -->
+      <div class="name">Xzzzz911</div>
+
+      <!-- 描述（支持 markdown） -->
+      <div class="description">
+        <p>越努力 越幸运</p>
+
+      </div>
+
+      <!-- 图标链接 -->
+      
+      <div class="icon-links">
+        
+        <span class="icon-link">
+          <a href="https://github.com/xzz911" title="来访问我的GitHub吧" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-github fa-fw"></i>
+          </a>
+        </span>
+        
+        <span class="icon-link">
+          <a href="https://wpa.qq.com/msgrd?v=3&amp;uin=443602796&amp;site=qq&amp;menu=yes" title="QQ: 443602796" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-qq fa-fw"></i>
+          </a>
+        </span>
+        
+        <span class="icon-link">
+          <a href="mailto:xzzzz911@qq.com" title="邮件发送我" target="_blank" rel="noopener noreferrer">
+            <i class="fa-solid fa-envelope fa-fw"></i>
+          </a>
+        </span>
+        
+        <span class="icon-link">
+          <a href="https://space.bilibili.com/1709777759" title="B站主页" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-bilibili fa-fw"></i>
+          </a>
+        </span>
+        
+      </div>
+      
+
+      <!-- 友链 -->
+      
+    </div>
+
+    <!-- 新增访客信息卡片，只在首页显示 -->
+    
+
+    <!-- ✅ 卡片 2：今日诗词（仅首页展示），加了分割样式 -->
+    
+
+    <!-- TOC 目录区域 -->
+    
+
+  </div>
+</div>
+
+      </div>
+      <div class="card-sticky-wrapper">
+        <div id="toc-container">
+          <div class="toc-header">
+            <i class="fa-solid fa-list-ul"></i> 目录
+          </div>
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">简介：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#linux-%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8F%B7%E8%A1%A8"><span class="toc-number">1.1.</span> <span class="toc-text">Linux 系统调用号表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#32-%E4%BD%8D"><span class="toc-number">1.1.1.</span> <span class="toc-text">32 位</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#64-%E4%BD%8D"><span class="toc-number">1.1.2.</span> <span class="toc-text">64 位</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#arch-%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E"><span class="toc-number">1.2.</span> <span class="toc-text">arch 参数说明</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#arch-x3d-39-i386-39"><span class="toc-number">1.2.1.</span> <span class="toc-text">arch&#x3D;&#39;i386&#39;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#arch-x3d-39-amd64-39"><span class="toc-number">1.2.2.</span> <span class="toc-text">arch&#x3D;&#39;amd64&#39;</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E7%A0%81-x2f-%E8%A7%A3%E7%A0%81"><span class="toc-number">1.3.</span> <span class="toc-text">编码 &#x2F; 解码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#base64-%E7%BC%96%E7%A0%81"><span class="toc-number">1.3.1.</span> <span class="toc-text">Base64 编码：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#base64-%E8%A7%A3%E7%A0%81"><span class="toc-number">1.3.2.</span> <span class="toc-text">Base64 解码：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#base32-%E8%A7%A3%E7%A0%81"><span class="toc-number">1.3.3.</span> <span class="toc-text">Base32 解码：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">2.</span> <span class="toc-text">总结：</span></a></li></ol>
+        </div>
+      </div>
+    </div>
+  
+</div>
+
+<!-- 修改过的上一篇/下一篇导航 -->
+<div class="post-nav-outer" style="max-width: 1200px; margin: 3rem auto 0; display: flex; justify-content: center;">
+  <div class="post-nav-inner" style="flex: 3; display: flex; gap: 1rem;">
+    
+      <a href="/NewStarCTF%202023%20%5BWEEK%203%5D%20PWN/" style="flex: 1; text-decoration: none; color: #ccc;">
+        <div>
+          <div style="font-size: 0.85rem; color: #492630;">⬅ 上一篇</div>
+          <div style="font-weight: bold; font-size: 1.1rem; margin-top: 0.3rem;">NewStarCTF 2023 [WEEK 3] PWN</div>
+          <div style="font-size: 0.85rem; margin-top: 0.5rem;">
+            <i class="fa fa-calendar"></i> 2023-10-28
+            
+              &nbsp;| <i class="fa fa-folder-open"></i> 
+            
+            
+              &nbsp;| <i class="fa fa-tags"></i>
+              
+                PWN, 
+              
+                NewStarCTF
+              
+            
+          </div>
+        </div>
+      </a>
+    
+
+    
+      <a href="/FSCTF%202023%20PWN/" style="flex: 1; text-decoration: none; color: #ccc; text-align: right;">
+        <div>
+          <div style="font-size: 0.85rem; color: #492630;">下一篇 ➡</div>
+          <div style="font-weight: bold; font-size: 1.1rem; margin-top: 0.3rem;">FSCTF 2023 PWN</div>
+          <div style="font-size: 0.85rem; margin-top: 0.5rem;">
+            <i class="fa fa-calendar"></i> 2023-10-26
+            
+              &nbsp;| <i class="fa fa-folder-open"></i> 
+            
+            
+              &nbsp;| <i class="fa fa-tags"></i>
+              
+                PWN, 
+              
+                FSCTF
+              
+            
+          </div>
+        </div>
+      </a>
+    
+  </div>
+</div>
+
+
+  
+  
+  
+  
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const tocLis = document.querySelectorAll("#toc-container > ol > li");
+  const headers = [...document.querySelectorAll(".content h1")];
+  const idToTocLi = {};
+  tocLis.forEach(li => {
+    const a = li.querySelector("a");
+    if (!a) return;
+    const href = a.getAttribute("href");
+    if (!href || !href.startsWith("#")) return;
+    const id = decodeURIComponent(href.slice(1));
+    idToTocLi[id] = li;
+  });
+
+  function onScroll() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+    let currentIndex = 0;
+    for (let i = 0; i < headers.length; i++) {
+      const headerTop = headers[i].getBoundingClientRect().top + window.pageYOffset - 100;
+      if (scrollTop >= headerTop) {
+        currentIndex = i;
+      } else {
+        break;
+      }
+    }
+
+    tocLis.forEach(li => li.classList.remove("active"));
+    if (headers[currentIndex]) {
+      const id = headers[currentIndex].id;
+      if (idToTocLi[id]) {
+        idToTocLi[id].classList.add("active");
+      }
+    }
+  }
+
+  window.addEventListener("scroll", onScroll);
+  onScroll();
+});
+</script>
+
+            <footer id="footer">
+  <div id="footer-wrap">
+    <div>
+      &copy;
+      2022 - 2025 By Xzzzz911
+      <span id="footer-icon">
+        <i class="fa-solid fa-font-awesome fa-fw"></i>
+      </span>
+    </div>
+
+    <!-- 运行时长显示 -->
+    <div id="site-runtime"></div>
+
+    <!-- 访问统计 -->
+    <div>
+      本站总访问量：<span id="busuanzi_value_site_pv">加载中...</span> 次
+    </div>
+
+    <!-- 拯救者 1 号当前距离显示 -->
+    <div id="voyager1-distance">加载中...</div>
+
+    <div>
+      Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+      <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+    </div>
+
+    
+  </div>
+
+  <!-- Busuanzi 访问统计脚本 -->
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  <!-- 页面底部 JS：运行时间 + Voyager 动态距离 -->
+  <script>
+    const siteStartTime = new Date('2025-06-18T00:00:00');
+    const voyagerStartTime = new Date('2023-07-25T00:00:00');
+    let voyagerDistanceKm = 23400000000;
+    const STORAGE_KEY = 'voyager1_distance_km';
+    const AU_IN_KM = 1.495979e+8;
+
+    const storedDistance = parseInt(localStorage.getItem(STORAGE_KEY));
+    if (!isNaN(storedDistance) && storedDistance > voyagerDistanceKm) {
+      voyagerDistanceKm = storedDistance;
+    }
+
+    function padZero(num, len = 2) {
+      return num.toString().padStart(len, '0');
+    }
+
+    function updateSiteRuntime() {
+      const now = new Date();
+      const diffSeconds = Math.floor((now - siteStartTime) / 1000);
+
+      const days = Math.floor(diffSeconds / (3600 * 24));
+      const hours = Math.floor((diffSeconds % (3600 * 24)) / 3600);
+      const minutes = Math.floor((diffSeconds % 3600) / 60);
+      const seconds = diffSeconds % 60;
+
+      const isDaytime = hours >= 9 && hours < 18;
+      const message = isDaytime
+        ? "加油加油好好干，冲冲冲~"
+        : "好好放松吧，好好休息一下~";
+
+      document.getElementById("site-runtime").innerHTML = `
+        <div style="font-size:16px;font-weight:bold">${message}</div>
+        <div style="font-size:13px;font-weight:bold">
+          本站居然运行了 ${days} 天 ${padZero(hours)} 小时 ${padZero(minutes)} 分 ${padZero(seconds)} 秒
+          <i id="heartbeat" class="fas fa-heartbeat" style="color: red;"></i>
+        </div>
+      `;
+    }
+
+    function updateVoyagerDistance() {
+      const now = new Date();
+      const secondsPassed = Math.floor((now - voyagerStartTime) / 1000);
+      voyagerDistanceKm = 23400000000 + secondsPassed * 17;
+
+      localStorage.setItem(STORAGE_KEY, voyagerDistanceKm);
+
+      const au = (voyagerDistanceKm / AU_IN_KM).toFixed(6);
+
+      document.getElementById("voyager1-distance").innerHTML = `
+        拯救者 1 号当前距离地球 ${voyagerDistanceKm.toLocaleString()} 千米，
+        约为 ${au} 个天文单位 🚀
+      `;
+    }
+
+    function startTimers() {
+      updateSiteRuntime();
+      updateVoyagerDistance();
+      setInterval(() => {
+        updateSiteRuntime();
+        updateVoyagerDistance();
+      }, 1000);
+    }
+
+    window.addEventListener('DOMContentLoaded', startTimers);
+  </script>
+</footer>
+
+<!-- Typed.js -->
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<!-- 初始化打字机效果 -->
+<script src="/js/typed-subtitle.js"></script>
+
+<!-- 鼠标点击核心价值观文字特效 -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+
+<!-- 鼠标粒子拖尾特效 -->
+<script src="/js/mouse-particles.js"></script>
+
+<!-- 网站页面特效 -->
+<canvas id="universe" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-1;pointer-events:none;"></canvas>
+<script defer src="/js/universe.js"></script>
+<script src="/js/custom.js"></script>
+
+<!-- ✅ 鼠标点击特效 -->
+<script src="/js/click-effect.js"></script>
+
+<script src="/js/code-copy.js"></script>
+
+
+<!-- 鼠标星星特效，仅桌面端加载 -->
+<script>
+  if (window.innerWidth > 768) {
+    document.write('<script src="/js/star.js"><\/script>');
+  }
+</script>
+
+<!-- 今日诗词API脚本 -->
+<script src="https://fastly.jsdelivr.net/npm/js-heo@1.0.11/poem/jinrishici.js" charset="utf-8"></script>
+<script type="text/javascript">
+  jinrishici.load(function(result) {
+    if (result.status === "success") {
+      const data = result.data;
+      const content = data.content || "";
+      const origin = data.origin || {};
+      const title = origin.title || "";
+      const author = origin.author || data.author || "";
+      const dynasty = origin.dynasty || data.dynasty || "";
+
+      const sentenceEl = document.getElementById("poem_sentence");
+      if (sentenceEl) sentenceEl.innerText = content;
+
+      const metaEl = document.getElementById("poem_meta");
+      if (metaEl) {
+        metaEl.innerText = `${dynasty} · ${author} 《${title}》`;
+      }
+    } else {
+      console.warn("今日诗词 API 加载失败");
+    }
+  });
+</script>
+
+
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+
+        <!-- 阅读进度绳子 -->
+        <div
+        id="rope-progress"
+        :class="{'rope-visible': ropeHeight > 20}"
+        :style="{ height: ropeHeight + 'px' }"
+        >
+        <!-- ✅ 新增：透明点击区域 -->
+        <div
+            id="rope-click-layer"
+            title="点我回到顶部"
+            @click="scrollToTop"
+        ></div>
+
+        <!-- 进度百分比 -->
+        <div class="rope-percent" id="rope-percent">0%</div>
+
+        <!-- 绳子头图片 -->
+        <img
+            src="/images/rope-head.png"
+            alt="Rope Head"
+            draggable="false"
+            oncontextmenu="return false;"
+            @click.stop.prevent
+            style="width: 80px; height: 80px; margin-top: 50px; pointer-events: none;"
+        />
+        </div>
+
+
+    </div>
+
+    <script src="/js/main.js"></script>
+
+    <script>
+        // 保留你已有 PrismJS 代码不变
+        document.addEventListener('DOMContentLoaded', function () {
+            Prism.highlightAll();
+
+            document.querySelectorAll('pre code[class^="language-"]').forEach(function (codeBlock) {
+                const pre = codeBlock.parentElement;
+                if (!pre.classList.contains('line-numbers')) {
+                    const lang = Array.from(codeBlock.classList).find(c => c.startsWith('language-'));
+                    pre.classList.add('line-numbers');
+                    if (lang) pre.classList.add(lang);
+                }
+            });
+
+            Prism.highlightAll();
+
+            const target = document.querySelector('.content');
+            if (target) {
+                const observer = new MutationObserver(() => {
+                    Prism.highlightAll();
+                });
+                observer.observe(target, { childList: true, subtree: true });
+            }
+        });
+    </script>
+
+    <!-- 新增：监听标签页切换，动态修改标签页标题 -->
+    <script>
+    (function () {
+        const isPost = true; // ✅ 是否是文章页面
+        const originalTitle = document.title;
+        const awayTitle = "🤠别再玩了啦~";
+        const backTitle = "🚩给我狠狠学~";
+        let blinkInterval = null;
+        let isTabActive = true;
+
+        // 闪烁标题
+        function blinkTitle(titles, interval = 500, times = 6) {
+            let count = 0;
+            let index = 0;
+            if (blinkInterval) clearInterval(blinkInterval);
+            blinkInterval = setInterval(() => {
+                document.title = titles[index];
+                index = (index + 1) % titles.length;
+                count++;
+                if (count >= times) {
+                    clearInterval(blinkInterval);
+                    blinkInterval = null;
+                    if (isPost) updateScrollProgressTitle();
+                    else document.title = originalTitle;
+                }
+            }, interval);
+        }
+
+        // 更新标题为进度百分比
+        function updateScrollProgressTitle() {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const percent = Math.min(100, Math.round((scrollTop / scrollHeight) * 100));
+            document.title = `📖 ${percent}% | ${originalTitle}`;
+        }
+
+        // 页面可见性切换
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                isTabActive = false;
+                if (blinkInterval) clearInterval(blinkInterval);
+                document.title = awayTitle;
+            } else {
+                isTabActive = true;
+                document.title = backTitle;
+                blinkTitle([backTitle, originalTitle], 500, 6);
+            }
+        });
+
+        // 仅在文章页监听滚动和初始化
+        if (isPost) {
+            window.addEventListener('scroll', () => {
+                if (isTabActive) updateScrollProgressTitle();
+            });
+            window.addEventListener('load', () => {
+                updateScrollProgressTitle();
+            });
+        }
+    })();
+    </script>
+
+
+
+
+
+
+
+    
+    
+
+
+
+
+    
+
+
+</body>
+</html>

