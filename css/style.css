@@ -619,3 +619,123 @@ figure.highlight .code pre {
     color: #fff !important;
   }
   
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+  
+    a, span {
+      display: inline-block;
+      min-width: 32px;
+      height: 32px;
+      margin: 0 4px;
+      line-height: 32px;
+      text-align: center;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background-color: rgba(255, 255, 255, 0.05);
+      color: #ccc;
+      font-weight: bold;
+      transition: all 0.2s ease-in-out;
+  
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        color: #fff;
+      }
+    }
+  
+    .current {
+      background-color: #89bbc1;
+      color: #fff;
+      border: none;
+    }
+  }
+  
+  /* 包裹器：控制导航整体水平居中 */
+  .menu-wrapper {
+    display: flex;                  /* 使用弹性布局 */
+    justify-content: center;        /* 水平居中子元素 */
+    align-items: center;            /* 垂直居中子元素 */
+    height: 60px;                   /* 导航栏高度 */
+    padding: 0 20px;                /* 左右内边距 */
+    box-sizing: border-box;         /* 包括内边距和边框在内的宽高计算 */
+    position: relative;             /* 方便子元素绝对定位 */
+  }
+
+  /* 左侧 logo / 标题容器：绝对定位靠左，垂直居中 */
+  .menu-left {
+    position: absolute;             /* 脱离文档流，定位相对于父容器 */
+    left: 20px;                    /* 距离左侧 20px */
+    top: 0;                        /* 顶部对齐父容器 */
+    bottom: 0;                     /* 底部对齐父容器 */
+    display: flex;                 /* 使用弹性布局 */
+    align-items: center;           /* 垂直居中 */
+  }
+
+  /* 居中导航栏菜单项容器 */
+  .menu-center {
+    display: flex;                 /* 使用弹性布局排列菜单项 */
+    justify-content: center;       /* 水平居中菜单项 */
+    gap: 30px;                    /* 菜单项间隔 30px */
+  }
+
+  /* 导航菜单链接样式 */
+  .menu-center a {
+    text-decoration: none;         /* 去掉下划线 */
+    color: #fff;                   /* 白色字体 */
+    font-weight: 500;              /* 字体中等粗细 */
+    display: flex;                 /* 方便垂直居中图标或文字 */
+    align-items: center;           /* 垂直居中 */
+    transition: all 0.3s ease;     /* 平滑过渡效果 */
+  }
+
+  /* 导航菜单链接鼠标悬停效果 */
+  .menu-center a:hover {
+    color: #00a596;                /* 变为青绿色 */
+  }
+
+  /* 左侧标题颜色和字体样式 */
+  .menu-left .title {
+    color: #00a596;                /* 主题色，青绿色 */
+    font-size: 1.2rem;             /* 字号 1.2rem */
+    font-weight: bold;             /* 加粗字体 */
+    text-decoration: none;         /* 无下划线 */
+  }
+
+  /* 左侧标题鼠标悬停颜色 */
+  .menu-left .title:hover {
+    color: #ffffff;                /* 悬停变白 */
+  }
+
+  /* 左侧标题中 span 的特殊样式：淡蓝色文字 + 呼吸光圈动画 */
+  .menu-left .title span {
+    color: #e0f7fa;                /* 淡蓝白色字体 */
+    font-size: 1.5rem;             /* 字号稍大 */
+    font-weight: bold;             /* 加粗 */
+    text-decoration: none;         /* 无下划线 */
+    animation: textGlowBreath 3s ease-in-out infinite;  /* 无限循环呼吸动画 */
+  }
+
+  /* 呼吸光圈动画关键帧定义（蓝灰色调） */
+  @keyframes textGlowBreath {
+    0% {
+      text-shadow: 
+        0 0 4px rgba(128, 216, 255, 0.2),
+        0 0 10px rgba(128, 216, 255, 0.2),
+        0 0 15px rgba(128, 216, 255, 0.1);
+    }
+    50% {
+      text-shadow: 
+        0 0 8px rgba(128, 216, 255, 0.7),
+        0 0 16px rgba(128, 216, 255, 0.5),
+        0 0 24px rgba(128, 216, 255, 0.3);
+    }
+    100% {
+      text-shadow: 
+        0 0 4px rgba(128, 216, 255, 0.2),
+        0 0 10px rgba(128, 216, 255, 0.2),
+        0 0 15px rgba(128, 216, 255, 0.1);
+    }
+  }
+
+

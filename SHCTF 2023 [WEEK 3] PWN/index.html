@@ -105,99 +105,105 @@
                 </div>
             </div>
         </transition>
-        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
-    <nav id="desktop-menu">
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor }">
+    <div class="menu-wrapper">
+      <div class="menu-left">
         <a class="title" href="/">
-            <span>XZZZZ911</span>
+          <span>Xzzzz911</span>
         </a>
+      </div>
+      <div class="menu-center">
         
         <a href="/">
-            <i class="fa-solid fa-house fa-fw"></i>
-            <span>&ensp;主页</span>
+          <i class="fa-solid fa-house fa-fw"></i>
+          <span>&ensp;主页</span>
         </a>
         
         <a href="/about">
-            <i class="fa-solid fa-id-card fa-fw"></i>
-            <span>&ensp;关于</span>
+          <i class="fa-solid fa-id-card fa-fw"></i>
+          <span>&ensp;关于</span>
         </a>
         
         <a href="/archives">
-            <i class="fa-solid fa-box-archive fa-fw"></i>
-            <span>&ensp;存档</span>
+          <i class="fa-solid fa-box-archive fa-fw"></i>
+          <span>&ensp;存档</span>
         </a>
         
         <a href="/categories">
-            <i class="fa-solid fa-bookmark fa-fw"></i>
-            <span>&ensp;分类</span>
+          <i class="fa-solid fa-bookmark fa-fw"></i>
+          <span>&ensp;分类</span>
         </a>
         
         <a href="/tags">
-            <i class="fa-solid fa-tags fa-fw"></i>
-            <span>&ensp;标签</span>
+          <i class="fa-solid fa-tags fa-fw"></i>
+          <span>&ensp;标签</span>
         </a>
         
-    </nav>
+      </div>
+    </div>
+  
+    <!-- 移动端菜单不动 -->
     <nav id="mobile-menu">
-        <div class="title" @click="showMenuItems = !showMenuItems">
-            <i class="fa-solid fa-bars fa-fw"></i>
-            <span>&emsp;XZZZZ911</span>
-        </div>
-        <transition name="slide">
-            <div class="items" v-show="showMenuItems">
-                
-                <a href="/">
-                    <div class="item">
-                        <div style="min-width: 20px; max-width: 50px; width: 10%">
-                            <i class="fa-solid fa-house fa-fw"></i>
-                        </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">主页</div>
-                    </div>
-                </a>
-                
-                <a href="/about">
-                    <div class="item">
-                        <div style="min-width: 20px; max-width: 50px; width: 10%">
-                            <i class="fa-solid fa-id-card fa-fw"></i>
-                        </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">关于</div>
-                    </div>
-                </a>
-                
-                <a href="/archives">
-                    <div class="item">
-                        <div style="min-width: 20px; max-width: 50px; width: 10%">
-                            <i class="fa-solid fa-box-archive fa-fw"></i>
-                        </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">存档</div>
-                    </div>
-                </a>
-                
-                <a href="/categories">
-                    <div class="item">
-                        <div style="min-width: 20px; max-width: 50px; width: 10%">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">分类</div>
-                    </div>
-                </a>
-                
-                <a href="/tags">
-                    <div class="item">
-                        <div style="min-width: 20px; max-width: 50px; width: 10%">
-                            <i class="fa-solid fa-tags fa-fw"></i>
-                        </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">标签</div>
-                    </div>
-                </a>
-                
+      <div class="title" @click="showMenuItems = !showMenuItems">
+        <i class="fa-solid fa-bars fa-fw"></i>
+        <span>&emsp;XZZZZ911</span>
+      </div>
+      <transition name="slide">
+        <div class="items" v-show="showMenuItems">
+          
+          <a href="/">
+            <div class="item">
+              <div style="min-width: 20px; max-width: 50px; width: 10%">
+                <i class="fa-solid fa-house fa-fw"></i>
+              </div>
+              <div style="min-width: 100px; max-width: 150%; width: 20%">主页</div>
             </div>
-        </transition>
+          </a>
+          
+          <a href="/about">
+            <div class="item">
+              <div style="min-width: 20px; max-width: 50px; width: 10%">
+                <i class="fa-solid fa-id-card fa-fw"></i>
+              </div>
+              <div style="min-width: 100px; max-width: 150%; width: 20%">关于</div>
+            </div>
+          </a>
+          
+          <a href="/archives">
+            <div class="item">
+              <div style="min-width: 20px; max-width: 50px; width: 10%">
+                <i class="fa-solid fa-box-archive fa-fw"></i>
+              </div>
+              <div style="min-width: 100px; max-width: 150%; width: 20%">存档</div>
+            </div>
+          </a>
+          
+          <a href="/categories">
+            <div class="item">
+              <div style="min-width: 20px; max-width: 50px; width: 10%">
+                <i class="fa-solid fa-bookmark fa-fw"></i>
+              </div>
+              <div style="min-width: 100px; max-width: 150%; width: 20%">分类</div>
+            </div>
+          </a>
+          
+          <a href="/tags">
+            <div class="item">
+              <div style="min-width: 20px; max-width: 50px; width: 10%">
+                <i class="fa-solid fa-tags fa-fw"></i>
+              </div>
+              <div style="min-width: 100px; max-width: 150%; width: 20%">标签</div>
+            </div>
+          </a>
+          
+        </div>
+      </transition>
     </nav>
-</div>
-<transition name="fade">
+  </div>
+  <transition name="fade">
     <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
-</transition>
-
+  </transition>
+  
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <!-- ✅ 页面标题和标签 --> 
 
@@ -228,7 +234,7 @@
       
       <span class="tag">
         
-        <a href="/tags/SHCTF/" style="color: #00a596; margin-right: 0.5rem;">SHCTF</a>
+        <a href="/tags/SHCTF/" style="color: #03a9f4; margin-right: 0.5rem;">SHCTF</a>
       </span>
       
     </span>

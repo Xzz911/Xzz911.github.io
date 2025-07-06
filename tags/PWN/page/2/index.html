@@ -101,114 +101,109 @@
                 </div>
             </div>
         </transition>
-        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
-    <nav id="desktop-menu">
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor }">
+    <div class="menu-wrapper">
+      <div class="menu-left">
         <a class="title" href="/">
-            <span>XZZZZ911</span>
+          <span>Xzzzz911</span>
         </a>
+      </div>
+      <div class="menu-center">
         
         <a href="/">
-            <i class="fa-solid fa-house fa-fw"></i>
-            <span>&ensp;主页</span>
+          <i class="fa-solid fa-house fa-fw"></i>
+          <span>&ensp;主页</span>
         </a>
         
         <a href="/about">
-            <i class="fa-solid fa-id-card fa-fw"></i>
-            <span>&ensp;关于</span>
+          <i class="fa-solid fa-id-card fa-fw"></i>
+          <span>&ensp;关于</span>
         </a>
         
         <a href="/archives">
-            <i class="fa-solid fa-box-archive fa-fw"></i>
-            <span>&ensp;存档</span>
+          <i class="fa-solid fa-box-archive fa-fw"></i>
+          <span>&ensp;存档</span>
         </a>
         
         <a href="/categories">
-            <i class="fa-solid fa-bookmark fa-fw"></i>
-            <span>&ensp;分类</span>
+          <i class="fa-solid fa-bookmark fa-fw"></i>
+          <span>&ensp;分类</span>
         </a>
         
         <a href="/tags">
-            <i class="fa-solid fa-tags fa-fw"></i>
-            <span>&ensp;标签</span>
+          <i class="fa-solid fa-tags fa-fw"></i>
+          <span>&ensp;标签</span>
         </a>
         
-    </nav>
+      </div>
+    </div>
+  
+    <!-- 移动端菜单不动 -->
     <nav id="mobile-menu">
-        <div class="title" @click="showMenuItems = !showMenuItems">
-            <i class="fa-solid fa-bars fa-fw"></i>
-            <span>&emsp;XZZZZ911</span>
-        </div>
-        <transition name="slide">
-            <div class="items" v-show="showMenuItems">
-                
-                <a href="/">
-                    <div class="item">
-                        <div style="min-width: 20px; max-width: 50px; width: 10%">
-                            <i class="fa-solid fa-house fa-fw"></i>
-                        </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">主页</div>
-                    </div>
-                </a>
-                
-                <a href="/about">
-                    <div class="item">
-                        <div style="min-width: 20px; max-width: 50px; width: 10%">
-                            <i class="fa-solid fa-id-card fa-fw"></i>
-                        </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">关于</div>
-                    </div>
-                </a>
-                
-                <a href="/archives">
-                    <div class="item">
-                        <div style="min-width: 20px; max-width: 50px; width: 10%">
-                            <i class="fa-solid fa-box-archive fa-fw"></i>
-                        </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">存档</div>
-                    </div>
-                </a>
-                
-                <a href="/categories">
-                    <div class="item">
-                        <div style="min-width: 20px; max-width: 50px; width: 10%">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">分类</div>
-                    </div>
-                </a>
-                
-                <a href="/tags">
-                    <div class="item">
-                        <div style="min-width: 20px; max-width: 50px; width: 10%">
-                            <i class="fa-solid fa-tags fa-fw"></i>
-                        </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">标签</div>
-                    </div>
-                </a>
-                
+      <div class="title" @click="showMenuItems = !showMenuItems">
+        <i class="fa-solid fa-bars fa-fw"></i>
+        <span>&emsp;XZZZZ911</span>
+      </div>
+      <transition name="slide">
+        <div class="items" v-show="showMenuItems">
+          
+          <a href="/">
+            <div class="item">
+              <div style="min-width: 20px; max-width: 50px; width: 10%">
+                <i class="fa-solid fa-house fa-fw"></i>
+              </div>
+              <div style="min-width: 100px; max-width: 150%; width: 20%">主页</div>
             </div>
-        </transition>
+          </a>
+          
+          <a href="/about">
+            <div class="item">
+              <div style="min-width: 20px; max-width: 50px; width: 10%">
+                <i class="fa-solid fa-id-card fa-fw"></i>
+              </div>
+              <div style="min-width: 100px; max-width: 150%; width: 20%">关于</div>
+            </div>
+          </a>
+          
+          <a href="/archives">
+            <div class="item">
+              <div style="min-width: 20px; max-width: 50px; width: 10%">
+                <i class="fa-solid fa-box-archive fa-fw"></i>
+              </div>
+              <div style="min-width: 100px; max-width: 150%; width: 20%">存档</div>
+            </div>
+          </a>
+          
+          <a href="/categories">
+            <div class="item">
+              <div style="min-width: 20px; max-width: 50px; width: 10%">
+                <i class="fa-solid fa-bookmark fa-fw"></i>
+              </div>
+              <div style="min-width: 100px; max-width: 150%; width: 20%">分类</div>
+            </div>
+          </a>
+          
+          <a href="/tags">
+            <div class="item">
+              <div style="min-width: 20px; max-width: 50px; width: 10%">
+                <i class="fa-solid fa-tags fa-fw"></i>
+              </div>
+              <div style="min-width: 100px; max-width: 150%; width: 20%">标签</div>
+            </div>
+          </a>
+          
+        </div>
+      </transition>
     </nav>
-</div>
-<transition name="fade">
+  </div>
+  <transition name="fade">
     <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
-</transition>
-
+  </transition>
+  
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div id="archives">
     
     <div class="categories-tags">
-        
-        
-        
-        <span>
-            <a href="/tags/%E5%A5%8B%E8%BF%9B/" style="background: #03a9f4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                奋进
-            </a>
-        </span>
         
         
         
@@ -226,7 +221,7 @@
         
         
         <span>
-            <a href="/tags/SWPU-NSS/" style="background: #ffa2c4">
+            <a href="/tags/SWPU-NSS/" style="background: #00bcd4">
                 <span class="icon">
                     <i class="fa-solid fa-tags fa-fw"></i>
                 </span>
@@ -237,29 +232,7 @@
         
         
         <span>
-            <a href="/tags/NewStarCTF/" style="background: #03a9f4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                NewStarCTF
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/MoeCTF/" style="background: #00a596">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                MoeCTF
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/FSCTF/" style="background: #03a9f4">
+            <a href="/tags/FSCTF/" style="background: #ffa2c4">
                 <span class="icon">
                     <i class="fa-solid fa-tags fa-fw"></i>
                 </span>
@@ -270,22 +243,44 @@
         
         
         <span>
-            <a href="/tags/SHCTF/" style="background: #00a596">
+            <a href="/tags/%E5%A5%8B%E8%BF%9B/" style="background: #00a596">
                 <span class="icon">
                     <i class="fa-solid fa-tags fa-fw"></i>
                 </span>
-                SHCTF
+                奋进
             </a>
         </span>
         
         
         
         <span>
-            <a href="/tags/CISCN/" style="background: #ffa2c4">
+            <a href="/tags/MoeCTF/" style="background: #ffa2c4">
                 <span class="icon">
                     <i class="fa-solid fa-tags fa-fw"></i>
                 </span>
-                CISCN
+                MoeCTF
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/tags/NewStarCTF/" style="background: #ff7d73">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                NewStarCTF
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/tags/SHCTF/" style="background: #03a9f4">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                SHCTF
             </a>
         </span>
         
@@ -303,7 +298,7 @@
         
         
         <span>
-            <a href="/tags/HNCTF/" style="background: #ff7d73">
+            <a href="/tags/HNCTF/" style="background: #03a9f4">
                 <span class="icon">
                     <i class="fa-solid fa-tags fa-fw"></i>
                 </span>
@@ -314,7 +309,18 @@
         
         
         <span>
-            <a href="/tags/SDCTF/" style="background: #00a596">
+            <a href="/tags/CISCN/" style="background: #00a596">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                CISCN
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/tags/SDCTF/" style="background: #ff7d73">
                 <span class="icon">
                     <i class="fa-solid fa-tags fa-fw"></i>
                 </span>
@@ -325,7 +331,7 @@
         
         
         <span>
-            <a href="/tags/hexo/" style="background: #00bcd4">
+            <a href="/tags/hexo/" style="background: #00a596">
                 <span class="icon">
                     <i class="fa-solid fa-tags fa-fw"></i>
                 </span>
@@ -336,7 +342,7 @@
         
         
         <span>
-            <a href="/tags/demo/" style="background: #03a9f4">
+            <a href="/tags/demo/" style="background: #ffa2c4">
                 <span class="icon">
                     <i class="fa-solid fa-tags fa-fw"></i>
                 </span>
@@ -374,7 +380,7 @@
                     
                     <span class="tag">
                         
-                        <a href="/tags/PWN/" style="color: #00bcd4">
+                        <a href="/tags/PWN/" style="color: #03a9f4">
                             PWN
                         </a>
                     </span>
@@ -457,7 +463,7 @@
                     
                     <span class="tag">
                         
-                        <a href="/tags/PWN/" style="color: #00a596">
+                        <a href="/tags/PWN/" style="color: #ff7d73">
                             PWN
                         </a>
                     </span>
@@ -502,14 +508,14 @@
                     
                     <span class="tag">
                         
-                        <a href="/tags/PWN/" style="color: #ff7d73">
+                        <a href="/tags/PWN/" style="color: #03a9f4">
                             PWN
                         </a>
                     </span>
                     
                     <span class="tag">
                         
-                        <a href="/tags/SHCTF/" style="color: #ffa2c4">
+                        <a href="/tags/SHCTF/" style="color: #00bcd4">
                             SHCTF
                         </a>
                     </span>
@@ -585,14 +591,14 @@
                     
                     <span class="tag">
                         
-                        <a href="/tags/PWN/" style="color: #00bcd4">
+                        <a href="/tags/PWN/" style="color: #ffa2c4">
                             PWN
                         </a>
                     </span>
                     
                     <span class="tag">
                         
-                        <a href="/tags/NewStarCTF/" style="color: #ff7d73">
+                        <a href="/tags/NewStarCTF/" style="color: #03a9f4">
                             NewStarCTF
                         </a>
                     </span>
@@ -668,14 +674,14 @@
                     
                     <span class="tag">
                         
-                        <a href="/tags/PWN/" style="color: #00bcd4">
+                        <a href="/tags/PWN/" style="color: #ffa2c4">
                             PWN
                         </a>
                     </span>
                     
                     <span class="tag">
                         
-                        <a href="/tags/FSCTF/" style="color: #ffa2c4">
+                        <a href="/tags/FSCTF/" style="color: #00bcd4">
                             FSCTF
                         </a>
                     </span>
@@ -751,7 +757,7 @@
                     
                     <span class="tag">
                         
-                        <a href="/tags/PWN/" style="color: #00a596">
+                        <a href="/tags/PWN/" style="color: #00bcd4">
                             PWN
                         </a>
                     </span>
@@ -796,14 +802,14 @@
                     
                     <span class="tag">
                         
-                        <a href="/tags/PWN/" style="color: #03a9f4">
+                        <a href="/tags/PWN/" style="color: #ff7d73">
                             PWN
                         </a>
                     </span>
                     
                     <span class="tag">
                         
-                        <a href="/tags/NewStarCTF/" style="color: #ff7d73">
+                        <a href="/tags/NewStarCTF/" style="color: #00a596">
                             NewStarCTF
                         </a>
                     </span>
@@ -841,14 +847,14 @@
                     
                     <span class="tag">
                         
-                        <a href="/tags/PWN/" style="color: #ffa2c4">
+                        <a href="/tags/PWN/" style="color: #ff7d73">
                             PWN
                         </a>
                     </span>
                     
                     <span class="tag">
                         
-                        <a href="/tags/MoeCTF/" style="color: #03a9f4">
+                        <a href="/tags/MoeCTF/" style="color: #ffa2c4">
                             MoeCTF
                         </a>
                     </span>
@@ -924,14 +930,14 @@
                     
                     <span class="tag">
                         
-                        <a href="/tags/PWN/" style="color: #00a596">
+                        <a href="/tags/PWN/" style="color: #03a9f4">
                             PWN
                         </a>
                     </span>
                     
                     <span class="tag">
                         
-                        <a href="/tags/NewStarCTF/" style="color: #03a9f4">
+                        <a href="/tags/NewStarCTF/" style="color: #00bcd4">
                             NewStarCTF
                         </a>
                     </span>
@@ -969,7 +975,7 @@
                     
                     <span class="tag">
                         
-                        <a href="/tags/PWN/" style="color: #00a596">
+                        <a href="/tags/PWN/" style="color: #ffa2c4">
                             PWN
                         </a>
                     </span>
@@ -1021,7 +1027,7 @@
                     
                     <span class="tag">
                         
-                        <a href="/tags/HNCTF/" style="color: #ff7d73">
+                        <a href="/tags/HNCTF/" style="color: #03a9f4">
                             HNCTF
                         </a>
                     </span>
@@ -1059,14 +1065,14 @@
                     
                     <span class="tag">
                         
-                        <a href="/tags/PWN/" style="color: #ff7d73">
+                        <a href="/tags/PWN/" style="color: #ffa2c4">
                             PWN
                         </a>
                     </span>
                     
                     <span class="tag">
                         
-                        <a href="/tags/SDCTF/" style="color: #ffa2c4">
+                        <a href="/tags/SDCTF/" style="color: #00bcd4">
                             SDCTF
                         </a>
                     </span>
@@ -1104,14 +1110,14 @@
                     
                     <span class="tag">
                         
-                        <a href="/tags/PWN/" style="color: #03a9f4">
+                        <a href="/tags/PWN/" style="color: #ff7d73">
                             PWN
                         </a>
                     </span>
                     
                     <span class="tag">
                         
-                        <a href="/tags/CISCN/" style="color: #00bcd4">
+                        <a href="/tags/CISCN/" style="color: #ffa2c4">
                             CISCN
                         </a>
                     </span>
@@ -1149,14 +1155,14 @@
                     
                     <span class="tag">
                         
-                        <a href="/tags/PWN/" style="color: #ff7d73">
+                        <a href="/tags/PWN/" style="color: #00bcd4">
                             PWN
                         </a>
                     </span>
                     
                     <span class="tag">
                         
-                        <a href="/tags/HGAME/" style="color: #00a596">
+                        <a href="/tags/HGAME/" style="color: #03a9f4">
                             HGAME
                         </a>
                     </span>
@@ -1239,14 +1245,14 @@
                     
                     <span class="tag">
                         
-                        <a href="/tags/PWN/" style="color: #03a9f4">
+                        <a href="/tags/PWN/" style="color: #ff7d73">
                             PWN
                         </a>
                     </span>
                     
                     <span class="tag">
                         
-                        <a href="/tags/MoeCTF/" style="color: #ff7d73">
+                        <a href="/tags/MoeCTF/" style="color: #00bcd4">
                             MoeCTF
                         </a>
                     </span>
