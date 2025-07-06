@@ -738,4 +738,33 @@ figure.highlight .code pre {
     }
   }
 
+  /* 导航栏左侧标题初始隐藏 + 呼吸光圈 + 渐显 */
+.menu-left .title span {
+  color: #e0f7fa; /* 字体颜色，搭配灰色背景 */
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+  opacity: 0;
+  animation: fadeInGlow 1.5s ease-in-out forwards, textGlowBreath 3s ease-in-out infinite;
+}
+
+/* 页面载入时淡入发光动画 */
+@keyframes fadeInGlow {
+  0% {
+    opacity: 0;
+    text-shadow: none;
+  }
+  100% {
+    opacity: 1;
+    text-shadow: 0 0 8px rgba(128, 216, 255, 0.7),
+                 0 0 16px rgba(128, 216, 255, 0.5),
+                 0 0 24px rgba(128, 216, 255, 0.3);
+  }
+}
+
+/* custom.styl 或 style.css 中 */
+.no-gallery {
+  pointer-events: none;
+}
+
 
