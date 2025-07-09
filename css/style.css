@@ -767,4 +767,50 @@ figure.highlight .code pre {
   pointer-events: none;
 }
 
+#menu {
+  transition: top 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+/* 向下滚动隐藏 */
+#menu.menu-hidden {
+  top: -100px;
+}
+
+/* 向上滚动显示白色背景 + 阴影 */
+#menu.menu-visible {
+  background: rgba(147, 143, 143, 0.455);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* 页面顶部状态：透明无阴影，菜单可点 */
+#menu.menu-top {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* ✅ 页面顶部：中间菜单可见并可点击 */
+#menu.menu-top .menu-center {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.3s ease;
+}
+
+/* ✅ 页面顶部：左侧标题可见 */
+#menu.menu-top .menu-left {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+/* 通用：中间菜单布局 */
+.menu-center {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
 
