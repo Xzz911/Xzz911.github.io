@@ -139,6 +139,11 @@
         </a>
       
     </div>
+
+    <!-- 右侧搜索图标按钮 -->
+    <div class="menu-right">
+      <i id="search-button" class="fa fa-search" style="font-size: 18px; cursor: pointer;"></i>
+    </div>
   </div>
 
   <!-- 移动端菜单 -->
@@ -239,7 +244,7 @@
         
         
         <span>
-            <a href="/categories/CTF/" style="background: #03a9f4">
+            <a href="/categories/CTF/" style="background: #ff7d73">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
@@ -312,7 +317,7 @@
                     
                     <span class="tag">
                         
-                        <a href="/tags/%E5%A5%8B%E8%BF%9B/" style="color: #ff7d73">
+                        <a href="/tags/%E5%A5%8B%E8%BF%9B/" style="color: #00a596">
                             奋进
                         </a>
                     </span>
@@ -516,8 +521,14 @@
             style="width: 80px; height: 80px; margin-top: 50px; pointer-events: none;"
         />
         </div>
+    </div>
 
-
+    <!-- ✅ 搜索弹窗 -->
+    <div id="search-mask" class="search-mask">
+        <div class="search-box">
+        <input type="text" id="search-input" placeholder="输入关键词进行搜索..." />
+        <ul id="search-result"></ul>
+        </div>
     </div>
 
     <script src="/js/main.js"></script>
@@ -609,9 +620,55 @@
     })();
     </script>
 
+    <!-- ✅ 搜索逻辑脚本 -->
+    <script>
+        window.addEventListener('load', () => {
+        let searchData = []
+        fetch('/search.xml')
+            .then(res => res.text())
+            .then(xmlStr => {
+            const parser = new DOMParser()
+            const xml = parser.parseFromString(xmlStr, 'text/xml')
+            const entries = xml.querySelectorAll('entry')
+            searchData = Array.from(entries).map(entry => ({
+                title: entry.querySelector('title').textContent,
+                content: entry.querySelector('content').textContent,
+                url: entry.querySelector('url').textContent
+            }))
+            })
 
+        const $searchMask = document.getElementById('search-mask')
+        const $searchInput = document.getElementById('search-input')
+        const $searchResult = document.getElementById('search-result')
+        const $searchBtn = document.getElementById('search-button')
 
+        if ($searchBtn) {
+            $searchBtn.addEventListener('click', () => {
+            $searchMask.style.display = 'flex'
+            $searchInput.focus()
+            })
+        }
 
+        $searchMask.addEventListener('click', (e) => {
+            if (e.target.id === 'search-mask') {
+            $searchMask.style.display = 'none'
+            $searchInput.value = ''
+            $searchResult.innerHTML = ''
+            }
+        })
+
+        $searchInput.addEventListener('input', () => {
+            const keyword = $searchInput.value.toLowerCase()
+            const result = searchData.filter(item =>
+            item.title.toLowerCase().includes(keyword) ||
+            item.content.toLowerCase().includes(keyword)
+            )
+            $searchResult.innerHTML = result.map(item => `
+            <li><a href="${item.url}">${item.title}</a></li>
+            `).join('')
+        })
+        })
+    </script>
 
 
 
