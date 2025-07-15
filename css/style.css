@@ -894,24 +894,3 @@ figure.highlight .code pre {
 }
 
 
-/* 高亮关键词 */
-mark {
-  background-color: #ffeb3b;
-  color: #000;
-  padding: 0 2px;
-  border-radius: 2px;
-}
-
-/* 标题样式 */
-.search-title {
-  font-weight: bold;
-  font-size: 16px;
-  margin-bottom: 2px;
-}
-
-/* 摘要内容样式 */
-.search-snippet {
-  font-size: 14px;
-  color: #666;
-  line-height: 1.4;
-}

@@ -1,96 +1,77 @@
 window.addEventListener('load', () => {
-  let searchData = []
-
-  // 加载 search.xml 数据
-  fetch('/search.xml')
-    .then(res => res.text())
-    .then(xmlStr => {
-      const parser = new DOMParser()
-      const xml = parser.parseFromString(xmlStr, 'text/xml')
-      const entries = xml.querySelectorAll('entry')
-      searchData = Array.from(entries).map(entry => ({
-        title: entry.querySelector('title').textContent,
-        content: entry.querySelector('content').textContent.replace(/<[^>]+>/g, ""), // 清除 HTML 标签
-        url: entry.querySelector('url').textContent
-      }))
-    })
-
-  const $searchMask = document.getElementById('search-mask')
-  const $searchInput = document.getElementById('search-input')
-  const $searchResult = document.getElementById('search-result')
-  const $searchBtn = document.getElementById('search-button')
-
-  if ($searchBtn) {
-    $searchBtn.addEventListener('click', () => {
+    let searchData = []
+  
+    // 加载 search.xml 数据
+    fetch('/search.xml')
+      .then(res => res.text())
+      .then(xmlStr => {
+        const parser = new DOMParser()
+        const xml = parser.parseFromString(xmlStr, 'text/xml')
+        const entries = xml.querySelectorAll('entry')
+        searchData = Array.from(entries).map(entry => ({
+          title: entry.querySelector('title').textContent,
+          content: entry.querySelector('content').textContent,
+          url: entry.querySelector('url').textContent
+        }))
+      })
+  
+    // 获取 DOM 元素
+    const $searchMask = document.getElementById('search-mask')
+    const $searchInput = document.getElementById('search-input')
+    const $searchResult = document.getElementById('search-result')
+  
+    // 点击搜索按钮显示遮罩
+    document.getElementById('search-button').addEventListener('click', () => {
       $searchMask.style.display = 'flex'
       $searchInput.focus()
     })
-  }
-
-  $searchMask.addEventListener('click', (e) => {
-    if (e.target.id === 'search-mask') {
-      $searchMask.style.display = 'none'
-      $searchInput.value = ''
-      $searchResult.innerHTML = ''
-    }
-  })
-
-  // 关键词高亮函数
-  function highlight(text, keywords) {
-    keywords.forEach(kw => {
-      const reg = new RegExp(`(${kw})`, 'gi')
-      text = text.replace(reg, '<mark>$1</mark>')
-    })
-    return text
-  }
-
-  // 搜索输入事件
-  $searchInput.addEventListener('input', () => {
-    const rawInput = $searchInput.value.trim().toLowerCase()
-    if (!rawInput) {
-      $searchResult.innerHTML = ''
-      return
-    }
-
-    const keywords = rawInput.split(/\s+/)
-
-    const result = searchData.filter(item => {
-      const title = item.title.toLowerCase()
-      const content = item.content.toLowerCase()
-      return keywords.some(kw => title.includes(kw) || content.includes(kw))
-    })
-
-    // 渲染搜索结果
-    $searchResult.innerHTML = result.map(item => {
-      // 提取匹配关键词附近的文本作为摘要
-      let snippet = ''
-      const lowerContent = item.content.toLowerCase()
-      let pos = -1
-
-      for (let kw of keywords) {
-        pos = lowerContent.indexOf(kw)
-        if (pos !== -1) break
+  
+    // 点击遮罩关闭搜索框
+    $searchMask.addEventListener('click', (e) => {
+      if (e.target.id === 'search-mask') {
+        $searchMask.style.display = 'none'
+        $searchInput.value = ''
+        $searchResult.innerHTML = ''
       }
-
-      if (pos !== -1) {
-        const start = Math.max(0, pos - 30)
-        const end = Math.min(item.content.length, pos + 70)
-        snippet = item.content.substring(start, end)
-      } else {
-        snippet = item.content.substring(0, 100)
+    })
+  
+    // 高亮多个关键词
+    function highlightKeywords(text, keywords) {
+      keywords.forEach(kw => {
+        const reg = new RegExp(`(${kw})`, 'gi')
+        text = text.replace(reg, '<mark>$1</mark>')
+      })
+      return text
+    }
+  
+    // 搜索逻辑（任意关键词命中标题或正文即可）
+    $searchInput.addEventListener('input', () => {
+      const rawInput = $searchInput.value.trim().toLowerCase()
+      if (!rawInput) {
+        $searchResult.innerHTML = ''
+        return
       }
-
-      const highlightedTitle = highlight(item.title, keywords)
-      const highlightedSnippet = highlight(snippet, keywords)
-
-      return `
-        <li>
-          <a href="${item.url}">
-            <div class="search-title">${highlightedTitle}</div>
-            <div class="search-snippet">${highlightedSnippet}...</div>
-          </a>
-        </li>
-      `
-    }).join('')
+  
+      const keywords = rawInput.split(/\s+/).filter(kw => kw.length > 0)
+  
+      const result = searchData.filter(item => {
+        const title = item.title.toLowerCase()
+        const content = item.content.toLowerCase()
+        return keywords.some(kw => title.includes(kw) || content.includes(kw))
+      })
+  
+      $searchResult.innerHTML = result.map(item => {
+        const highlightedTitle = highlightKeywords(item.title, keywords)
+        const snippet = highlightKeywords(item.content.substring(0, 100), keywords)
+        return `
+          <li>
+            <a href="${item.url}">
+              <strong>${highlightedTitle}</strong><br />
+              <small>${snippet}...</small>
+            </a>
+          </li>
+        `
+      }).join('')
+    })
   })
-})
+  
