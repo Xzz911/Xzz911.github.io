@@ -239,7 +239,7 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div id="archives">
     <!-- 分类统计图 -->
-    <div id="category-chart" style="width: 100%; max-width: 600px; height: 400px; margin: 0 auto 40px;"></div>
+    <div id="category-chart" style="width: 100%; max-width: 800px; height: 420px; margin: 0 auto 40px;"></div>
   
     <!-- 分类标签展示 -->
     
@@ -248,7 +248,7 @@
       
       
       <span>
-          <a href="/categories/CTF/" style="background: #ff7d73">
+          <a href="/categories/CTF/" style="background: #ffa2c4">
               <span class="icon">
                   <i class="fa-solid fa-bookmark fa-fw"></i>
               </span>
@@ -272,7 +272,7 @@
       
       
       <span>
-          <a href="/categories/%E6%8A%80%E5%B7%A7/" style="background: #ffa2c4">
+          <a href="/categories/%E6%8A%80%E5%B7%A7/" style="background: #00bcd4">
               <span class="icon">
                   <i class="fa-solid fa-bookmark fa-fw"></i>
               </span>
@@ -283,7 +283,7 @@
       
       
       <span>
-          <a href="/categories/%E6%8A%80%E5%B7%A7/%E6%96%B9%E6%B3%95/" style="background: #00bcd4">
+          <a href="/categories/%E6%8A%80%E5%B7%A7/%E6%96%B9%E6%B3%95/" style="background: #ffa2c4">
               <span class="icon">
                   <i class="fa-solid fa-bookmark fa-fw"></i>
               </span>
@@ -336,63 +336,91 @@
     
   </div>
   
-  <!-- ECharts 饼图脚本 -->
+  <!-- 引入 ECharts -->
   <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const chartDom = document.getElementById('category-chart');
       const myChart = echarts.init(chartDom);
+  
+      const data = [
+        
+          {
+            name: "CTF",
+            value: 16
+          },
+        
+          {
+            name: "年度总结",
+            value: 1
+          },
+        
+          {
+            name: "技巧",
+            value: 5
+          },
+        
+          {
+            name: "方法",
+            value: 5
+          },
+        
+      ];
+  
       const option = {
         title: {
-          text: '文章分类统计图',
-          left: 'center'
+          text: '文章分类统计',
+          left: 'center',
+          top: 10,
+          textStyle: {
+            fontSize: 20,
+            fontWeight: 'bold'
+          }
         },
         tooltip: {
-          trigger: 'item'
+          trigger: 'item',
+          formatter: '{b} : {c} 篇 ({d}%)'
         },
         legend: {
-          bottom: '0%',
-          left: 'center'
+          orient: 'vertical',
+          right: 20,
+          top: 'middle',
+          textStyle: {
+            fontSize: 14
+          }
         },
         series: [
           {
             name: '分类',
             type: 'pie',
-            radius: ['40%', '70%'],
-            avoidLabelOverlap: false,
+            radius: ['45%', '65%'],
+            center: ['40%', '50%'],
+            avoidLabelOverlap: true,
             label: {
               show: true,
-              formatter: '{b}: {c} ({d}%)'
+              position: 'outside',
+              formatter: '{b}\n{d}%',
+              fontSize: 13
             },
             labelLine: {
-              show: true
+              length: 20,
+              length2: 10,
+              smooth: true
             },
-            data: [
-              
-                {
-                  name: "CTF",
-                  value: 16
-                },
-              
-                {
-                  name: "年度总结",
-                  value: 1
-                },
-              
-                {
-                  name: "技巧",
-                  value: 5
-                },
-              
-                {
-                  name: "方法",
-                  value: 5
-                },
-              
-            ]
+            itemStyle: {
+              borderRadius: 6,
+              borderColor: '#fff',
+              borderWidth: 2
+            },
+            emphasis: {
+              scale: true,
+              scaleSize: 10
+            },
+            data: data
           }
         ]
       };
+  
       myChart.setOption(option);
     });
   </script>
