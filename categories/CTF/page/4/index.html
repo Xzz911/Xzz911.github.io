@@ -238,780 +238,847 @@
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div id="archives">
+    <!-- 分类统计图 -->
+    <div id="category-chart" style="width: 100%; max-width: 600px; height: 400px; margin: 0 auto 40px;"></div>
+  
+    <!-- 分类标签展示 -->
     
     <div class="categories-tags">
-        
-        
-        
-        <span>
-            <a href="/categories/CTF/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                CTF
+      
+      
+      
+      <span>
+          <a href="/categories/CTF/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
+              <span class="icon">
+                  <i class="fa-solid fa-bookmark fa-fw"></i>
+              </span>
+              CTF
+          </a>
+      </span>
+      
+      
+      
+      
+      
+      <span>
+          <a href="/categories/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" style="background: #03a9f4">
+              <span class="icon">
+                  <i class="fa-solid fa-bookmark fa-fw"></i>
+              </span>
+              年度总结
+          </a>
+      </span>
+      
+      
+      
+      <span>
+          <a href="/categories/%E6%8A%80%E5%B7%A7/" style="background: #ffa2c4">
+              <span class="icon">
+                  <i class="fa-solid fa-bookmark fa-fw"></i>
+              </span>
+              技巧
+          </a>
+      </span>
+      
+      
+      
+      <span>
+          <a href="/categories/%E6%8A%80%E5%B7%A7/%E6%96%B9%E6%B3%95/" style="background: #ff7d73">
+              <span class="icon">
+                  <i class="fa-solid fa-bookmark fa-fw"></i>
+              </span>
+              方法
+          </a>
+      </span>
+      
+      
+    </div>
+  
+    <!-- 分类对应的文章时间轴 -->
+    
+    <div class="timeline">
+      <div class="timeline-tail"></div>
+      <div class="timeline-content">
+        <div class="item-time">2023/11/4</div>
+        <a href="/SHCTF%202023%20%5BWEEK%203%5D%20PWN/">
+          <h3>SHCTF 2023 [WEEK 3] PWN</h3>
+        </a>
+        <div class="info">
+          
+          <span class="category">
+            <a href="/categories/CTF/">
+              <span class="icon">
+                <i class="fa-solid fa-bookmark fa-fw"></i>
+              </span>
+              CTF
             </a>
-        </span>
-        
-        
-        
-        
-        
-        <span>
-            <a href="/categories/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" style="background: #ff7d73">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                年度总结
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/%E6%8A%80%E5%B7%A7/" style="background: #00bcd4">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                技巧
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/%E6%8A%80%E5%B7%A7/%E6%96%B9%E6%B3%95/" style="background: #ff7d73">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                方法
-            </a>
-        </span>
-        
-        
+          </span>
+          
+          
+          <span class="tags">
+            <span class="icon">
+              <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+              
+              <a href="/tags/PWN/" style="color: #00a596">
+                PWN
+              </a>
+            </span>
+            
+            <span class="tag">
+              
+              <a href="/tags/SHCTF/" style="color: #ff7d73">
+                SHCTF
+              </a>
+            </span>
+            
+          </span>
+          
+        </div>
+      </div>
     </div>
     
     <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2023/11/4</div>
-            <a href="/SHCTF%202023%20%5BWEEK%203%5D%20PWN/">
-                <h3>SHCTF 2023 [WEEK 3] PWN</h3>
+      <div class="timeline-tail"></div>
+      <div class="timeline-content">
+        <div class="item-time">2023/11/1</div>
+        <a href="/SHCTF%202023%20%5BWEEK%202%5D%20PWN/">
+          <h3>SHCTF 2023 [WEEK 2] PWN</h3>
+        </a>
+        <div class="info">
+          
+          <span class="category">
+            <a href="/categories/CTF/">
+              <span class="icon">
+                <i class="fa-solid fa-bookmark fa-fw"></i>
+              </span>
+              CTF
             </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/CTF/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        CTF
-                    </a>
-                </span>
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/PWN/" style="color: #00a596">
-                            PWN
-                        </a>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/SHCTF/" style="color: #ffa2c4">
-                            SHCTF
-                        </a>
-                    </span>
-                    
-                </span>
-                
-            </div>
+          </span>
+          
+          
+          <span class="tags">
+            <span class="icon">
+              <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+              
+              <a href="/tags/PWN/" style="color: #00a596">
+                PWN
+              </a>
+            </span>
+            
+            <span class="tag">
+              
+              <a href="/tags/SHCTF/" style="color: #ffa2c4">
+                SHCTF
+              </a>
+            </span>
+            
+          </span>
+          
         </div>
+      </div>
     </div>
     
     <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2023/11/1</div>
-            <a href="/SHCTF%202023%20%5BWEEK%202%5D%20PWN/">
-                <h3>SHCTF 2023 [WEEK 2] PWN</h3>
+      <div class="timeline-tail"></div>
+      <div class="timeline-content">
+        <div class="item-time">2023/10/31</div>
+        <a href="/SHCTF%202023%20%5BWEEK%201%5D%20PWN/">
+          <h3>SHCTF 2023 [WEEK 1] PWN</h3>
+        </a>
+        <div class="info">
+          
+          <span class="category">
+            <a href="/categories/CTF/">
+              <span class="icon">
+                <i class="fa-solid fa-bookmark fa-fw"></i>
+              </span>
+              CTF
             </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/CTF/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        CTF
-                    </a>
-                </span>
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/PWN/" style="color: #00a596">
-                            PWN
-                        </a>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/SHCTF/" style="color: #ffa2c4">
-                            SHCTF
-                        </a>
-                    </span>
-                    
-                </span>
-                
-            </div>
+          </span>
+          
+          
+          <span class="tags">
+            <span class="icon">
+              <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+              
+              <a href="/tags/PWN/" style="color: #00a596">
+                PWN
+              </a>
+            </span>
+            
+            <span class="tag">
+              
+              <a href="/tags/SHCTF/" style="color: #03a9f4">
+                SHCTF
+              </a>
+            </span>
+            
+          </span>
+          
         </div>
+      </div>
     </div>
     
     <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2023/10/31</div>
-            <a href="/SHCTF%202023%20%5BWEEK%201%5D%20PWN/">
-                <h3>SHCTF 2023 [WEEK 1] PWN</h3>
+      <div class="timeline-tail"></div>
+      <div class="timeline-content">
+        <div class="item-time">2023/10/28</div>
+        <a href="/NewStarCTF%202023%20%5BWEEK%203%5D%20PWN/">
+          <h3>NewStarCTF 2023 [WEEK 3] PWN</h3>
+        </a>
+        <div class="info">
+          
+          <span class="category">
+            <a href="/categories/CTF/">
+              <span class="icon">
+                <i class="fa-solid fa-bookmark fa-fw"></i>
+              </span>
+              CTF
             </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/CTF/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        CTF
-                    </a>
-                </span>
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/PWN/" style="color: #ffa2c4">
-                            PWN
-                        </a>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/SHCTF/" style="color: #00a596">
-                            SHCTF
-                        </a>
-                    </span>
-                    
-                </span>
-                
-            </div>
+          </span>
+          
+          
+          <span class="tags">
+            <span class="icon">
+              <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+              
+              <a href="/tags/PWN/" style="color: #03a9f4">
+                PWN
+              </a>
+            </span>
+            
+            <span class="tag">
+              
+              <a href="/tags/NewStarCTF/" style="color: #00a596">
+                NewStarCTF
+              </a>
+            </span>
+            
+          </span>
+          
         </div>
+      </div>
     </div>
     
     <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2023/10/28</div>
-            <a href="/NewStarCTF%202023%20%5BWEEK%203%5D%20PWN/">
-                <h3>NewStarCTF 2023 [WEEK 3] PWN</h3>
+      <div class="timeline-tail"></div>
+      <div class="timeline-content">
+        <div class="item-time">2023/10/26</div>
+        <a href="/FSCTF%202023%20PWN/">
+          <h3>FSCTF 2023 PWN</h3>
+        </a>
+        <div class="info">
+          
+          <span class="category">
+            <a href="/categories/CTF/">
+              <span class="icon">
+                <i class="fa-solid fa-bookmark fa-fw"></i>
+              </span>
+              CTF
             </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/CTF/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        CTF
-                    </a>
-                </span>
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/PWN/" style="color: #ff7d73">
-                            PWN
-                        </a>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/NewStarCTF/" style="color: #ffa2c4">
-                            NewStarCTF
-                        </a>
-                    </span>
-                    
-                </span>
-                
-            </div>
+          </span>
+          
+          
+          <span class="tags">
+            <span class="icon">
+              <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+              
+              <a href="/tags/PWN/" style="color: #ff7d73">
+                PWN
+              </a>
+            </span>
+            
+            <span class="tag">
+              
+              <a href="/tags/FSCTF/" style="color: #00a596">
+                FSCTF
+              </a>
+            </span>
+            
+          </span>
+          
         </div>
+      </div>
     </div>
     
     <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2023/10/26</div>
-            <a href="/FSCTF%202023%20PWN/">
-                <h3>FSCTF 2023 PWN</h3>
+      <div class="timeline-tail"></div>
+      <div class="timeline-content">
+        <div class="item-time">2023/10/20</div>
+        <a href="/2023%E5%B9%B4SWPU%20NSS%20%E7%A7%8B%E5%AD%A3%E6%8B%9B%E6%96%B0%E8%B5%9B%20PWN/">
+          <h3>2023年SWPU NSS 秋季招新赛 PWN</h3>
+        </a>
+        <div class="info">
+          
+          <span class="category">
+            <a href="/categories/CTF/">
+              <span class="icon">
+                <i class="fa-solid fa-bookmark fa-fw"></i>
+              </span>
+              CTF
             </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/CTF/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        CTF
-                    </a>
-                </span>
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/PWN/" style="color: #ffa2c4">
-                            PWN
-                        </a>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/FSCTF/" style="color: #03a9f4">
-                            FSCTF
-                        </a>
-                    </span>
-                    
-                </span>
-                
-            </div>
+          </span>
+          
+          
+          <span class="tags">
+            <span class="icon">
+              <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+              
+              <a href="/tags/PWN/" style="color: #03a9f4">
+                PWN
+              </a>
+            </span>
+            
+            <span class="tag">
+              
+              <a href="/tags/SWPU-NSS/" style="color: #00a596">
+                SWPU NSS
+              </a>
+            </span>
+            
+          </span>
+          
         </div>
+      </div>
     </div>
     
     <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2023/10/20</div>
-            <a href="/2023%E5%B9%B4SWPU%20NSS%20%E7%A7%8B%E5%AD%A3%E6%8B%9B%E6%96%B0%E8%B5%9B%20PWN/">
-                <h3>2023年SWPU NSS 秋季招新赛 PWN</h3>
+      <div class="timeline-tail"></div>
+      <div class="timeline-content">
+        <div class="item-time">2023/10/15</div>
+        <a href="/NewStarCTF%202023%20%5BWEEK%202%5D%20PWN/">
+          <h3>NewStarCTF 2023 [WEEK 2] PWN</h3>
+        </a>
+        <div class="info">
+          
+          <span class="category">
+            <a href="/categories/CTF/">
+              <span class="icon">
+                <i class="fa-solid fa-bookmark fa-fw"></i>
+              </span>
+              CTF
             </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/CTF/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        CTF
-                    </a>
-                </span>
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/PWN/" style="color: #03a9f4">
-                            PWN
-                        </a>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/SWPU-NSS/" style="color: #ffa2c4">
-                            SWPU NSS
-                        </a>
-                    </span>
-                    
-                </span>
-                
-            </div>
+          </span>
+          
+          
+          <span class="tags">
+            <span class="icon">
+              <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+              
+              <a href="/tags/PWN/" style="color: #00bcd4">
+                PWN
+              </a>
+            </span>
+            
+            <span class="tag">
+              
+              <a href="/tags/NewStarCTF/" style="color: #03a9f4">
+                NewStarCTF
+              </a>
+            </span>
+            
+          </span>
+          
         </div>
+      </div>
     </div>
     
     <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2023/10/15</div>
-            <a href="/NewStarCTF%202023%20%5BWEEK%202%5D%20PWN/">
-                <h3>NewStarCTF 2023 [WEEK 2] PWN</h3>
+      <div class="timeline-tail"></div>
+      <div class="timeline-content">
+        <div class="item-time">2023/10/14</div>
+        <a href="/MoeCTF%202023%20PWN/">
+          <h3>MoeCTF 2023 PWN</h3>
+        </a>
+        <div class="info">
+          
+          <span class="category">
+            <a href="/categories/CTF/">
+              <span class="icon">
+                <i class="fa-solid fa-bookmark fa-fw"></i>
+              </span>
+              CTF
             </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/CTF/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        CTF
-                    </a>
-                </span>
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/PWN/" style="color: #03a9f4">
-                            PWN
-                        </a>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/NewStarCTF/" style="color: #ff7d73">
-                            NewStarCTF
-                        </a>
-                    </span>
-                    
-                </span>
-                
-            </div>
+          </span>
+          
+          
+          <span class="tags">
+            <span class="icon">
+              <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+              
+              <a href="/tags/PWN/" style="color: #ffa2c4">
+                PWN
+              </a>
+            </span>
+            
+            <span class="tag">
+              
+              <a href="/tags/MoeCTF/" style="color: #00a596">
+                MoeCTF
+              </a>
+            </span>
+            
+          </span>
+          
         </div>
+      </div>
     </div>
     
     <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2023/10/14</div>
-            <a href="/MoeCTF%202023%20PWN/">
-                <h3>MoeCTF 2023 PWN</h3>
+      <div class="timeline-tail"></div>
+      <div class="timeline-content">
+        <div class="item-time">2023/10/1</div>
+        <a href="/NewStarCTF%202023%20%5BWEEK%201%5D%20PWN/">
+          <h3>NewStarCTF 2023 [WEEK 1] PWN</h3>
+        </a>
+        <div class="info">
+          
+          <span class="category">
+            <a href="/categories/CTF/">
+              <span class="icon">
+                <i class="fa-solid fa-bookmark fa-fw"></i>
+              </span>
+              CTF
             </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/CTF/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        CTF
-                    </a>
-                </span>
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/PWN/" style="color: #03a9f4">
-                            PWN
-                        </a>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/MoeCTF/" style="color: #00bcd4">
-                            MoeCTF
-                        </a>
-                    </span>
-                    
-                </span>
-                
-            </div>
+          </span>
+          
+          
+          <span class="tags">
+            <span class="icon">
+              <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+              
+              <a href="/tags/PWN/" style="color: #ff7d73">
+                PWN
+              </a>
+            </span>
+            
+            <span class="tag">
+              
+              <a href="/tags/NewStarCTF/" style="color: #03a9f4">
+                NewStarCTF
+              </a>
+            </span>
+            
+          </span>
+          
         </div>
+      </div>
     </div>
     
     <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2023/10/1</div>
-            <a href="/NewStarCTF%202023%20%5BWEEK%201%5D%20PWN/">
-                <h3>NewStarCTF 2023 [WEEK 1] PWN</h3>
+      <div class="timeline-tail"></div>
+      <div class="timeline-content">
+        <div class="item-time">2023/9/22</div>
+        <a href="/%5BHNCTF%202022%20WEEK4%5D%20ezcanary%20%E5%A4%8D%E7%8E%B0/">
+          <h3>[HNCTF 2022 WEEK4] ezcanary 复现</h3>
+        </a>
+        <div class="info">
+          
+          <span class="category">
+            <a href="/categories/CTF/">
+              <span class="icon">
+                <i class="fa-solid fa-bookmark fa-fw"></i>
+              </span>
+              CTF
             </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/CTF/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        CTF
-                    </a>
-                </span>
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/PWN/" style="color: #ffa2c4">
-                            PWN
-                        </a>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/NewStarCTF/" style="color: #03a9f4">
-                            NewStarCTF
-                        </a>
-                    </span>
-                    
-                </span>
-                
-            </div>
+          </span>
+          
+          
+          <span class="tags">
+            <span class="icon">
+              <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+              
+              <a href="/tags/PWN/" style="color: #03a9f4">
+                PWN
+              </a>
+            </span>
+            
+            <span class="tag">
+              
+              <a href="/tags/HNCTF/" style="color: #00a596">
+                HNCTF
+              </a>
+            </span>
+            
+          </span>
+          
         </div>
+      </div>
     </div>
     
     <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2023/9/22</div>
-            <a href="/%5BHNCTF%202022%20WEEK4%5D%20ezcanary%20%E5%A4%8D%E7%8E%B0/">
-                <h3>[HNCTF 2022 WEEK4] ezcanary 复现</h3>
+      <div class="timeline-tail"></div>
+      <div class="timeline-content">
+        <div class="item-time">2023/9/7</div>
+        <a href="/%5BHNCTF%202022%20WEEK3%5D%20smash%20%E5%A4%8D%E7%8E%B0/">
+          <h3>[HNCTF 2022 WEEK3] smash 复现</h3>
+        </a>
+        <div class="info">
+          
+          <span class="category">
+            <a href="/categories/CTF/">
+              <span class="icon">
+                <i class="fa-solid fa-bookmark fa-fw"></i>
+              </span>
+              CTF
             </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/CTF/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        CTF
-                    </a>
-                </span>
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/PWN/" style="color: #ff7d73">
-                            PWN
-                        </a>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/HNCTF/" style="color: #03a9f4">
-                            HNCTF
-                        </a>
-                    </span>
-                    
-                </span>
-                
-            </div>
+          </span>
+          
+          
+          <span class="tags">
+            <span class="icon">
+              <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+              
+              <a href="/tags/PWN/" style="color: #ffa2c4">
+                PWN
+              </a>
+            </span>
+            
+            <span class="tag">
+              
+              <a href="/tags/HNCTF/" style="color: #ff7d73">
+                HNCTF
+              </a>
+            </span>
+            
+          </span>
+          
         </div>
+      </div>
     </div>
     
     <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2023/9/7</div>
-            <a href="/%5BHNCTF%202022%20WEEK3%5D%20smash%20%E5%A4%8D%E7%8E%B0/">
-                <h3>[HNCTF 2022 WEEK3] smash 复现</h3>
+      <div class="timeline-tail"></div>
+      <div class="timeline-content">
+        <div class="item-time">2023/9/6</div>
+        <a href="/%5BSDCTF%202022%5DprintFAILED%20%E5%A4%8D%E7%8E%B0/">
+          <h3>[SDCTF 2022]printFAILED 复现</h3>
+        </a>
+        <div class="info">
+          
+          <span class="category">
+            <a href="/categories/CTF/">
+              <span class="icon">
+                <i class="fa-solid fa-bookmark fa-fw"></i>
+              </span>
+              CTF
             </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/CTF/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        CTF
-                    </a>
-                </span>
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/PWN/" style="color: #03a9f4">
-                            PWN
-                        </a>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/HNCTF/" style="color: #00a596">
-                            HNCTF
-                        </a>
-                    </span>
-                    
-                </span>
-                
-            </div>
+          </span>
+          
+          
+          <span class="tags">
+            <span class="icon">
+              <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+              
+              <a href="/tags/PWN/" style="color: #00a596">
+                PWN
+              </a>
+            </span>
+            
+            <span class="tag">
+              
+              <a href="/tags/SDCTF/" style="color: #03a9f4">
+                SDCTF
+              </a>
+            </span>
+            
+          </span>
+          
         </div>
+      </div>
     </div>
     
     <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2023/9/6</div>
-            <a href="/%5BSDCTF%202022%5DprintFAILED%20%E5%A4%8D%E7%8E%B0/">
-                <h3>[SDCTF 2022]printFAILED 复现</h3>
+      <div class="timeline-tail"></div>
+      <div class="timeline-content">
+        <div class="item-time">2023/9/5</div>
+        <a href="/%5BCISCN%202019%E5%8D%8E%E5%8C%97%5D%20PWN5%EF%BC%88ciscn_2019_n_5%EF%BC%89%20%E5%A4%8D%E7%8E%B0/">
+          <h3>[CISCN 2019华北] PWN5（ciscn_2019_n_5） 复现</h3>
+        </a>
+        <div class="info">
+          
+          <span class="category">
+            <a href="/categories/CTF/">
+              <span class="icon">
+                <i class="fa-solid fa-bookmark fa-fw"></i>
+              </span>
+              CTF
             </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/CTF/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        CTF
-                    </a>
-                </span>
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/PWN/" style="color: #ff7d73">
-                            PWN
-                        </a>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/SDCTF/" style="color: #00a596">
-                            SDCTF
-                        </a>
-                    </span>
-                    
-                </span>
-                
-            </div>
+          </span>
+          
+          
+          <span class="tags">
+            <span class="icon">
+              <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+              
+              <a href="/tags/PWN/" style="color: #03a9f4">
+                PWN
+              </a>
+            </span>
+            
+            <span class="tag">
+              
+              <a href="/tags/CISCN/" style="color: #ffa2c4">
+                CISCN
+              </a>
+            </span>
+            
+          </span>
+          
         </div>
+      </div>
     </div>
     
     <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2023/9/5</div>
-            <a href="/%5BCISCN%202019%E5%8D%8E%E5%8C%97%5D%20PWN5%EF%BC%88ciscn_2019_n_5%EF%BC%89%20%E5%A4%8D%E7%8E%B0/">
-                <h3>[CISCN 2019华北] PWN5（ciscn_2019_n_5） 复现</h3>
+      <div class="timeline-tail"></div>
+      <div class="timeline-content">
+        <div class="item-time">2023/9/4</div>
+        <a href="/%5BHGAME%202023%20week1%5D%20PWN%20%E5%A4%8D%E7%8E%B0/">
+          <h3>[HGAME 2023 week1] PWN 复现</h3>
+        </a>
+        <div class="info">
+          
+          <span class="category">
+            <a href="/categories/CTF/">
+              <span class="icon">
+                <i class="fa-solid fa-bookmark fa-fw"></i>
+              </span>
+              CTF
             </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/CTF/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        CTF
-                    </a>
-                </span>
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/PWN/" style="color: #00bcd4">
-                            PWN
-                        </a>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/CISCN/" style="color: #00a596">
-                            CISCN
-                        </a>
-                    </span>
-                    
-                </span>
-                
-            </div>
+          </span>
+          
+          
+          <span class="tags">
+            <span class="icon">
+              <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+              
+              <a href="/tags/PWN/" style="color: #00a596">
+                PWN
+              </a>
+            </span>
+            
+            <span class="tag">
+              
+              <a href="/tags/HGAME/" style="color: #03a9f4">
+                HGAME
+              </a>
+            </span>
+            
+          </span>
+          
         </div>
+      </div>
     </div>
     
     <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2023/9/4</div>
-            <a href="/%5BHGAME%202023%20week1%5D%20PWN%20%E5%A4%8D%E7%8E%B0/">
-                <h3>[HGAME 2023 week1] PWN 复现</h3>
+      <div class="timeline-tail"></div>
+      <div class="timeline-content">
+        <div class="item-time">2023/8/18</div>
+        <a href="/%5BHNCTF%202022%20Week1%5D%20PWN%20%E5%A4%8D%E7%8E%B0/">
+          <h3>[HNCTF 2022 Week1] PWN 复现</h3>
+        </a>
+        <div class="info">
+          
+          <span class="category">
+            <a href="/categories/CTF/">
+              <span class="icon">
+                <i class="fa-solid fa-bookmark fa-fw"></i>
+              </span>
+              CTF
             </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/CTF/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        CTF
-                    </a>
-                </span>
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/PWN/" style="color: #03a9f4">
-                            PWN
-                        </a>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/HGAME/" style="color: #00bcd4">
-                            HGAME
-                        </a>
-                    </span>
-                    
-                </span>
-                
-            </div>
+          </span>
+          
+          
+          <span class="tags">
+            <span class="icon">
+              <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+              
+              <a href="/tags/PWN/" style="color: #00a596">
+                PWN
+              </a>
+            </span>
+            
+            <span class="tag">
+              
+              <a href="/tags/HNCTF/" style="color: #03a9f4">
+                HNCTF
+              </a>
+            </span>
+            
+          </span>
+          
         </div>
+      </div>
     </div>
     
     <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2023/8/18</div>
-            <a href="/%5BHNCTF%202022%20Week1%5D%20PWN%20%E5%A4%8D%E7%8E%B0/">
-                <h3>[HNCTF 2022 Week1] PWN 复现</h3>
+      <div class="timeline-tail"></div>
+      <div class="timeline-content">
+        <div class="item-time">2023/8/16</div>
+        <a href="/%5BMoeCTF%202022%5D%20PWN%E5%A4%8D%E7%8E%B0/">
+          <h3>[MoeCTF 2022] PWN复现</h3>
+        </a>
+        <div class="info">
+          
+          <span class="category">
+            <a href="/categories/CTF/">
+              <span class="icon">
+                <i class="fa-solid fa-bookmark fa-fw"></i>
+              </span>
+              CTF
             </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/CTF/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        CTF
-                    </a>
-                </span>
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/PWN/" style="color: #00a596">
-                            PWN
-                        </a>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/HNCTF/" style="color: #ff7d73">
-                            HNCTF
-                        </a>
-                    </span>
-                    
-                </span>
-                
-            </div>
+          </span>
+          
+          
+          <span class="tags">
+            <span class="icon">
+              <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+              
+              <a href="/tags/PWN/" style="color: #00a596">
+                PWN
+              </a>
+            </span>
+            
+            <span class="tag">
+              
+              <a href="/tags/MoeCTF/" style="color: #03a9f4">
+                MoeCTF
+              </a>
+            </span>
+            
+          </span>
+          
         </div>
+      </div>
     </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2023/8/16</div>
-            <a href="/%5BMoeCTF%202022%5D%20PWN%E5%A4%8D%E7%8E%B0/">
-                <h3>[MoeCTF 2022] PWN复现</h3>
-            </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/CTF/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        CTF
-                    </a>
-                </span>
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/PWN/" style="color: #00bcd4">
-                            PWN
-                        </a>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/MoeCTF/" style="color: #03a9f4">
-                            MoeCTF
-                        </a>
-                    </span>
-                    
-                </span>
-                
-            </div>
-        </div>
-    </div>
-    
-</div>
-
+  </div>
+  
+  <!-- ECharts 饼图脚本 -->
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const chartDom = document.getElementById('category-chart');
+      const myChart = echarts.init(chartDom);
+      const option = {
+        title: {
+          text: '文章分类统计图',
+          left: 'center'
+        },
+        tooltip: {
+          trigger: 'item'
+        },
+        legend: {
+          bottom: '0%',
+          left: 'center'
+        },
+        series: [
+          {
+            name: '分类',
+            type: 'pie',
+            radius: ['40%', '70%'],
+            avoidLabelOverlap: false,
+            label: {
+              show: true,
+              formatter: '{b}: {c} ({d}%)'
+            },
+            labelLine: {
+              show: true
+            },
+            data: [
+              
+                {
+                  name: "CTF",
+                  value: 16
+                },
+              
+                {
+                  name: "年度总结",
+                  value: 1
+                },
+              
+                {
+                  name: "技巧",
+                  value: 5
+                },
+              
+                {
+                  name: "方法",
+                  value: 5
+                },
+              
+            ]
+          }
+        ]
+      };
+      myChart.setOption(option);
+    });
+  </script>
+  
             <footer id="footer">
   <div id="footer-wrap">
     <div>
@@ -1111,6 +1178,9 @@
     window.addEventListener('DOMContentLoaded', startTimers);
   </script>
 </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+
 
 <!-- Typed.js -->
 <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
