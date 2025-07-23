@@ -239,7 +239,9 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div id="archives">
     <!-- 分类统计图 -->
-    <div id="category-chart" style="width: 100%; max-width: 800px; height: 420px; margin: 0 auto 40px;"></div>
+    <div class="category-chart-wrapper">
+      <div id="category-chart"></div>
+    </div>    
   
     <!-- 分类标签展示 -->
     
@@ -248,7 +250,7 @@
       
       
       <span>
-          <a href="/categories/CTF/" style="background: #ff7d73">
+          <a href="/categories/CTF/" style="background: #03a9f4">
               <span class="icon">
                   <i class="fa-solid fa-bookmark fa-fw"></i>
               </span>
@@ -272,7 +274,7 @@
       
       
       <span>
-          <a href="/categories/%E6%8A%80%E5%B7%A7/" style="background: #ffa2c4">
+          <a href="/categories/%E6%8A%80%E5%B7%A7/" style="background: #ff7d73">
               <span class="icon">
                   <i class="fa-solid fa-bookmark fa-fw"></i>
               </span>
@@ -283,7 +285,7 @@
       
       
       <span>
-          <a href="/categories/%E6%8A%80%E5%B7%A7/%E6%96%B9%E6%B3%95/" style="background: #ff7d73">
+          <a href="/categories/%E6%8A%80%E5%B7%A7/%E6%96%B9%E6%B3%95/" style="background: #00bcd4">
               <span class="icon">
                   <i class="fa-solid fa-bookmark fa-fw"></i>
               </span>
@@ -369,7 +371,7 @@
   
       const option = {
         title: {
-          text: '文章分类统计',
+          text: '文章分类统计 🎯',
           left: 'center',
           top: 10,
           textStyle: {

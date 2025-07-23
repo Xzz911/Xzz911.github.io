@@ -894,10 +894,28 @@ figure.highlight .code pre {
 }
 
 #category-chart {
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.08);
-  border-radius: 10px;
-  background: #fff;
-  padding: 20px;
-  margin-bottom: 40px;
+  width: 100%;
+  height: 420px;
 }
+
+/* 让分类图表容器脱离限制宽度的祖先元素 */
+.category-chart-wrapper {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100vw - 200px); /* 控制两侧边距 */
+  max-width: unset !important;
+  background: rgba(255, 255, 255, 0.4);
+  padding: 30px;
+  margin: 40px auto;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  z-index: 10;
+}
+
+
+
+
+
 
