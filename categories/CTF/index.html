@@ -238,66 +238,65 @@
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div id="archives">
+  <!-- 分类统计图和标签按钮整体容器 -->
+  <div class="category-chart-wrapper">
     <!-- 分类统计图 -->
-    <div class="category-chart-wrapper">
-      <div id="category-chart"></div>
-    </div>    
-  
-    <!-- 分类标签展示 -->
+    <div id="category-chart"></div>
+
+    <!-- 分类标签按钮 -->
     
     <div class="categories-tags">
       
       
+        
+        <a class="category-pill" href="/categories/CTF/">
+          <span class="dot" style="
+            background-color: #e17055;
+            animation-delay: 1.23s;
+            --main-color: #e17055;
+          "></span>
+          CTF（16）
+        </a>
+        
       
-      <span>
-          <a href="/categories/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" style="background: #03a9f4">
-              <span class="icon">
-                  <i class="fa-solid fa-bookmark fa-fw"></i>
-              </span>
-              年度总结
-          </a>
-      </span>
+        
+        <a class="category-pill" href="/categories/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/">
+          <span class="dot" style="
+            background-color: #ff6b6b;
+            animation-delay: 1.00s;
+            --main-color: #ff6b6b;
+          "></span>
+          年度总结（1）
+        </a>
+        
       
+        
+        <a class="category-pill" href="/categories/%E6%8A%80%E5%B7%A7/">
+          <span class="dot" style="
+            background-color: #6c5ce7;
+            animation-delay: 1.31s;
+            --main-color: #6c5ce7;
+          "></span>
+          技巧（5）
+        </a>
+        
       
-      
-      <span>
-          <a href="/categories/CTF/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
-              <span class="icon">
-                  <i class="fa-solid fa-bookmark fa-fw"></i>
-              </span>
-              CTF
-          </a>
-      </span>
-      
-      
-      
-      
-      
-      <span>
-          <a href="/categories/%E6%8A%80%E5%B7%A7/" style="background: #03a9f4">
-              <span class="icon">
-                  <i class="fa-solid fa-bookmark fa-fw"></i>
-              </span>
-              技巧
-          </a>
-      </span>
-      
-      
-      
-      <span>
-          <a href="/categories/%E6%8A%80%E5%B7%A7/%E6%96%B9%E6%B3%95/" style="background: #00a596">
-              <span class="icon">
-                  <i class="fa-solid fa-bookmark fa-fw"></i>
-              </span>
-              方法
-          </a>
-      </span>
-      
+        
+        <a class="category-pill" href="/categories/%E6%8A%80%E5%B7%A7/%E6%96%B9%E6%B3%95/">
+          <span class="dot" style="
+            background-color: #fdcb6e;
+            animation-delay: 1.45s;
+            --main-color: #fdcb6e;
+          "></span>
+          方法（5）
+        </a>
+        
       
     </div>
+  </div>
+
+  <!-- 分类对应的文章时间轴 -->
   
-    <!-- 分类对应的文章时间轴 -->
-    
     <div class="timeline">
       <div class="timeline-tail"></div>
       <div class="timeline-content">
@@ -307,42 +306,42 @@
         </a>
         <div class="info">
           
-          <span class="category">
-            <a href="/categories/CTF/">
+            <span class="category">
+              <a href="/categories/CTF/">
+                <span class="icon">
+                  <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                CTF
+              </a>
+            </span>
+          
+          
+            <span class="tags">
               <span class="icon">
-                <i class="fa-solid fa-bookmark fa-fw"></i>
+                <i class="fa-solid fa-tags fa-fw"></i>
               </span>
-              CTF
-            </a>
-          </span>
-          
-          
-          <span class="tags">
-            <span class="icon">
-              <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
               
-              <a href="/tags/PWN/" style="color: #00bcd4">
-                PWN
-              </a>
-            </span>
-            
-            <span class="tag">
               
-              <a href="/tags/SHCTF/" style="color: #03a9f4">
-                SHCTF
-              </a>
+                <span class="tag">
+                  
+                  <a href="/tags/PWN/" style="color: #ffa2c4">
+                    PWN
+                  </a>
+                </span>
+              
+                <span class="tag">
+                  
+                  <a href="/tags/SHCTF/" style="color: #00a596">
+                    SHCTF
+                  </a>
+                </span>
+              
             </span>
-            
-          </span>
           
         </div>
       </div>
     </div>
-    
+  
     <div class="timeline">
       <div class="timeline-tail"></div>
       <div class="timeline-content">
@@ -352,42 +351,42 @@
         </a>
         <div class="info">
           
-          <span class="category">
-            <a href="/categories/CTF/">
+            <span class="category">
+              <a href="/categories/CTF/">
+                <span class="icon">
+                  <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                CTF
+              </a>
+            </span>
+          
+          
+            <span class="tags">
               <span class="icon">
-                <i class="fa-solid fa-bookmark fa-fw"></i>
+                <i class="fa-solid fa-tags fa-fw"></i>
               </span>
-              CTF
-            </a>
-          </span>
-          
-          
-          <span class="tags">
-            <span class="icon">
-              <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
               
-              <a href="/tags/PWN/" style="color: #00a596">
-                PWN
-              </a>
-            </span>
-            
-            <span class="tag">
               
-              <a href="/tags/SHCTF/" style="color: #ff7d73">
-                SHCTF
-              </a>
+                <span class="tag">
+                  
+                  <a href="/tags/PWN/" style="color: #ffa2c4">
+                    PWN
+                  </a>
+                </span>
+              
+                <span class="tag">
+                  
+                  <a href="/tags/SHCTF/" style="color: #ff7d73">
+                    SHCTF
+                  </a>
+                </span>
+              
             </span>
-            
-          </span>
           
         </div>
       </div>
     </div>
-    
+  
     <div class="timeline">
       <div class="timeline-tail"></div>
       <div class="timeline-content">
@@ -397,42 +396,42 @@
         </a>
         <div class="info">
           
-          <span class="category">
-            <a href="/categories/CTF/">
+            <span class="category">
+              <a href="/categories/CTF/">
+                <span class="icon">
+                  <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                CTF
+              </a>
+            </span>
+          
+          
+            <span class="tags">
               <span class="icon">
-                <i class="fa-solid fa-bookmark fa-fw"></i>
+                <i class="fa-solid fa-tags fa-fw"></i>
               </span>
-              CTF
-            </a>
-          </span>
-          
-          
-          <span class="tags">
-            <span class="icon">
-              <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
               
-              <a href="/tags/PWN/" style="color: #ffa2c4">
-                PWN
-              </a>
-            </span>
-            
-            <span class="tag">
               
-              <a href="/tags/SHCTF/" style="color: #03a9f4">
-                SHCTF
-              </a>
+                <span class="tag">
+                  
+                  <a href="/tags/PWN/" style="color: #03a9f4">
+                    PWN
+                  </a>
+                </span>
+              
+                <span class="tag">
+                  
+                  <a href="/tags/SHCTF/" style="color: #ffa2c4">
+                    SHCTF
+                  </a>
+                </span>
+              
             </span>
-            
-          </span>
           
         </div>
       </div>
     </div>
-    
+  
     <div class="timeline">
       <div class="timeline-tail"></div>
       <div class="timeline-content">
@@ -442,42 +441,42 @@
         </a>
         <div class="info">
           
-          <span class="category">
-            <a href="/categories/CTF/">
+            <span class="category">
+              <a href="/categories/CTF/">
+                <span class="icon">
+                  <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                CTF
+              </a>
+            </span>
+          
+          
+            <span class="tags">
               <span class="icon">
-                <i class="fa-solid fa-bookmark fa-fw"></i>
+                <i class="fa-solid fa-tags fa-fw"></i>
               </span>
-              CTF
-            </a>
-          </span>
-          
-          
-          <span class="tags">
-            <span class="icon">
-              <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
               
-              <a href="/tags/PWN/" style="color: #ff7d73">
-                PWN
-              </a>
-            </span>
-            
-            <span class="tag">
               
-              <a href="/tags/NewStarCTF/" style="color: #00a596">
-                NewStarCTF
-              </a>
+                <span class="tag">
+                  
+                  <a href="/tags/PWN/" style="color: #ff7d73">
+                    PWN
+                  </a>
+                </span>
+              
+                <span class="tag">
+                  
+                  <a href="/tags/NewStarCTF/" style="color: #00a596">
+                    NewStarCTF
+                  </a>
+                </span>
+              
             </span>
-            
-          </span>
           
         </div>
       </div>
     </div>
-    
+  
     <div class="timeline">
       <div class="timeline-tail"></div>
       <div class="timeline-content">
@@ -487,42 +486,42 @@
         </a>
         <div class="info">
           
-          <span class="category">
-            <a href="/categories/CTF/">
+            <span class="category">
+              <a href="/categories/CTF/">
+                <span class="icon">
+                  <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                CTF
+              </a>
+            </span>
+          
+          
+            <span class="tags">
               <span class="icon">
-                <i class="fa-solid fa-bookmark fa-fw"></i>
+                <i class="fa-solid fa-tags fa-fw"></i>
               </span>
-              CTF
-            </a>
-          </span>
-          
-          
-          <span class="tags">
-            <span class="icon">
-              <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
               
-              <a href="/tags/PWN/" style="color: #ff7d73">
-                PWN
-              </a>
-            </span>
-            
-            <span class="tag">
               
-              <a href="/tags/FSCTF/" style="color: #00bcd4">
-                FSCTF
-              </a>
+                <span class="tag">
+                  
+                  <a href="/tags/PWN/" style="color: #03a9f4">
+                    PWN
+                  </a>
+                </span>
+              
+                <span class="tag">
+                  
+                  <a href="/tags/FSCTF/" style="color: #ff7d73">
+                    FSCTF
+                  </a>
+                </span>
+              
             </span>
-            
-          </span>
           
         </div>
       </div>
     </div>
-    
+  
     <div class="timeline">
       <div class="timeline-tail"></div>
       <div class="timeline-content">
@@ -532,42 +531,42 @@
         </a>
         <div class="info">
           
-          <span class="category">
-            <a href="/categories/CTF/">
+            <span class="category">
+              <a href="/categories/CTF/">
+                <span class="icon">
+                  <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                CTF
+              </a>
+            </span>
+          
+          
+            <span class="tags">
               <span class="icon">
-                <i class="fa-solid fa-bookmark fa-fw"></i>
+                <i class="fa-solid fa-tags fa-fw"></i>
               </span>
-              CTF
-            </a>
-          </span>
-          
-          
-          <span class="tags">
-            <span class="icon">
-              <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
               
-              <a href="/tags/PWN/" style="color: #00a596">
-                PWN
-              </a>
-            </span>
-            
-            <span class="tag">
               
-              <a href="/tags/SWPU-NSS/" style="color: #ff7d73">
-                SWPU NSS
-              </a>
+                <span class="tag">
+                  
+                  <a href="/tags/PWN/" style="color: #03a9f4">
+                    PWN
+                  </a>
+                </span>
+              
+                <span class="tag">
+                  
+                  <a href="/tags/SWPU-NSS/" style="color: #ff7d73">
+                    SWPU NSS
+                  </a>
+                </span>
+              
             </span>
-            
-          </span>
           
         </div>
       </div>
     </div>
-    
+  
     <div class="timeline">
       <div class="timeline-tail"></div>
       <div class="timeline-content">
@@ -577,42 +576,42 @@
         </a>
         <div class="info">
           
-          <span class="category">
-            <a href="/categories/CTF/">
+            <span class="category">
+              <a href="/categories/CTF/">
+                <span class="icon">
+                  <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                CTF
+              </a>
+            </span>
+          
+          
+            <span class="tags">
               <span class="icon">
-                <i class="fa-solid fa-bookmark fa-fw"></i>
+                <i class="fa-solid fa-tags fa-fw"></i>
               </span>
-              CTF
-            </a>
-          </span>
-          
-          
-          <span class="tags">
-            <span class="icon">
-              <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
               
-              <a href="/tags/PWN/" style="color: #03a9f4">
-                PWN
-              </a>
-            </span>
-            
-            <span class="tag">
               
-              <a href="/tags/NewStarCTF/" style="color: #00bcd4">
-                NewStarCTF
-              </a>
+                <span class="tag">
+                  
+                  <a href="/tags/PWN/" style="color: #03a9f4">
+                    PWN
+                  </a>
+                </span>
+              
+                <span class="tag">
+                  
+                  <a href="/tags/NewStarCTF/" style="color: #ffa2c4">
+                    NewStarCTF
+                  </a>
+                </span>
+              
             </span>
-            
-          </span>
           
         </div>
       </div>
     </div>
-    
+  
     <div class="timeline">
       <div class="timeline-tail"></div>
       <div class="timeline-content">
@@ -622,42 +621,42 @@
         </a>
         <div class="info">
           
-          <span class="category">
-            <a href="/categories/CTF/">
+            <span class="category">
+              <a href="/categories/CTF/">
+                <span class="icon">
+                  <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                CTF
+              </a>
+            </span>
+          
+          
+            <span class="tags">
               <span class="icon">
-                <i class="fa-solid fa-bookmark fa-fw"></i>
+                <i class="fa-solid fa-tags fa-fw"></i>
               </span>
-              CTF
-            </a>
-          </span>
-          
-          
-          <span class="tags">
-            <span class="icon">
-              <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
               
-              <a href="/tags/PWN/" style="color: #00bcd4">
-                PWN
-              </a>
-            </span>
-            
-            <span class="tag">
               
-              <a href="/tags/MoeCTF/" style="color: #03a9f4">
-                MoeCTF
-              </a>
+                <span class="tag">
+                  
+                  <a href="/tags/PWN/" style="color: #00a596">
+                    PWN
+                  </a>
+                </span>
+              
+                <span class="tag">
+                  
+                  <a href="/tags/MoeCTF/" style="color: #ffa2c4">
+                    MoeCTF
+                  </a>
+                </span>
+              
             </span>
-            
-          </span>
           
         </div>
       </div>
     </div>
-    
+  
     <div class="timeline">
       <div class="timeline-tail"></div>
       <div class="timeline-content">
@@ -667,42 +666,42 @@
         </a>
         <div class="info">
           
-          <span class="category">
-            <a href="/categories/CTF/">
+            <span class="category">
+              <a href="/categories/CTF/">
+                <span class="icon">
+                  <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                CTF
+              </a>
+            </span>
+          
+          
+            <span class="tags">
               <span class="icon">
-                <i class="fa-solid fa-bookmark fa-fw"></i>
+                <i class="fa-solid fa-tags fa-fw"></i>
               </span>
-              CTF
-            </a>
-          </span>
-          
-          
-          <span class="tags">
-            <span class="icon">
-              <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
               
-              <a href="/tags/PWN/" style="color: #03a9f4">
-                PWN
-              </a>
-            </span>
-            
-            <span class="tag">
               
-              <a href="/tags/NewStarCTF/" style="color: #ffa2c4">
-                NewStarCTF
-              </a>
+                <span class="tag">
+                  
+                  <a href="/tags/PWN/" style="color: #ffa2c4">
+                    PWN
+                  </a>
+                </span>
+              
+                <span class="tag">
+                  
+                  <a href="/tags/NewStarCTF/" style="color: #00bcd4">
+                    NewStarCTF
+                  </a>
+                </span>
+              
             </span>
-            
-          </span>
           
         </div>
       </div>
     </div>
-    
+  
     <div class="timeline">
       <div class="timeline-tail"></div>
       <div class="timeline-content">
@@ -712,42 +711,42 @@
         </a>
         <div class="info">
           
-          <span class="category">
-            <a href="/categories/CTF/">
+            <span class="category">
+              <a href="/categories/CTF/">
+                <span class="icon">
+                  <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                CTF
+              </a>
+            </span>
+          
+          
+            <span class="tags">
               <span class="icon">
-                <i class="fa-solid fa-bookmark fa-fw"></i>
+                <i class="fa-solid fa-tags fa-fw"></i>
               </span>
-              CTF
-            </a>
-          </span>
-          
-          
-          <span class="tags">
-            <span class="icon">
-              <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
               
-              <a href="/tags/PWN/" style="color: #ff7d73">
-                PWN
-              </a>
-            </span>
-            
-            <span class="tag">
               
-              <a href="/tags/HNCTF/" style="color: #00bcd4">
-                HNCTF
-              </a>
+                <span class="tag">
+                  
+                  <a href="/tags/PWN/" style="color: #ff7d73">
+                    PWN
+                  </a>
+                </span>
+              
+                <span class="tag">
+                  
+                  <a href="/tags/HNCTF/" style="color: #00a596">
+                    HNCTF
+                  </a>
+                </span>
+              
             </span>
-            
-          </span>
           
         </div>
       </div>
     </div>
-    
+  
     <div class="timeline">
       <div class="timeline-tail"></div>
       <div class="timeline-content">
@@ -757,42 +756,42 @@
         </a>
         <div class="info">
           
-          <span class="category">
-            <a href="/categories/CTF/">
+            <span class="category">
+              <a href="/categories/CTF/">
+                <span class="icon">
+                  <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                CTF
+              </a>
+            </span>
+          
+          
+            <span class="tags">
               <span class="icon">
-                <i class="fa-solid fa-bookmark fa-fw"></i>
+                <i class="fa-solid fa-tags fa-fw"></i>
               </span>
-              CTF
-            </a>
-          </span>
-          
-          
-          <span class="tags">
-            <span class="icon">
-              <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
               
-              <a href="/tags/PWN/" style="color: #ffa2c4">
-                PWN
-              </a>
-            </span>
-            
-            <span class="tag">
               
-              <a href="/tags/HNCTF/" style="color: #00bcd4">
-                HNCTF
-              </a>
+                <span class="tag">
+                  
+                  <a href="/tags/PWN/" style="color: #ff7d73">
+                    PWN
+                  </a>
+                </span>
+              
+                <span class="tag">
+                  
+                  <a href="/tags/HNCTF/" style="color: #00bcd4">
+                    HNCTF
+                  </a>
+                </span>
+              
             </span>
-            
-          </span>
           
         </div>
       </div>
     </div>
-    
+  
     <div class="timeline">
       <div class="timeline-tail"></div>
       <div class="timeline-content">
@@ -802,42 +801,42 @@
         </a>
         <div class="info">
           
-          <span class="category">
-            <a href="/categories/CTF/">
+            <span class="category">
+              <a href="/categories/CTF/">
+                <span class="icon">
+                  <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                CTF
+              </a>
+            </span>
+          
+          
+            <span class="tags">
               <span class="icon">
-                <i class="fa-solid fa-bookmark fa-fw"></i>
+                <i class="fa-solid fa-tags fa-fw"></i>
               </span>
-              CTF
-            </a>
-          </span>
-          
-          
-          <span class="tags">
-            <span class="icon">
-              <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
               
-              <a href="/tags/PWN/" style="color: #03a9f4">
-                PWN
-              </a>
-            </span>
-            
-            <span class="tag">
               
-              <a href="/tags/SDCTF/" style="color: #ffa2c4">
-                SDCTF
-              </a>
+                <span class="tag">
+                  
+                  <a href="/tags/PWN/" style="color: #ff7d73">
+                    PWN
+                  </a>
+                </span>
+              
+                <span class="tag">
+                  
+                  <a href="/tags/SDCTF/" style="color: #ffa2c4">
+                    SDCTF
+                  </a>
+                </span>
+              
             </span>
-            
-          </span>
           
         </div>
       </div>
     </div>
-    
+  
     <div class="timeline">
       <div class="timeline-tail"></div>
       <div class="timeline-content">
@@ -847,42 +846,42 @@
         </a>
         <div class="info">
           
-          <span class="category">
-            <a href="/categories/CTF/">
+            <span class="category">
+              <a href="/categories/CTF/">
+                <span class="icon">
+                  <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                CTF
+              </a>
+            </span>
+          
+          
+            <span class="tags">
               <span class="icon">
-                <i class="fa-solid fa-bookmark fa-fw"></i>
+                <i class="fa-solid fa-tags fa-fw"></i>
               </span>
-              CTF
-            </a>
-          </span>
-          
-          
-          <span class="tags">
-            <span class="icon">
-              <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
               
-              <a href="/tags/PWN/" style="color: #ff7d73">
-                PWN
-              </a>
-            </span>
-            
-            <span class="tag">
               
-              <a href="/tags/CISCN/" style="color: #ffa2c4">
-                CISCN
-              </a>
+                <span class="tag">
+                  
+                  <a href="/tags/PWN/" style="color: #03a9f4">
+                    PWN
+                  </a>
+                </span>
+              
+                <span class="tag">
+                  
+                  <a href="/tags/CISCN/" style="color: #00a596">
+                    CISCN
+                  </a>
+                </span>
+              
             </span>
-            
-          </span>
           
         </div>
       </div>
     </div>
-    
+  
     <div class="timeline">
       <div class="timeline-tail"></div>
       <div class="timeline-content">
@@ -892,42 +891,42 @@
         </a>
         <div class="info">
           
-          <span class="category">
-            <a href="/categories/CTF/">
+            <span class="category">
+              <a href="/categories/CTF/">
+                <span class="icon">
+                  <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                CTF
+              </a>
+            </span>
+          
+          
+            <span class="tags">
               <span class="icon">
-                <i class="fa-solid fa-bookmark fa-fw"></i>
+                <i class="fa-solid fa-tags fa-fw"></i>
               </span>
-              CTF
-            </a>
-          </span>
-          
-          
-          <span class="tags">
-            <span class="icon">
-              <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
               
-              <a href="/tags/PWN/" style="color: #00bcd4">
-                PWN
-              </a>
-            </span>
-            
-            <span class="tag">
               
-              <a href="/tags/HGAME/" style="color: #00a596">
-                HGAME
-              </a>
+                <span class="tag">
+                  
+                  <a href="/tags/PWN/" style="color: #00bcd4">
+                    PWN
+                  </a>
+                </span>
+              
+                <span class="tag">
+                  
+                  <a href="/tags/HGAME/" style="color: #ffa2c4">
+                    HGAME
+                  </a>
+                </span>
+              
             </span>
-            
-          </span>
           
         </div>
       </div>
     </div>
-    
+  
     <div class="timeline">
       <div class="timeline-tail"></div>
       <div class="timeline-content">
@@ -937,42 +936,42 @@
         </a>
         <div class="info">
           
-          <span class="category">
-            <a href="/categories/CTF/">
+            <span class="category">
+              <a href="/categories/CTF/">
+                <span class="icon">
+                  <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                CTF
+              </a>
+            </span>
+          
+          
+            <span class="tags">
               <span class="icon">
-                <i class="fa-solid fa-bookmark fa-fw"></i>
+                <i class="fa-solid fa-tags fa-fw"></i>
               </span>
-              CTF
-            </a>
-          </span>
-          
-          
-          <span class="tags">
-            <span class="icon">
-              <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
               
-              <a href="/tags/PWN/" style="color: #00bcd4">
-                PWN
-              </a>
-            </span>
-            
-            <span class="tag">
               
-              <a href="/tags/HNCTF/" style="color: #ff7d73">
-                HNCTF
-              </a>
+                <span class="tag">
+                  
+                  <a href="/tags/PWN/" style="color: #03a9f4">
+                    PWN
+                  </a>
+                </span>
+              
+                <span class="tag">
+                  
+                  <a href="/tags/HNCTF/" style="color: #00a596">
+                    HNCTF
+                  </a>
+                </span>
+              
             </span>
-            
-          </span>
           
         </div>
       </div>
     </div>
-    
+  
     <div class="timeline">
       <div class="timeline-tail"></div>
       <div class="timeline-content">
@@ -982,133 +981,133 @@
         </a>
         <div class="info">
           
-          <span class="category">
-            <a href="/categories/CTF/">
+            <span class="category">
+              <a href="/categories/CTF/">
+                <span class="icon">
+                  <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                CTF
+              </a>
+            </span>
+          
+          
+            <span class="tags">
               <span class="icon">
-                <i class="fa-solid fa-bookmark fa-fw"></i>
+                <i class="fa-solid fa-tags fa-fw"></i>
               </span>
-              CTF
-            </a>
-          </span>
-          
-          
-          <span class="tags">
-            <span class="icon">
-              <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
               
-              <a href="/tags/PWN/" style="color: #ff7d73">
-                PWN
-              </a>
-            </span>
-            
-            <span class="tag">
               
-              <a href="/tags/MoeCTF/" style="color: #ffa2c4">
-                MoeCTF
-              </a>
+                <span class="tag">
+                  
+                  <a href="/tags/PWN/" style="color: #00bcd4">
+                    PWN
+                  </a>
+                </span>
+              
+                <span class="tag">
+                  
+                  <a href="/tags/MoeCTF/" style="color: #ff7d73">
+                    MoeCTF
+                  </a>
+                </span>
+              
             </span>
-            
-          </span>
           
         </div>
       </div>
     </div>
-    
-  </div>
   
-  <!-- 引入 ECharts -->
-  <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const chartDom = document.getElementById('category-chart');
-      const myChart = echarts.init(chartDom);
-  
-      const data = [
-        
-          {
-            name: "年度总结",
-            value: 1
-          },
-        
-          {
-            name: "CTF",
-            value: 16
-          },
-        
-          {
-            name: "技巧",
-            value: 5
-          },
-        
-          {
-            name: "方法",
-            value: 5
-          },
-        
-      ];
-  
-      const option = {
-        title: {
-          text: '文章分类统计 🎯',
-          left: 'center',
-          top: 10,
-          textStyle: {
-            fontSize: 20,
-            fontWeight: 'bold'
-          }
+</div>
+
+<!-- ECharts 图表脚本 -->
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const chartDom = document.getElementById('category-chart');
+    const myChart = echarts.init(chartDom);
+
+    const data = [
+      
+        {
+          name: "CTF",
+          value: "16"
         },
-        tooltip: {
-          trigger: 'item',
-          formatter: '{b} : {c} 篇 ({d}%)'
+      
+        {
+          name: "年度总结",
+          value: "1"
         },
-        legend: {
-          orient: 'vertical',
-          right: 20,
-          top: 'middle',
-          textStyle: {
-            fontSize: 14
-          }
+      
+        {
+          name: "技巧",
+          value: "5"
         },
-        series: [
-          {
-            name: '分类',
-            type: 'pie',
-            radius: ['45%', '65%'],
-            center: ['40%', '50%'],
-            avoidLabelOverlap: true,
-            label: {
-              show: true,
-              position: 'outside',
-              formatter: '{b}\n{d}%',
-              fontSize: 13
-            },
-            labelLine: {
-              length: 20,
-              length2: 10,
-              smooth: true
-            },
-            itemStyle: {
-              borderRadius: 6,
-              borderColor: '#fff',
-              borderWidth: 2
-            },
-            emphasis: {
-              scale: true,
-              scaleSize: 10
-            },
-            data: data
-          }
-        ]
-      };
-  
-      myChart.setOption(option);
-    });
-  </script>
-  
+      
+        {
+          name: "方法",
+          value: "5"
+        },
+      
+    ];
+
+    const option = {
+      title: {
+        text: '文章分类统计 🎯',
+        left: 'center',
+        top: 10,
+        textStyle: {
+          fontSize: 20,
+          fontWeight: 'bold'
+        }
+      },
+      tooltip: {
+        trigger: 'item',
+        formatter: '{b} : {c} 篇 ({d}%)'
+      },
+      legend: {
+        orient: 'vertical',
+        right: 20,
+        top: 'middle',
+        textStyle: {
+          fontSize: 14
+        }
+      },
+      series: [
+        {
+          name: '分类',
+          type: 'pie',
+          radius: ['45%', '65%'],
+          center: ['40%', '55%'],
+          avoidLabelOverlap: true,
+          label: {
+            show: true,
+            position: 'outside',
+            formatter: '{b}\n{d}%',
+            fontSize: 13
+          },
+          labelLine: {
+            length: 20,
+            length2: 10,
+            smooth: true
+          },
+          itemStyle: {
+            borderRadius: 6,
+            borderColor: '#fff',
+            borderWidth: 2
+          },
+          emphasis: {
+            scale: true,
+            scaleSize: 10
+          },
+          data: data
+        }
+      ]
+    };
+
+    myChart.setOption(option);
+  });
+</script>
+
             <footer id="footer">
   <div id="footer-wrap">
     <div>
