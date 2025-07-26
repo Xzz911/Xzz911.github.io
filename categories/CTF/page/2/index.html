@@ -237,7 +237,12 @@
 </script>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div id="archives">
+            <!-- 页面顶部“分类”标题 -->
+<div class="category-title-container">
+  <h1 class="category-title">分类</h1>
+</div>
+
+<div id="archives">
   <!-- 分类统计图和标签按钮整体容器 -->
   <div class="category-chart-wrapper">
     <!-- 分类统计图 -->
@@ -251,9 +256,9 @@
         
         <a class="category-pill" href="/categories/CTF/">
           <span class="dot" style="
-            background-color: #ff6b6b;
-            animation-delay: 0.69s;
-            --main-color: #ff6b6b;
+            background-color: #74b9ff;
+            animation-delay: 1.99s;
+            --main-color: #74b9ff;
           "></span>
           CTF（16）
         </a>
@@ -263,7 +268,7 @@
         <a class="category-pill" href="/categories/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/">
           <span class="dot" style="
             background-color: #00cec9;
-            animation-delay: 1.37s;
+            animation-delay: 1.22s;
             --main-color: #00cec9;
           "></span>
           年度总结（1）
@@ -273,9 +278,9 @@
         
         <a class="category-pill" href="/categories/%E6%8A%80%E5%B7%A7/">
           <span class="dot" style="
-            background-color: #e17055;
-            animation-delay: 1.43s;
-            --main-color: #e17055;
+            background-color: #fdcb6e;
+            animation-delay: 1.64s;
+            --main-color: #fdcb6e;
           "></span>
           技巧（5）
         </a>
@@ -284,9 +289,9 @@
         
         <a class="category-pill" href="/categories/%E6%8A%80%E5%B7%A7/%E6%96%B9%E6%B3%95/">
           <span class="dot" style="
-            background-color: #fdcb6e;
-            animation-delay: 2.87s;
-            --main-color: #fdcb6e;
+            background-color: #e17055;
+            animation-delay: 1.04s;
+            --main-color: #e17055;
           "></span>
           方法（5）
         </a>
@@ -331,7 +336,7 @@
               
                 <span class="tag">
                   
-                  <a href="/tags/SHCTF/" style="color: #ff7d73">
+                  <a href="/tags/SHCTF/" style="color: #ffa2c4">
                     SHCTF
                   </a>
                 </span>
@@ -369,14 +374,14 @@
               
                 <span class="tag">
                   
-                  <a href="/tags/PWN/" style="color: #00a596">
+                  <a href="/tags/PWN/" style="color: #03a9f4">
                     PWN
                   </a>
                 </span>
               
                 <span class="tag">
                   
-                  <a href="/tags/SHCTF/" style="color: #ffa2c4">
+                  <a href="/tags/SHCTF/" style="color: #00bcd4">
                     SHCTF
                   </a>
                 </span>
@@ -414,14 +419,14 @@
               
                 <span class="tag">
                   
-                  <a href="/tags/PWN/" style="color: #ff7d73">
+                  <a href="/tags/PWN/" style="color: #00bcd4">
                     PWN
                   </a>
                 </span>
               
                 <span class="tag">
                   
-                  <a href="/tags/SHCTF/" style="color: #ffa2c4">
+                  <a href="/tags/SHCTF/" style="color: #ff7d73">
                     SHCTF
                   </a>
                 </span>
@@ -459,14 +464,14 @@
               
                 <span class="tag">
                   
-                  <a href="/tags/PWN/" style="color: #ff7d73">
+                  <a href="/tags/PWN/" style="color: #03a9f4">
                     PWN
                   </a>
                 </span>
               
                 <span class="tag">
                   
-                  <a href="/tags/NewStarCTF/" style="color: #03a9f4">
+                  <a href="/tags/NewStarCTF/" style="color: #ffa2c4">
                     NewStarCTF
                   </a>
                 </span>
@@ -511,7 +516,7 @@
               
                 <span class="tag">
                   
-                  <a href="/tags/FSCTF/" style="color: #00a596">
+                  <a href="/tags/FSCTF/" style="color: #00bcd4">
                     FSCTF
                   </a>
                 </span>
@@ -549,14 +554,14 @@
               
                 <span class="tag">
                   
-                  <a href="/tags/PWN/" style="color: #03a9f4">
+                  <a href="/tags/PWN/" style="color: #00bcd4">
                     PWN
                   </a>
                 </span>
               
                 <span class="tag">
                   
-                  <a href="/tags/SWPU-NSS/" style="color: #ff7d73">
+                  <a href="/tags/SWPU-NSS/" style="color: #ffa2c4">
                     SWPU NSS
                   </a>
                 </span>
@@ -601,7 +606,7 @@
               
                 <span class="tag">
                   
-                  <a href="/tags/NewStarCTF/" style="color: #ff7d73">
+                  <a href="/tags/NewStarCTF/" style="color: #00a596">
                     NewStarCTF
                   </a>
                 </span>
@@ -639,14 +644,14 @@
               
                 <span class="tag">
                   
-                  <a href="/tags/PWN/" style="color: #03a9f4">
+                  <a href="/tags/PWN/" style="color: #ff7d73">
                     PWN
                   </a>
                 </span>
               
                 <span class="tag">
                   
-                  <a href="/tags/MoeCTF/" style="color: #ff7d73">
+                  <a href="/tags/MoeCTF/" style="color: #00bcd4">
                     MoeCTF
                   </a>
                 </span>
@@ -684,14 +689,14 @@
               
                 <span class="tag">
                   
-                  <a href="/tags/PWN/" style="color: #ff7d73">
+                  <a href="/tags/PWN/" style="color: #ffa2c4">
                     PWN
                   </a>
                 </span>
               
                 <span class="tag">
                   
-                  <a href="/tags/NewStarCTF/" style="color: #00bcd4">
+                  <a href="/tags/NewStarCTF/" style="color: #ff7d73">
                     NewStarCTF
                   </a>
                 </span>
@@ -729,14 +734,14 @@
               
                 <span class="tag">
                   
-                  <a href="/tags/PWN/" style="color: #03a9f4">
+                  <a href="/tags/PWN/" style="color: #00a596">
                     PWN
                   </a>
                 </span>
               
                 <span class="tag">
                   
-                  <a href="/tags/HNCTF/" style="color: #ffa2c4">
+                  <a href="/tags/HNCTF/" style="color: #00bcd4">
                     HNCTF
                   </a>
                 </span>
@@ -774,14 +779,14 @@
               
                 <span class="tag">
                   
-                  <a href="/tags/PWN/" style="color: #ffa2c4">
+                  <a href="/tags/PWN/" style="color: #00a596">
                     PWN
                   </a>
                 </span>
               
                 <span class="tag">
                   
-                  <a href="/tags/HNCTF/" style="color: #00bcd4">
+                  <a href="/tags/HNCTF/" style="color: #03a9f4">
                     HNCTF
                   </a>
                 </span>
@@ -819,14 +824,14 @@
               
                 <span class="tag">
                   
-                  <a href="/tags/PWN/" style="color: #00a596">
+                  <a href="/tags/PWN/" style="color: #00bcd4">
                     PWN
                   </a>
                 </span>
               
                 <span class="tag">
                   
-                  <a href="/tags/SDCTF/" style="color: #ffa2c4">
+                  <a href="/tags/SDCTF/" style="color: #ff7d73">
                     SDCTF
                   </a>
                 </span>
@@ -864,7 +869,7 @@
               
                 <span class="tag">
                   
-                  <a href="/tags/PWN/" style="color: #ff7d73">
+                  <a href="/tags/PWN/" style="color: #00a596">
                     PWN
                   </a>
                 </span>
@@ -916,7 +921,7 @@
               
                 <span class="tag">
                   
-                  <a href="/tags/HGAME/" style="color: #ffa2c4">
+                  <a href="/tags/HGAME/" style="color: #00a596">
                     HGAME
                   </a>
                 </span>
@@ -954,14 +959,14 @@
               
                 <span class="tag">
                   
-                  <a href="/tags/PWN/" style="color: #00a596">
+                  <a href="/tags/PWN/" style="color: #ffa2c4">
                     PWN
                   </a>
                 </span>
               
                 <span class="tag">
                   
-                  <a href="/tags/HNCTF/" style="color: #ff7d73">
+                  <a href="/tags/HNCTF/" style="color: #03a9f4">
                     HNCTF
                   </a>
                 </span>
@@ -999,14 +1004,14 @@
               
                 <span class="tag">
                   
-                  <a href="/tags/PWN/" style="color: #00a596">
+                  <a href="/tags/PWN/" style="color: #ffa2c4">
                     PWN
                   </a>
                 </span>
               
                 <span class="tag">
                   
-                  <a href="/tags/MoeCTF/" style="color: #03a9f4">
+                  <a href="/tags/MoeCTF/" style="color: #00a596">
                     MoeCTF
                   </a>
                 </span>

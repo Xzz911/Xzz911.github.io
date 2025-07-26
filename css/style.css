@@ -900,6 +900,7 @@ figure.highlight .code pre {
 
 /* 让分类图表容器脱离限制宽度的祖先元素 */
 .category-chart-wrapper {
+  margin-top: 120px; /* 可调大 */
   position: relative;
   left: 50%;
   transform: translateX(-50%);
@@ -907,7 +908,6 @@ figure.highlight .code pre {
   max-width: unset !important;
   background: rgba(255, 255, 255, 0.4);
   padding: 30px;
-  margin: 40px auto;
   border-radius: 16px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
@@ -978,6 +978,67 @@ figure.highlight .code pre {
   100% { box-shadow: 0 0 0px var(--main-color); opacity: 0.8; }
 }
 
+/* 页面顶部标题样式 */
+.category-title-container {
+  text-align: center;
+  margin-top: 200px;
+  margin-bottom: 40px;
+}
+
+.category-title {
+  font-size: 48px;
+  font-weight: bold;
+  color: #fff;
+  animation: fadeInDown 1s ease;
+}
+
+/* 分类按钮区域 */
+.categories-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.category-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  font-size: 15px;
+  color: #fff;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  transition: all 0.3s;
+}
+
+.category-pill:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* 呼吸灯圆点 */
+.dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background-color: var(--main-color);
+  animation: breathe 2.6s ease-in-out infinite alternate;
+}
+
+@keyframes breathe {
+  0%   { transform: scale(1); opacity: 1; }
+  50%  { transform: scale(1.4); opacity: 0.6; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* 淡入标题动效 */
+@keyframes fadeInDown {
+  from { transform: translateY(-20px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
 
 
 
