@@ -1116,3 +1116,97 @@ figure.highlight .code pre {
   50% { border-color: transparent; }
 }
 
+
+
+
+
+
+
+
+
+/* 标签图表容器 */
+#top-tags-chart,
+/* 图表容器美化样式 */
+.tag-chart-container {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw; /* 使用整个视口宽度 */
+  max-width: 1200px; /* 更宽了 */
+  height: 460px;
+  margin: 40px 0;
+  padding: 20px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+  z-index: 1;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+
+@media screen and (max-width: 768px) {
+  .tag-chart-container {
+    height: 400px;
+    padding: 10px;
+  }
+}
+
+/* 标签云整体样式 */
+.tag-cloud {
+  text-align: center;
+  margin-bottom: 60px;
+  line-height: 2em;
+}
+
+.tag-cloud a {
+  margin: 8px;
+  display: inline-block;
+  transition: transform 0.3s ease;
+  text-decoration: none;
+}
+
+.tag-cloud a:hover {
+  transform: scale(1.2);
+  opacity: 0.85;
+}
+
+/* 时间线结构样式（如果未自定义） */
+.timeline {
+  margin: 30px 0;
+  position: relative;
+  padding-left: 20px;
+  border-left: 2px solid #ccc;
+}
+
+.timeline-tail {
+  width: 12px;
+  height: 12px;
+  background: #4facfe;
+  border-radius: 50%;
+  position: absolute;
+  left: -6px;
+  top: 5px;
+}
+
+.timeline-content {
+  padding-left: 20px;
+}
+
+.timeline-content .item-time {
+  color: #aaa;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.timeline-content h3 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.timeline-content .info {
+  margin-top: 6px;
+  font-size: 14px;
+}

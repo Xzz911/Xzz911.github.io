@@ -238,204 +238,253 @@
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div id="archives">
-    
-    <div class="categories-tags">
+
+    <!-- Top 10 标签统计图容器 -->
+    <div id="top-tags-chart" class="tag-chart-container"></div>
+  
+    <!-- 标签云 -->
+    <div class="tag-cloud">
+      
         
         
-        
-        <span>
-            <a href="/tags/PWN/" style="background: #00a596">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                PWN
-            </a>
-        </span>
+        <a href="/tags/PWN/" title="PWN" style="font-size:32px; color:#00bcd4;">
+          PWN<sup>21</sup>
+        </a>
+      
         
         
-        
-        <span>
-            <a href="/tags/SWPU-NSS/" style="background: #03a9f4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                SWPU NSS
-            </a>
-        </span>
+        <a href="/tags/HNCTF/" title="HNCTF" style="font-size:15px; color:#03a9f4;">
+          HNCTF<sup>3</sup>
+        </a>
+      
         
         
-        
-        <span>
-            <a href="/tags/%E5%A5%8B%E8%BF%9B/" style="background: #ffa2c4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                奋进
-            </a>
-        </span>
+        <a href="/tags/SHCTF/" title="SHCTF" style="font-size:15px; color:#03a9f4;">
+          SHCTF<sup>3</sup>
+        </a>
+      
         
         
-        
-        <span>
-            <a href="/tags/NewStarCTF/" style="background: #00bcd4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                NewStarCTF
-            </a>
-        </span>
+        <a href="/tags/NewStarCTF/" title="NewStarCTF" style="font-size:15px; color:#03a9f4;">
+          NewStarCTF<sup>3</sup>
+        </a>
+      
         
         
-        
-        <span>
-            <a href="/tags/FSCTF/" style="background: #ffa2c4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                FSCTF
-            </a>
-        </span>
+        <a href="/tags/MoeCTF/" title="MoeCTF" style="font-size:14px; color:#00bcd4;">
+          MoeCTF<sup>2</sup>
+        </a>
+      
         
         
-        
-        <span>
-            <a href="/tags/MoeCTF/" style="background: #03a9f4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                MoeCTF
-            </a>
-        </span>
+        <a href="/tags/demo/" title="demo" style="font-size:13px; color:#ffa2c4;">
+          demo<sup>1</sup>
+        </a>
+      
         
         
-        
-        <span>
-            <a href="/tags/SHCTF/" style="background: #00a596">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                SHCTF
-            </a>
-        </span>
+        <a href="/tags/hexo/" title="hexo" style="font-size:13px; color:#00a596;">
+          hexo<sup>1</sup>
+        </a>
+      
         
         
-        
-        <span>
-            <a href="/tags/CISCN/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                CISCN
-            </a>
-        </span>
+        <a href="/tags/SDCTF/" title="SDCTF" style="font-size:13px; color:#00a596;">
+          SDCTF<sup>1</sup>
+        </a>
+      
         
         
+        <a href="/tags/HGAME/" title="HGAME" style="font-size:13px; color:#00bcd4;">
+          HGAME<sup>1</sup>
+        </a>
+      
         
         
-        
-        <span>
-            <a href="/tags/HNCTF/" style="background: #03a9f4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                HNCTF
-            </a>
-        </span>
+        <a href="/tags/CISCN/" title="CISCN" style="font-size:13px; color:#00bcd4;">
+          CISCN<sup>1</sup>
+        </a>
+      
         
         
-        
-        <span>
-            <a href="/tags/HGAME/" style="background: #00bcd4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                HGAME
-            </a>
-        </span>
+        <a href="/tags/%E5%A5%8B%E8%BF%9B/" title="奋进" style="font-size:13px; color:#ffa2c4;">
+          奋进<sup>1</sup>
+        </a>
+      
         
         
-        
-        <span>
-            <a href="/tags/SDCTF/" style="background: #00a596">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                SDCTF
-            </a>
-        </span>
+        <a href="/tags/FSCTF/" title="FSCTF" style="font-size:13px; color:#ff7d73;">
+          FSCTF<sup>1</sup>
+        </a>
+      
         
         
-        
-        <span>
-            <a href="/tags/hexo/" style="background: #ff7d73">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                hexo
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/demo/" style="background: #ffa2c4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                demo
-            </a>
-        </span>
-        
-        
+        <a href="/tags/SWPU-NSS/" title="SWPU NSS" style="font-size:13px; color:#03a9f4;">
+          SWPU NSS<sup>1</sup>
+        </a>
+      
     </div>
+  
+    <!-- 标签时间线（点击标签时展示） -->
     
-    <div class="timeline">
+    
+  
+    
+      <div class="timeline">
         <div class="timeline-tail"></div>
         <div class="timeline-content">
-            <div class="item-time">2023/9/5</div>
-            <a href="/%5BCISCN%202019%E5%8D%8E%E5%8C%97%5D%20PWN5%EF%BC%88ciscn_2019_n_5%EF%BC%89%20%E5%A4%8D%E7%8E%B0/">
-                <h3>[CISCN 2019华北] PWN5（ciscn_2019_n_5） 复现</h3>
-            </a>
-            <div class="info">
+          <div class="item-time">2023/9/5</div>
+          <a href="/%5BCISCN%202019%E5%8D%8E%E5%8C%97%5D%20PWN5%EF%BC%88ciscn_2019_n_5%EF%BC%89%20%E5%A4%8D%E7%8E%B0/">
+            <h3>[CISCN 2019华北] PWN5（ciscn_2019_n_5） 复现</h3>
+          </a>
+          <div class="info">
+            
+              <span class="category">
+                <a href="/categories/CTF/">
+                  <span class="icon"><i class="fa-solid fa-bookmark fa-fw"></i></span>
+                  CTF
+                </a>
+              </span>
+            
+            
+              <span class="tags">
+                <span class="icon"><i class="fa-solid fa-tags fa-fw"></i></span>
                 
-                <span class="category">
-                    <a href="/categories/CTF/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        CTF
+                
+                  <span class="tag">
+                    <a href="/tags/PWN/" style="color: #03a9f4">
+                      PWN
                     </a>
-                </span>
+                  </span>
                 
+                  <span class="tag">
+                    <a href="/tags/CISCN/" style="color: #ffa2c4">
+                      CISCN
+                    </a>
+                  </span>
                 
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/PWN/" style="color: #00bcd4">
-                            PWN
-                        </a>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/CISCN/" style="color: #03a9f4">
-                            CISCN
-                        </a>
-                    </span>
-                    
-                </span>
-                
-            </div>
+              </span>
+            
+          </div>
         </div>
-    </div>
+      </div>
     
-</div>
-
+  
+  </div>
+  
+  <!-- 引入 ECharts 图表库 -->
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+  
+  <!-- 图表绘制逻辑 -->
+  <script>
+    window.addEventListener('load', () => {
+      const chartDom = document.getElementById('top-tags-chart');
+      if (!chartDom) return;
+      const myChart = echarts.init(chartDom);
+  
+      const tagData = [
+        
+          {
+            name: 'PWN',
+            value: 21
+          },
+        
+          {
+            name: 'HNCTF',
+            value: 3
+          },
+        
+          {
+            name: 'SHCTF',
+            value: 3
+          },
+        
+          {
+            name: 'NewStarCTF',
+            value: 3
+          },
+        
+          {
+            name: 'MoeCTF',
+            value: 2
+          },
+        
+          {
+            name: 'demo',
+            value: 1
+          },
+        
+          {
+            name: 'hexo',
+            value: 1
+          },
+        
+          {
+            name: 'SDCTF',
+            value: 1
+          },
+        
+          {
+            name: 'HGAME',
+            value: 1
+          },
+        
+          {
+            name: 'CISCN',
+            value: 1
+          },
+        
+      ];
+  
+      const option = {
+        title: {
+          text: 'Top 10 标签统计图📌',
+          left: 'center',
+          top: 10,
+          textStyle: {
+            color: '#fff'
+          }
+        },
+        tooltip: {
+          trigger: 'item',
+          formatter: '{b} : {c} 篇'
+        },
+        xAxis: {
+          type: 'category',
+          data: tagData.map(d => d.name),
+          axisLabel: {
+            color: '#ccc'
+          }
+        },
+        yAxis: {
+          type: 'value',
+          axisLabel: {
+            color: '#ccc'
+          },
+          minInterval: 1
+        },
+        series: [{
+          type: 'bar',
+          data: tagData.map(d => d.value),
+          itemStyle: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              { offset: 0, color: '#4facfe' },
+              { offset: 1, color: '#00f2fe' }
+            ])
+          },
+          label: {
+            show: true,
+            position: 'top',
+            color: '#fff'
+          }
+        }]
+      };
+  
+      myChart.setOption(option);
+      window.addEventListener('resize', () => myChart.resize());
+    });
+  </script>
+  
             <footer id="footer">
   <div id="footer-wrap">
     <div>
