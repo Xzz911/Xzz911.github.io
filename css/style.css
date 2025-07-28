@@ -911,95 +911,47 @@ figure.highlight .code pre {
   background: transparent;
   padding: 20px;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px; /* 圆角 */
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* 轻微阴影 */
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease-in-out;
-  z-index: 1; /* 堆叠顺序，保证覆盖其他元素 */
+  z-index: 1;
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
 }
 
-/* 分类标签区域，使用弹性盒布局，允许换行，居中对齐，标签间距 */
+/* ✅ 分类标签区域（类似标签云样式） */
 .categories-tags {
-  margin-top: 30px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
+  margin: 40px auto;
+  text-align: center;
+  line-height: 2.4;
+  max-width: 780px;
 }
 
-/* 分类标签内的链接样式 */
-.categories-tags span a {
-  display: inline-flex;
-  align-items: center;
-  padding: 8px 14px;
-  border-radius: 20px;
-  color: #fff;
-  font-weight: 500;
-  font-size: 14px;
-  text-decoration: none;
-  transition: transform 0.3s ease; /* 鼠标悬停时平滑缩放 */
-}
-
-/* 鼠标悬停时标签放大效果 */
-.categories-tags span a:hover {
-  transform: scale(1.05);
-}
-
-/* 简易分类标签区域，类似 .categories-tags，但间距略有不同 */
-.categories-tags-simple {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px 16px;
-  margin-top: 30px;
-}
-
-/* 分类标签 pill 风格，圆角背景和边框 */
-.category-pill {
-  display: inline-flex;
-  align-items: center;
-  padding: 6px 12px;
-  font-size: 14px;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.06); /* 透明度较低背景 */
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.1); /* 细边框 */
-  text-decoration: none;
-  transition: all 0.3s ease; /* 平滑过渡所有变化 */
-}
-
-/* pill 标签悬停时背景变深 */
-.category-pill:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff; /* 保持字体颜色 */
-}
-
-/* pill 内部的小圆点，带呼吸动画 */
-.category-pill .dot {
+/* ✅ 单个分类按钮（替代原 .category-pill） */
+.category-cloud-item {
   display: inline-block;
-  width: 10px;
-  height: 10px;
-  margin-right: 8px;
-  border-radius: 50%; /* 圆形 */
-  animation: glowPulse 2.8s infinite ease-in-out; /* 呼吸发光动画 */
+  margin: 6px 10px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  opacity: 0.9;
 }
 
-/* 呼吸发光动画关键帧 */
-@keyframes glowPulse {
-  0%   { box-shadow: 0 0 0px var(--main-color); opacity: 0.8; }
-  50%  { box-shadow: 0 0 8px var(--main-color); opacity: 1; }
-  100% { box-shadow: 0 0 0px var(--main-color); opacity: 0.8; }
+/* ✅ 鼠标悬停：放大并加阴影 */
+.category-cloud-item:hover {
+  transform: scale(1.2);
+  opacity: 1;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
 }
 
-/* 页面顶部标题容器，居中对齐，有上下边距 */
+/* 页面顶部标题容器 */
 .category-title-container {
   text-align: center;
   margin-top: 200px;
   margin-bottom: 40px;
 }
 
-/* 分类标题文字样式，带淡入动画 */
+/* 分类标题文字 */
 .category-title {
   font-size: 48px;
   font-weight: bold;
@@ -1007,56 +959,51 @@ figure.highlight .code pre {
   animation: fadeInDown 1s ease;
 }
 
-/* 分类按钮区域（重复定义，和 .categories-tags 类似，建议合并） */
-.categories-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-  justify-content: center;
-  margin-top: 40px;
+/* 副标题样式 */
+.category-subtitle {
+  text-align: center;
+  font-size: 16px;
+  color: #ddd;
+  margin-top: -20px;
+  margin-bottom: 20px;
+  opacity: 0.85;
 }
 
-/* pill 标签样式（重复定义，font-size 和 border-radius 有差别，也建议合并调整） */
-.category-pill {
-  display: inline-flex;
-  align-items: center;
-  padding: 6px 12px;
-  font-size: 15px;
+/* 打字机字幕（可带动画） */
+.category-typewriter {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid #fff;
+  width: 0;
+  margin: 0 auto;
+  animation: typing 3.5s steps(28, end) forwards, blink 0.75s step-end infinite;
   color: #fff;
-  text-decoration: none;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 16px;
-  transition: all 0.3s;
+  font-size: 18px;
+  text-align: center;
+  max-width: fit-content;
+  opacity: 0.8;
 }
 
-/* pill 悬停背景变深 */
-.category-pill:hover {
-  background: rgba(255, 255, 255, 0.15);
+/* 打字动画 */
+@keyframes typing {
+  to {
+    width: 100%;
+  }
 }
 
-/* 呼吸灯圆点基础样式，独立于 category-pill */
-.dot {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  margin-right: 8px;
-  border-radius: 50%;
-  background-color: var(--main-color);
-  animation: breathe 2.6s ease-in-out infinite alternate; /* 呼吸动画 */
+/* 光标闪烁 */
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
 }
 
-/* 呼吸灯动画关键帧 */
-@keyframes breathe {
-  0%   { transform: scale(1); opacity: 1; }
-  50%  { transform: scale(1.4); opacity: 0.6; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-/* 标题淡入下滑动画关键帧 */
+/* 标题淡入下滑动画 */
 @keyframes fadeInDown {
   from { transform: translateY(-20px); opacity: 0; }
   to   { transform: translateY(0); opacity: 1; }
 }
+
 
 /* 华丽分割线样式 */
 .fancy-divider {
@@ -1125,11 +1072,7 @@ figure.highlight .code pre {
   to { border-right: none; }
 }
 
-
-
-
-
-/* 标签页副标题（渐变文字 + 呼吸动效） */
+/* 🌈 标签页副标题样式（渐变颜色 + 呼吸动效） */
 .tag-subtitle {
   text-align: center;
   font-size: 16px;
@@ -1139,30 +1082,30 @@ figure.highlight .code pre {
   opacity: 0.85;
 }
 
-/* 标签页字幕（打字机效果） */
+/* ✨ 标签页打字机字幕样式（打字 + 光标 + 自动隐藏） */
 .tag-typewriter {
   font-size: 18px;
-  overflow: hidden;
-  white-space: nowrap;
-  border-right: 2px solid #fff; /* 光标样式 */
-  color: #ddd; /* ✅ 字体颜色 */
-  width: 0; /* 初始宽度为0，动画逐步展开 */
+  color: #ddd;                        /* 字体颜色 */
+  overflow: hidden;                  /* 溢出隐藏 */
+  white-space: nowrap;              /* 不换行 */
+  border-right: 2px solid #fff;      /* 光标样式 */
+  width: 0;                          /* 初始宽度为 0，逐字展开 */
   margin: 0 auto;
-  
+
   animation:
-  typing 3.5s steps(28, end) forwards,     /* 打字效果 */
-  blink 0.75s step-end infinite,           /* 光标闪烁 */
-  cursor-hide 0s 4.0s forwards;            /* 4.0s 后隐藏光标 */
+    typing 3.5s steps(28, end) forwards, /* 打字动画 */
+    blink 0.75s step-end infinite,       /* 光标闪烁 */
+    cursor-hide 0s 4.0s forwards;        /* 光标 4 秒后隐藏 */
 }
 
-/* 外层包装器 - 控制整体位置 */
+/* ⬇️ 图表上方标题的容器（用于整体定位） */
 .tag-chart-wrapper {
   text-align: center;
   margin-top: 200px;
   margin-bottom: 40px;
 }
 
-/* “标签”标题样式 */
+/* 🏷️ “标签”大标题样式 */
 .tag-title {
   font-size: 48px;
   font-weight: bold;
@@ -1170,7 +1113,7 @@ figure.highlight .code pre {
   animation: fadeInDown 1s ease;
 }
 
-/* 图表容器样式（加宽版） */
+/* 📊 图表主容器（可容纳图表和标签云） */
 .tag-chart-container {
   position: relative;
   left: 50%;
@@ -1180,18 +1123,19 @@ figure.highlight .code pre {
   margin-top: 240px;
   height: 460px;
   padding: 20px;
+
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease-in-out;
   z-index: 1;
+
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
 }
 
-
-
+/* 📱 响应式布局：图表容器在移动端高度缩小 */
 @media screen and (max-width: 768px) {
   .tag-chart-container {
     height: 400px;
@@ -1199,13 +1143,14 @@ figure.highlight .code pre {
   }
 }
 
-/* 标签云整体样式 */
+/* ☁️ 标签云容器样式 */
 .tag-cloud {
   text-align: center;
   margin-bottom: 60px;
   line-height: 2em;
 }
 
+/* 🏷️ 单个标签链接样式 */
 .tag-cloud a {
   margin: 8px;
   display: inline-block;
@@ -1213,10 +1158,24 @@ figure.highlight .code pre {
   text-decoration: none;
 }
 
+/* 🌟 鼠标悬停放大效果 */
 .tag-cloud a:hover {
   transform: scale(1.2);
   opacity: 0.85;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* 时间线结构样式（如果未自定义） */
 .timeline {

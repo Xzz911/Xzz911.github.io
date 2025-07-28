@@ -239,76 +239,66 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <!-- 页面顶部“分类”标题 -->
 <div class="category-title-container">
-  <h1 class="category-title">分  类</h1>
+  <h1 class="category-title">分 类</h1>
 </div>
 
-<!-- 🌈 渐变分隔线 + 呼吸动效 START -->
+<!-- 🌈 渐变分隔线 + 呼吸动效 -->
 <div class="fancy-divider"></div>
-<!-- 🌈 渐变分隔线 + 呼吸动效 END -->
+
+<!-- 副标题 + 打字机字幕 -->
 <div class="category-subtitle">🧩 你想看的内容都在这里 🧩</div>
 <div class="category-typewriter">—— 分类即秩序，归纳即智慧 ——</div>
 
-
-
 <div id="archives">
-  <!-- 分类统计图和标签按钮整体容器 -->
+  <!-- 分类统计图容器 -->
   <div class="category-chart-wrapper">
-    <!-- 分类统计图 -->
     <div id="category-chart"></div>
-
-    <!-- 分类标签按钮 -->
-    
-    <div class="categories-tags">
-      
-      
-        
-        <a class="category-pill" href="/categories/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/">
-          <span class="dot" style="
-            background-color: #74b9ff;
-            animation-delay: 0.45s;
-            --main-color: #74b9ff;
-          "></span>
-          年度总结（1）
-        </a>
-        
-      
-        
-        <a class="category-pill" href="/categories/CTF/">
-          <span class="dot" style="
-            background-color: #a29bfe;
-            animation-delay: 1.83s;
-            --main-color: #a29bfe;
-          "></span>
-          CTF（16）
-        </a>
-        
-      
-        
-        <a class="category-pill" href="/categories/%E6%8A%80%E5%B7%A7/">
-          <span class="dot" style="
-            background-color: #fdcb6e;
-            animation-delay: 0.45s;
-            --main-color: #fdcb6e;
-          "></span>
-          技巧（5）
-        </a>
-        
-      
-        
-        <a class="category-pill" href="/categories/%E6%8A%80%E5%B7%A7/%E6%96%B9%E6%B3%95/">
-          <span class="dot" style="
-            background-color: #6c5ce7;
-            animation-delay: 1.27s;
-            --main-color: #6c5ce7;
-          "></span>
-          方法（5）
-        </a>
-        
-      
-    </div>
   </div>
 
-  <!-- 分类对应的文章时间轴 -->
+  <!-- ✅ 分类标签按钮（改为类似标签云样式） -->
+  
+  <div class="categories-tags">
+    
+    
+      
+      <a class="category-cloud-item"
+         href="/categories/CTF/"
+         title="CTF"
+         style="font-size:28px; color:#ff7d73;">
+        #CTF<sup>16</sup>
+      </a>
+      
+    
+      
+      <a class="category-cloud-item"
+         href="/categories/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/"
+         title="年度总结"
+         style="font-size:13px; color:#00bcd4;">
+        #年度总结<sup>1</sup>
+      </a>
+      
+    
+      
+      <a class="category-cloud-item"
+         href="/categories/%E6%8A%80%E5%B7%A7/"
+         title="技巧"
+         style="font-size:17px; color:#ff7d73;">
+        #技巧<sup>5</sup>
+      </a>
+      
+    
+      
+      <a class="category-cloud-item"
+         href="/categories/%E6%8A%80%E5%B7%A7/%E6%96%B9%E6%B3%95/"
+         title="方法"
+         style="font-size:17px; color:#03a9f4;">
+        #方法<sup>5</sup>
+      </a>
+      
+    
+  </div>
+
+  <!-- 分类对应文章时间轴 -->
   
     <div class="timeline">
       <div class="timeline-tail"></div>
@@ -321,30 +311,24 @@
           
             <span class="category">
               <a href="/categories/CTF/">
-                <span class="icon">
-                  <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
+                <span class="icon"><i class="fa-solid fa-bookmark fa-fw"></i></span>
                 CTF
               </a>
             </span>
           
           
             <span class="tags">
-              <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
-              </span>
+              <span class="icon"><i class="fa-solid fa-tags fa-fw"></i></span>
               
               
                 <span class="tag">
-                  
-                  <a href="/tags/PWN/" style="color: #ff7d73">
+                  <a href="/tags/PWN/" style="color: #00a596">
                     PWN
                   </a>
                 </span>
               
                 <span class="tag">
-                  
-                  <a href="/tags/SHCTF/" style="color: #00bcd4">
+                  <a href="/tags/SHCTF/" style="color: #03a9f4">
                     SHCTF
                   </a>
                 </span>
@@ -366,30 +350,24 @@
           
             <span class="category">
               <a href="/categories/CTF/">
-                <span class="icon">
-                  <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
+                <span class="icon"><i class="fa-solid fa-bookmark fa-fw"></i></span>
                 CTF
               </a>
             </span>
           
           
             <span class="tags">
-              <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
-              </span>
+              <span class="icon"><i class="fa-solid fa-tags fa-fw"></i></span>
               
               
                 <span class="tag">
-                  
-                  <a href="/tags/PWN/" style="color: #00bcd4">
+                  <a href="/tags/PWN/" style="color: #03a9f4">
                     PWN
                   </a>
                 </span>
               
                 <span class="tag">
-                  
-                  <a href="/tags/SHCTF/" style="color: #ffa2c4">
+                  <a href="/tags/SHCTF/" style="color: #00bcd4">
                     SHCTF
                   </a>
                 </span>
@@ -411,30 +389,24 @@
           
             <span class="category">
               <a href="/categories/CTF/">
-                <span class="icon">
-                  <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
+                <span class="icon"><i class="fa-solid fa-bookmark fa-fw"></i></span>
                 CTF
               </a>
             </span>
           
           
             <span class="tags">
-              <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
-              </span>
+              <span class="icon"><i class="fa-solid fa-tags fa-fw"></i></span>
               
               
                 <span class="tag">
-                  
-                  <a href="/tags/PWN/" style="color: #00bcd4">
+                  <a href="/tags/PWN/" style="color: #00a596">
                     PWN
                   </a>
                 </span>
               
                 <span class="tag">
-                  
-                  <a href="/tags/SHCTF/" style="color: #00a596">
+                  <a href="/tags/SHCTF/" style="color: #00bcd4">
                     SHCTF
                   </a>
                 </span>
@@ -456,29 +428,23 @@
           
             <span class="category">
               <a href="/categories/CTF/">
-                <span class="icon">
-                  <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
+                <span class="icon"><i class="fa-solid fa-bookmark fa-fw"></i></span>
                 CTF
               </a>
             </span>
           
           
             <span class="tags">
-              <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
-              </span>
+              <span class="icon"><i class="fa-solid fa-tags fa-fw"></i></span>
               
               
                 <span class="tag">
-                  
-                  <a href="/tags/PWN/" style="color: #00bcd4">
+                  <a href="/tags/PWN/" style="color: #ffa2c4">
                     PWN
                   </a>
                 </span>
               
                 <span class="tag">
-                  
                   <a href="/tags/NewStarCTF/" style="color: #ff7d73">
                     NewStarCTF
                   </a>
@@ -501,29 +467,23 @@
           
             <span class="category">
               <a href="/categories/CTF/">
-                <span class="icon">
-                  <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
+                <span class="icon"><i class="fa-solid fa-bookmark fa-fw"></i></span>
                 CTF
               </a>
             </span>
           
           
             <span class="tags">
-              <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
-              </span>
+              <span class="icon"><i class="fa-solid fa-tags fa-fw"></i></span>
               
               
                 <span class="tag">
-                  
-                  <a href="/tags/PWN/" style="color: #03a9f4">
+                  <a href="/tags/PWN/" style="color: #ff7d73">
                     PWN
                   </a>
                 </span>
               
                 <span class="tag">
-                  
                   <a href="/tags/FSCTF/" style="color: #00bcd4">
                     FSCTF
                   </a>
@@ -546,30 +506,24 @@
           
             <span class="category">
               <a href="/categories/CTF/">
-                <span class="icon">
-                  <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
+                <span class="icon"><i class="fa-solid fa-bookmark fa-fw"></i></span>
                 CTF
               </a>
             </span>
           
           
             <span class="tags">
-              <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
-              </span>
+              <span class="icon"><i class="fa-solid fa-tags fa-fw"></i></span>
               
               
                 <span class="tag">
-                  
                   <a href="/tags/PWN/" style="color: #ff7d73">
                     PWN
                   </a>
                 </span>
               
                 <span class="tag">
-                  
-                  <a href="/tags/SWPU-NSS/" style="color: #00a596">
+                  <a href="/tags/SWPU-NSS/" style="color: #00bcd4">
                     SWPU NSS
                   </a>
                 </span>
@@ -591,29 +545,23 @@
           
             <span class="category">
               <a href="/categories/CTF/">
-                <span class="icon">
-                  <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
+                <span class="icon"><i class="fa-solid fa-bookmark fa-fw"></i></span>
                 CTF
               </a>
             </span>
           
           
             <span class="tags">
-              <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
-              </span>
+              <span class="icon"><i class="fa-solid fa-tags fa-fw"></i></span>
               
               
                 <span class="tag">
-                  
                   <a href="/tags/PWN/" style="color: #00a596">
                     PWN
                   </a>
                 </span>
               
                 <span class="tag">
-                  
                   <a href="/tags/NewStarCTF/" style="color: #ff7d73">
                     NewStarCTF
                   </a>
@@ -636,30 +584,24 @@
           
             <span class="category">
               <a href="/categories/CTF/">
-                <span class="icon">
-                  <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
+                <span class="icon"><i class="fa-solid fa-bookmark fa-fw"></i></span>
                 CTF
               </a>
             </span>
           
           
             <span class="tags">
-              <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
-              </span>
+              <span class="icon"><i class="fa-solid fa-tags fa-fw"></i></span>
               
               
                 <span class="tag">
-                  
-                  <a href="/tags/PWN/" style="color: #03a9f4">
+                  <a href="/tags/PWN/" style="color: #ff7d73">
                     PWN
                   </a>
                 </span>
               
                 <span class="tag">
-                  
-                  <a href="/tags/MoeCTF/" style="color: #00bcd4">
+                  <a href="/tags/MoeCTF/" style="color: #ffa2c4">
                     MoeCTF
                   </a>
                 </span>
@@ -681,30 +623,24 @@
           
             <span class="category">
               <a href="/categories/CTF/">
-                <span class="icon">
-                  <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
+                <span class="icon"><i class="fa-solid fa-bookmark fa-fw"></i></span>
                 CTF
               </a>
             </span>
           
           
             <span class="tags">
-              <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
-              </span>
+              <span class="icon"><i class="fa-solid fa-tags fa-fw"></i></span>
               
               
                 <span class="tag">
-                  
                   <a href="/tags/PWN/" style="color: #ff7d73">
                     PWN
                   </a>
                 </span>
               
                 <span class="tag">
-                  
-                  <a href="/tags/NewStarCTF/" style="color: #00a596">
+                  <a href="/tags/NewStarCTF/" style="color: #00bcd4">
                     NewStarCTF
                   </a>
                 </span>
@@ -726,30 +662,24 @@
           
             <span class="category">
               <a href="/categories/CTF/">
-                <span class="icon">
-                  <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
+                <span class="icon"><i class="fa-solid fa-bookmark fa-fw"></i></span>
                 CTF
               </a>
             </span>
           
           
             <span class="tags">
-              <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
-              </span>
+              <span class="icon"><i class="fa-solid fa-tags fa-fw"></i></span>
               
               
                 <span class="tag">
-                  
-                  <a href="/tags/PWN/" style="color: #ffa2c4">
+                  <a href="/tags/PWN/" style="color: #03a9f4">
                     PWN
                   </a>
                 </span>
               
                 <span class="tag">
-                  
-                  <a href="/tags/HNCTF/" style="color: #03a9f4">
+                  <a href="/tags/HNCTF/" style="color: #ff7d73">
                     HNCTF
                   </a>
                 </span>
@@ -771,29 +701,23 @@
           
             <span class="category">
               <a href="/categories/CTF/">
-                <span class="icon">
-                  <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
+                <span class="icon"><i class="fa-solid fa-bookmark fa-fw"></i></span>
                 CTF
               </a>
             </span>
           
           
             <span class="tags">
-              <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
-              </span>
+              <span class="icon"><i class="fa-solid fa-tags fa-fw"></i></span>
               
               
                 <span class="tag">
-                  
-                  <a href="/tags/PWN/" style="color: #ffa2c4">
+                  <a href="/tags/PWN/" style="color: #ff7d73">
                     PWN
                   </a>
                 </span>
               
                 <span class="tag">
-                  
                   <a href="/tags/HNCTF/" style="color: #03a9f4">
                     HNCTF
                   </a>
@@ -816,30 +740,24 @@
           
             <span class="category">
               <a href="/categories/CTF/">
-                <span class="icon">
-                  <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
+                <span class="icon"><i class="fa-solid fa-bookmark fa-fw"></i></span>
                 CTF
               </a>
             </span>
           
           
             <span class="tags">
-              <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
-              </span>
+              <span class="icon"><i class="fa-solid fa-tags fa-fw"></i></span>
               
               
                 <span class="tag">
-                  
-                  <a href="/tags/PWN/" style="color: #00bcd4">
+                  <a href="/tags/PWN/" style="color: #03a9f4">
                     PWN
                   </a>
                 </span>
               
                 <span class="tag">
-                  
-                  <a href="/tags/SDCTF/" style="color: #ff7d73">
+                  <a href="/tags/SDCTF/" style="color: #00a596">
                     SDCTF
                   </a>
                 </span>
@@ -861,30 +779,24 @@
           
             <span class="category">
               <a href="/categories/CTF/">
-                <span class="icon">
-                  <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
+                <span class="icon"><i class="fa-solid fa-bookmark fa-fw"></i></span>
                 CTF
               </a>
             </span>
           
           
             <span class="tags">
-              <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
-              </span>
+              <span class="icon"><i class="fa-solid fa-tags fa-fw"></i></span>
               
               
                 <span class="tag">
-                  
-                  <a href="/tags/PWN/" style="color: #00a596">
+                  <a href="/tags/PWN/" style="color: #ff7d73">
                     PWN
                   </a>
                 </span>
               
                 <span class="tag">
-                  
-                  <a href="/tags/CISCN/" style="color: #00bcd4">
+                  <a href="/tags/CISCN/" style="color: #00a596">
                     CISCN
                   </a>
                 </span>
@@ -906,30 +818,24 @@
           
             <span class="category">
               <a href="/categories/CTF/">
-                <span class="icon">
-                  <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
+                <span class="icon"><i class="fa-solid fa-bookmark fa-fw"></i></span>
                 CTF
               </a>
             </span>
           
           
             <span class="tags">
-              <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
-              </span>
+              <span class="icon"><i class="fa-solid fa-tags fa-fw"></i></span>
               
               
                 <span class="tag">
-                  
-                  <a href="/tags/PWN/" style="color: #03a9f4">
+                  <a href="/tags/PWN/" style="color: #00a596">
                     PWN
                   </a>
                 </span>
               
                 <span class="tag">
-                  
-                  <a href="/tags/HGAME/" style="color: #00bcd4">
+                  <a href="/tags/HGAME/" style="color: #ffa2c4">
                     HGAME
                   </a>
                 </span>
@@ -951,30 +857,24 @@
           
             <span class="category">
               <a href="/categories/CTF/">
-                <span class="icon">
-                  <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
+                <span class="icon"><i class="fa-solid fa-bookmark fa-fw"></i></span>
                 CTF
               </a>
             </span>
           
           
             <span class="tags">
-              <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
-              </span>
+              <span class="icon"><i class="fa-solid fa-tags fa-fw"></i></span>
               
               
                 <span class="tag">
-                  
-                  <a href="/tags/PWN/" style="color: #ffa2c4">
+                  <a href="/tags/PWN/" style="color: #00bcd4">
                     PWN
                   </a>
                 </span>
               
                 <span class="tag">
-                  
-                  <a href="/tags/HNCTF/" style="color: #ff7d73">
+                  <a href="/tags/HNCTF/" style="color: #03a9f4">
                     HNCTF
                   </a>
                 </span>
@@ -996,30 +896,24 @@
           
             <span class="category">
               <a href="/categories/CTF/">
-                <span class="icon">
-                  <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
+                <span class="icon"><i class="fa-solid fa-bookmark fa-fw"></i></span>
                 CTF
               </a>
             </span>
           
           
             <span class="tags">
-              <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
-              </span>
+              <span class="icon"><i class="fa-solid fa-tags fa-fw"></i></span>
               
               
                 <span class="tag">
-                  
-                  <a href="/tags/PWN/" style="color: #ff7d73">
+                  <a href="/tags/PWN/" style="color: #00bcd4">
                     PWN
                   </a>
                 </span>
               
                 <span class="tag">
-                  
-                  <a href="/tags/MoeCTF/" style="color: #00bcd4">
+                  <a href="/tags/MoeCTF/" style="color: #ff7d73">
                     MoeCTF
                   </a>
                 </span>
@@ -1032,7 +926,7 @@
   
 </div>
 
-<!-- ECharts 图表脚本 -->
+<!-- ECharts 分类图表脚本 -->
 <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", () => {
@@ -1041,25 +935,13 @@
 
     const data = [
       
-        {
-          name: "年度总结",
-          value: "1"
-        },
+        { name: "CTF", value: 16 },
       
-        {
-          name: "CTF",
-          value: "16"
-        },
+        { name: "年度总结", value: 1 },
       
-        {
-          name: "技巧",
-          value: "5"
-        },
+        { name: "技巧", value: 5 },
       
-        {
-          name: "方法",
-          value: "5"
-        },
+        { name: "方法", value: 5 },
       
     ];
 
@@ -1082,39 +964,38 @@
         right: 20,
         top: 'middle',
         textStyle: {
-          fontSize: 14
+          fontSize: 14,
+          color: '#ccc'
         }
       },
-      series: [
-        {
-          name: '分类',
-          type: 'pie',
-          radius: ['45%', '65%'],
-          center: ['40%', '55%'],
-          avoidLabelOverlap: true,
-          label: {
-            show: true,
-            position: 'outside',
-            formatter: '{b}\n{d}%',
-            fontSize: 13
-          },
-          labelLine: {
-            length: 20,
-            length2: 10,
-            smooth: true
-          },
-          itemStyle: {
-            borderRadius: 6,
-            borderColor: '#fff',
-            borderWidth: 2
-          },
-          emphasis: {
-            scale: true,
-            scaleSize: 10
-          },
-          data: data
-        }
-      ]
+      series: [{
+        name: '分类',
+        type: 'pie',
+        radius: ['45%', '65%'],
+        center: ['40%', '55%'],
+        avoidLabelOverlap: true,
+        label: {
+          show: true,
+          position: 'outside',
+          formatter: '{b}\n{d}%',
+          fontSize: 13
+        },
+        labelLine: {
+          length: 20,
+          length2: 10,
+          smooth: true
+        },
+        itemStyle: {
+          borderRadius: 6,
+          borderColor: '#fff',
+          borderWidth: 2
+        },
+        emphasis: {
+          scale: true,
+          scaleSize: 10
+        },
+        data: data
+      }]
     };
 
     myChart.setOption(option);
