@@ -907,12 +907,15 @@ figure.highlight .code pre {
   transform: translateX(-50%); /* 右移自身宽度一半，实现水平居中 */
   width: calc(100vw - 200px); /* 宽度为视口宽度减去两侧边距 */
   max-width: unset !important; /* 取消任何 max-width 限制 */
-  background: rgba(255, 255, 255, 0.4); /* 半透明白色背景 */
-  padding: 30px;
-  border-radius: 16px; /* 圆角 */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* 轻微阴影 */
-  box-sizing: border-box; /* 计算内边距和边框到宽高内 */
-  z-index: 10; /* 堆叠顺序，保证覆盖其他元素 */
+  background: transparent;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px; /* 圆角 */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* 轻微阴影 */
+  transition: all 0.3s ease-in-out;
+  z-index: 1; /* 堆叠顺序，保证覆盖其他元素 */
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
 
 /* 分类标签区域，使用弹性盒布局，允许换行，居中对齐，标签间距 */
