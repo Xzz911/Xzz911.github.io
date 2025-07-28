@@ -901,12 +901,13 @@ figure.highlight .code pre {
 
 /* 分类图表外层包装容器，解除宽度限制，并居中显示 */
 .category-chart-wrapper {
-  margin-top: 248px; /* 顶部距离，可根据需求调整 */
   position: relative;
-  left: 50%; /* 左移 50%  */
-  transform: translateX(-50%); /* 右移自身宽度一半，实现水平居中 */
-  width: calc(100vw - 200px); /* 宽度为视口宽度减去两侧边距 */
-  max-width: unset !important; /* 取消任何 max-width 限制 */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  max-width: 1200px;
+  margin-top: 240px;
+  height: 460px;
   background: transparent;
   padding: 20px;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -1088,24 +1089,24 @@ figure.highlight .code pre {
   opacity: 0.85;
 }
 
-/* 一般副标题样式，白色文字，居中，限制最大宽度 */
-.subtitle {
+/* 打字机效果容器，隐藏溢出，单行不换行，带闪烁光标 */
+.category-typewriter {
   color: #fff;
   font-size: 18px;
   text-align: center;
-  margin: 20px auto 30px;
   opacity: 0.8;
-  max-width: fit-content; /* 防止撑满父元素 */
-}
+  max-width: fit-content;
+  margin: 20px auto 30px;
 
-/* 打字机效果容器，隐藏溢出，单行不换行，带闪烁光标 */
-.typewriter {
   overflow: hidden;
   white-space: nowrap;
-  border-right: 2px solid #fff; /* 光标样式 */
-  width: 0; /* 初始宽度为0，动画逐步展开 */
-  margin: 0 auto;
-  animation: typing 3.5s steps(28, end) forwards, blink 0.75s step-end infinite;
+  border-right: 2px solid #fff;
+  width: 0;
+
+  animation:
+  typing 3.5s steps(28, end) forwards,     /* 打字效果 */
+  blink 0.75s step-end infinite,           /* 光标闪烁 */
+  cursor-hide 0s 4.0s forwards;            /* 4.0s 后隐藏光标 */
 }
 
 /* 打字机文字逐字展开动画，28个字符宽度 */
@@ -1119,25 +1120,65 @@ figure.highlight .code pre {
   50% { border-color: transparent; }
 }
 
+/* 打字完成后隐藏光标 */
+@keyframes cursor-hide {
+  to { border-right: none; }
+}
 
 
 
 
 
+/* 标签页副标题（渐变文字 + 呼吸动效） */
+.tag-subtitle {
+  text-align: center;
+  font-size: 16px;
+  color: #ddd;
+  margin-top: -20px;
+  margin-bottom: 20px;
+  opacity: 0.85;
+}
 
+/* 标签页字幕（打字机效果） */
+.tag-typewriter {
+  font-size: 18px;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid #fff; /* 光标样式 */
+  color: #ddd; /* ✅ 字体颜色 */
+  width: 0; /* 初始宽度为0，动画逐步展开 */
+  margin: 0 auto;
+  
+  animation:
+  typing 3.5s steps(28, end) forwards,     /* 打字效果 */
+  blink 0.75s step-end infinite,           /* 光标闪烁 */
+  cursor-hide 0s 4.0s forwards;            /* 4.0s 后隐藏光标 */
+}
 
+/* 外层包装器 - 控制整体位置 */
+.tag-chart-wrapper {
+  text-align: center;
+  margin-top: 200px;
+  margin-bottom: 40px;
+}
 
-/* 标签图表容器 */
-#top-tags-chart,
-/* 图表容器美化样式 */
+/* “标签”标题样式 */
+.tag-title {
+  font-size: 48px;
+  font-weight: bold;
+  color: #fff;
+  animation: fadeInDown 1s ease;
+}
+
+/* 图表容器样式（加宽版） */
 .tag-chart-container {
   position: relative;
   left: 50%;
   transform: translateX(-50%);
-  width: 100vw; /* 使用整个视口宽度 */
-  max-width: 1200px; /* 更宽了 */
+  width: 100vw;
+  max-width: 1200px;
+  margin-top: 240px;
   height: 460px;
-  margin: 40px 0;
   padding: 20px;
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -1148,6 +1189,7 @@ figure.highlight .code pre {
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
 }
+
 
 
 @media screen and (max-width: 768px) {
@@ -1213,3 +1255,9 @@ figure.highlight .code pre {
   margin-top: 6px;
   font-size: 14px;
 }
+
+
+
+
+
+
