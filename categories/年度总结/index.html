@@ -255,6 +255,7 @@
     <div id="category-chart"></div>
   </div>
 
+  
   <!-- ✅ 分类标签按钮（改为类似标签云样式） -->
   
   <div class="categories-tags">
@@ -264,7 +265,7 @@
       <a class="category-cloud-item"
          href="/categories/CTF/"
          title="CTF"
-         style="font-size:28px; color:#ff7d73;">
+         style="font-size:28px; color:#ffa2c4;">
         #CTF<sup>16</sup>
       </a>
       
@@ -282,7 +283,7 @@
       <a class="category-cloud-item"
          href="/categories/%E6%8A%80%E5%B7%A7/"
          title="技巧"
-         style="font-size:17px; color:#ffa2c4;">
+         style="font-size:17px; color:#03a9f4;">
         #技巧<sup>5</sup>
       </a>
       
@@ -322,7 +323,7 @@
               
               
                 <span class="tag">
-                  <a href="/tags/%E5%A5%8B%E8%BF%9B/" style="color: #ffa2c4">
+                  <a href="/tags/%E5%A5%8B%E8%BF%9B/" style="color: #00bcd4">
                     奋进
                   </a>
                 </span>
@@ -369,42 +370,48 @@
         formatter: '{b} : {c} 篇 ({d}%)'
       },
       legend: {
-        orient: 'vertical',
-        right: 20,
-        top: 'middle',
+        orient: 'horizontal',
+        bottom: 0,
+        left: 'center',
+        icon: 'roundRect', // 圆角矩形
+        itemWidth: 14,
+        itemHeight: 6,
+        itemGap: 18,
         textStyle: {
-          fontSize: 14,
-          color: '#ccc'
+          color: '#ddd',
+          fontSize: 13,
+          fontFamily: 'sans-serif'
         }
       },
       series: [{
-        name: '分类',
-        type: 'pie',
-        radius: ['45%', '65%'],
-        center: ['40%', '55%'],
-        avoidLabelOverlap: true,
-        label: {
-          show: true,
-          position: 'outside',
-          formatter: '{b}\n{d}%',
-          fontSize: 13
-        },
-        labelLine: {
-          length: 20,
-          length2: 10,
-          smooth: true
-        },
-        itemStyle: {
-          borderRadius: 6,
-          borderColor: '#fff',
-          borderWidth: 2
-        },
-        emphasis: {
-          scale: true,
-          scaleSize: 10
-        },
-        data: data
-      }]
+      name: '分类',
+      type: 'pie',
+      roseType: 'area', // ✅ 启用玫瑰图效果（关键）
+      radius: ['30%', '65%'], // 内外半径范围调整，更有层次感
+      center: ['50%', '50%'], // 居中显示
+      avoidLabelOverlap: true,
+      label: {
+        show: true,
+        position: 'outside',
+        formatter: '{b}\n{d}%',
+        fontSize: 13
+      },
+      labelLine: {
+        length: 20,
+        length2: 10,
+        smooth: true
+      },
+      itemStyle: {
+        borderRadius: 6,
+        borderColor: '#fff',
+        borderWidth: 2
+      },
+      emphasis: {
+        scale: true,
+        scaleSize: 10
+      },
+      data: data
+    }]
     };
 
     myChart.setOption(option);
