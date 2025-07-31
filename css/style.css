@@ -1164,75 +1164,138 @@ figure.highlight .code pre {
   opacity: 0.85;
 }
 
+/* ⬇️ 图表上方标题的容器（用于整体定位） */
+.archive-header {
+  text-align: center;               /* 居中 */
+  margin-top: 200px;               /* 顶部外边距 */
+  margin-bottom: 40px;             /* 底部外边距 */
+}
+
+.archive-title {
+  text-align: center;              /* 居中标题文字 */
+  font-size: 48px;                 /* 标题字号 */
+  font-weight: bold;              /* 加粗 */
+  color: #fff;                     /* 白色字体 */
+  animation: fadeInDown 1s ease;  /* 向下淡入动画 */
+}
 
 /* 📊 图表区域 */
 #archive-chart {
-  margin-top: 20px;
-  width: 100%;
-  height: 360px;
+  margin-top: 20px;                /* 上边距 */
+  width: 100%;                     /* 宽度占满父容器 */
+  height: 360px;                   /* 图表高度 */
 }
 
 /* 📊 统计图容器样式 */
 #archive-chart-wrapper {
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100vw;
-  max-width: 1200px;
-  margin-top: 240px;
-  height: 460px;
-  background: transparent;
-  padding: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease-in-out;
-  z-index: 1;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  position: relative;              /* 相对定位用于居中 */
+  left: 50%;                       /* 向右偏移50% */
+  transform: translateX(-50%);     /* 水平居中修正 */
+  width: 100vw;                    /* 占满视口宽度 */
+  max-width: 1200px;               /* 最大宽度 */
+  margin-top: 240px;               /* 上边距 */
+  height: 460px;                   /* 容器高度 */
+  background: transparent;         /* 背景透明 */
+  padding: 20px;                   /* 内边距 */
+  border: 1px solid rgba(255, 255, 255, 0.1); /* 浅白边框 */
+  border-radius: 12px;             /* 圆角 */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* 阴影 */
+  transition: all 0.3s ease-in-out; /* 平滑过渡 */
+  z-index: 1;                      /* 层级提升 */
+  backdrop-filter: blur(6px);      /* 背景模糊 */
+  -webkit-backdrop-filter: blur(6px); /* 兼容 Safari */
 }
 
 /* 📊 统计图顶部标题和下拉菜单 */
 .archive-chart-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 10px;
+  display: flex;                   /* 横向布局 */
+  justify-content: space-between; /* 两端对齐 */
+  align-items: center;            /* 垂直居中 */
+  padding: 0 10px;                 /* 左右内边距 */
 }
 
 .archive-chart-header h2 {
-  color: white;
-  font-size: 20px;
+  color: white;                    /* 标题白色 */
+  font-size: 20px;                 /* 标题字号 */
 }
 
+/* 📁 年份下拉选择器容器 */
+.selector-wrapper {
+  position: relative;              /* 相对定位，为了内部箭头定位 */
+  display: inline-block;           /* 行内块元素 */
+}
+
+/* 📁 年份选择器样式 */
 #year-selector {
-  appearance: none;
-  background: rgba(255, 255, 255, 0.05);
-  color: #fff;
-  padding: 6px 14px;
-  font-size: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  cursor: pointer;
-  transition: all 0.3s ease;
+  appearance: none;                /* 去除原生样式 */
+  background: rgba(255, 255, 255, 0.05); /* 半透明背景 */
+  color: #fff;                     /* 白字 */
+  padding: 6px 18px 6px 14px;      /* 上右下左内边距（右边缩小） */
+  font-size: 14px;                 /* 字体大小 */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* 边框半透明 */
+  border-radius: 12px;             /* 圆角 */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* 阴影 */
+  cursor: pointer;                /* 鼠标指针 */
+  transition: all 0.3s ease;       /* 平滑变化 */
+  line-height: 1.5;                /* 行高 */
 }
 
-/* 鼠标悬停时变亮 */
-#year-selector:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.4);
+/* 🔽 年份选择器右侧箭头 */
+.selector-arrow {
+  position: absolute;             /* 绝对定位 */
+  right: 12px;                    /* 靠右边对齐 */
+  top: 50%;                       /* 垂直居中 */
+  transform: translateY(-50%);    /* 修正居中位置 */
+  pointer-events: none;           /* 不可点 */
+  font-size: 10px;                /* 字体大小 */
+  color: #fff;                    /* 白色 */
+  transition: transform 0.3s ease; /* 箭头旋转动画 */
 }
 
-/* 点击/聚焦时字体变黑 + 边框高亮 */
-#year-selector:focus,
-#year-selector:active {
-  color: #000;
-  background: rgba(255, 255, 255, 0.85);
-  border-color: #00e3ff;
-  box-shadow: 0 0 0 3px rgba(0, 227, 255, 0.4);
-  outline: none;
+/* 🔄 聚焦时效果：高亮 + 箭头旋转 */
+#year-selector:focus {
+  color: #000;                                      /* 黑字 */
+  background: rgba(255, 255, 255, 0.85);            /* 白背景 */
+  border-color: #00e3ff;                           /* 边框高亮 */
+  box-shadow: 0 0 0 3px rgba(0, 227, 255, 0.4);     /* 外阴影 */
+  outline: none;                                   /* 去掉蓝边 */
 }
+
+#year-selector:focus + .selector-arrow {
+  transform: translateY(-50%) rotate(180deg);      /* 箭头旋转 */
+  color: #000;                                     /* 黑色箭头 */
+}
+
+/* 🌈 存档页副标题样式（渐变颜色 + 呼吸动效） */
+.archive-subtitle {
+  text-align: center;              /* 居中 */
+  font-size: 16px;                 /* 字号 */
+  color: #ddd;                     /* 灰色字体 */
+  margin-top: -20px;              /* 向上偏移 */
+  margin-bottom: 20px;            /* 下边距 */
+  opacity: 0.85;                   /* 透明度 */
+  animation: archive-breathing 3s ease-in-out infinite; /* 呼吸动画 */
+}
+
+/* ✨ 存档页打字机字幕样式（打字 + 光标 + 自动隐藏） */
+.archive-typewriter {
+  font-size: 18px;                 /* 字号 */
+  color: #ddd;                     /* 灰字 */
+  overflow: hidden;               /* 隐藏溢出 */
+  white-space: nowrap;            /* 单行文本 */
+  border-right: 2px solid #fff;   /* 光标样式 */
+  width: 0;                        /* 初始宽度为0，用于打字效果 */
+  margin: 0 auto;                 /* 水平居中 */
+  animation:
+    typing 3.5s steps(28, end) forwards,    /* 打字效果 */
+    blink 0.75s step-end infinite,          /* 光标闪烁 */
+    cursor-hide 0s 4.0s forwards;           /* 光标自动隐藏 */
+}
+
+
+
+
+
 
 
 
