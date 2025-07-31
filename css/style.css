@@ -1165,7 +1165,14 @@ figure.highlight .code pre {
 }
 
 
+/* 📊 图表区域 */
+#archive-chart {
+  margin-top: 20px;
+  width: 100%;
+  height: 360px;
+}
 
+/* 📊 统计图容器样式 */
 #archive-chart-wrapper {
   position: relative;
   left: 50%;
@@ -1185,10 +1192,55 @@ figure.highlight .code pre {
   -webkit-backdrop-filter: blur(6px);
 }
 
-#archive-chart {
-  width: 100%;
-  height: 100%;
+/* 📊 统计图顶部标题和下拉菜单 */
+.archive-chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
 }
+
+.archive-chart-header h2 {
+  color: white;
+  font-size: 20px;
+}
+
+#year-selector {
+  appearance: none;
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  padding: 6px 14px;
+  font-size: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* 鼠标悬停时变亮 */
+#year-selector:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* 点击/聚焦时字体变黑 + 边框高亮 */
+#year-selector:focus,
+#year-selector:active {
+  color: #000;
+  background: rgba(255, 255, 255, 0.85);
+  border-color: #00e3ff;
+  box-shadow: 0 0 0 3px rgba(0, 227, 255, 0.4);
+  outline: none;
+}
+
+
+
+
+
+
+
+
 
 
 
