@@ -1194,7 +1194,6 @@ figure.highlight .code pre {
   width: 100vw;                    /* 占满视口宽度 */
   max-width: 1200px;               /* 最大宽度 */
   margin-top: 240px;               /* 上边距 */
-  height: 460px;                   /* 容器高度 */
   background: transparent;         /* 背景透明 */
   padding: 20px;                   /* 内边距 */
   border: 1px solid rgba(255, 255, 255, 0.1); /* 浅白边框 */
@@ -1204,6 +1203,10 @@ figure.highlight .code pre {
   z-index: 1;                      /* 层级提升 */
   backdrop-filter: blur(6px);      /* 背景模糊 */
   -webkit-backdrop-filter: blur(6px); /* 兼容 Safari */
+
+  /* ✅ 修改点：让高度自适应内容 */
+  height: auto;
+  overflow: visible;
 }
 
 /* 📊 统计图顶部标题和下拉菜单 */
