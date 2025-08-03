@@ -1298,67 +1298,35 @@ figure.highlight .code pre {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* 时间线结构样式（如果未自定义） */
-.timeline {
-  margin: 30px 0;
-  position: relative;
-  padding-left: 20px;
-  border-left: 2px solid #ccc;
+.simple-archive-list a:hover {
+  color: #00e3ff;
+  text-decoration: underline;
 }
 
-.timeline-tail {
-  width: 12px;
-  height: 12px;
-  background: #4facfe;
-  border-radius: 50%;
-  position: absolute;
-  left: -6px;
-  top: 5px;
+.archive-chart-header select {
+  margin-left: 10px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid #666;
+  background: #111;
+  color: #fff;
 }
 
-.timeline-content {
-  padding-left: 20px;
-}
 
-.timeline-content .item-time {
-  color: #aaa;
-  font-size: 14px;
-  margin-bottom: 6px;
-}
 
-.timeline-content h3 {
-  font-size: 18px;
-  margin: 0;
-}
 
-.timeline-content .info {
-  margin-top: 6px;
-  font-size: 14px;
-}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

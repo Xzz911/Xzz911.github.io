@@ -255,7 +255,9 @@
 <div id="archives">
 
   <!-- 📊 图表容器开始 -->
-  <div id="archive-chart-wrapper">
+  <div id="archive-chart-wrapper" style="padding: 20px; border-radius: 12px; background: rgba(255, 255, 255, 0.05); box-shadow: 0 0 8px rgba(0,0,0,0.1);">
+
+    <!-- 图表顶部标题与年份选择器 -->
     <div class="archive-chart-header">
       <h2>📈 文章发布统计</h2>
       <select id="year-selector">
@@ -263,1028 +265,773 @@
       </select>
       <i class="fa-solid fa-chevron-down selector-arrow"></i>
     </div>
-    <div id="archive-chart"></div>
+    <div id="archive-chart" style="height: 300px;"></div>
+
+    <!-- 📚 简洁文章列表样式 START -->
+    <div class="simple-archive-list" style="margin-top: 40px;">
+      <h3 style="font-size: 35px; margin-bottom: 16px; color: #fff;">文章总览 - 25</h3>
+
+      
+        <div class="archive-year-block" data-year="2025" style="margin-bottom: 24px;">
+          <div class="archive-year" style="font-size: 28px; margin-bottom: 10px; font-weight: bold; color: #fff;">
+            <span>2025</span> <span style="margin-left: 6px;"></span>
+          </div>
+
+          
+            <div class="archive-item" style="margin-bottom: 20px;">
+              <!-- 第一行：时间 + 分类 + 标签 -->
+              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
+                <i class="fa-solid fa-calendar-days"></i>
+                2025-06-18
+            
+                
+            
+                
+              </div>
+            
+              <!-- 第二行：文章标题 -->
+              <div style="margin-left: 56px; margin-top: 4px;">
+                <a href="/highlight-test/" style="color: #fff; font-size: 22px; text-decoration: none;">
+                  highlight-test
+                </a>
+              </div>
+            </div>
+            
+          
+            <div class="archive-item" style="margin-bottom: 20px;">
+              <!-- 第一行：时间 + 分类 + 标签 -->
+              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
+                <i class="fa-solid fa-calendar-days"></i>
+                2025-06-18
+            
+                
+            
+                
+                  <span style="margin-left: 16px; color: #c9d;">
+                    <i class="fa-solid fa-tags"></i>
+                    hexo, demo
+                  </span>
+                
+              </div>
+            
+              <!-- 第二行：文章标题 -->
+              <div style="margin-left: 56px; margin-top: 4px;">
+                <a href="/%E7%BB%83%E4%B9%A0/" style="color: #fff; font-size: 22px; text-decoration: none;">
+                  简单的 Hexo 文章示例
+                </a>
+              </div>
+            </div>
+            
+          
+            <div class="archive-item" style="margin-bottom: 20px;">
+              <!-- 第一行：时间 + 分类 + 标签 -->
+              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
+                <i class="fa-solid fa-calendar-days"></i>
+                2025-06-18
+            
+                
+            
+                
+              </div>
+            
+              <!-- 第二行：文章标题 -->
+              <div style="margin-left: 56px; margin-top: 4px;">
+                <a href="/hello-world/" style="color: #fff; font-size: 22px; text-decoration: none;">
+                  Hello World
+                </a>
+              </div>
+            </div>
+            
+          
+        </div>
+      
+        <div class="archive-year-block" data-year="2024" style="margin-bottom: 24px;">
+          <div class="archive-year" style="font-size: 28px; margin-bottom: 10px; font-weight: bold; color: #fff;">
+            <span>2024</span> <span style="margin-left: 6px;"></span>
+          </div>
+
+          
+            <div class="archive-item" style="margin-bottom: 20px;">
+              <!-- 第一行：时间 + 分类 + 标签 -->
+              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
+                <i class="fa-solid fa-calendar-days"></i>
+                2024-12-31
+            
+                
+                  <span style="margin-left: 16px; color: #9cd;">
+                    <i class="fa-solid fa-bookmark"></i>
+                    年度总结
+                  </span>
+                
+            
+                
+                  <span style="margin-left: 16px; color: #c9d;">
+                    <i class="fa-solid fa-tags"></i>
+                    奋进
+                  </span>
+                
+              </div>
+            
+              <!-- 第二行：文章标题 -->
+              <div style="margin-left: 56px; margin-top: 4px;">
+                <a href="/2024%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" style="color: #fff; font-size: 22px; text-decoration: none;">
+                  2024年度总结：保持正念 延迟满足
+                </a>
+              </div>
+            </div>
+            
+          
+        </div>
+      
+        <div class="archive-year-block" data-year="2023" style="margin-bottom: 24px;">
+          <div class="archive-year" style="font-size: 28px; margin-bottom: 10px; font-weight: bold; color: #fff;">
+            <span>2023</span> <span style="margin-left: 6px;"></span>
+          </div>
+
+          
+            <div class="archive-item" style="margin-bottom: 20px;">
+              <!-- 第一行：时间 + 分类 + 标签 -->
+              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
+                <i class="fa-solid fa-calendar-days"></i>
+                2023-11-04
+            
+                
+                  <span style="margin-left: 16px; color: #9cd;">
+                    <i class="fa-solid fa-bookmark"></i>
+                    CTF
+                  </span>
+                
+            
+                
+                  <span style="margin-left: 16px; color: #c9d;">
+                    <i class="fa-solid fa-tags"></i>
+                    PWN, SHCTF
+                  </span>
+                
+              </div>
+            
+              <!-- 第二行：文章标题 -->
+              <div style="margin-left: 56px; margin-top: 4px;">
+                <a href="/SHCTF%202023%20%5BWEEK%203%5D%20PWN/" style="color: #fff; font-size: 22px; text-decoration: none;">
+                  SHCTF 2023 [WEEK 3] PWN
+                </a>
+              </div>
+            </div>
+            
+          
+            <div class="archive-item" style="margin-bottom: 20px;">
+              <!-- 第一行：时间 + 分类 + 标签 -->
+              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
+                <i class="fa-solid fa-calendar-days"></i>
+                2023-11-02
+            
+                
+                  <span style="margin-left: 16px; color: #9cd;">
+                    <i class="fa-solid fa-bookmark"></i>
+                    技巧
+                  </span>
+                
+            
+                
+                  <span style="margin-left: 16px; color: #c9d;">
+                    <i class="fa-solid fa-tags"></i>
+                    PWN
+                  </span>
+                
+              </div>
+            
+              <!-- 第二行：文章标题 -->
+              <div style="margin-left: 56px; margin-top: 4px;">
+                <a href="/PWN%20PWN%20PWN%20!!!%20%E6%8A%80%E5%B7%A7%20(5)/" style="color: #fff; font-size: 22px; text-decoration: none;">
+                  PWN PWN PWN !!! 技巧 (5)
+                </a>
+              </div>
+            </div>
+            
+          
+            <div class="archive-item" style="margin-bottom: 20px;">
+              <!-- 第一行：时间 + 分类 + 标签 -->
+              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
+                <i class="fa-solid fa-calendar-days"></i>
+                2023-11-01
+            
+                
+                  <span style="margin-left: 16px; color: #9cd;">
+                    <i class="fa-solid fa-bookmark"></i>
+                    CTF
+                  </span>
+                
+            
+                
+                  <span style="margin-left: 16px; color: #c9d;">
+                    <i class="fa-solid fa-tags"></i>
+                    PWN, SHCTF
+                  </span>
+                
+              </div>
+            
+              <!-- 第二行：文章标题 -->
+              <div style="margin-left: 56px; margin-top: 4px;">
+                <a href="/SHCTF%202023%20%5BWEEK%202%5D%20PWN/" style="color: #fff; font-size: 22px; text-decoration: none;">
+                  SHCTF 2023 [WEEK 2] PWN
+                </a>
+              </div>
+            </div>
+            
+          
+            <div class="archive-item" style="margin-bottom: 20px;">
+              <!-- 第一行：时间 + 分类 + 标签 -->
+              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
+                <i class="fa-solid fa-calendar-days"></i>
+                2023-10-31
+            
+                
+                  <span style="margin-left: 16px; color: #9cd;">
+                    <i class="fa-solid fa-bookmark"></i>
+                    CTF
+                  </span>
+                
+            
+                
+                  <span style="margin-left: 16px; color: #c9d;">
+                    <i class="fa-solid fa-tags"></i>
+                    PWN, SHCTF
+                  </span>
+                
+              </div>
+            
+              <!-- 第二行：文章标题 -->
+              <div style="margin-left: 56px; margin-top: 4px;">
+                <a href="/SHCTF%202023%20%5BWEEK%201%5D%20PWN/" style="color: #fff; font-size: 22px; text-decoration: none;">
+                  SHCTF 2023 [WEEK 1] PWN
+                </a>
+              </div>
+            </div>
+            
+          
+            <div class="archive-item" style="margin-bottom: 20px;">
+              <!-- 第一行：时间 + 分类 + 标签 -->
+              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
+                <i class="fa-solid fa-calendar-days"></i>
+                2023-10-29
+            
+                
+                  <span style="margin-left: 16px; color: #9cd;">
+                    <i class="fa-solid fa-bookmark"></i>
+                    技巧
+                  </span>
+                
+            
+                
+                  <span style="margin-left: 16px; color: #c9d;">
+                    <i class="fa-solid fa-tags"></i>
+                    PWN
+                  </span>
+                
+              </div>
+            
+              <!-- 第二行：文章标题 -->
+              <div style="margin-left: 56px; margin-top: 4px;">
+                <a href="/PWN%20PWN%20PWN%20!!!%20%E6%8A%80%E5%B7%A7%20(4)/" style="color: #fff; font-size: 22px; text-decoration: none;">
+                  PWN PWN PWN !!! 技巧 (4)
+                </a>
+              </div>
+            </div>
+            
+          
+            <div class="archive-item" style="margin-bottom: 20px;">
+              <!-- 第一行：时间 + 分类 + 标签 -->
+              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
+                <i class="fa-solid fa-calendar-days"></i>
+                2023-10-28
+            
+                
+                  <span style="margin-left: 16px; color: #9cd;">
+                    <i class="fa-solid fa-bookmark"></i>
+                    CTF
+                  </span>
+                
+            
+                
+                  <span style="margin-left: 16px; color: #c9d;">
+                    <i class="fa-solid fa-tags"></i>
+                    PWN, NewStarCTF
+                  </span>
+                
+              </div>
+            
+              <!-- 第二行：文章标题 -->
+              <div style="margin-left: 56px; margin-top: 4px;">
+                <a href="/NewStarCTF%202023%20%5BWEEK%203%5D%20PWN/" style="color: #fff; font-size: 22px; text-decoration: none;">
+                  NewStarCTF 2023 [WEEK 3] PWN
+                </a>
+              </div>
+            </div>
+            
+          
+            <div class="archive-item" style="margin-bottom: 20px;">
+              <!-- 第一行：时间 + 分类 + 标签 -->
+              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
+                <i class="fa-solid fa-calendar-days"></i>
+                2023-10-27
+            
+                
+                  <span style="margin-left: 16px; color: #9cd;">
+                    <i class="fa-solid fa-bookmark"></i>
+                    技巧
+                  </span>
+                
+            
+                
+                  <span style="margin-left: 16px; color: #c9d;">
+                    <i class="fa-solid fa-tags"></i>
+                    PWN
+                  </span>
+                
+              </div>
+            
+              <!-- 第二行：文章标题 -->
+              <div style="margin-left: 56px; margin-top: 4px;">
+                <a href="/PWN%20PWN%20PWN%20!!!%20%E6%8A%80%E5%B7%A7%20(3)/" style="color: #fff; font-size: 22px; text-decoration: none;">
+                  PWN PWN PWN !!! 技巧 (3)
+                </a>
+              </div>
+            </div>
+            
+          
+            <div class="archive-item" style="margin-bottom: 20px;">
+              <!-- 第一行：时间 + 分类 + 标签 -->
+              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
+                <i class="fa-solid fa-calendar-days"></i>
+                2023-10-26
+            
+                
+                  <span style="margin-left: 16px; color: #9cd;">
+                    <i class="fa-solid fa-bookmark"></i>
+                    CTF
+                  </span>
+                
+            
+                
+                  <span style="margin-left: 16px; color: #c9d;">
+                    <i class="fa-solid fa-tags"></i>
+                    PWN, FSCTF
+                  </span>
+                
+              </div>
+            
+              <!-- 第二行：文章标题 -->
+              <div style="margin-left: 56px; margin-top: 4px;">
+                <a href="/FSCTF%202023%20PWN/" style="color: #fff; font-size: 22px; text-decoration: none;">
+                  FSCTF 2023 PWN
+                </a>
+              </div>
+            </div>
+            
+          
+            <div class="archive-item" style="margin-bottom: 20px;">
+              <!-- 第一行：时间 + 分类 + 标签 -->
+              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
+                <i class="fa-solid fa-calendar-days"></i>
+                2023-10-21
+            
+                
+                  <span style="margin-left: 16px; color: #9cd;">
+                    <i class="fa-solid fa-bookmark"></i>
+                    技巧
+                  </span>
+                
+            
+                
+                  <span style="margin-left: 16px; color: #c9d;">
+                    <i class="fa-solid fa-tags"></i>
+                    PWN
+                  </span>
+                
+              </div>
+            
+              <!-- 第二行：文章标题 -->
+              <div style="margin-left: 56px; margin-top: 4px;">
+                <a href="/PWN%20PWN%20PWN%20!!!%20%E6%8A%80%E5%B7%A7%20(2)/" style="color: #fff; font-size: 22px; text-decoration: none;">
+                  PWN PWN PWN !!! 技巧 (2)
+                </a>
+              </div>
+            </div>
+            
+          
+            <div class="archive-item" style="margin-bottom: 20px;">
+              <!-- 第一行：时间 + 分类 + 标签 -->
+              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
+                <i class="fa-solid fa-calendar-days"></i>
+                2023-10-20
+            
+                
+                  <span style="margin-left: 16px; color: #9cd;">
+                    <i class="fa-solid fa-bookmark"></i>
+                    CTF
+                  </span>
+                
+            
+                
+                  <span style="margin-left: 16px; color: #c9d;">
+                    <i class="fa-solid fa-tags"></i>
+                    PWN, SWPU NSS
+                  </span>
+                
+              </div>
+            
+              <!-- 第二行：文章标题 -->
+              <div style="margin-left: 56px; margin-top: 4px;">
+                <a href="/2023%E5%B9%B4SWPU%20NSS%20%E7%A7%8B%E5%AD%A3%E6%8B%9B%E6%96%B0%E8%B5%9B%20PWN/" style="color: #fff; font-size: 22px; text-decoration: none;">
+                  2023年SWPU NSS 秋季招新赛 PWN
+                </a>
+              </div>
+            </div>
+            
+          
+            <div class="archive-item" style="margin-bottom: 20px;">
+              <!-- 第一行：时间 + 分类 + 标签 -->
+              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
+                <i class="fa-solid fa-calendar-days"></i>
+                2023-10-15
+            
+                
+                  <span style="margin-left: 16px; color: #9cd;">
+                    <i class="fa-solid fa-bookmark"></i>
+                    CTF
+                  </span>
+                
+            
+                
+                  <span style="margin-left: 16px; color: #c9d;">
+                    <i class="fa-solid fa-tags"></i>
+                    PWN, NewStarCTF
+                  </span>
+                
+              </div>
+            
+              <!-- 第二行：文章标题 -->
+              <div style="margin-left: 56px; margin-top: 4px;">
+                <a href="/NewStarCTF%202023%20%5BWEEK%202%5D%20PWN/" style="color: #fff; font-size: 22px; text-decoration: none;">
+                  NewStarCTF 2023 [WEEK 2] PWN
+                </a>
+              </div>
+            </div>
+            
+          
+            <div class="archive-item" style="margin-bottom: 20px;">
+              <!-- 第一行：时间 + 分类 + 标签 -->
+              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
+                <i class="fa-solid fa-calendar-days"></i>
+                2023-10-14
+            
+                
+                  <span style="margin-left: 16px; color: #9cd;">
+                    <i class="fa-solid fa-bookmark"></i>
+                    CTF
+                  </span>
+                
+            
+                
+                  <span style="margin-left: 16px; color: #c9d;">
+                    <i class="fa-solid fa-tags"></i>
+                    PWN, MoeCTF
+                  </span>
+                
+              </div>
+            
+              <!-- 第二行：文章标题 -->
+              <div style="margin-left: 56px; margin-top: 4px;">
+                <a href="/MoeCTF%202023%20PWN/" style="color: #fff; font-size: 22px; text-decoration: none;">
+                  MoeCTF 2023 PWN
+                </a>
+              </div>
+            </div>
+            
+          
+            <div class="archive-item" style="margin-bottom: 20px;">
+              <!-- 第一行：时间 + 分类 + 标签 -->
+              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
+                <i class="fa-solid fa-calendar-days"></i>
+                2023-10-06
+            
+                
+                  <span style="margin-left: 16px; color: #9cd;">
+                    <i class="fa-solid fa-bookmark"></i>
+                    技巧
+                  </span>
+                
+            
+                
+                  <span style="margin-left: 16px; color: #c9d;">
+                    <i class="fa-solid fa-tags"></i>
+                    PWN
+                  </span>
+                
+              </div>
+            
+              <!-- 第二行：文章标题 -->
+              <div style="margin-left: 56px; margin-top: 4px;">
+                <a href="/PWN%20PWN%20PWN%20!!!%20%E6%8A%80%E5%B7%A7%20(1)/" style="color: #fff; font-size: 22px; text-decoration: none;">
+                  PWN PWN PWN !!! 技巧 (1)
+                </a>
+              </div>
+            </div>
+            
+          
+            <div class="archive-item" style="margin-bottom: 20px;">
+              <!-- 第一行：时间 + 分类 + 标签 -->
+              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
+                <i class="fa-solid fa-calendar-days"></i>
+                2023-10-01
+            
+                
+                  <span style="margin-left: 16px; color: #9cd;">
+                    <i class="fa-solid fa-bookmark"></i>
+                    CTF
+                  </span>
+                
+            
+                
+                  <span style="margin-left: 16px; color: #c9d;">
+                    <i class="fa-solid fa-tags"></i>
+                    PWN, NewStarCTF
+                  </span>
+                
+              </div>
+            
+              <!-- 第二行：文章标题 -->
+              <div style="margin-left: 56px; margin-top: 4px;">
+                <a href="/NewStarCTF%202023%20%5BWEEK%201%5D%20PWN/" style="color: #fff; font-size: 22px; text-decoration: none;">
+                  NewStarCTF 2023 [WEEK 1] PWN
+                </a>
+              </div>
+            </div>
+            
+          
+            <div class="archive-item" style="margin-bottom: 20px;">
+              <!-- 第一行：时间 + 分类 + 标签 -->
+              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
+                <i class="fa-solid fa-calendar-days"></i>
+                2023-09-22
+            
+                
+                  <span style="margin-left: 16px; color: #9cd;">
+                    <i class="fa-solid fa-bookmark"></i>
+                    CTF
+                  </span>
+                
+            
+                
+                  <span style="margin-left: 16px; color: #c9d;">
+                    <i class="fa-solid fa-tags"></i>
+                    PWN, HNCTF
+                  </span>
+                
+              </div>
+            
+              <!-- 第二行：文章标题 -->
+              <div style="margin-left: 56px; margin-top: 4px;">
+                <a href="/%5BHNCTF%202022%20WEEK4%5D%20ezcanary%20%E5%A4%8D%E7%8E%B0/" style="color: #fff; font-size: 22px; text-decoration: none;">
+                  [HNCTF 2022 WEEK4] ezcanary 复现
+                </a>
+              </div>
+            </div>
+            
+          
+            <div class="archive-item" style="margin-bottom: 20px;">
+              <!-- 第一行：时间 + 分类 + 标签 -->
+              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
+                <i class="fa-solid fa-calendar-days"></i>
+                2023-09-07
+            
+                
+                  <span style="margin-left: 16px; color: #9cd;">
+                    <i class="fa-solid fa-bookmark"></i>
+                    CTF
+                  </span>
+                
+            
+                
+                  <span style="margin-left: 16px; color: #c9d;">
+                    <i class="fa-solid fa-tags"></i>
+                    PWN, HNCTF
+                  </span>
+                
+              </div>
+            
+              <!-- 第二行：文章标题 -->
+              <div style="margin-left: 56px; margin-top: 4px;">
+                <a href="/%5BHNCTF%202022%20WEEK3%5D%20smash%20%E5%A4%8D%E7%8E%B0/" style="color: #fff; font-size: 22px; text-decoration: none;">
+                  [HNCTF 2022 WEEK3] smash 复现
+                </a>
+              </div>
+            </div>
+            
+          
+            <div class="archive-item" style="margin-bottom: 20px;">
+              <!-- 第一行：时间 + 分类 + 标签 -->
+              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
+                <i class="fa-solid fa-calendar-days"></i>
+                2023-09-06
+            
+                
+                  <span style="margin-left: 16px; color: #9cd;">
+                    <i class="fa-solid fa-bookmark"></i>
+                    CTF
+                  </span>
+                
+            
+                
+                  <span style="margin-left: 16px; color: #c9d;">
+                    <i class="fa-solid fa-tags"></i>
+                    PWN, SDCTF
+                  </span>
+                
+              </div>
+            
+              <!-- 第二行：文章标题 -->
+              <div style="margin-left: 56px; margin-top: 4px;">
+                <a href="/%5BSDCTF%202022%5DprintFAILED%20%E5%A4%8D%E7%8E%B0/" style="color: #fff; font-size: 22px; text-decoration: none;">
+                  [SDCTF 2022]printFAILED 复现
+                </a>
+              </div>
+            </div>
+            
+          
+            <div class="archive-item" style="margin-bottom: 20px;">
+              <!-- 第一行：时间 + 分类 + 标签 -->
+              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
+                <i class="fa-solid fa-calendar-days"></i>
+                2023-09-05
+            
+                
+                  <span style="margin-left: 16px; color: #9cd;">
+                    <i class="fa-solid fa-bookmark"></i>
+                    CTF
+                  </span>
+                
+            
+                
+                  <span style="margin-left: 16px; color: #c9d;">
+                    <i class="fa-solid fa-tags"></i>
+                    PWN, CISCN
+                  </span>
+                
+              </div>
+            
+              <!-- 第二行：文章标题 -->
+              <div style="margin-left: 56px; margin-top: 4px;">
+                <a href="/%5BCISCN%202019%E5%8D%8E%E5%8C%97%5D%20PWN5%EF%BC%88ciscn_2019_n_5%EF%BC%89%20%E5%A4%8D%E7%8E%B0/" style="color: #fff; font-size: 22px; text-decoration: none;">
+                  [CISCN 2019华北] PWN5（ciscn_2019_n_5） 复现
+                </a>
+              </div>
+            </div>
+            
+          
+            <div class="archive-item" style="margin-bottom: 20px;">
+              <!-- 第一行：时间 + 分类 + 标签 -->
+              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
+                <i class="fa-solid fa-calendar-days"></i>
+                2023-09-04
+            
+                
+                  <span style="margin-left: 16px; color: #9cd;">
+                    <i class="fa-solid fa-bookmark"></i>
+                    CTF
+                  </span>
+                
+            
+                
+                  <span style="margin-left: 16px; color: #c9d;">
+                    <i class="fa-solid fa-tags"></i>
+                    PWN, HGAME
+                  </span>
+                
+              </div>
+            
+              <!-- 第二行：文章标题 -->
+              <div style="margin-left: 56px; margin-top: 4px;">
+                <a href="/%5BHGAME%202023%20week1%5D%20PWN%20%E5%A4%8D%E7%8E%B0/" style="color: #fff; font-size: 22px; text-decoration: none;">
+                  [HGAME 2023 week1] PWN 复现
+                </a>
+              </div>
+            </div>
+            
+          
+            <div class="archive-item" style="margin-bottom: 20px;">
+              <!-- 第一行：时间 + 分类 + 标签 -->
+              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
+                <i class="fa-solid fa-calendar-days"></i>
+                2023-08-18
+            
+                
+                  <span style="margin-left: 16px; color: #9cd;">
+                    <i class="fa-solid fa-bookmark"></i>
+                    CTF
+                  </span>
+                
+            
+                
+                  <span style="margin-left: 16px; color: #c9d;">
+                    <i class="fa-solid fa-tags"></i>
+                    PWN, HNCTF
+                  </span>
+                
+              </div>
+            
+              <!-- 第二行：文章标题 -->
+              <div style="margin-left: 56px; margin-top: 4px;">
+                <a href="/%5BHNCTF%202022%20Week1%5D%20PWN%20%E5%A4%8D%E7%8E%B0/" style="color: #fff; font-size: 22px; text-decoration: none;">
+                  [HNCTF 2022 Week1] PWN 复现
+                </a>
+              </div>
+            </div>
+            
+          
+            <div class="archive-item" style="margin-bottom: 20px;">
+              <!-- 第一行：时间 + 分类 + 标签 -->
+              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
+                <i class="fa-solid fa-calendar-days"></i>
+                2023-08-16
+            
+                
+                  <span style="margin-left: 16px; color: #9cd;">
+                    <i class="fa-solid fa-bookmark"></i>
+                    CTF
+                  </span>
+                
+            
+                
+                  <span style="margin-left: 16px; color: #c9d;">
+                    <i class="fa-solid fa-tags"></i>
+                    PWN, MoeCTF
+                  </span>
+                
+              </div>
+            
+              <!-- 第二行：文章标题 -->
+              <div style="margin-left: 56px; margin-top: 4px;">
+                <a href="/%5BMoeCTF%202022%5D%20PWN%E5%A4%8D%E7%8E%B0/" style="color: #fff; font-size: 22px; text-decoration: none;">
+                  [MoeCTF 2022] PWN复现
+                </a>
+              </div>
+            </div>
+            
+          
+        </div>
+      
+    </div>
+    <!-- 📚 简洁文章列表样式 END -->
+
   </div>
   <!-- 📊 图表容器结束 -->
+</div>
+
 
   
 
-  <div id="timeline-wrap" ref="timeline">
-    
-    <div class="timeline" data-title="[moectf2022]pwn复现">
-      <div class="timeline-tail"></div>
-      <div class="timeline-content" style="opacity: 0.5; border-radius: 12px; padding: 1rem;">
-        <div class="item-time">2023/8/16</div>
-        <a href="/%5BMoeCTF%202022%5D%20PWN%E5%A4%8D%E7%8E%B0/">
-          <h3>[MoeCTF 2022] PWN复现</h3>
-        </a>
-        <div class="info">
-          
-          <span class="category">
-            <a href="/categories/CTF/">
-              <span class="icon">
-                <i class="fa-solid fa-bookmark fa-fw"></i>
-              </span>
-              CTF
-            </a>
-          </span>
-          
-          
-          <span class="tags">
-            <span class="icon">
-              <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
-              
-              <a href="/tags/PWN/" style="color: #03a9f4">
-                PWN
-              </a>
-            </span>
-            
-            <span class="tag">
-              
-              <a href="/tags/MoeCTF/" style="color: #00bcd4">
-                MoeCTF
-              </a>
-            </span>
-            
-          </span>
-          
-        </div>
-      </div>
-    </div>
-    
-    <div class="timeline" data-title="[hnctf2022week1]pwn复现">
-      <div class="timeline-tail"></div>
-      <div class="timeline-content" style="opacity: 0.5; border-radius: 12px; padding: 1rem;">
-        <div class="item-time">2023/8/18</div>
-        <a href="/%5BHNCTF%202022%20Week1%5D%20PWN%20%E5%A4%8D%E7%8E%B0/">
-          <h3>[HNCTF 2022 Week1] PWN 复现</h3>
-        </a>
-        <div class="info">
-          
-          <span class="category">
-            <a href="/categories/CTF/">
-              <span class="icon">
-                <i class="fa-solid fa-bookmark fa-fw"></i>
-              </span>
-              CTF
-            </a>
-          </span>
-          
-          
-          <span class="tags">
-            <span class="icon">
-              <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
-              
-              <a href="/tags/PWN/" style="color: #00bcd4">
-                PWN
-              </a>
-            </span>
-            
-            <span class="tag">
-              
-              <a href="/tags/HNCTF/" style="color: #ff7d73">
-                HNCTF
-              </a>
-            </span>
-            
-          </span>
-          
-        </div>
-      </div>
-    </div>
-    
-    <div class="timeline" data-title="[hgame2023week1]pwn复现">
-      <div class="timeline-tail"></div>
-      <div class="timeline-content" style="opacity: 0.5; border-radius: 12px; padding: 1rem;">
-        <div class="item-time">2023/9/4</div>
-        <a href="/%5BHGAME%202023%20week1%5D%20PWN%20%E5%A4%8D%E7%8E%B0/">
-          <h3>[HGAME 2023 week1] PWN 复现</h3>
-        </a>
-        <div class="info">
-          
-          <span class="category">
-            <a href="/categories/CTF/">
-              <span class="icon">
-                <i class="fa-solid fa-bookmark fa-fw"></i>
-              </span>
-              CTF
-            </a>
-          </span>
-          
-          
-          <span class="tags">
-            <span class="icon">
-              <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
-              
-              <a href="/tags/PWN/" style="color: #03a9f4">
-                PWN
-              </a>
-            </span>
-            
-            <span class="tag">
-              
-              <a href="/tags/HGAME/" style="color: #ff7d73">
-                HGAME
-              </a>
-            </span>
-            
-          </span>
-          
-        </div>
-      </div>
-    </div>
-    
-    <div class="timeline" data-title="[ciscn2019华北]pwn5（ciscn_2019_n_5）复现">
-      <div class="timeline-tail"></div>
-      <div class="timeline-content" style="opacity: 0.5; border-radius: 12px; padding: 1rem;">
-        <div class="item-time">2023/9/5</div>
-        <a href="/%5BCISCN%202019%E5%8D%8E%E5%8C%97%5D%20PWN5%EF%BC%88ciscn_2019_n_5%EF%BC%89%20%E5%A4%8D%E7%8E%B0/">
-          <h3>[CISCN 2019华北] PWN5（ciscn_2019_n_5） 复现</h3>
-        </a>
-        <div class="info">
-          
-          <span class="category">
-            <a href="/categories/CTF/">
-              <span class="icon">
-                <i class="fa-solid fa-bookmark fa-fw"></i>
-              </span>
-              CTF
-            </a>
-          </span>
-          
-          
-          <span class="tags">
-            <span class="icon">
-              <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
-              
-              <a href="/tags/PWN/" style="color: #ffa2c4">
-                PWN
-              </a>
-            </span>
-            
-            <span class="tag">
-              
-              <a href="/tags/CISCN/" style="color: #03a9f4">
-                CISCN
-              </a>
-            </span>
-            
-          </span>
-          
-        </div>
-      </div>
-    </div>
-    
-    <div class="timeline" data-title="[sdctf2022]printfailed复现">
-      <div class="timeline-tail"></div>
-      <div class="timeline-content" style="opacity: 0.5; border-radius: 12px; padding: 1rem;">
-        <div class="item-time">2023/9/6</div>
-        <a href="/%5BSDCTF%202022%5DprintFAILED%20%E5%A4%8D%E7%8E%B0/">
-          <h3>[SDCTF 2022]printFAILED 复现</h3>
-        </a>
-        <div class="info">
-          
-          <span class="category">
-            <a href="/categories/CTF/">
-              <span class="icon">
-                <i class="fa-solid fa-bookmark fa-fw"></i>
-              </span>
-              CTF
-            </a>
-          </span>
-          
-          
-          <span class="tags">
-            <span class="icon">
-              <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
-              
-              <a href="/tags/PWN/" style="color: #00bcd4">
-                PWN
-              </a>
-            </span>
-            
-            <span class="tag">
-              
-              <a href="/tags/SDCTF/" style="color: #ffa2c4">
-                SDCTF
-              </a>
-            </span>
-            
-          </span>
-          
-        </div>
-      </div>
-    </div>
-    
-    <div class="timeline" data-title="[hnctf2022week3]smash复现">
-      <div class="timeline-tail"></div>
-      <div class="timeline-content" style="opacity: 0.5; border-radius: 12px; padding: 1rem;">
-        <div class="item-time">2023/9/7</div>
-        <a href="/%5BHNCTF%202022%20WEEK3%5D%20smash%20%E5%A4%8D%E7%8E%B0/">
-          <h3>[HNCTF 2022 WEEK3] smash 复现</h3>
-        </a>
-        <div class="info">
-          
-          <span class="category">
-            <a href="/categories/CTF/">
-              <span class="icon">
-                <i class="fa-solid fa-bookmark fa-fw"></i>
-              </span>
-              CTF
-            </a>
-          </span>
-          
-          
-          <span class="tags">
-            <span class="icon">
-              <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
-              
-              <a href="/tags/PWN/" style="color: #ffa2c4">
-                PWN
-              </a>
-            </span>
-            
-            <span class="tag">
-              
-              <a href="/tags/HNCTF/" style="color: #00bcd4">
-                HNCTF
-              </a>
-            </span>
-            
-          </span>
-          
-        </div>
-      </div>
-    </div>
-    
-    <div class="timeline" data-title="[hnctf2022week4]ezcanary复现">
-      <div class="timeline-tail"></div>
-      <div class="timeline-content" style="opacity: 0.5; border-radius: 12px; padding: 1rem;">
-        <div class="item-time">2023/9/22</div>
-        <a href="/%5BHNCTF%202022%20WEEK4%5D%20ezcanary%20%E5%A4%8D%E7%8E%B0/">
-          <h3>[HNCTF 2022 WEEK4] ezcanary 复现</h3>
-        </a>
-        <div class="info">
-          
-          <span class="category">
-            <a href="/categories/CTF/">
-              <span class="icon">
-                <i class="fa-solid fa-bookmark fa-fw"></i>
-              </span>
-              CTF
-            </a>
-          </span>
-          
-          
-          <span class="tags">
-            <span class="icon">
-              <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
-              
-              <a href="/tags/PWN/" style="color: #03a9f4">
-                PWN
-              </a>
-            </span>
-            
-            <span class="tag">
-              
-              <a href="/tags/HNCTF/" style="color: #00bcd4">
-                HNCTF
-              </a>
-            </span>
-            
-          </span>
-          
-        </div>
-      </div>
-    </div>
-    
-    <div class="timeline" data-title="newstarctf2023[week1]pwn">
-      <div class="timeline-tail"></div>
-      <div class="timeline-content" style="opacity: 0.5; border-radius: 12px; padding: 1rem;">
-        <div class="item-time">2023/10/1</div>
-        <a href="/NewStarCTF%202023%20%5BWEEK%201%5D%20PWN/">
-          <h3>NewStarCTF 2023 [WEEK 1] PWN</h3>
-        </a>
-        <div class="info">
-          
-          <span class="category">
-            <a href="/categories/CTF/">
-              <span class="icon">
-                <i class="fa-solid fa-bookmark fa-fw"></i>
-              </span>
-              CTF
-            </a>
-          </span>
-          
-          
-          <span class="tags">
-            <span class="icon">
-              <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
-              
-              <a href="/tags/PWN/" style="color: #03a9f4">
-                PWN
-              </a>
-            </span>
-            
-            <span class="tag">
-              
-              <a href="/tags/NewStarCTF/" style="color: #ffa2c4">
-                NewStarCTF
-              </a>
-            </span>
-            
-          </span>
-          
-        </div>
-      </div>
-    </div>
-    
-    <div class="timeline" data-title="pwnpwnpwn!!!技巧(1)">
-      <div class="timeline-tail"></div>
-      <div class="timeline-content" style="opacity: 0.5; border-radius: 12px; padding: 1rem;">
-        <div class="item-time">2023/10/6</div>
-        <a href="/PWN%20PWN%20PWN%20!!!%20%E6%8A%80%E5%B7%A7%20(1)/">
-          <h3>PWN PWN PWN !!! 技巧 (1)</h3>
-        </a>
-        <div class="info">
-          
-          <span class="category">
-            <a href="/categories/%E6%8A%80%E5%B7%A7/">
-              <span class="icon">
-                <i class="fa-solid fa-bookmark fa-fw"></i>
-              </span>
-              技巧
-            </a>
-          </span>
-          
-          
-          <span class="tags">
-            <span class="icon">
-              <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
-              
-              <a href="/tags/PWN/" style="color: #ff7d73">
-                PWN
-              </a>
-            </span>
-            
-          </span>
-          
-        </div>
-      </div>
-    </div>
-    
-    <div class="timeline" data-title="moectf2023pwn">
-      <div class="timeline-tail"></div>
-      <div class="timeline-content" style="opacity: 0.5; border-radius: 12px; padding: 1rem;">
-        <div class="item-time">2023/10/14</div>
-        <a href="/MoeCTF%202023%20PWN/">
-          <h3>MoeCTF 2023 PWN</h3>
-        </a>
-        <div class="info">
-          
-          <span class="category">
-            <a href="/categories/CTF/">
-              <span class="icon">
-                <i class="fa-solid fa-bookmark fa-fw"></i>
-              </span>
-              CTF
-            </a>
-          </span>
-          
-          
-          <span class="tags">
-            <span class="icon">
-              <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
-              
-              <a href="/tags/PWN/" style="color: #00bcd4">
-                PWN
-              </a>
-            </span>
-            
-            <span class="tag">
-              
-              <a href="/tags/MoeCTF/" style="color: #00a596">
-                MoeCTF
-              </a>
-            </span>
-            
-          </span>
-          
-        </div>
-      </div>
-    </div>
-    
-    <div class="timeline" data-title="newstarctf2023[week2]pwn">
-      <div class="timeline-tail"></div>
-      <div class="timeline-content" style="opacity: 0.5; border-radius: 12px; padding: 1rem;">
-        <div class="item-time">2023/10/15</div>
-        <a href="/NewStarCTF%202023%20%5BWEEK%202%5D%20PWN/">
-          <h3>NewStarCTF 2023 [WEEK 2] PWN</h3>
-        </a>
-        <div class="info">
-          
-          <span class="category">
-            <a href="/categories/CTF/">
-              <span class="icon">
-                <i class="fa-solid fa-bookmark fa-fw"></i>
-              </span>
-              CTF
-            </a>
-          </span>
-          
-          
-          <span class="tags">
-            <span class="icon">
-              <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
-              
-              <a href="/tags/PWN/" style="color: #00bcd4">
-                PWN
-              </a>
-            </span>
-            
-            <span class="tag">
-              
-              <a href="/tags/NewStarCTF/" style="color: #ff7d73">
-                NewStarCTF
-              </a>
-            </span>
-            
-          </span>
-          
-        </div>
-      </div>
-    </div>
-    
-    <div class="timeline" data-title="2023年swpunss秋季招新赛pwn">
-      <div class="timeline-tail"></div>
-      <div class="timeline-content" style="opacity: 0.5; border-radius: 12px; padding: 1rem;">
-        <div class="item-time">2023/10/20</div>
-        <a href="/2023%E5%B9%B4SWPU%20NSS%20%E7%A7%8B%E5%AD%A3%E6%8B%9B%E6%96%B0%E8%B5%9B%20PWN/">
-          <h3>2023年SWPU NSS 秋季招新赛 PWN</h3>
-        </a>
-        <div class="info">
-          
-          <span class="category">
-            <a href="/categories/CTF/">
-              <span class="icon">
-                <i class="fa-solid fa-bookmark fa-fw"></i>
-              </span>
-              CTF
-            </a>
-          </span>
-          
-          
-          <span class="tags">
-            <span class="icon">
-              <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
-              
-              <a href="/tags/PWN/" style="color: #ffa2c4">
-                PWN
-              </a>
-            </span>
-            
-            <span class="tag">
-              
-              <a href="/tags/SWPU-NSS/" style="color: #03a9f4">
-                SWPU NSS
-              </a>
-            </span>
-            
-          </span>
-          
-        </div>
-      </div>
-    </div>
-    
-    <div class="timeline" data-title="pwnpwnpwn!!!技巧(2)">
-      <div class="timeline-tail"></div>
-      <div class="timeline-content" style="opacity: 0.5; border-radius: 12px; padding: 1rem;">
-        <div class="item-time">2023/10/21</div>
-        <a href="/PWN%20PWN%20PWN%20!!!%20%E6%8A%80%E5%B7%A7%20(2)/">
-          <h3>PWN PWN PWN !!! 技巧 (2)</h3>
-        </a>
-        <div class="info">
-          
-          <span class="category">
-            <a href="/categories/%E6%8A%80%E5%B7%A7/">
-              <span class="icon">
-                <i class="fa-solid fa-bookmark fa-fw"></i>
-              </span>
-              技巧
-            </a>
-          </span>
-          
-          
-          <span class="tags">
-            <span class="icon">
-              <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
-              
-              <a href="/tags/PWN/" style="color: #ff7d73">
-                PWN
-              </a>
-            </span>
-            
-          </span>
-          
-        </div>
-      </div>
-    </div>
-    
-    <div class="timeline" data-title="fsctf2023pwn">
-      <div class="timeline-tail"></div>
-      <div class="timeline-content" style="opacity: 0.5; border-radius: 12px; padding: 1rem;">
-        <div class="item-time">2023/10/26</div>
-        <a href="/FSCTF%202023%20PWN/">
-          <h3>FSCTF 2023 PWN</h3>
-        </a>
-        <div class="info">
-          
-          <span class="category">
-            <a href="/categories/CTF/">
-              <span class="icon">
-                <i class="fa-solid fa-bookmark fa-fw"></i>
-              </span>
-              CTF
-            </a>
-          </span>
-          
-          
-          <span class="tags">
-            <span class="icon">
-              <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
-              
-              <a href="/tags/PWN/" style="color: #00a596">
-                PWN
-              </a>
-            </span>
-            
-            <span class="tag">
-              
-              <a href="/tags/FSCTF/" style="color: #ffa2c4">
-                FSCTF
-              </a>
-            </span>
-            
-          </span>
-          
-        </div>
-      </div>
-    </div>
-    
-    <div class="timeline" data-title="pwnpwnpwn!!!技巧(3)">
-      <div class="timeline-tail"></div>
-      <div class="timeline-content" style="opacity: 0.5; border-radius: 12px; padding: 1rem;">
-        <div class="item-time">2023/10/27</div>
-        <a href="/PWN%20PWN%20PWN%20!!!%20%E6%8A%80%E5%B7%A7%20(3)/">
-          <h3>PWN PWN PWN !!! 技巧 (3)</h3>
-        </a>
-        <div class="info">
-          
-          <span class="category">
-            <a href="/categories/%E6%8A%80%E5%B7%A7/">
-              <span class="icon">
-                <i class="fa-solid fa-bookmark fa-fw"></i>
-              </span>
-              技巧
-            </a>
-          </span>
-          
-          
-          <span class="tags">
-            <span class="icon">
-              <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
-              
-              <a href="/tags/PWN/" style="color: #ffa2c4">
-                PWN
-              </a>
-            </span>
-            
-          </span>
-          
-        </div>
-      </div>
-    </div>
-    
-    <div class="timeline" data-title="newstarctf2023[week3]pwn">
-      <div class="timeline-tail"></div>
-      <div class="timeline-content" style="opacity: 0.5; border-radius: 12px; padding: 1rem;">
-        <div class="item-time">2023/10/28</div>
-        <a href="/NewStarCTF%202023%20%5BWEEK%203%5D%20PWN/">
-          <h3>NewStarCTF 2023 [WEEK 3] PWN</h3>
-        </a>
-        <div class="info">
-          
-          <span class="category">
-            <a href="/categories/CTF/">
-              <span class="icon">
-                <i class="fa-solid fa-bookmark fa-fw"></i>
-              </span>
-              CTF
-            </a>
-          </span>
-          
-          
-          <span class="tags">
-            <span class="icon">
-              <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
-              
-              <a href="/tags/PWN/" style="color: #ff7d73">
-                PWN
-              </a>
-            </span>
-            
-            <span class="tag">
-              
-              <a href="/tags/NewStarCTF/" style="color: #00a596">
-                NewStarCTF
-              </a>
-            </span>
-            
-          </span>
-          
-        </div>
-      </div>
-    </div>
-    
-    <div class="timeline" data-title="pwnpwnpwn!!!技巧(4)">
-      <div class="timeline-tail"></div>
-      <div class="timeline-content" style="opacity: 0.5; border-radius: 12px; padding: 1rem;">
-        <div class="item-time">2023/10/29</div>
-        <a href="/PWN%20PWN%20PWN%20!!!%20%E6%8A%80%E5%B7%A7%20(4)/">
-          <h3>PWN PWN PWN !!! 技巧 (4)</h3>
-        </a>
-        <div class="info">
-          
-          <span class="category">
-            <a href="/categories/%E6%8A%80%E5%B7%A7/">
-              <span class="icon">
-                <i class="fa-solid fa-bookmark fa-fw"></i>
-              </span>
-              技巧
-            </a>
-          </span>
-          
-          
-          <span class="tags">
-            <span class="icon">
-              <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
-              
-              <a href="/tags/PWN/" style="color: #00bcd4">
-                PWN
-              </a>
-            </span>
-            
-          </span>
-          
-        </div>
-      </div>
-    </div>
-    
-    <div class="timeline" data-title="shctf2023[week1]pwn">
-      <div class="timeline-tail"></div>
-      <div class="timeline-content" style="opacity: 0.5; border-radius: 12px; padding: 1rem;">
-        <div class="item-time">2023/10/31</div>
-        <a href="/SHCTF%202023%20%5BWEEK%201%5D%20PWN/">
-          <h3>SHCTF 2023 [WEEK 1] PWN</h3>
-        </a>
-        <div class="info">
-          
-          <span class="category">
-            <a href="/categories/CTF/">
-              <span class="icon">
-                <i class="fa-solid fa-bookmark fa-fw"></i>
-              </span>
-              CTF
-            </a>
-          </span>
-          
-          
-          <span class="tags">
-            <span class="icon">
-              <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
-              
-              <a href="/tags/PWN/" style="color: #ffa2c4">
-                PWN
-              </a>
-            </span>
-            
-            <span class="tag">
-              
-              <a href="/tags/SHCTF/" style="color: #00bcd4">
-                SHCTF
-              </a>
-            </span>
-            
-          </span>
-          
-        </div>
-      </div>
-    </div>
-    
-    <div class="timeline" data-title="shctf2023[week2]pwn">
-      <div class="timeline-tail"></div>
-      <div class="timeline-content" style="opacity: 0.5; border-radius: 12px; padding: 1rem;">
-        <div class="item-time">2023/11/1</div>
-        <a href="/SHCTF%202023%20%5BWEEK%202%5D%20PWN/">
-          <h3>SHCTF 2023 [WEEK 2] PWN</h3>
-        </a>
-        <div class="info">
-          
-          <span class="category">
-            <a href="/categories/CTF/">
-              <span class="icon">
-                <i class="fa-solid fa-bookmark fa-fw"></i>
-              </span>
-              CTF
-            </a>
-          </span>
-          
-          
-          <span class="tags">
-            <span class="icon">
-              <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
-              
-              <a href="/tags/PWN/" style="color: #00a596">
-                PWN
-              </a>
-            </span>
-            
-            <span class="tag">
-              
-              <a href="/tags/SHCTF/" style="color: #ff7d73">
-                SHCTF
-              </a>
-            </span>
-            
-          </span>
-          
-        </div>
-      </div>
-    </div>
-    
-    <div class="timeline" data-title="pwnpwnpwn!!!技巧(5)">
-      <div class="timeline-tail"></div>
-      <div class="timeline-content" style="opacity: 0.5; border-radius: 12px; padding: 1rem;">
-        <div class="item-time">2023/11/2</div>
-        <a href="/PWN%20PWN%20PWN%20!!!%20%E6%8A%80%E5%B7%A7%20(5)/">
-          <h3>PWN PWN PWN !!! 技巧 (5)</h3>
-        </a>
-        <div class="info">
-          
-          <span class="category">
-            <a href="/categories/%E6%8A%80%E5%B7%A7/">
-              <span class="icon">
-                <i class="fa-solid fa-bookmark fa-fw"></i>
-              </span>
-              技巧
-            </a>
-          </span>
-          
-          
-          <span class="tags">
-            <span class="icon">
-              <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
-              
-              <a href="/tags/PWN/" style="color: #03a9f4">
-                PWN
-              </a>
-            </span>
-            
-          </span>
-          
-        </div>
-      </div>
-    </div>
-    
-    <div class="timeline" data-title="shctf2023[week3]pwn">
-      <div class="timeline-tail"></div>
-      <div class="timeline-content" style="opacity: 0.5; border-radius: 12px; padding: 1rem;">
-        <div class="item-time">2023/11/4</div>
-        <a href="/SHCTF%202023%20%5BWEEK%203%5D%20PWN/">
-          <h3>SHCTF 2023 [WEEK 3] PWN</h3>
-        </a>
-        <div class="info">
-          
-          <span class="category">
-            <a href="/categories/CTF/">
-              <span class="icon">
-                <i class="fa-solid fa-bookmark fa-fw"></i>
-              </span>
-              CTF
-            </a>
-          </span>
-          
-          
-          <span class="tags">
-            <span class="icon">
-              <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
-              
-              <a href="/tags/PWN/" style="color: #ff7d73">
-                PWN
-              </a>
-            </span>
-            
-            <span class="tag">
-              
-              <a href="/tags/SHCTF/" style="color: #00bcd4">
-                SHCTF
-              </a>
-            </span>
-            
-          </span>
-          
-        </div>
-      </div>
-    </div>
-    
-    <div class="timeline" data-title="2024年度总结：保持正念延迟满足">
-      <div class="timeline-tail"></div>
-      <div class="timeline-content" style="opacity: 0.5; border-radius: 12px; padding: 1rem;">
-        <div class="item-time">2024/12/31</div>
-        <a href="/2024%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/">
-          <h3>2024年度总结：保持正念 延迟满足</h3>
-        </a>
-        <div class="info">
-          
-          <span class="category">
-            <a href="/categories/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/">
-              <span class="icon">
-                <i class="fa-solid fa-bookmark fa-fw"></i>
-              </span>
-              年度总结
-            </a>
-          </span>
-          
-          
-          <span class="tags">
-            <span class="icon">
-              <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
-              
-              <a href="/tags/%E5%A5%8B%E8%BF%9B/" style="color: #00a596">
-                奋进
-              </a>
-            </span>
-            
-          </span>
-          
-        </div>
-      </div>
-    </div>
-    
-    <div class="timeline" data-title="helloworld">
-      <div class="timeline-tail"></div>
-      <div class="timeline-content" style="opacity: 0.5; border-radius: 12px; padding: 1rem;">
-        <div class="item-time">2025/6/18</div>
-        <a href="/hello-world/">
-          <h3>Hello World</h3>
-        </a>
-        <div class="info">
-          
-          
-        </div>
-      </div>
-    </div>
-    
-    <div class="timeline" data-title="简单的hexo文章示例">
-      <div class="timeline-tail"></div>
-      <div class="timeline-content" style="opacity: 0.5; border-radius: 12px; padding: 1rem;">
-        <div class="item-time">2025/6/18</div>
-        <a href="/%E7%BB%83%E4%B9%A0/">
-          <h3>简单的 Hexo 文章示例</h3>
-        </a>
-        <div class="info">
-          
-          
-          <span class="tags">
-            <span class="icon">
-              <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
-              
-              <a href="/tags/hexo/" style="color: #03a9f4">
-                hexo
-              </a>
-            </span>
-            
-            <span class="tag">
-              
-              <a href="/tags/demo/" style="color: #ff7d73">
-                demo
-              </a>
-            </span>
-            
-          </span>
-          
-        </div>
-      </div>
-    </div>
-    
-    <div class="timeline" data-title="highlight-test">
-      <div class="timeline-tail"></div>
-      <div class="timeline-content" style="opacity: 0.5; border-radius: 12px; padding: 1rem;">
-        <div class="item-time">2025/6/18</div>
-        <a href="/highlight-test/">
-          <h3>highlight-test</h3>
-        </a>
-        <div class="info">
-          
-          
-        </div>
-      </div>
-    </div>
-    
-  </div>
-</div>
+
 
 <!-- 📊 图表脚本 -->
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
