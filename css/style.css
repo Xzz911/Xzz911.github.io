@@ -1314,6 +1314,15 @@ figure.highlight .code pre {
 
 
 
+.hover-slide {
+  display: inline-block;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.hover-slide:hover {
+  transform: translateX(10px); /* 向右移动 10px */
+  color: #6cc3cf !important; /* 可选：悬停时改变颜色 */
+}
 
 
 

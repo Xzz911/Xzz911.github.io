@@ -267,762 +267,418 @@
     </div>
     <div id="archive-chart" style="height: 300px;"></div>
 
-    <!-- 📚 简洁文章列表样式 START -->
+    <!-- 📚 简洁文章列表样式 START --> 
     <div class="simple-archive-list" style="margin-top: 40px;">
-      <h3 style="font-size: 35px; margin-bottom: 16px; color: #fff;">文章总览 - 25</h3>
+      <h3 style="font-size: 28px; margin-bottom: 16px; color: #fff;">
+        文章总览 - 25
+      </h3>
 
       
         <div class="archive-year-block" data-year="2025" style="margin-bottom: 24px;">
-          <div class="archive-year" style="font-size: 28px; margin-bottom: 10px; font-weight: bold; color: #fff;">
-            <span>2025</span> <span style="margin-left: 6px;"></span>
+          <!-- 🔽 年份标题 + 折叠箭头 -->
+          <div class="archive-year" style="font-size: 22px; margin-bottom: 10px; font-weight: bold; color: #fff; cursor: pointer; display: flex; align-items: center;" onclick="toggleYear('2025')">
+            <i id="arrow-2025" class="fa-solid fa-chevron-down" style="margin-right: 8px; transition: transform 0.3s;"></i>
+            <span>2025</span>
           </div>
 
-          
-            <div class="archive-item" style="margin-bottom: 20px;">
-              <!-- 第一行：时间 + 分类 + 标签 -->
-              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
-                <i class="fa-solid fa-calendar-days"></i>
-                2025-06-18
+          <!-- 📄 文章列表区域（可折叠） -->
+          <div class="archive-posts-of-year" id="posts-2025">
             
-                
-            
-                
+              <div class="archive-item" style="margin-bottom: 20px;">
+                <!-- 第一行：时间 -->
+                <div style="margin-left: 40px; color: #aaa; font-size: 14px;">
+                  📅 2025-06-18
+                </div>
+
+                <!-- 第二行：文章标题 -->
+                <div style="margin-left: 40px; margin-top: 4px;">
+                  <a href="/highlight-test/" class="hover-slide" style="color: #fff; font-size: 17px; text-decoration: none;">
+                    highlight-test
+                  </a>
+                </div>
               </div>
             
-              <!-- 第二行：文章标题 -->
-              <div style="margin-left: 56px; margin-top: 4px;">
-                <a href="/highlight-test/" style="color: #fff; font-size: 22px; text-decoration: none;">
-                  highlight-test
-                </a>
-              </div>
-            </div>
-            
-          
-            <div class="archive-item" style="margin-bottom: 20px;">
-              <!-- 第一行：时间 + 分类 + 标签 -->
-              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
-                <i class="fa-solid fa-calendar-days"></i>
-                2025-06-18
-            
-                
-            
-                
-                  <span style="margin-left: 16px; color: #c9d;">
-                    <i class="fa-solid fa-tags"></i>
-                    hexo, demo
-                  </span>
-                
+              <div class="archive-item" style="margin-bottom: 20px;">
+                <!-- 第一行：时间 -->
+                <div style="margin-left: 40px; color: #aaa; font-size: 14px;">
+                  📅 2025-06-18
+                </div>
+
+                <!-- 第二行：文章标题 -->
+                <div style="margin-left: 40px; margin-top: 4px;">
+                  <a href="/%E7%BB%83%E4%B9%A0/" class="hover-slide" style="color: #fff; font-size: 17px; text-decoration: none;">
+                    简单的 Hexo 文章示例
+                  </a>
+                </div>
               </div>
             
-              <!-- 第二行：文章标题 -->
-              <div style="margin-left: 56px; margin-top: 4px;">
-                <a href="/%E7%BB%83%E4%B9%A0/" style="color: #fff; font-size: 22px; text-decoration: none;">
-                  简单的 Hexo 文章示例
-                </a>
-              </div>
-            </div>
-            
-          
-            <div class="archive-item" style="margin-bottom: 20px;">
-              <!-- 第一行：时间 + 分类 + 标签 -->
-              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
-                <i class="fa-solid fa-calendar-days"></i>
-                2025-06-18
-            
-                
-            
-                
+              <div class="archive-item" style="margin-bottom: 20px;">
+                <!-- 第一行：时间 -->
+                <div style="margin-left: 40px; color: #aaa; font-size: 14px;">
+                  📅 2025-06-18
+                </div>
+
+                <!-- 第二行：文章标题 -->
+                <div style="margin-left: 40px; margin-top: 4px;">
+                  <a href="/hello-world/" class="hover-slide" style="color: #fff; font-size: 17px; text-decoration: none;">
+                    Hello World
+                  </a>
+                </div>
               </div>
             
-              <!-- 第二行：文章标题 -->
-              <div style="margin-left: 56px; margin-top: 4px;">
-                <a href="/hello-world/" style="color: #fff; font-size: 22px; text-decoration: none;">
-                  Hello World
-                </a>
-              </div>
-            </div>
-            
-          
+          </div>
         </div>
       
         <div class="archive-year-block" data-year="2024" style="margin-bottom: 24px;">
-          <div class="archive-year" style="font-size: 28px; margin-bottom: 10px; font-weight: bold; color: #fff;">
-            <span>2024</span> <span style="margin-left: 6px;"></span>
+          <!-- 🔽 年份标题 + 折叠箭头 -->
+          <div class="archive-year" style="font-size: 22px; margin-bottom: 10px; font-weight: bold; color: #fff; cursor: pointer; display: flex; align-items: center;" onclick="toggleYear('2024')">
+            <i id="arrow-2024" class="fa-solid fa-chevron-down" style="margin-right: 8px; transition: transform 0.3s;"></i>
+            <span>2024</span>
           </div>
 
-          
-            <div class="archive-item" style="margin-bottom: 20px;">
-              <!-- 第一行：时间 + 分类 + 标签 -->
-              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
-                <i class="fa-solid fa-calendar-days"></i>
-                2024-12-31
+          <!-- 📄 文章列表区域（可折叠） -->
+          <div class="archive-posts-of-year" id="posts-2024">
             
-                
-                  <span style="margin-left: 16px; color: #9cd;">
-                    <i class="fa-solid fa-bookmark"></i>
-                    年度总结
-                  </span>
-                
-            
-                
-                  <span style="margin-left: 16px; color: #c9d;">
-                    <i class="fa-solid fa-tags"></i>
-                    奋进
-                  </span>
-                
+              <div class="archive-item" style="margin-bottom: 20px;">
+                <!-- 第一行：时间 -->
+                <div style="margin-left: 40px; color: #aaa; font-size: 14px;">
+                  📅 2024-12-31
+                </div>
+
+                <!-- 第二行：文章标题 -->
+                <div style="margin-left: 40px; margin-top: 4px;">
+                  <a href="/2024%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" class="hover-slide" style="color: #fff; font-size: 17px; text-decoration: none;">
+                    2024年度总结：保持正念 延迟满足
+                  </a>
+                </div>
               </div>
             
-              <!-- 第二行：文章标题 -->
-              <div style="margin-left: 56px; margin-top: 4px;">
-                <a href="/2024%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" style="color: #fff; font-size: 22px; text-decoration: none;">
-                  2024年度总结：保持正念 延迟满足
-                </a>
-              </div>
-            </div>
-            
-          
+          </div>
         </div>
       
         <div class="archive-year-block" data-year="2023" style="margin-bottom: 24px;">
-          <div class="archive-year" style="font-size: 28px; margin-bottom: 10px; font-weight: bold; color: #fff;">
-            <span>2023</span> <span style="margin-left: 6px;"></span>
+          <!-- 🔽 年份标题 + 折叠箭头 -->
+          <div class="archive-year" style="font-size: 22px; margin-bottom: 10px; font-weight: bold; color: #fff; cursor: pointer; display: flex; align-items: center;" onclick="toggleYear('2023')">
+            <i id="arrow-2023" class="fa-solid fa-chevron-down" style="margin-right: 8px; transition: transform 0.3s;"></i>
+            <span>2023</span>
           </div>
 
-          
-            <div class="archive-item" style="margin-bottom: 20px;">
-              <!-- 第一行：时间 + 分类 + 标签 -->
-              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
-                <i class="fa-solid fa-calendar-days"></i>
-                2023-11-04
+          <!-- 📄 文章列表区域（可折叠） -->
+          <div class="archive-posts-of-year" id="posts-2023">
             
-                
-                  <span style="margin-left: 16px; color: #9cd;">
-                    <i class="fa-solid fa-bookmark"></i>
-                    CTF
-                  </span>
-                
-            
-                
-                  <span style="margin-left: 16px; color: #c9d;">
-                    <i class="fa-solid fa-tags"></i>
-                    PWN, SHCTF
-                  </span>
-                
+              <div class="archive-item" style="margin-bottom: 20px;">
+                <!-- 第一行：时间 -->
+                <div style="margin-left: 40px; color: #aaa; font-size: 14px;">
+                  📅 2023-11-04
+                </div>
+
+                <!-- 第二行：文章标题 -->
+                <div style="margin-left: 40px; margin-top: 4px;">
+                  <a href="/SHCTF%202023%20%5BWEEK%203%5D%20PWN/" class="hover-slide" style="color: #fff; font-size: 17px; text-decoration: none;">
+                    SHCTF 2023 [WEEK 3] PWN
+                  </a>
+                </div>
               </div>
             
-              <!-- 第二行：文章标题 -->
-              <div style="margin-left: 56px; margin-top: 4px;">
-                <a href="/SHCTF%202023%20%5BWEEK%203%5D%20PWN/" style="color: #fff; font-size: 22px; text-decoration: none;">
-                  SHCTF 2023 [WEEK 3] PWN
-                </a>
-              </div>
-            </div>
-            
-          
-            <div class="archive-item" style="margin-bottom: 20px;">
-              <!-- 第一行：时间 + 分类 + 标签 -->
-              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
-                <i class="fa-solid fa-calendar-days"></i>
-                2023-11-02
-            
-                
-                  <span style="margin-left: 16px; color: #9cd;">
-                    <i class="fa-solid fa-bookmark"></i>
-                    技巧
-                  </span>
-                
-            
-                
-                  <span style="margin-left: 16px; color: #c9d;">
-                    <i class="fa-solid fa-tags"></i>
-                    PWN
-                  </span>
-                
+              <div class="archive-item" style="margin-bottom: 20px;">
+                <!-- 第一行：时间 -->
+                <div style="margin-left: 40px; color: #aaa; font-size: 14px;">
+                  📅 2023-11-02
+                </div>
+
+                <!-- 第二行：文章标题 -->
+                <div style="margin-left: 40px; margin-top: 4px;">
+                  <a href="/PWN%20PWN%20PWN%20!!!%20%E6%8A%80%E5%B7%A7%20(5)/" class="hover-slide" style="color: #fff; font-size: 17px; text-decoration: none;">
+                    PWN PWN PWN !!! 技巧 (5)
+                  </a>
+                </div>
               </div>
             
-              <!-- 第二行：文章标题 -->
-              <div style="margin-left: 56px; margin-top: 4px;">
-                <a href="/PWN%20PWN%20PWN%20!!!%20%E6%8A%80%E5%B7%A7%20(5)/" style="color: #fff; font-size: 22px; text-decoration: none;">
-                  PWN PWN PWN !!! 技巧 (5)
-                </a>
-              </div>
-            </div>
-            
-          
-            <div class="archive-item" style="margin-bottom: 20px;">
-              <!-- 第一行：时间 + 分类 + 标签 -->
-              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
-                <i class="fa-solid fa-calendar-days"></i>
-                2023-11-01
-            
-                
-                  <span style="margin-left: 16px; color: #9cd;">
-                    <i class="fa-solid fa-bookmark"></i>
-                    CTF
-                  </span>
-                
-            
-                
-                  <span style="margin-left: 16px; color: #c9d;">
-                    <i class="fa-solid fa-tags"></i>
-                    PWN, SHCTF
-                  </span>
-                
+              <div class="archive-item" style="margin-bottom: 20px;">
+                <!-- 第一行：时间 -->
+                <div style="margin-left: 40px; color: #aaa; font-size: 14px;">
+                  📅 2023-11-01
+                </div>
+
+                <!-- 第二行：文章标题 -->
+                <div style="margin-left: 40px; margin-top: 4px;">
+                  <a href="/SHCTF%202023%20%5BWEEK%202%5D%20PWN/" class="hover-slide" style="color: #fff; font-size: 17px; text-decoration: none;">
+                    SHCTF 2023 [WEEK 2] PWN
+                  </a>
+                </div>
               </div>
             
-              <!-- 第二行：文章标题 -->
-              <div style="margin-left: 56px; margin-top: 4px;">
-                <a href="/SHCTF%202023%20%5BWEEK%202%5D%20PWN/" style="color: #fff; font-size: 22px; text-decoration: none;">
-                  SHCTF 2023 [WEEK 2] PWN
-                </a>
-              </div>
-            </div>
-            
-          
-            <div class="archive-item" style="margin-bottom: 20px;">
-              <!-- 第一行：时间 + 分类 + 标签 -->
-              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
-                <i class="fa-solid fa-calendar-days"></i>
-                2023-10-31
-            
-                
-                  <span style="margin-left: 16px; color: #9cd;">
-                    <i class="fa-solid fa-bookmark"></i>
-                    CTF
-                  </span>
-                
-            
-                
-                  <span style="margin-left: 16px; color: #c9d;">
-                    <i class="fa-solid fa-tags"></i>
-                    PWN, SHCTF
-                  </span>
-                
+              <div class="archive-item" style="margin-bottom: 20px;">
+                <!-- 第一行：时间 -->
+                <div style="margin-left: 40px; color: #aaa; font-size: 14px;">
+                  📅 2023-10-31
+                </div>
+
+                <!-- 第二行：文章标题 -->
+                <div style="margin-left: 40px; margin-top: 4px;">
+                  <a href="/SHCTF%202023%20%5BWEEK%201%5D%20PWN/" class="hover-slide" style="color: #fff; font-size: 17px; text-decoration: none;">
+                    SHCTF 2023 [WEEK 1] PWN
+                  </a>
+                </div>
               </div>
             
-              <!-- 第二行：文章标题 -->
-              <div style="margin-left: 56px; margin-top: 4px;">
-                <a href="/SHCTF%202023%20%5BWEEK%201%5D%20PWN/" style="color: #fff; font-size: 22px; text-decoration: none;">
-                  SHCTF 2023 [WEEK 1] PWN
-                </a>
-              </div>
-            </div>
-            
-          
-            <div class="archive-item" style="margin-bottom: 20px;">
-              <!-- 第一行：时间 + 分类 + 标签 -->
-              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
-                <i class="fa-solid fa-calendar-days"></i>
-                2023-10-29
-            
-                
-                  <span style="margin-left: 16px; color: #9cd;">
-                    <i class="fa-solid fa-bookmark"></i>
-                    技巧
-                  </span>
-                
-            
-                
-                  <span style="margin-left: 16px; color: #c9d;">
-                    <i class="fa-solid fa-tags"></i>
-                    PWN
-                  </span>
-                
+              <div class="archive-item" style="margin-bottom: 20px;">
+                <!-- 第一行：时间 -->
+                <div style="margin-left: 40px; color: #aaa; font-size: 14px;">
+                  📅 2023-10-29
+                </div>
+
+                <!-- 第二行：文章标题 -->
+                <div style="margin-left: 40px; margin-top: 4px;">
+                  <a href="/PWN%20PWN%20PWN%20!!!%20%E6%8A%80%E5%B7%A7%20(4)/" class="hover-slide" style="color: #fff; font-size: 17px; text-decoration: none;">
+                    PWN PWN PWN !!! 技巧 (4)
+                  </a>
+                </div>
               </div>
             
-              <!-- 第二行：文章标题 -->
-              <div style="margin-left: 56px; margin-top: 4px;">
-                <a href="/PWN%20PWN%20PWN%20!!!%20%E6%8A%80%E5%B7%A7%20(4)/" style="color: #fff; font-size: 22px; text-decoration: none;">
-                  PWN PWN PWN !!! 技巧 (4)
-                </a>
-              </div>
-            </div>
-            
-          
-            <div class="archive-item" style="margin-bottom: 20px;">
-              <!-- 第一行：时间 + 分类 + 标签 -->
-              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
-                <i class="fa-solid fa-calendar-days"></i>
-                2023-10-28
-            
-                
-                  <span style="margin-left: 16px; color: #9cd;">
-                    <i class="fa-solid fa-bookmark"></i>
-                    CTF
-                  </span>
-                
-            
-                
-                  <span style="margin-left: 16px; color: #c9d;">
-                    <i class="fa-solid fa-tags"></i>
-                    PWN, NewStarCTF
-                  </span>
-                
+              <div class="archive-item" style="margin-bottom: 20px;">
+                <!-- 第一行：时间 -->
+                <div style="margin-left: 40px; color: #aaa; font-size: 14px;">
+                  📅 2023-10-28
+                </div>
+
+                <!-- 第二行：文章标题 -->
+                <div style="margin-left: 40px; margin-top: 4px;">
+                  <a href="/NewStarCTF%202023%20%5BWEEK%203%5D%20PWN/" class="hover-slide" style="color: #fff; font-size: 17px; text-decoration: none;">
+                    NewStarCTF 2023 [WEEK 3] PWN
+                  </a>
+                </div>
               </div>
             
-              <!-- 第二行：文章标题 -->
-              <div style="margin-left: 56px; margin-top: 4px;">
-                <a href="/NewStarCTF%202023%20%5BWEEK%203%5D%20PWN/" style="color: #fff; font-size: 22px; text-decoration: none;">
-                  NewStarCTF 2023 [WEEK 3] PWN
-                </a>
-              </div>
-            </div>
-            
-          
-            <div class="archive-item" style="margin-bottom: 20px;">
-              <!-- 第一行：时间 + 分类 + 标签 -->
-              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
-                <i class="fa-solid fa-calendar-days"></i>
-                2023-10-27
-            
-                
-                  <span style="margin-left: 16px; color: #9cd;">
-                    <i class="fa-solid fa-bookmark"></i>
-                    技巧
-                  </span>
-                
-            
-                
-                  <span style="margin-left: 16px; color: #c9d;">
-                    <i class="fa-solid fa-tags"></i>
-                    PWN
-                  </span>
-                
+              <div class="archive-item" style="margin-bottom: 20px;">
+                <!-- 第一行：时间 -->
+                <div style="margin-left: 40px; color: #aaa; font-size: 14px;">
+                  📅 2023-10-27
+                </div>
+
+                <!-- 第二行：文章标题 -->
+                <div style="margin-left: 40px; margin-top: 4px;">
+                  <a href="/PWN%20PWN%20PWN%20!!!%20%E6%8A%80%E5%B7%A7%20(3)/" class="hover-slide" style="color: #fff; font-size: 17px; text-decoration: none;">
+                    PWN PWN PWN !!! 技巧 (3)
+                  </a>
+                </div>
               </div>
             
-              <!-- 第二行：文章标题 -->
-              <div style="margin-left: 56px; margin-top: 4px;">
-                <a href="/PWN%20PWN%20PWN%20!!!%20%E6%8A%80%E5%B7%A7%20(3)/" style="color: #fff; font-size: 22px; text-decoration: none;">
-                  PWN PWN PWN !!! 技巧 (3)
-                </a>
-              </div>
-            </div>
-            
-          
-            <div class="archive-item" style="margin-bottom: 20px;">
-              <!-- 第一行：时间 + 分类 + 标签 -->
-              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
-                <i class="fa-solid fa-calendar-days"></i>
-                2023-10-26
-            
-                
-                  <span style="margin-left: 16px; color: #9cd;">
-                    <i class="fa-solid fa-bookmark"></i>
-                    CTF
-                  </span>
-                
-            
-                
-                  <span style="margin-left: 16px; color: #c9d;">
-                    <i class="fa-solid fa-tags"></i>
-                    PWN, FSCTF
-                  </span>
-                
+              <div class="archive-item" style="margin-bottom: 20px;">
+                <!-- 第一行：时间 -->
+                <div style="margin-left: 40px; color: #aaa; font-size: 14px;">
+                  📅 2023-10-26
+                </div>
+
+                <!-- 第二行：文章标题 -->
+                <div style="margin-left: 40px; margin-top: 4px;">
+                  <a href="/FSCTF%202023%20PWN/" class="hover-slide" style="color: #fff; font-size: 17px; text-decoration: none;">
+                    FSCTF 2023 PWN
+                  </a>
+                </div>
               </div>
             
-              <!-- 第二行：文章标题 -->
-              <div style="margin-left: 56px; margin-top: 4px;">
-                <a href="/FSCTF%202023%20PWN/" style="color: #fff; font-size: 22px; text-decoration: none;">
-                  FSCTF 2023 PWN
-                </a>
-              </div>
-            </div>
-            
-          
-            <div class="archive-item" style="margin-bottom: 20px;">
-              <!-- 第一行：时间 + 分类 + 标签 -->
-              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
-                <i class="fa-solid fa-calendar-days"></i>
-                2023-10-21
-            
-                
-                  <span style="margin-left: 16px; color: #9cd;">
-                    <i class="fa-solid fa-bookmark"></i>
-                    技巧
-                  </span>
-                
-            
-                
-                  <span style="margin-left: 16px; color: #c9d;">
-                    <i class="fa-solid fa-tags"></i>
-                    PWN
-                  </span>
-                
+              <div class="archive-item" style="margin-bottom: 20px;">
+                <!-- 第一行：时间 -->
+                <div style="margin-left: 40px; color: #aaa; font-size: 14px;">
+                  📅 2023-10-21
+                </div>
+
+                <!-- 第二行：文章标题 -->
+                <div style="margin-left: 40px; margin-top: 4px;">
+                  <a href="/PWN%20PWN%20PWN%20!!!%20%E6%8A%80%E5%B7%A7%20(2)/" class="hover-slide" style="color: #fff; font-size: 17px; text-decoration: none;">
+                    PWN PWN PWN !!! 技巧 (2)
+                  </a>
+                </div>
               </div>
             
-              <!-- 第二行：文章标题 -->
-              <div style="margin-left: 56px; margin-top: 4px;">
-                <a href="/PWN%20PWN%20PWN%20!!!%20%E6%8A%80%E5%B7%A7%20(2)/" style="color: #fff; font-size: 22px; text-decoration: none;">
-                  PWN PWN PWN !!! 技巧 (2)
-                </a>
-              </div>
-            </div>
-            
-          
-            <div class="archive-item" style="margin-bottom: 20px;">
-              <!-- 第一行：时间 + 分类 + 标签 -->
-              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
-                <i class="fa-solid fa-calendar-days"></i>
-                2023-10-20
-            
-                
-                  <span style="margin-left: 16px; color: #9cd;">
-                    <i class="fa-solid fa-bookmark"></i>
-                    CTF
-                  </span>
-                
-            
-                
-                  <span style="margin-left: 16px; color: #c9d;">
-                    <i class="fa-solid fa-tags"></i>
-                    PWN, SWPU NSS
-                  </span>
-                
+              <div class="archive-item" style="margin-bottom: 20px;">
+                <!-- 第一行：时间 -->
+                <div style="margin-left: 40px; color: #aaa; font-size: 14px;">
+                  📅 2023-10-20
+                </div>
+
+                <!-- 第二行：文章标题 -->
+                <div style="margin-left: 40px; margin-top: 4px;">
+                  <a href="/2023%E5%B9%B4SWPU%20NSS%20%E7%A7%8B%E5%AD%A3%E6%8B%9B%E6%96%B0%E8%B5%9B%20PWN/" class="hover-slide" style="color: #fff; font-size: 17px; text-decoration: none;">
+                    2023年SWPU NSS 秋季招新赛 PWN
+                  </a>
+                </div>
               </div>
             
-              <!-- 第二行：文章标题 -->
-              <div style="margin-left: 56px; margin-top: 4px;">
-                <a href="/2023%E5%B9%B4SWPU%20NSS%20%E7%A7%8B%E5%AD%A3%E6%8B%9B%E6%96%B0%E8%B5%9B%20PWN/" style="color: #fff; font-size: 22px; text-decoration: none;">
-                  2023年SWPU NSS 秋季招新赛 PWN
-                </a>
-              </div>
-            </div>
-            
-          
-            <div class="archive-item" style="margin-bottom: 20px;">
-              <!-- 第一行：时间 + 分类 + 标签 -->
-              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
-                <i class="fa-solid fa-calendar-days"></i>
-                2023-10-15
-            
-                
-                  <span style="margin-left: 16px; color: #9cd;">
-                    <i class="fa-solid fa-bookmark"></i>
-                    CTF
-                  </span>
-                
-            
-                
-                  <span style="margin-left: 16px; color: #c9d;">
-                    <i class="fa-solid fa-tags"></i>
-                    PWN, NewStarCTF
-                  </span>
-                
+              <div class="archive-item" style="margin-bottom: 20px;">
+                <!-- 第一行：时间 -->
+                <div style="margin-left: 40px; color: #aaa; font-size: 14px;">
+                  📅 2023-10-15
+                </div>
+
+                <!-- 第二行：文章标题 -->
+                <div style="margin-left: 40px; margin-top: 4px;">
+                  <a href="/NewStarCTF%202023%20%5BWEEK%202%5D%20PWN/" class="hover-slide" style="color: #fff; font-size: 17px; text-decoration: none;">
+                    NewStarCTF 2023 [WEEK 2] PWN
+                  </a>
+                </div>
               </div>
             
-              <!-- 第二行：文章标题 -->
-              <div style="margin-left: 56px; margin-top: 4px;">
-                <a href="/NewStarCTF%202023%20%5BWEEK%202%5D%20PWN/" style="color: #fff; font-size: 22px; text-decoration: none;">
-                  NewStarCTF 2023 [WEEK 2] PWN
-                </a>
-              </div>
-            </div>
-            
-          
-            <div class="archive-item" style="margin-bottom: 20px;">
-              <!-- 第一行：时间 + 分类 + 标签 -->
-              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
-                <i class="fa-solid fa-calendar-days"></i>
-                2023-10-14
-            
-                
-                  <span style="margin-left: 16px; color: #9cd;">
-                    <i class="fa-solid fa-bookmark"></i>
-                    CTF
-                  </span>
-                
-            
-                
-                  <span style="margin-left: 16px; color: #c9d;">
-                    <i class="fa-solid fa-tags"></i>
-                    PWN, MoeCTF
-                  </span>
-                
+              <div class="archive-item" style="margin-bottom: 20px;">
+                <!-- 第一行：时间 -->
+                <div style="margin-left: 40px; color: #aaa; font-size: 14px;">
+                  📅 2023-10-14
+                </div>
+
+                <!-- 第二行：文章标题 -->
+                <div style="margin-left: 40px; margin-top: 4px;">
+                  <a href="/MoeCTF%202023%20PWN/" class="hover-slide" style="color: #fff; font-size: 17px; text-decoration: none;">
+                    MoeCTF 2023 PWN
+                  </a>
+                </div>
               </div>
             
-              <!-- 第二行：文章标题 -->
-              <div style="margin-left: 56px; margin-top: 4px;">
-                <a href="/MoeCTF%202023%20PWN/" style="color: #fff; font-size: 22px; text-decoration: none;">
-                  MoeCTF 2023 PWN
-                </a>
-              </div>
-            </div>
-            
-          
-            <div class="archive-item" style="margin-bottom: 20px;">
-              <!-- 第一行：时间 + 分类 + 标签 -->
-              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
-                <i class="fa-solid fa-calendar-days"></i>
-                2023-10-06
-            
-                
-                  <span style="margin-left: 16px; color: #9cd;">
-                    <i class="fa-solid fa-bookmark"></i>
-                    技巧
-                  </span>
-                
-            
-                
-                  <span style="margin-left: 16px; color: #c9d;">
-                    <i class="fa-solid fa-tags"></i>
-                    PWN
-                  </span>
-                
+              <div class="archive-item" style="margin-bottom: 20px;">
+                <!-- 第一行：时间 -->
+                <div style="margin-left: 40px; color: #aaa; font-size: 14px;">
+                  📅 2023-10-06
+                </div>
+
+                <!-- 第二行：文章标题 -->
+                <div style="margin-left: 40px; margin-top: 4px;">
+                  <a href="/PWN%20PWN%20PWN%20!!!%20%E6%8A%80%E5%B7%A7%20(1)/" class="hover-slide" style="color: #fff; font-size: 17px; text-decoration: none;">
+                    PWN PWN PWN !!! 技巧 (1)
+                  </a>
+                </div>
               </div>
             
-              <!-- 第二行：文章标题 -->
-              <div style="margin-left: 56px; margin-top: 4px;">
-                <a href="/PWN%20PWN%20PWN%20!!!%20%E6%8A%80%E5%B7%A7%20(1)/" style="color: #fff; font-size: 22px; text-decoration: none;">
-                  PWN PWN PWN !!! 技巧 (1)
-                </a>
-              </div>
-            </div>
-            
-          
-            <div class="archive-item" style="margin-bottom: 20px;">
-              <!-- 第一行：时间 + 分类 + 标签 -->
-              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
-                <i class="fa-solid fa-calendar-days"></i>
-                2023-10-01
-            
-                
-                  <span style="margin-left: 16px; color: #9cd;">
-                    <i class="fa-solid fa-bookmark"></i>
-                    CTF
-                  </span>
-                
-            
-                
-                  <span style="margin-left: 16px; color: #c9d;">
-                    <i class="fa-solid fa-tags"></i>
-                    PWN, NewStarCTF
-                  </span>
-                
+              <div class="archive-item" style="margin-bottom: 20px;">
+                <!-- 第一行：时间 -->
+                <div style="margin-left: 40px; color: #aaa; font-size: 14px;">
+                  📅 2023-10-01
+                </div>
+
+                <!-- 第二行：文章标题 -->
+                <div style="margin-left: 40px; margin-top: 4px;">
+                  <a href="/NewStarCTF%202023%20%5BWEEK%201%5D%20PWN/" class="hover-slide" style="color: #fff; font-size: 17px; text-decoration: none;">
+                    NewStarCTF 2023 [WEEK 1] PWN
+                  </a>
+                </div>
               </div>
             
-              <!-- 第二行：文章标题 -->
-              <div style="margin-left: 56px; margin-top: 4px;">
-                <a href="/NewStarCTF%202023%20%5BWEEK%201%5D%20PWN/" style="color: #fff; font-size: 22px; text-decoration: none;">
-                  NewStarCTF 2023 [WEEK 1] PWN
-                </a>
-              </div>
-            </div>
-            
-          
-            <div class="archive-item" style="margin-bottom: 20px;">
-              <!-- 第一行：时间 + 分类 + 标签 -->
-              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
-                <i class="fa-solid fa-calendar-days"></i>
-                2023-09-22
-            
-                
-                  <span style="margin-left: 16px; color: #9cd;">
-                    <i class="fa-solid fa-bookmark"></i>
-                    CTF
-                  </span>
-                
-            
-                
-                  <span style="margin-left: 16px; color: #c9d;">
-                    <i class="fa-solid fa-tags"></i>
-                    PWN, HNCTF
-                  </span>
-                
+              <div class="archive-item" style="margin-bottom: 20px;">
+                <!-- 第一行：时间 -->
+                <div style="margin-left: 40px; color: #aaa; font-size: 14px;">
+                  📅 2023-09-22
+                </div>
+
+                <!-- 第二行：文章标题 -->
+                <div style="margin-left: 40px; margin-top: 4px;">
+                  <a href="/%5BHNCTF%202022%20WEEK4%5D%20ezcanary%20%E5%A4%8D%E7%8E%B0/" class="hover-slide" style="color: #fff; font-size: 17px; text-decoration: none;">
+                    [HNCTF 2022 WEEK4] ezcanary 复现
+                  </a>
+                </div>
               </div>
             
-              <!-- 第二行：文章标题 -->
-              <div style="margin-left: 56px; margin-top: 4px;">
-                <a href="/%5BHNCTF%202022%20WEEK4%5D%20ezcanary%20%E5%A4%8D%E7%8E%B0/" style="color: #fff; font-size: 22px; text-decoration: none;">
-                  [HNCTF 2022 WEEK4] ezcanary 复现
-                </a>
-              </div>
-            </div>
-            
-          
-            <div class="archive-item" style="margin-bottom: 20px;">
-              <!-- 第一行：时间 + 分类 + 标签 -->
-              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
-                <i class="fa-solid fa-calendar-days"></i>
-                2023-09-07
-            
-                
-                  <span style="margin-left: 16px; color: #9cd;">
-                    <i class="fa-solid fa-bookmark"></i>
-                    CTF
-                  </span>
-                
-            
-                
-                  <span style="margin-left: 16px; color: #c9d;">
-                    <i class="fa-solid fa-tags"></i>
-                    PWN, HNCTF
-                  </span>
-                
+              <div class="archive-item" style="margin-bottom: 20px;">
+                <!-- 第一行：时间 -->
+                <div style="margin-left: 40px; color: #aaa; font-size: 14px;">
+                  📅 2023-09-07
+                </div>
+
+                <!-- 第二行：文章标题 -->
+                <div style="margin-left: 40px; margin-top: 4px;">
+                  <a href="/%5BHNCTF%202022%20WEEK3%5D%20smash%20%E5%A4%8D%E7%8E%B0/" class="hover-slide" style="color: #fff; font-size: 17px; text-decoration: none;">
+                    [HNCTF 2022 WEEK3] smash 复现
+                  </a>
+                </div>
               </div>
             
-              <!-- 第二行：文章标题 -->
-              <div style="margin-left: 56px; margin-top: 4px;">
-                <a href="/%5BHNCTF%202022%20WEEK3%5D%20smash%20%E5%A4%8D%E7%8E%B0/" style="color: #fff; font-size: 22px; text-decoration: none;">
-                  [HNCTF 2022 WEEK3] smash 复现
-                </a>
-              </div>
-            </div>
-            
-          
-            <div class="archive-item" style="margin-bottom: 20px;">
-              <!-- 第一行：时间 + 分类 + 标签 -->
-              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
-                <i class="fa-solid fa-calendar-days"></i>
-                2023-09-06
-            
-                
-                  <span style="margin-left: 16px; color: #9cd;">
-                    <i class="fa-solid fa-bookmark"></i>
-                    CTF
-                  </span>
-                
-            
-                
-                  <span style="margin-left: 16px; color: #c9d;">
-                    <i class="fa-solid fa-tags"></i>
-                    PWN, SDCTF
-                  </span>
-                
+              <div class="archive-item" style="margin-bottom: 20px;">
+                <!-- 第一行：时间 -->
+                <div style="margin-left: 40px; color: #aaa; font-size: 14px;">
+                  📅 2023-09-06
+                </div>
+
+                <!-- 第二行：文章标题 -->
+                <div style="margin-left: 40px; margin-top: 4px;">
+                  <a href="/%5BSDCTF%202022%5DprintFAILED%20%E5%A4%8D%E7%8E%B0/" class="hover-slide" style="color: #fff; font-size: 17px; text-decoration: none;">
+                    [SDCTF 2022]printFAILED 复现
+                  </a>
+                </div>
               </div>
             
-              <!-- 第二行：文章标题 -->
-              <div style="margin-left: 56px; margin-top: 4px;">
-                <a href="/%5BSDCTF%202022%5DprintFAILED%20%E5%A4%8D%E7%8E%B0/" style="color: #fff; font-size: 22px; text-decoration: none;">
-                  [SDCTF 2022]printFAILED 复现
-                </a>
-              </div>
-            </div>
-            
-          
-            <div class="archive-item" style="margin-bottom: 20px;">
-              <!-- 第一行：时间 + 分类 + 标签 -->
-              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
-                <i class="fa-solid fa-calendar-days"></i>
-                2023-09-05
-            
-                
-                  <span style="margin-left: 16px; color: #9cd;">
-                    <i class="fa-solid fa-bookmark"></i>
-                    CTF
-                  </span>
-                
-            
-                
-                  <span style="margin-left: 16px; color: #c9d;">
-                    <i class="fa-solid fa-tags"></i>
-                    PWN, CISCN
-                  </span>
-                
+              <div class="archive-item" style="margin-bottom: 20px;">
+                <!-- 第一行：时间 -->
+                <div style="margin-left: 40px; color: #aaa; font-size: 14px;">
+                  📅 2023-09-05
+                </div>
+
+                <!-- 第二行：文章标题 -->
+                <div style="margin-left: 40px; margin-top: 4px;">
+                  <a href="/%5BCISCN%202019%E5%8D%8E%E5%8C%97%5D%20PWN5%EF%BC%88ciscn_2019_n_5%EF%BC%89%20%E5%A4%8D%E7%8E%B0/" class="hover-slide" style="color: #fff; font-size: 17px; text-decoration: none;">
+                    [CISCN 2019华北] PWN5（ciscn_2019_n_5） 复现
+                  </a>
+                </div>
               </div>
             
-              <!-- 第二行：文章标题 -->
-              <div style="margin-left: 56px; margin-top: 4px;">
-                <a href="/%5BCISCN%202019%E5%8D%8E%E5%8C%97%5D%20PWN5%EF%BC%88ciscn_2019_n_5%EF%BC%89%20%E5%A4%8D%E7%8E%B0/" style="color: #fff; font-size: 22px; text-decoration: none;">
-                  [CISCN 2019华北] PWN5（ciscn_2019_n_5） 复现
-                </a>
-              </div>
-            </div>
-            
-          
-            <div class="archive-item" style="margin-bottom: 20px;">
-              <!-- 第一行：时间 + 分类 + 标签 -->
-              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
-                <i class="fa-solid fa-calendar-days"></i>
-                2023-09-04
-            
-                
-                  <span style="margin-left: 16px; color: #9cd;">
-                    <i class="fa-solid fa-bookmark"></i>
-                    CTF
-                  </span>
-                
-            
-                
-                  <span style="margin-left: 16px; color: #c9d;">
-                    <i class="fa-solid fa-tags"></i>
-                    PWN, HGAME
-                  </span>
-                
+              <div class="archive-item" style="margin-bottom: 20px;">
+                <!-- 第一行：时间 -->
+                <div style="margin-left: 40px; color: #aaa; font-size: 14px;">
+                  📅 2023-09-04
+                </div>
+
+                <!-- 第二行：文章标题 -->
+                <div style="margin-left: 40px; margin-top: 4px;">
+                  <a href="/%5BHGAME%202023%20week1%5D%20PWN%20%E5%A4%8D%E7%8E%B0/" class="hover-slide" style="color: #fff; font-size: 17px; text-decoration: none;">
+                    [HGAME 2023 week1] PWN 复现
+                  </a>
+                </div>
               </div>
             
-              <!-- 第二行：文章标题 -->
-              <div style="margin-left: 56px; margin-top: 4px;">
-                <a href="/%5BHGAME%202023%20week1%5D%20PWN%20%E5%A4%8D%E7%8E%B0/" style="color: #fff; font-size: 22px; text-decoration: none;">
-                  [HGAME 2023 week1] PWN 复现
-                </a>
-              </div>
-            </div>
-            
-          
-            <div class="archive-item" style="margin-bottom: 20px;">
-              <!-- 第一行：时间 + 分类 + 标签 -->
-              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
-                <i class="fa-solid fa-calendar-days"></i>
-                2023-08-18
-            
-                
-                  <span style="margin-left: 16px; color: #9cd;">
-                    <i class="fa-solid fa-bookmark"></i>
-                    CTF
-                  </span>
-                
-            
-                
-                  <span style="margin-left: 16px; color: #c9d;">
-                    <i class="fa-solid fa-tags"></i>
-                    PWN, HNCTF
-                  </span>
-                
+              <div class="archive-item" style="margin-bottom: 20px;">
+                <!-- 第一行：时间 -->
+                <div style="margin-left: 40px; color: #aaa; font-size: 14px;">
+                  📅 2023-08-18
+                </div>
+
+                <!-- 第二行：文章标题 -->
+                <div style="margin-left: 40px; margin-top: 4px;">
+                  <a href="/%5BHNCTF%202022%20Week1%5D%20PWN%20%E5%A4%8D%E7%8E%B0/" class="hover-slide" style="color: #fff; font-size: 17px; text-decoration: none;">
+                    [HNCTF 2022 Week1] PWN 复现
+                  </a>
+                </div>
               </div>
             
-              <!-- 第二行：文章标题 -->
-              <div style="margin-left: 56px; margin-top: 4px;">
-                <a href="/%5BHNCTF%202022%20Week1%5D%20PWN%20%E5%A4%8D%E7%8E%B0/" style="color: #fff; font-size: 22px; text-decoration: none;">
-                  [HNCTF 2022 Week1] PWN 复现
-                </a>
-              </div>
-            </div>
-            
-          
-            <div class="archive-item" style="margin-bottom: 20px;">
-              <!-- 第一行：时间 + 分类 + 标签 -->
-              <div style="margin-left: 40px; color: #aaa; font-size: 15px;">
-                <i class="fa-solid fa-calendar-days"></i>
-                2023-08-16
-            
-                
-                  <span style="margin-left: 16px; color: #9cd;">
-                    <i class="fa-solid fa-bookmark"></i>
-                    CTF
-                  </span>
-                
-            
-                
-                  <span style="margin-left: 16px; color: #c9d;">
-                    <i class="fa-solid fa-tags"></i>
-                    PWN, MoeCTF
-                  </span>
-                
+              <div class="archive-item" style="margin-bottom: 20px;">
+                <!-- 第一行：时间 -->
+                <div style="margin-left: 40px; color: #aaa; font-size: 14px;">
+                  📅 2023-08-16
+                </div>
+
+                <!-- 第二行：文章标题 -->
+                <div style="margin-left: 40px; margin-top: 4px;">
+                  <a href="/%5BMoeCTF%202022%5D%20PWN%E5%A4%8D%E7%8E%B0/" class="hover-slide" style="color: #fff; font-size: 17px; text-decoration: none;">
+                    [MoeCTF 2022] PWN复现
+                  </a>
+                </div>
               </div>
             
-              <!-- 第二行：文章标题 -->
-              <div style="margin-left: 56px; margin-top: 4px;">
-                <a href="/%5BMoeCTF%202022%5D%20PWN%E5%A4%8D%E7%8E%B0/" style="color: #fff; font-size: 22px; text-decoration: none;">
-                  [MoeCTF 2022] PWN复现
-                </a>
-              </div>
-            </div>
-            
-          
+          </div>
         </div>
       
     </div>
     <!-- 📚 简洁文章列表样式 END -->
+
+    <!-- ✅ 折叠功能脚本 -->
+    <script>
+      function toggleYear(year) {
+        const content = document.getElementById('posts-' + year);
+        const arrow = document.getElementById('arrow-' + year);
+        const isHidden = content.style.display === 'none';
+
+        content.style.display = isHidden ? 'block' : 'none';
+        arrow.style.transform = isHidden ? 'rotate(0deg)' : 'rotate(-90deg)';
+      }
+    </script>
+
+
 
   </div>
   <!-- 📊 图表容器结束 -->
