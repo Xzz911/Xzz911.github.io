@@ -1321,7 +1321,7 @@ figure.highlight .code pre {
 
 .hover-slide:hover {
   transform: translateX(10px); /* 向右移动 10px */
-  color: #6cc3cf !important; /* 可选：悬停时改变颜色 */
+  color: #4783c8 !important; /* 可选：悬停时改变颜色 */
 }
 
 
