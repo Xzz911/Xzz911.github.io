@@ -1296,6 +1296,19 @@ figure.highlight .code pre {
 }
 
 
+.archive-posts-of-year {
+  overflow: hidden;
+  max-height: 1000px;
+  opacity: 1;
+  transition: max-height 0.4s ease, opacity 0.4s ease;
+}
+
+.archive-posts-of-year.collapsed {
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
 
 
 .simple-archive-list a:hover {
@@ -1312,6 +1325,17 @@ figure.highlight .code pre {
   color: #fff;
 }
 
+.archive-search {
+  margin-top: 20px;
+  text-align: center;
+}
+.archive-search .input {
+  width: 60%;
+  padding: 8px 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
 
 
 .hover-slide {
