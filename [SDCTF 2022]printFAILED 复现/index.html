@@ -267,12 +267,12 @@
       
       <span class="tag">
         
-        <a href="/tags/PWN/" style="color: #ff7d73; margin-right: 0.5rem;">PWN</a>
+        <a href="/tags/PWN/" style="color: #03a9f4; margin-right: 0.5rem;">PWN</a>
       </span>
       
       <span class="tag">
         
-        <a href="/tags/SDCTF/" style="color: #03a9f4; margin-right: 0.5rem;">SDCTF</a>
+        <a href="/tags/SDCTF/" style="color: #ff7d73; margin-right: 0.5rem;">SDCTF</a>
       </span>
       
     </span>
@@ -322,73 +322,84 @@
   
     <div id="home-card" style="opacity: 0.5; flex: 1; position: relative;">
       <div class="profile-card-fixed">
-        <div id="card-style"> 
+        <!-- ✅ 固定头像卡片 -->
+<div class="sidebar-fixed avatar-fixed">
+  <div id="card-style" class="avatar-card">
+    <div id="card-div">
+      <div class="card-header">
+        <!-- 头像 -->
+        <div class="avatar">
+          <img src="/images/123.jpg" alt="avatar" />
+          <div class="author-status-sidebar" tabindex="0" aria-label="认真摸鱼中">
+            <g-emoji class="g-emoji" alias="palm_tree"
+                     fallback-src="https://lskypro.acozycotage.net/LightPicture/2022/12/fe1dc0402e623096.jpg">🐟</g-emoji>
+            <span class="status-text">认真摸鱼中</span>
+          </div>
+        </div>
+
+        <!-- 作者名 -->
+        <div class="name">Xzzzz911</div>
+
+        <!-- 描述 -->
+        <div class="description">
+          <p>越努力 越幸运</p>
+
+        </div>
+
+        <!-- 图标链接 -->
+        
+          <div class="icon-links">
+            
+              <span class="icon-link">
+                <a href="https://github.com/xzz911" title="来访问我的GitHub吧"
+                   target="_blank" rel="noopener noreferrer">
+                  <i class="fa-brands fa-github fa-fw"></i>
+                </a>
+              </span>
+            
+              <span class="icon-link">
+                <a href="https://wpa.qq.com/msgrd?v=3&amp;uin=443602796&amp;site=qq&amp;menu=yes" title="QQ: 443602796"
+                   target="_blank" rel="noopener noreferrer">
+                  <i class="fa-brands fa-qq fa-fw"></i>
+                </a>
+              </span>
+            
+              <span class="icon-link">
+                <a href="mailto:xzzzz911@qq.com" title="邮件发送我"
+                   target="_blank" rel="noopener noreferrer">
+                  <i class="fa-solid fa-envelope fa-fw"></i>
+                </a>
+              </span>
+            
+              <span class="icon-link">
+                <a href="https://space.bilibili.com/1709777759" title="B站主页"
+                   target="_blank" rel="noopener noreferrer">
+                  <i class="fa-brands fa-bilibili fa-fw"></i>
+                </a>
+              </span>
+            
+          </div>
+        
+
+        <!-- 友链 -->
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ✅ 今日诗词卡片（单独容器，固定在头像卡片下方） -->
+
+  
+
+<!-- ✅ 公告栏及其他卡片 -->
+<div id="card-style" class="notice-card">
   <div id="card-div">
 
-    <!-- 头像区域整体包裹 -->
-    <div class="card-header">
-      <!-- 头像，添加外层相对定位 -->
-      <div class="avatar">
-        <img src="/images/123.jpg" alt="avatar" />
-
-        <!-- 右下角小标注 -->
-        <div class="author-status-sidebar" tabindex="0" aria-label="认真摸鱼中">
-          <g-emoji class="g-emoji" alias="palm_tree" fallback-src="https://lskypro.acozycotage.net/LightPicture/2022/12/fe1dc0402e623096.jpg">🐟</g-emoji>
-          <span class="status-text">认真摸鱼中</span>
-        </div>
-      </div>
-
-      <!-- 作者名 -->
-      <div class="name">Xzzzz911</div>
-
-      <!-- 描述（支持 markdown） -->
-      <div class="description">
-        <p>越努力 越幸运</p>
-
-      </div>
-
-      <!-- 图标链接 -->
-      
-      <div class="icon-links">
-        
-        <span class="icon-link">
-          <a href="https://github.com/xzz911" title="来访问我的GitHub吧" target="_blank" rel="noopener noreferrer">
-            <i class="fa-brands fa-github fa-fw"></i>
-          </a>
-        </span>
-        
-        <span class="icon-link">
-          <a href="https://wpa.qq.com/msgrd?v=3&amp;uin=443602796&amp;site=qq&amp;menu=yes" title="QQ: 443602796" target="_blank" rel="noopener noreferrer">
-            <i class="fa-brands fa-qq fa-fw"></i>
-          </a>
-        </span>
-        
-        <span class="icon-link">
-          <a href="mailto:xzzzz911@qq.com" title="邮件发送我" target="_blank" rel="noopener noreferrer">
-            <i class="fa-solid fa-envelope fa-fw"></i>
-          </a>
-        </span>
-        
-        <span class="icon-link">
-          <a href="https://space.bilibili.com/1709777759" title="B站主页" target="_blank" rel="noopener noreferrer">
-            <i class="fa-brands fa-bilibili fa-fw"></i>
-          </a>
-        </span>
-        
-      </div>
-      
-
-      <!-- 友链 -->
-      
-    </div>
-
-    <!-- 新增访客信息卡片，只在首页显示 -->
+    <!-- 公告栏 -->
     
 
-    <!-- ✅ 卡片 2：今日诗词（仅首页展示），加了分割样式 -->
-    
-
-    <!-- TOC 目录区域 -->
+    <!-- TOC -->
     
 
   </div>

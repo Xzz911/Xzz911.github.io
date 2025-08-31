@@ -392,11 +392,42 @@ html {
   padding: 1rem;
 }
 
-#card-style, #card-div {
-  height: auto !important;
-  max-height: none !important;
-  overflow: visible !important;
+/* 头像卡片 sticky 固定 */
+.avatar-card {
+  position: sticky;
+  top: 88px; /* 根据导航栏高度调 */
+  z-index: 10;
+  margin-bottom: 20px;
 }
+
+/* 今日诗词卡片（独立容器） */
+.poem-card {
+  margin-top: 16px;
+  margin-bottom: 20px;
+}
+
+/* 公告栏继续下面布局 */
+.notice-card {
+  margin-top: 0;
+}
+
+/* ✅ 让两个卡片保持独立风格 */
+.avatar-card #card-div,
+.notice-card #card-div {
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.08); /* 半透明背景，和整体风格一致 */
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  padding: 16px;
+}
+
+/* ⚠️ 移除会导致 sticky 失效的覆盖，不要加 !important */
+#card-style, #card-div {
+  height: auto;
+  max-height: none;
+  overflow: visible;
+}
+
 /* ===== 顶部工具栏样式 ===== */
 .custom-code-toolbar {
   position: relative;

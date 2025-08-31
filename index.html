@@ -339,12 +339,12 @@
         
         <span class="tag">
             
-            <a href="/tags/hexo/" style="color: #ffa2c4">hexo</a>
+            <a href="/tags/hexo/" style="color: #03a9f4">hexo</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/demo/" style="color: #ff7d73">demo</a>
+            <a href="/tags/demo/" style="color: #ffa2c4">demo</a>
         </span>
         
     </div>
@@ -471,12 +471,12 @@
         
         <span class="tag">
             
-            <a href="/tags/PWN/" style="color: #00bcd4">PWN</a>
+            <a href="/tags/PWN/" style="color: #ff7d73">PWN</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/SHCTF/" style="color: #03a9f4">SHCTF</a>
+            <a href="/tags/SHCTF/" style="color: #00a596">SHCTF</a>
         </span>
         
     </div>
@@ -533,95 +533,111 @@
     
     <!-- 侧边卡片也透明 -->
     <div id="home-card" style="opacity: 0.5;">
-        <div id="card-style"> 
-  <div id="card-div">
-
-    <!-- 头像区域整体包裹 -->
-    <div class="card-header">
-      <!-- 头像，添加外层相对定位 -->
-      <div class="avatar">
-        <img src="/images/123.jpg" alt="avatar" />
-
-        <!-- 右下角小标注 -->
-        <div class="author-status-sidebar" tabindex="0" aria-label="认真摸鱼中">
-          <g-emoji class="g-emoji" alias="palm_tree" fallback-src="https://lskypro.acozycotage.net/LightPicture/2022/12/fe1dc0402e623096.jpg">🐟</g-emoji>
-          <span class="status-text">认真摸鱼中</span>
+        <!-- ✅ 固定头像卡片 -->
+<div class="sidebar-fixed avatar-fixed">
+  <div id="card-style" class="avatar-card">
+    <div id="card-div">
+      <div class="card-header">
+        <!-- 头像 -->
+        <div class="avatar">
+          <img src="/images/123.jpg" alt="avatar" />
+          <div class="author-status-sidebar" tabindex="0" aria-label="认真摸鱼中">
+            <g-emoji class="g-emoji" alias="palm_tree"
+                     fallback-src="https://lskypro.acozycotage.net/LightPicture/2022/12/fe1dc0402e623096.jpg">🐟</g-emoji>
+            <span class="status-text">认真摸鱼中</span>
+          </div>
         </div>
-      </div>
 
-      <!-- 作者名 -->
-      <div class="name">Xzzzz911</div>
+        <!-- 作者名 -->
+        <div class="name">Xzzzz911</div>
 
-      <!-- 描述（支持 markdown） -->
-      <div class="description">
-        <p>越努力 越幸运</p>
+        <!-- 描述 -->
+        <div class="description">
+          <p>越努力 越幸运</p>
 
-      </div>
-
-      <!-- 图标链接 -->
-      
-      <div class="icon-links">
-        
-        <span class="icon-link">
-          <a href="https://github.com/xzz911" title="来访问我的GitHub吧" target="_blank" rel="noopener noreferrer">
-            <i class="fa-brands fa-github fa-fw"></i>
-          </a>
-        </span>
-        
-        <span class="icon-link">
-          <a href="https://wpa.qq.com/msgrd?v=3&amp;uin=443602796&amp;site=qq&amp;menu=yes" title="QQ: 443602796" target="_blank" rel="noopener noreferrer">
-            <i class="fa-brands fa-qq fa-fw"></i>
-          </a>
-        </span>
-        
-        <span class="icon-link">
-          <a href="mailto:xzzzz911@qq.com" title="邮件发送我" target="_blank" rel="noopener noreferrer">
-            <i class="fa-solid fa-envelope fa-fw"></i>
-          </a>
-        </span>
-        
-        <span class="icon-link">
-          <a href="https://space.bilibili.com/1709777759" title="B站主页" target="_blank" rel="noopener noreferrer">
-            <i class="fa-brands fa-bilibili fa-fw"></i>
-          </a>
-        </span>
-        
-      </div>
-      
-
-      <!-- 友链 -->
-      
-    </div>
-
-    <!-- 新增访客信息卡片，只在首页显示 -->
-    
-    <div id="visitor-info-card" class="card-widget" style="margin-top: 1.5rem; padding: 1rem; border: 1px solid #ddd; border-radius: 8px; background: #fafafa;">
-      <div class="card-header" style="font-weight: bold; font-size: 1.1rem; margin-bottom: 10px;">
-        <i class="fa fa-bullhorn"></i> 公告栏
-      </div>
-      <div class="card-content" style="font-size: 0.95rem; color: #333;">
-        <div id="welcome-text">Welcome to my blog!</div>
-        <div id="visitor-location" style="margin-top: 10px;"></div>
-
-        <!-- ✅ 插入公告栏GIF动图，并禁止点击预览 -->
-        <div style="margin-top: 10px; text-align: center;">
-          <img class="no-gallery" src="/images/%E5%92%92%E6%9C%AF%E5%9B%9E%E6%88%98.gif" alt="公告动图" style="width: 100%; max-width: 200px; border-radius: 8px;">
         </div>
+
+        <!-- 图标链接 -->
+        
+          <div class="icon-links">
+            
+              <span class="icon-link">
+                <a href="https://github.com/xzz911" title="来访问我的GitHub吧"
+                   target="_blank" rel="noopener noreferrer">
+                  <i class="fa-brands fa-github fa-fw"></i>
+                </a>
+              </span>
+            
+              <span class="icon-link">
+                <a href="https://wpa.qq.com/msgrd?v=3&amp;uin=443602796&amp;site=qq&amp;menu=yes" title="QQ: 443602796"
+                   target="_blank" rel="noopener noreferrer">
+                  <i class="fa-brands fa-qq fa-fw"></i>
+                </a>
+              </span>
+            
+              <span class="icon-link">
+                <a href="mailto:xzzzz911@qq.com" title="邮件发送我"
+                   target="_blank" rel="noopener noreferrer">
+                  <i class="fa-solid fa-envelope fa-fw"></i>
+                </a>
+              </span>
+            
+              <span class="icon-link">
+                <a href="https://space.bilibili.com/1709777759" title="B站主页"
+                   target="_blank" rel="noopener noreferrer">
+                  <i class="fa-brands fa-bilibili fa-fw"></i>
+                </a>
+              </span>
+            
+          </div>
+        
+
+        <!-- 友链 -->
+        
       </div>
     </div>
-    
+  </div>
+</div>
 
-    <!-- ✅ 卡片 2：今日诗词（仅首页展示），加了分割样式 -->
-    
-      <div class="card-widget" id="card-poem" style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #eee;">
+<!-- ✅ 今日诗词卡片（单独容器，固定在头像卡片下方） -->
+
+  <div class="sidebar-fixed poem-fixed">
+    <div id="card-style" class="poem-card">
+      <div id="card-div" class="card-widget">
+        <div class="poem-title" style="text-align:center; font-weight:bold; font-size:1.1rem; margin-bottom:0.5rem;">
+          <i class="fa fa-book-open" style="margin-right:0.3rem;"></i> 今日诗词</div>
         <div id="poem_sentence" style="font-size: 1rem; padding: 0.5rem 0;"></div>
         <div id="poem_info" style="font-size: 0.85rem; color: #888;">
           <div id="poem_meta"></div>
         </div>
       </div>
+    </div>
+  </div>
+  
+  
+
+<!-- ✅ 公告栏及其他卡片 -->
+<div id="card-style" class="notice-card">
+  <div id="card-div">
+
+    <!-- 公告栏 -->
+    
+    <div id="visitor-info-card" class="card-widget">
+      <div class="card-header" style="font-weight: bold; font-size: 1.1rem; margin-bottom: 10px;">
+        <i class="fa fa-bullhorn"></i> 公告栏
+      </div>
+      <div class="card-content">
+        <div id="welcome-text">Welcome to my blog!</div>
+        <div id="visitor-location" style="margin-top: 10px;"></div>
+        <div style="margin-top: 10px; text-align: center;">
+          <img class="no-gallery" src="/images/%E5%92%92%E6%9C%AF%E5%9B%9E%E6%88%98.gif"
+               alt="公告动图" style="width: 100%; max-width: 200px; border-radius: 8px;">
+        </div>
+      </div>
+    </div>
     
 
-    <!-- TOC 目录区域 -->
+    <!-- TOC -->
     
 
   </div>
