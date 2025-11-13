@@ -161,13 +161,15 @@
 
 /* TOC 容器样式 */
 #toc-container {
-  background: rgba(255, 255, 255, 0.6); /* 半透明白背景 */
-  margin-top: 2rem;
-  border-radius: 12px;
+  background: #fff; /* 与今日诗词模块一致的纯白背景 */
+  border-radius: 12px; /* 相同圆角 */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06); /* 相同阴影 */
   padding: 1rem;
-  max-height: 60vh; /* 最大高度，超出滚动 */
+  margin-top: 2rem;
+  max-height: 60vh;
   overflow-y: auto;
 }
+
 
 /* 默认隐藏所有二级目录 */
 #toc-container ol.toc > li > ol.toc-child {
