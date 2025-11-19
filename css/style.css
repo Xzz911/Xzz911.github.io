@@ -1381,7 +1381,179 @@ figure.highlight .code pre {
   color: #4783c8 !important; /* 可选：悬停时改变颜色 */
 }
 
+/* ================================================= */
+/* 朋克风放大加载动画样式 (style.css)           */
+/* ================================================= */
 
+/* --- 颜色变量（可选，便于修改） --- */
+:root {
+  --punk-pink: #FF00A2; /* 霓虹粉 */
+  --punk-cyan: #00FFFF; /* 电光蓝 */
+  --punk-yellow: #FFFF00; /* 亮黄 */
+  --punk-bg: #111111; /* 深色背景 */
+}
+
+/* --- 容器和背景样式 --- */
+#loading-box {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+#loading-box.loaded {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loading-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: var(--punk-bg); /* 深色背景更具朋克感 */
+  /* 也可以使用背景图片或渐变 */
+}
+
+/* --- 动画容器样式：放大效果 --- */
+.loading-animation {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* ✅ 放大动画 */
+  transform: scale(2); 
+}
+
+/* --- SVG 动画样式 --- */
+.loading {
+  width: 64px;
+  height: 64px;
+  stroke: var(--punk-cyan); /* 电光蓝线条 */
+  stroke-width: 2px;
+  fill: none;
+  stroke-dasharray: 360;
+  stroke-dashoffset: 0;
+  animation: loading-dash 2s linear infinite, 
+             loading-glow 1.5s infinite alternate; /* 新增发光动画 */
+}
+
+.loading path {
+  stroke: var(--punk-cyan);
+  fill: none;
+  transition: stroke 0.3s ease-in-out;
+}
+
+/* 带有 .color 类的路径使用霓虹粉 */
+.loading path.color {
+  stroke: var(--punk-pink); 
+}
+
+@keyframes loading-dash {
+  0% {
+      stroke-dashoffset: 360;
+  }
+  100% {
+      stroke-dashoffset: 0;
+  }
+}
+
+/* SVG 霓虹发光效果 */
+@keyframes loading-glow {
+  0% {
+      filter: drop-shadow(0 0 5px var(--punk-cyan)) drop-shadow(0 0 1px var(--punk-pink));
+  }
+  100% {
+      filter: drop-shadow(0 0 10px var(--punk-cyan)) drop-shadow(0 0 5px var(--punk-pink));
+  }
+}
+
+/* --- 文本样式：故障 (Glitch) 效果 --- */
+.loading-text {
+  font-family: 'Arial Black', sans-serif; 
+  font-size: 16px; 
+  font-weight: bold;
+  color: var(--punk-yellow); /* 亮黄色文本 */
+  text-transform: uppercase;
+  position: relative;
+  margin-top: 15px;
+  animation: text-glow 1s infinite alternate;
+}
+
+/* 文本霓虹发光效果 */
+@keyframes text-glow {
+  0% {
+      text-shadow: 0 0 5px var(--punk-yellow), 0 0 10px var(--punk-cyan);
+  }
+  100% {
+      text-shadow: 0 0 10px var(--punk-yellow), 0 0 20px var(--punk-cyan);
+  }
+}
+
+/* Glitch 效果 - 第一层 (霓虹粉) */
+.loading-text:before {
+  content: attr(data-glitch);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--punk-bg);
+  color: var(--punk-pink);
+  overflow: hidden;
+  clip: rect(0, 900px, 0, 0);
+  animation: glitch-anim-1 2s linear infinite alternate-reverse;
+}
+
+/* Glitch 效果 - 第二层 (电光蓝) */
+.loading-text:after {
+  content: attr(data-glitch);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--punk-bg);
+  color: var(--punk-cyan);
+  overflow: hidden;
+  clip: rect(0, 900px, 0, 0);
+  animation: glitch-anim-2 3s linear infinite alternate-reverse;
+}
+
+/* Glitch 动画关键帧 */
+@keyframes glitch-anim-1 {
+  0% { clip: rect(10px, 9999px, 5px, 0); transform: translate(-2px, 1px); }
+  20% { clip: rect(50px, 9999px, 60px, 0); transform: translate(1px, -2px); }
+  40% { clip: rect(80px, 9999px, 10px, 0); transform: translate(-1px, 2px); }
+  60% { clip: rect(10px, 9999px, 30px, 0); transform: translate(2px, -1px); }
+  80% { clip: rect(70px, 9999px, 80px, 0); transform: translate(-2px, -2px); }
+  100% { clip: rect(30px, 9999px, 40px, 0); transform: translate(1px, 1px); }
+}
+
+@keyframes glitch-anim-2 {
+  0% { clip: rect(20px, 9999px, 15px, 0); transform: translate(1px, -1px); }
+  25% { clip: rect(75px, 9999px, 85px, 0); transform: translate(-1px, 1px); }
+  50% { clip: rect(5px, 9999px, 15px, 0); transform: translate(2px, 2px); }
+  75% { clip: rect(40px, 9999px, 50px, 0); transform: translate(-1px, -2px); }
+  100% { clip: rect(90px, 9999px, 100px, 0); transform: translate(2px, 1px); }
+}
+
+/* 修正尺寸问题，让故障层超出边界可见 */
+.loading-text:before,
+.loading-text:after {
+  top: -2px;
+  left: -2px;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  text-shadow: none; /* 移除子元素的 text-shadow，只在主元素上保留 */
+}
 
 
 
