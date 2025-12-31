@@ -266,7 +266,7 @@
     <!-- 📚 简洁文章列表样式 START --> 
     <div class="simple-archive-list" style="margin-top: 40px;">
       <h3 id="post-total-count" style="font-size: 28px; margin-bottom: 16px; color: #fff;">
-        文章总览 - 24
+        文章总览 - 23
       </h3>
 
       
@@ -281,19 +281,10 @@
             
               <div class="archive-item" style="margin-bottom: 20px;">
                 <!-- 第一行：时间 -->
-                <div style="margin-left: 40px; color: #aaa; font-size: 14px;">📅 2025-06-18</div>
+                <div style="margin-left: 40px; color: #aaa; font-size: 14px;">📅 2025-12-31</div>
                 <!-- 第二行：文章标题 -->
                 <div style="margin-left: 40px; margin-top: 4px;">
-                  <a href="/highlight-test/" class="hover-slide" style="color: #fff; font-size: 17px; text-decoration: none;">highlight-test</a>
-                </div>
-              </div>
-            
-              <div class="archive-item" style="margin-bottom: 20px;">
-                <!-- 第一行：时间 -->
-                <div style="margin-left: 40px; color: #aaa; font-size: 14px;">📅 2025-06-18</div>
-                <!-- 第二行：文章标题 -->
-                <div style="margin-left: 40px; margin-top: 4px;">
-                  <a href="/%E7%BB%83%E4%B9%A0/" class="hover-slide" style="color: #fff; font-size: 17px; text-decoration: none;">简单的 Hexo 文章示例</a>
+                  <a href="/2025%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" class="hover-slide" style="color: #fff; font-size: 17px; text-decoration: none;">2025年度总结：流水不争先 争的是滔滔不绝</a>
                 </div>
               </div>
             
@@ -561,7 +552,7 @@ window.addEventListener('load', () => {
   const postTotal = document.getElementById('post-total-count');
   const yearBlocks = document.querySelectorAll('.archive-year-block');
 
-  const postData = [{"date":"2023-08","title":"[MoeCTF 2022] PWN复现","year":"2023"},{"date":"2023-08","title":"[HNCTF 2022 Week1] PWN 复现","year":"2023"},{"date":"2023-09","title":"[HGAME 2023 week1] PWN 复现","year":"2023"},{"date":"2023-09","title":"[CISCN 2019华北] PWN5（ciscn_2019_n_5） 复现","year":"2023"},{"date":"2023-09","title":"[SDCTF 2022]printFAILED 复现","year":"2023"},{"date":"2023-09","title":"[HNCTF 2022 WEEK3] smash 复现","year":"2023"},{"date":"2023-09","title":"[HNCTF 2022 WEEK4] ezcanary 复现","year":"2023"},{"date":"2023-10","title":"NewStarCTF 2023 [WEEK 1] PWN","year":"2023"},{"date":"2023-10","title":"PWN PWN PWN !!! 技巧 (1)","year":"2023"},{"date":"2023-10","title":"MoeCTF 2023 PWN","year":"2023"},{"date":"2023-10","title":"NewStarCTF 2023 [WEEK 2] PWN","year":"2023"},{"date":"2023-10","title":"2023年SWPU NSS 秋季招新赛 PWN","year":"2023"},{"date":"2023-10","title":"PWN PWN PWN !!! 技巧 (2)","year":"2023"},{"date":"2023-10","title":"FSCTF 2023 PWN","year":"2023"},{"date":"2023-10","title":"PWN PWN PWN !!! 技巧 (3)","year":"2023"},{"date":"2023-10","title":"NewStarCTF 2023 [WEEK 3] PWN","year":"2023"},{"date":"2023-10","title":"PWN PWN PWN !!! 技巧 (4)","year":"2023"},{"date":"2023-10","title":"SHCTF 2023 [WEEK 1] PWN","year":"2023"},{"date":"2023-11","title":"SHCTF 2023 [WEEK 2] PWN","year":"2023"},{"date":"2023-11","title":"PWN PWN PWN !!! 技巧 (5)","year":"2023"},{"date":"2023-11","title":"SHCTF 2023 [WEEK 3] PWN","year":"2023"},{"date":"2024-12","title":"2024年度总结：保持正念 延迟满足","year":"2024"},{"date":"2025-06","title":"简单的 Hexo 文章示例","year":"2025"},{"date":"2025-06","title":"highlight-test","year":"2025"}];
+  const postData = [{"date":"2023-08","title":"[MoeCTF 2022] PWN复现","year":"2023"},{"date":"2023-08","title":"[HNCTF 2022 Week1] PWN 复现","year":"2023"},{"date":"2023-09","title":"[HGAME 2023 week1] PWN 复现","year":"2023"},{"date":"2023-09","title":"[CISCN 2019华北] PWN5（ciscn_2019_n_5） 复现","year":"2023"},{"date":"2023-09","title":"[SDCTF 2022]printFAILED 复现","year":"2023"},{"date":"2023-09","title":"[HNCTF 2022 WEEK3] smash 复现","year":"2023"},{"date":"2023-09","title":"[HNCTF 2022 WEEK4] ezcanary 复现","year":"2023"},{"date":"2023-10","title":"NewStarCTF 2023 [WEEK 1] PWN","year":"2023"},{"date":"2023-10","title":"PWN PWN PWN !!! 技巧 (1)","year":"2023"},{"date":"2023-10","title":"MoeCTF 2023 PWN","year":"2023"},{"date":"2023-10","title":"NewStarCTF 2023 [WEEK 2] PWN","year":"2023"},{"date":"2023-10","title":"2023年SWPU NSS 秋季招新赛 PWN","year":"2023"},{"date":"2023-10","title":"PWN PWN PWN !!! 技巧 (2)","year":"2023"},{"date":"2023-10","title":"FSCTF 2023 PWN","year":"2023"},{"date":"2023-10","title":"PWN PWN PWN !!! 技巧 (3)","year":"2023"},{"date":"2023-10","title":"NewStarCTF 2023 [WEEK 3] PWN","year":"2023"},{"date":"2023-10","title":"PWN PWN PWN !!! 技巧 (4)","year":"2023"},{"date":"2023-10","title":"SHCTF 2023 [WEEK 1] PWN","year":"2023"},{"date":"2023-11","title":"SHCTF 2023 [WEEK 2] PWN","year":"2023"},{"date":"2023-11","title":"PWN PWN PWN !!! 技巧 (5)","year":"2023"},{"date":"2023-11","title":"SHCTF 2023 [WEEK 3] PWN","year":"2023"},{"date":"2024-12","title":"2024年度总结：保持正念 延迟满足","year":"2024"},{"date":"2025-12","title":"2025年度总结：流水不争先 争的是滔滔不绝","year":"2025"}];
 
   const postMap = {};
   const postCountByMonth = {};
